@@ -191,7 +191,7 @@
 <ul>
 <li><p>汇编: gcc</p>
 <ul>
-<li><figure class="highlight plain"><figcaption><span>gcc -Og -S mstore.c```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)</div><div class="line">-  ```linux&gt; gcc -Og -c mstore.c</div></pre></td></tr></table></figure>
+<li><figure class="highlight plain"><figcaption><span>gcc -Og -S mstore.c```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)</div><div class="line">- ```linux&gt; gcc -Og -c mstore.c</div></pre></td></tr></table></figure>
 <ul>
 <li>这会产生目标代码文件mstore.o, 它是二进制格式的, 所以无法直接查看</li>
 </ul>
@@ -771,7 +771,24 @@
 
     
         <div class="content">
-            <p>我于杀戮中绽放, 亦如黎明中的花朵</p>
+            <ul>
+<li><p>汇编: gcc</p>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>gcc -Og -S mstore.c```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)</div><div class="line">- ```linux&gt; gcc -Og -c mstore.c</div></pre></td></tr></table></figure>
+<ul>
+<li>这会产生目标代码文件mstore.o, 它是二进制格式的, 所以无法直接查看</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反汇编: objdump<ul>
+<li><code>linux&gt; objdump -d mstore.o</code><ul>
+<li>这些反汇编程序(像objdump)会根据机器代码产生一种类似汇编代码的格式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
         </div>
     
