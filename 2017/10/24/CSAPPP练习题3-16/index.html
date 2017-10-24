@@ -10,7 +10,10 @@
 
     <!--Description-->
     
-        <meta name="description" content="测试测试">
+        <meta name="description" content="exercise 3.16  已知下列C代码
+  1234void cond(long a, long *p) &amp;#123;    if (p &amp;amp;&amp;amp; a &amp;gt; *p)         *p = a;&amp;#125;
+  GCC会产生下面的汇编代码
+  12345678cond:   ">
     
 
     <!--Author-->
@@ -20,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="我的文章1019"/>
+        <meta property="og:title" content="深入了解计算机系统CSAPPP练习题3.16"/>
     
 
     <!--Open Graph Description-->
@@ -42,7 +45,7 @@
 
     <!-- Title -->
     
-    <title>我的文章1019 - 邹泰然的个人博客</title>
+    <title>深入了解计算机系统CSAPPP练习题3.16 - 邹泰然的个人博客</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -146,18 +149,18 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2017/10/19/我的文章1019/">
-                我的文章1019
+            <a href="/2017/10/24/CSAPPP练习题3-16/">
+                深入了解计算机系统CSAPPP练习题3.16
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2017-10-19</span>
+                <span class="date">2017-10-24</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/test/">test</a>
+                    <a href="/categories/CSAPP/">CSAPP</a>
                 </span>
             
         </div>
@@ -169,7 +172,17 @@
         
 
         <!-- Post Content -->
-        <p>测试测试</p>
+        <ul>
+<li><p>exercise 3.16<br>  已知下列C代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">void cond(long a, long *p) &#123;</div><div class="line">    if (p &amp;&amp; a &gt; *p) </div><div class="line">        *p = a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  GCC会产生下面的汇编代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cond:</div><div class="line">    testq   %rsi, %rsi</div><div class="line">    je      .L1</div><div class="line">    cmpq    %rdi, (%rsi)</div><div class="line">    jge     .L1</div><div class="line">    movq    %rdi, (%rsi)</div><div class="line">.L1</div><div class="line">    rep; ret</div></pre></td></tr></table></figure>
+<ul>
+<li>疑惑: <code>if (p &amp;&amp; a &gt; *p)</code>为何会在汇编语言中产生<code>cmpq    %rdi, (%rsi)</code>? <code>p &amp;&amp; a</code>在汇编中为何没有反映出来</li>
+<li>解答: 运算符的优先级在书中没有讲到, <code>&gt;</code>的优先级大于<code>&amp;&amp;</code>的优先级, 因此上面的代码片段应理解为: <code>if (p &amp;&amp; (a &gt; *p))</code>, 其中<code>a &gt; *p</code>在<code>cmpq    %rdi, (%rsi)</code>中反映出来. 而<code>p &amp;&amp; ()</code>在汇编中等价于<code>testq   %rsi, %rsi      je  .L1 ...</code>, 即当<code>p</code>不为空且<code>a &gt; *p</code>不为零时, 执行<code>cmpq    %rdi, (%rsi)</code>否则结束程序</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
