@@ -12,9 +12,13 @@
     
         <meta name="description" content="汇编: gcc
 
-gcc -Og -S mstore.c```12    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)- ```linux&amp;gt; gcc -Og -c mstore.c
+反汇编: objdump
 
-这会产">
+linux&amp;gt; objdump -d mstore.o
+这些反汇编程序(像objdump)会根据机器代码产生一种类似汇编代码的格式
+
+
+linux&amp;gt; objdump -d mstore.o">
     
 
     <!--Author-->
@@ -175,12 +179,14 @@ gcc -Og -S mstore.c```12    - 这会使GCC运行编辑器, 产生一个汇编文
         <!-- Post Content -->
         <ul>
 <li><p>汇编: gcc</p>
+</li>
+<li><p>反汇编: objdump</p>
 <ul>
-<li><figure class="highlight plain"><figcaption><span>gcc -Og -S mstore.c```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)</div><div class="line">- ```linux&gt; gcc -Og -c mstore.c</div></pre></td></tr></table></figure>
-<ul>
-<li>这会产生目标代码文件mstore.o, 它是二进制格式的, 所以无法直接查看</li>
+<li><code>linux&gt; objdump -d mstore.o</code><ul>
+<li>这些反汇编程序(像objdump)会根据机器代码产生一种类似汇编代码的格式</li>
 </ul>
 </li>
+<li><code>linux&gt; objdump -d mstore.o</code></li>
 </ul>
 </li>
 </ul>
