@@ -12,8 +12,7 @@
     
         <meta name="description" content="exercise 3.16  已知下列C代码
   1234void cond(long a, long *p) &amp;#123;    if (p &amp;amp;&amp;amp; a &amp;gt; *p)         *p = a;&amp;#125;
-  GCC会产生下面的汇编代码
-  12345678cond:   ">
+  GCC会产生下面的汇编代码">
     
 
     <!--Author-->
@@ -175,7 +174,7 @@
         <ul>
 <li><p>exercise 3.16<br>  已知下列C代码</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">void cond(long a, long *p) &#123;</div><div class="line">    if (p &amp;&amp; a &gt; *p) </div><div class="line">        *p = a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  GCC会产生下面的汇编代码</p>
+<p>  GCC会产生下面的汇编代码   <a id="more"></a></p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cond:</div><div class="line">    testq   %rsi, %rsi</div><div class="line">    je      .L1</div><div class="line">    cmpq    %rdi, (%rsi)</div><div class="line">    jge     .L1</div><div class="line">    movq    %rdi, (%rsi)</div><div class="line">.L1</div><div class="line">    rep; ret</div></pre></td></tr></table></figure>
 <ul>
 <li>疑惑: <code>if (p &amp;&amp; a &gt; *p)</code>为何会在汇编语言中产生<code>cmpq    %rdi, (%rsi)</code>? <code>p &amp;&amp; a</code>在汇编中为何没有反映出来</li>
