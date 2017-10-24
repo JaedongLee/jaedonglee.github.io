@@ -147,6 +147,51 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/10/24/JEECMS栏目自定义属性研究/">
+                JEECMS栏目自定义属性研究
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JEECMS/">JEECMS</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>可以为栏目添加自定义属性</p>
+<ul>
+<li>实现步骤: <ol>
+<li>在配置中的模型管理中为所需的模型添加所需的字段名<ul>
+<li>此时会在数据库的jc_channel_attr表中的channel_id 和 attr_name分别产生一个记录</li>
+</ul>
+</li>
+<li>在栏目中点击修改, 找到新添加的字段, 输入想要的值<ul>
+<li>此时会在数据库的jc_channel_attr表中的attr_value中产生一个记录</li>
+</ul>
+</li>
+<li>在栏目模板对应的html文件(如: C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.5\webapps\ROOT\WEB-INF\t\cms\www\default\channel\create_cast_agencies.html)中使用channel.attr.custom_value来显示为栏目所设置的属性</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/10/24/server/">
                 host is not allowed to connect to this mysql server
             </a>
@@ -350,6 +395,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/10/24/JEECMS栏目自定义属性研究/">JEECMS栏目自定义属性研究</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/10/24/server/">host is not allowed to co</a>
             </li>
             
@@ -359,10 +408,6 @@
             
             <li>
                 <a class="footer-post" href="/2017/10/19/我的文章1019/">我的文章1019</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/10/18/test1018/">test1018</a>
             </li>
             
         </ul>
@@ -376,11 +421,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/CSAPP/">CSAPP</a>
+            <a class="footer-post" href="/categories/JEECMS/">JEECMS</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/CSAPP/">CSAPP</a>
         </li>
         
         <li>
