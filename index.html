@@ -180,9 +180,103 @@
 </ul>
 </li>
 <li>处理器状态<ul>
-<li>程序计数器(通常被称为”PC”, 在x86-64中用%rip表示): 给出将要执行的下一条指令在内存中的地址
+<li>程序计数器(通常被称为”PC”, 在x86-64中用%rip表示): 给出将要执行的下一条指令在内存中的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.2.2 代码示例</p>
+<ul>
+<li><p>汇编与反汇编程序</p>
+<ul>
+<li><p>汇编: gcc</p>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>gcc -Og -S mstore.c```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    - 这会使GCC运行编辑器, 产生一个汇编文件mstore.s, 但是不做其他进一步的工作. (通常情况下, 它还会继续调用汇编器产生目标代码文件)</div><div class="line">- ```linux&gt; gcc -Og -c mstore.c</div></pre></td></tr></table></figure>
+<ul>
+<li>这会产生目标代码文件mstore.o, 它是二进制格式的, 所以无法直接查看</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>反汇编: objdump</p>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>objdump -d mstore.o```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">                    - 这些反汇编程序(像objdump)会根据机器代码产生一种类似汇编代码的格式</div><div class="line">        - 链接器</div><div class="line">            - l链接器(Linker)是一个程序, 将一个或多个由编译器或汇编器生成的目标文件外加库链接为一个可执行文件</div><div class="line">    - 3.2.3 关于格式的注释</div><div class="line">        - 以&quot;.&quot;开头的行</div><div class="line">            - 都是指导汇编器和链接器工作的伪命令</div><div class="line">        - 把C语言和汇编语言结合起来</div><div class="line">            - 方法:</div><div class="line">                1. 我们可以编写完整的函数, 放进一个独立的汇编文件中, 让汇编器和链接器把它和用C语言编写的代码合并起来</div><div class="line">                2. 我们可以使用GCC的内联汇编(inline assembly)特性, 用asm伪指令可以在C程序中包含简短的汇编代码</div><div class="line">                    - 好处: 减少代码量</div><div class="line">                    - 坏处: 会使代码与某些特殊的机器有关,所以只应该在想要的特性只能以这种方式才能访问到时才使用它</div><div class="line">        - 条件码: 条件码是CPU根据运算结果由硬件设置的位, 体现当前指令执行结果的各种状态信息. 例如: 算术运算产生的正/负/零/溢出等结果.</div><div class="line">            - 奇偶标志(parity flag): </div><div class="line">                - 定义: 用于反映运算结果中&quot;1&quot;的个数的奇偶性</div><div class="line">                - 作用: 为了提供传送的可靠性, 如果采用奇偶校验的方法, 就可使用该标志位</div><div class="line">- 3.3 数据格式</div><div class="line">    - 由于是从16位体系结构扩展成32字, Intel用术语&quot;字(word)&quot;表示16位数据类型. 因此32位数为&quot;双字(double words)&quot;, 称64位数为&quot;四字(quad words)&quot;.</div><div class="line">    - 数据格式的汇编后缀:</div><div class="line">        - 后缀&quot;l&quot;: 表示4字节整数和8字节双精度浮点数, 这样不会产生歧义, 因为浮点数使用的是一组完全不同的指令和寄存器</div><div class="line">- 3.4 访问信息</div><div class="line">    - 通用目的寄存器:</div><div class="line">        - 作用: 用来存储整数数据和指针</div><div class="line">        - 数量: 16</div><div class="line">        - 详情:</div><div class="line">            -  &amp;nbsp;&amp;nbsp;8位: | %al | %bl | %cl | %dl | %sil | %dil | %bpl | %spl | %r8b | %r9b | %r10b | %r11b | %r12b | %r13b | %r14b | %r15b | </div><div class="line">            - 16位: | %ax | %bx | %cx | %dx | %si | %di | %bp | %sp | %r8w | %r9w | %r10w | %r11w | %r12w | %r13w | %r14w | %r15w | </div><div class="line">            - 32位: | %eax | %ebx | %ecx | %edx | %esi | %edi | %ebp | %esp | %r8d | %r9d | %r10d | %r11d | %r12d | %r13d | %r14d | %r15d |</div><div class="line">            - 64位: | %rax | %rbx | %rcx | %rdx | %rsi | %rdi | %rbp | %rsp | %r8 | %r9 | %r10 | %r11 | %r12 | %r13 | %r14 | %r15 | </div><div class="line">                - 不同字节数的操作码可以访问不同的最低寄存器</div><div class="line">    - 3.4.1 操作数指示符</div><div class="line">        - 操作数: 一个操作中要使用的源数据值, 以及放置结果的目的位置</div><div class="line">            - 操作数本身没有数据类型的标志, 它的数据类型由操作码确定</div><div class="line">        - 操作数格式:</div><div class="line">            - 产生原因: 源数据值可以以常数形式给出, 或是从寄存器或内存中读出. 结果可以存放在寄存器或内存中. 因此, 不同的操作数可以分为三种类型:</div><div class="line">                1. 立即数: 用来表示常数值</div><div class="line">                2. 寄存器: 表示某个寄存器的内容</div><div class="line">                3. 内存引用: 根据计算出来的==地址==(通常是有效地址)访问某个内存位置</div><div class="line">    - 3.4.2 数据传送指令</div><div class="line">        - 注意点:</div><div class="line">            - movabsq: 源操作数只能为64位立即数, 目的操作数只能是寄存器</div><div class="line">            - 指令如何修改目的寄存器的高字节数: 按照操作码的不同, 有不同的方式. 有些操作码会保持高位不变, 有些会将高位设置为0, 有些会将高位设置为符号位</div><div class="line">            - x86-64的限制: 传送指令的两个操作数不能都指向内存位置</div><div class="line">            - movq只能以表示32位的补码数字的立即数作为源操作数, 然后把这个值符号扩展为64位的值, 放到目的寄存器</div><div class="line">            - 立即数不能做目的操作数</div><div class="line">    - 3.4.4 压入和弹出栈数据</div><div class="line">        - 寄存器%rsp: </div><div class="line">            - 作用: 栈指针寄存器, 用来存放栈指针的值</div><div class="line">- 3.5 算术和逻辑操作</div><div class="line">    - 3.5.1 加载有效地址(load effective address: leaq)</div><div class="line">        - 作用: 将一个有效地址写入目的寄存器</div><div class="line">            - 有效地址: 计算出来的地址</div><div class="line">        - 目的操作数: 必须是寄存器</div><div class="line">    - 3.5.2 一元和二元操作</div><div class="line">        - 一元操作: 只有一个操作数, 既是源又是目的. 这个操作数可以是一个寄存器或者内存地址</div><div class="line">        - 二元操作: 其中第二个操作数既是源又是目的, 第一个操作数可以是立即数/寄存器/内存位置. 第二个操作数是寄存器或内存地址</div><div class="line">            - 注意: 当第二个操作数是内存地址时, 处理器必须从内存读出值, 执行操作, 再把结果写回内存</div><div class="line">    - 3.5.5 特殊的算术操作</div><div class="line">        - imulq: </div><div class="line">            - 一般用法:</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>imulq   %rdx, %rcx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 特殊用法:</div></pre></td></tr></table></figure>
+<p>imulq   %rdx     //有符号乘法<br>mulq   %rdx     //无符号乘法<br>```</p>
+<ul>
+<li>作用: 计算两个64位值的全128位乘积</li>
+<li>注意点: 要求一个参数必须在寄存器%rax中, 而另一个作为指令的操作源给出. 然后乘积存放在寄存器%rdx(高64位)和%rax(低64位)中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.6 控制<ul>
+<li>3.6.1 条件码<ul>
+<li>常用条件码:<ul>
+<li>CF(Carry Flag): 进位标志</li>
+<li>ZF(Zero Flag): 零标志</li>
+<li>SF(Sign Flag): 符号标志</li>
+<li>OF(Overflow Flag): 溢出标志</li>
+</ul>
+</li>
+<li>CMP: cmp系列指令会比较两个操作数并设置条件码,而不改变目的寄存器</li>
+<li>条件码的改变: <ul>
+<li>绝大部分指令的执行都会设置条件码</li>
+<li>lea系列指令不改变条件码<ul>
+<li>原因: lea系列是用来进行地址计算的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.6 2 访问条件码<ul>
+<li>SET: set系列指令可以根据条件码的某种组合, 将一个字节设置为0或1</li>
+<li>溢出:<ul>
+<li>负溢出: 当计算结果本应该是负数但寄存器中却存放的是正数时为负溢出</li>
+<li>正溢出: 当计算结果本应该是正数但寄存器中却存放的是负数时为正溢出</li>
+<li>详见2.3.2 补码加法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.6.4 跳转指令的编码<ul>
+<li>汇编: 将汇编代码转化成机器码</li>
+<li>反汇编: 将机器码转化成汇编代码 </li>
+<li>理解跳转指令目标的如何编码, 对第7章研究链接非常重要<ul>
+<li>汇编代码中: 跳转目标用符号标号书写</li>
+<li>汇编器, 以及后来的链接器, 会产生跳转目标的适当编码<ul>
+<li>跳转指令有几种编码, 通常使用PC相对寻址(PC-relative)<ul>
+<li>PC-relative: 会将目标指令的地址与紧跟在跳转指令后面的那条指令的地址之间的差作为编码<ul>
+<li>优点: <ol>
+<li>使用PC-relative时, 当使用链接器将这些代码重新定位时, 跳转目标的编码并没有改变</li>
+<li>指令编码很简洁</li>
+<li>目标代码可以不做改变的移动到内存的不同位置</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>“绝对”地址: 用4个字节直接指定目标</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
         </div>
-        <a href="/2017/10/24/CSAPP程序的机器级表示/" class="read-more">Read More</a>
     
 
 </div>
