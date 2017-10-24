@@ -10,6 +10,8 @@
 
     <!--Description-->
     
+        <meta name="description" content="获取指定栏目标题图的方法:&amp;emsp;&amp;emsp;` [@cms_channel id=’175’]      &amp;lt;img src=&amp;quot;${tag_bean.titleImg!site.defImg}&amp;quot; alt=&amp;quot;${tag_bean.name}&amp;quot; widt">
+    
 
     <!--Author-->
     
@@ -18,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="邹泰然的个人博客"/>
+        <meta property="og:title" content="JEECMS获取指定栏目标题图"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +31,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>Mysql - 邹泰然的个人博客</title>
+    <title>JEECMS获取指定栏目标题图 - 邹泰然的个人博客</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,9 +129,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -137,23 +137,65 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Mysql</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2017/10/24/server/">
-        <span class="archive-date">
-            Oct 2017
-        </span>
-        host is not allowed to connect to this mysql server
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/10/24/JEECMS获取指定栏目标题图/">
+                JEECMS获取指定栏目标题图
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JEECMS/">JEECMS</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li>获取指定栏目标题图的方法:<br>&emsp;&emsp;` [@cms_channel id=’175’]  <pre><code>    &lt;img src=&quot;${tag_bean.titleImg!site.defImg}&quot; alt=&quot;${tag_bean.name}&quot; width=&quot;100%&quot; /&gt;  
+[/@cms_channel]`
+</code></pre><ul>
+<li>注意: alt中不能为title, 因为没有这个字段, 这个字段是属于content的</li>
+</ul>
+</li>
+<li>获取批量栏目标题图的方法:<ul>
+<li>` [@cms_channel_list ]<br>  [#list tag_list as a] <pre><code>&lt;img src=&quot;${a.titleImg!site.defImg}&quot; alt=&quot;${a.name}&quot; width=&quot;100%&quot; /&gt; 
+</code></pre>  [/#list]<br>  [/@cms_channel_list]`</li>
+<li>注意: 如果a.name不行请使用, 请使用a.title尝试</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
         </section>
+
     </div>
 </div>
 

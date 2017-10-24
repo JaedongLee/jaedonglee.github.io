@@ -147,6 +147,50 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/10/24/JEECMS获取指定栏目标题图/">
+                JEECMS获取指定栏目标题图
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JEECMS/">JEECMS</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>获取指定栏目标题图的方法:<br>&emsp;&emsp;` [@cms_channel id=’175’]  <pre><code>    &lt;img src=&quot;${tag_bean.titleImg!site.defImg}&quot; alt=&quot;${tag_bean.name}&quot; width=&quot;100%&quot; /&gt;  
+[/@cms_channel]`
+</code></pre><ul>
+<li>注意: alt中不能为title, 因为没有这个字段, 这个字段是属于content的</li>
+</ul>
+</li>
+<li>获取批量栏目标题图的方法:<ul>
+<li>` [@cms_channel_list ]<br>  [#list tag_list as a] <pre><code>&lt;img src=&quot;${a.titleImg!site.defImg}&quot; alt=&quot;${a.name}&quot; width=&quot;100%&quot; /&gt; 
+</code></pre>  [/#list]<br>  [/@cms_channel_list]`</li>
+<li>注意: 如果a.name不行请使用, 请使用a.title尝试</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/10/24/CSAPP程序的机器级表示/">
                 Charpter Three 程序的机器级表示
             </a>
@@ -480,6 +524,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/10/24/JEECMS获取指定栏目标题图/">JEECMS获取指定栏目标题图</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/10/24/CSAPP程序的机器级表示/">Charpter Three 程序的机器级表示</a>
             </li>
             
@@ -489,10 +537,6 @@
             
             <li>
                 <a class="footer-post" href="/2017/10/24/JEECMS栏目自定义属性研究/">JEECMS栏目自定义属性研究</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/10/24/server/">host is not allowed to co</a>
             </li>
             
         </ul>
@@ -506,11 +550,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/JEECMS/">JEECMS</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/JEECMS/">JEECMS</a>
         </li>
         
         <li>
