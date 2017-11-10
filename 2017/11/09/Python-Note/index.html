@@ -224,6 +224,8 @@ list[-1]: 使用-1做索引获取最">
 <ul>
 <li><p>函数的参数</p>
 <ul>
+<li><p>默认参数</p>
+<ul>
 <li><p><font color="red">默认参数设为不变变量的问题:</font></p>
 <ul>
 <li><p>例子:<br>  为了保证默认参数不会在多次调用函数时改变内容, 我们可以使用None这个不变变量来实现:</p>
@@ -234,10 +236,37 @@ list[-1]: 使用-1做索引获取最">
 <li><p>问题: 为何在<code>code 1</code>第三行中将<code>[]</code>赋值给<code>L</code>后下一次调用<code>add_end()</code>时<code>L</code>初始依然为<code>None</code></p>
 </li>
 <li>答案: 每调用一次<code>add_end()</code>, 变量<code>L</code>就会指向一次<code>None</code>所在的地址. as <code>L</code> intialized to be <code>None</code>, 语句<code>L = []</code>会使<code>L</code>指向一个存放<code>[]</code>的新的内存地址,<br>而原来存放<code>None</code>的地址的内容没有改变, 因此在下一次调用<code>add_end()</code>时, L还是等于<code>None</code>所在地址的内容, 即<code>L = None</code></li>
-<li>默认参数的本质: <ol>
+<li>默认参数的本质: <ul>
 <li>函数在定义时会确定默认参数指向的地址, 当函数在被调用时默认参数会指向该地址, 在函数中可以改变默认地址的指向, 也可以改变默认参数的指向地址的值(当默认地址设置的不为不变变量)</li>
-</ol>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可变参数</p>
+<ul>
+<li><p>方法: 在定义函数参数时在前面加<code>*</code>. 例:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def calc(*number):</div><div class="line">    sum = 0</div><div class="line">    for n in numbers:</div><div class="line">        sum += n*n</div><div class="line">    return sum</div></pre></td></tr></table></figure>
+<p>  定义可变参数和定义一个<code>list</code>或<code>tuple</code>参数相比, 仅仅在参数前面加了一个<code>*</code>号. 在函数内部, 参数<code>number</code>接收到的是一个<code>tuple</code>, 因此, 函数代码完全不变. 但是, 调用该函数时, 可以传入任意个参数, 包括零个.</p>
+</li>
+<li>问题: 如果已经有一个<code>list</code>或<code>tuple</code>, 要调用一个可变参数怎么办? </li>
+<li><p>答案: 可以这样做:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; nums = [1,2,3]</div><div class="line">&gt;&gt;&gt; calc(*nums)</div></pre></td></tr></table></figure>
+<p>  <code>*nums</code>表示把<code>nums</code>这个<code>list</code>的所有元素作为可变参数传进去. 这种写法相当有用, 而且很常见</p>
+</li>
+</ul>
+</li>
+<li><p>关键字参数</p>
+<ul>
+<li><p>作用:<br>  允许传入0个或任意个含参数名的参数, 这些关键字参数在函数内部自动组装为一个<code>dict</code>. 例:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def person(name, age, **kw):</div><div class="line">    print(&apos;name:&apos;, name, &apos;age:&apos;, age, &apos;other:&apos;, kw)</div></pre></td></tr></table></figure>
+<p>  函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外, 还接受关键字参数<code>kw</code>. 在调用该函数时, 可以传入任意个数的关键字参数:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; person(&apos;Bob&apos;, 35, city=&apos;Beijing&apos;)</div><div class="line">name: Bob age: 35 other: &#123;&apos;city&apos;: &apos;Beijing&apos;&#125;</div><div class="line">&gt;&gt;&gt; person(&apos;Adam&apos;, 45, gender=&apos;M&apos;, job=&apos;Engineer&apos;)</div><div class="line">name: Bob age: 35 other: &#123;&apos;gender&apos;: &apos;M&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>问题: 如果已经有一个<code>dict</code>, 要调用一个可变参数怎么办? </p>
+</li>
+<li>答案: 可以这样做:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div><div class="line">&gt;&gt;&gt; person(&apos;jack&apos;, 24, **extra)</div><div class="line">name: jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
