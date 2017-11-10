@@ -420,6 +420,27 @@
 </li>
 </ul>
 </li>
+<li>3.7 过程<ul>
+<li>3.7.2 转移控制<ul>
+<li>程序计数器(PC): 用于存放下一条指令所在单元的地址</li>
+<li>指令<ul>
+<li>call: 该指令会把返回地址压入栈中, 并将PC(程序计数器)设置为被调用函数的起始位置</li>
+<li>ret: 该指令会从栈中弹出返回地址, 并把PC设置为返回地址(即跳转回返回地址)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.7.3 数据传送<ul>
+<li>函数P调用函数Q并传参(多于6个)的具体过程:<ol>
+<li>把函数P前六个要传递的参数分别放到六个寄存器, 其它参数压入栈中</li>
+<li>把返回地址压入栈中</li>
+<li>==问题: CPU如何知道返回地址的栈指针之前有几个内存地址里面是参数==</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -459,6 +480,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/11/09/Python-Note/">Python_Note</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/11/05/CSAPPP练习题3-30/">CSAPPP练习题3-30</a>
             </li>
             
@@ -468,10 +493,6 @@
             
             <li>
                 <a class="footer-post" href="/2017/10/24/CSAPP程序的机器级表示/">Charpter Three 程序的机器级表示</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/10/24/CSAPP信息的表示和处理/">Charpter Two 信息的表示和处理</a>
             </li>
             
         </ul>
@@ -485,11 +506,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/Python/">Python</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/JEECMS/">JEECMS</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
         <li>
@@ -497,7 +518,7 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/CSAPP/">CSAPP</a>
+            <a class="footer-post" href="/categories/JEECMS/">JEECMS</a>
         </li>
         
     </ul>
