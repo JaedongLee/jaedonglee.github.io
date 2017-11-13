@@ -256,7 +256,20 @@
 </li>
 <li><p>问题: 如果已经有一个<code>dict</code>, 要调用一个可变参数怎么办? </p>
 </li>
-<li>答案: 可以这样做:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div><div class="line">&gt;&gt;&gt; person(&apos;jack&apos;, 24, **extra)</div><div class="line">name: jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div></pre></td></tr></table></figure></li>
+<li>答案: 可以这样做:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div><div class="line">&gt;&gt;&gt; person(&apos;jack&apos;, 24, **extra)</div><div class="line">name: jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>命名关键字参数</p>
+<ul>
+<li><p>如果要限制关键字参数的名字, 就可以用命名关键字参数, 例如, 只接收<code>city</code>和<code>job</code>作为关键字参数. 这种方式定义的函数如下:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def person(name, age, *, city, job):</div><div class="line">    print(name, age, city, job)</div></pre></td></tr></table></figure>
+<p>  和关键字参数<em>*kw不同, 命名关键字参数需要一个特殊分隔符`</em><code>,</code>*`后面的参数被视为命名关键字参数.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; person(&apos;Jack&apos;, 24, city=&apos;Beijing&apos;, job=&apos;Engineer&apos;)</div><div class="line">Jack 24 Beijing Engineer</div></pre></td></tr></table></figure>
+<p>  如果函数定义中已经有了一个可变参数, 后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def person(name, age, *args, city, job):</div><div class="line">    print(name, age, args, city, job)</div></pre></td></tr></table></figure>
+<p>  命名关键字参数必须传入参数名, 这和位置参数不同. 如果没有参入参数名, 调用将报错</p>
+</li>
 </ul>
 </li>
 </ul>
