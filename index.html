@@ -274,6 +274,32 @@
 </li>
 </ul>
 </li>
+<li><p>递归函数</p>
+<ul>
+<li><p>尾递归优化</p>
+<ul>
+<li>定义:　<ol>
+<li>一句话定义: 函数在最后一步只<code>return</code>函数本身的方法</li>
+<li>尾递归优化是指在函数返回时, 调用函数本身, 并且, <code>return</code>语句不能包含表达式</li>
+</ol>
+</li>
+<li><p>解释: </p>
+<ol>
+<li>函数调用会在内存中形成一个”调用记录”, 又称”调用祯”, 用来保存调用位置和内部变量等信息. 如果在函数A的内部动用函数B, 那么在A的调用记录上方, 还会形成一个B的调用记录.</li>
+<li><p>由于尾递归是函数的最后一步操作, 因此与目前的环境(context)没有任何关联,调用位置/内部信息等信息都不会再用到了. 所以不需要保留外层函数的调用记录. 只要直接用内层函数的调用记录, 取代外层函数的调用记录就可以了.</p>
+<ul>
+<li><p>以尾调用为例, 尾递归属于尾调用:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function f() &#123;</div><div class="line">    let m = 1;</div><div class="line">    let n = 2;</div><div class="line">    return g(m + n);</div><div class="line">&#125;</div><div class="line">f()</div><div class="line"></div><div class="line">//等同于</div><div class="line">function f() &#123;</div><div class="line">    return g(3);</div><div class="line">&#125;</div><div class="line">f()</div><div class="line"></div><div class="line">//等同于</div><div class="line">g(3);</div></pre></td></tr></table></figure>
+<p>上面代码中, 乳沟函数<code>g</code>不是尾调用, 函数f就需要保存内部变量<code>m</code>和<code>n</code>的值, <code>g</code>的调用位置等信息. 但由于调用<code>g</code>之后, 函数<code>f</code>就结束了, 所以执行到最后一步, 完全可以删除<code>f()</code>的调用记录, 值保留g(3)的调用记录</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
