@@ -167,8 +167,7 @@
     
         <div class="content">
             <ul>
-<li><p>Python基础</p>
-<ul>
+<li>Python基础<ul>
 <li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
 <li>使用list和tuple<ul>
 <li>list<ul>
@@ -206,6 +205,8 @@
 </li>
 <li>continue<ul>
 <li>跳过当前的这次循环, 直接开始下一次循环</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -300,6 +301,189 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>高级特性</p>
+<ul>
+<li><p>切片</p>
+<ul>
+<li>作用: 提取一个list/tuple中的一段数列</li>
+<li><p>例子:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">L = [&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;, &apos;Bob&apos;, &apos;Jack&apos;]</div><div class="line">&gt;&gt;&gt; L[0:3]      //从索引`0`开始取, 直到索引`3`为止, 但不包括索引`3`</div><div class="line">&gt;&gt;&gt; L[-3:-1]        //从索引`-3`开始, 直到索引`-1`为止, 但不包括索引`-1`. 记住倒数第一个元素的索引是`-1`</div><div class="line">&gt;&gt;&gt; L[-3:]      //包括索引`-1`</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">L = [0,1,2,...,99]</div><div class="line">&gt;&gt;&gt; L[:10:2]      //前十个数, 每两个取一个</div><div class="line">&gt;&gt;&gt; L[::5]      //所有数, 每5个取一个</div><div class="line">&gt;&gt;&gt; L[:]        //获取所有数</div></pre></td></tr></table></figure>
+</li>
+<li><p>注意: </p>
+<ol>
+<li><p>tuple也是一种list, 唯一区别是tuple不可变. 因此, tuple也可以用切片操作, 只是操作结果仍是字符串. 例:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; (0, 1, 2, 3, 4, 5)[:3]</div><div class="line">(0, 1, 2)</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串<code>&#39;xxx&#39;</code>也可以看成是一种list, 每个元素就是一个字符. 因此, 字符串也可以用切片操作, 只是操作结果仍是字符串</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &apos;ABCDEFG&apos;[:3]</div><div class="line">&apos;ABC&apos;</div><div class="line">&gt;&gt;&gt; &apos;ABCDEFG&apos;[::2]</div><div class="line">&apos;ACEG&apos;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>练习</p>
+<ul>
+<li>题目: 利用切片操作，实现一个trim()函数，去除字符串首尾的空格，注意不要调用str的strip()方法</li>
+<li>答案:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">def trim(s):</div><div class="line">l = len(s)</div><div class="line">begin = 0</div><div class="line">end = l-1</div><div class="line">while begin &lt; l:</div><div class="line">    if s[begin] == &apos; &apos;:</div><div class="line">        begin = begin + 1</div><div class="line">    else:</div><div class="line">        break</div><div class="line">while end &gt; 0:</div><div class="line">    if s[end] == &apos; &apos;:</div><div class="line">        end = end - 1</div><div class="line">    else:</div><div class="line">        break</div><div class="line">s_slice = s[begin:end+1]</div><div class="line">print(s_slice)</div><div class="line">print(len(s_slice))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>迭代</p>
+<ul>
+<li>定义: 如果给定一个list或tuple, 我们可以通过<code>for</code>循环来遍历这个<code>list</code>或<code>tuple</code>, 这种遍历我们称为迭代(Iteration)<ul>
+<li>只要作用于一个可迭代对象, <code>for</code>循环就可以正常运行, 而我们不太关心该对象是list还是其它数据类型.</li>
+</ul>
+</li>
+<li><p>用法:</p>
+<ul>
+<li><p>可用于没有下标的数据类型, 比如<code>dict</code>就可以迭代:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; d = &#123;&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3&#125;</div><div class="line">&gt;&gt;&gt; for key in d:</div><div class="line">...     print(key)</div><div class="line">...</div><div class="line">a</div><div class="line">c</div><div class="line">b</div></pre></td></tr></table></figure>
+<p>  PS: 由于<code>dict</code>的存储不是按照<code>list</code>的方式顺序排列, 所有, 迭代出的结果顺序很可能不一样</p>
+<ul>
+<li>默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用for k, v in d.items()。</li>
+</ul>
+</li>
+<li>字符串也是可迭代对象, 因此, 也可以作用于<code>for</code>循环</li>
+</ul>
+</li>
+<li><p>问题</p>
+<ul>
+<li><p>如何判断一个对象是可迭代对象?</p>
+<ul>
+<li>解答: 通过collections模块的Iterable类型判断:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from collections import Iterable</div><div class="line">&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable)     #_str是否可迭代_</div><div class="line">True</div><div class="line">&gt;&gt;&gt; isinstance([1,2,3], Iterable)     #_list是否可迭代_</div><div class="line">True</div><div class="line">&gt;&gt;&gt; isinstance(123, Iterable)     #_整数是否可迭代_</div><div class="line">False</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果要对list实现类似Java那样的下标循环怎么办?</p>
+<ul>
+<li><p>解答: Python内置的<code>enumerate</code>函数可以把一个list变成使用索引-元素对, 这样就可以在<code>for</code>循环中同时迭代索引和元素本身:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; for i, value in enumerate(&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]):</div><div class="line">...     print(i, value)</div><div class="line">...</div><div class="line">0 A</div><div class="line">1 B</div><div class="line">2 C</div></pre></td></tr></table></figure>
+<p>上面的<code>for</code>循环里, 同时引进了两个变量, 在Python里是很常见的, 比如下面的代码:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:</div><div class="line">...     print(x,y)</div><div class="line">... </div><div class="line">1 1 </div><div class="line">2 4</div><div class="line">3 9</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>练习</p>
+<ul>
+<li>题目: 请使用迭代查找一个list中最小和最大值, 并返回一个tuple</li>
+<li>答案:   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def findMinAndMax(L):</div><div class="line">max = L[0]</div><div class="line">min = L[0]</div><div class="line">for i, value in enumerate(L):</div><div class="line">    if max &lt; L[i]:</div><div class="line">        max = L[i]</div><div class="line">    if min &gt; L[i]:</div><div class="line">        min = L[i]</div><div class="line">print(max)</div><div class="line">print(min)</div><div class="line">return (max, min)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>列表生成式</p>
+<ul>
+<li>定义: 列表生成式即List Comprehensions, 是Python内置的非常简单却强大的可以用来创建list的生成式.</li>
+<li><p>用法</p>
+<ul>
+<li><p>举例: 如果要生成[1<em>1, 2</em>2, 3<em>3,…, 10</em>10]怎么做?</p>
+<ul>
+<li><p>方法一: 循环</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; L = []</div><div class="line">&gt;&gt;&gt; for x in range(1, 11):</div><div class="line">...    L.append(x * x)</div><div class="line">...</div><div class="line">&gt;&gt;&gt; L</div><div class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</div></pre></td></tr></table></figure>
+</li>
+<li><p>方法二: 循环太繁琐, 而列表生成式则可以用一行语句代替循环生成上面的list:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [x * x for x in range(1, 11)]</div><div class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</div></pre></td></tr></table></figure>
+<ul>
+<li><p>for循环后面还可以加上if判断, 这样我们就可以筛选出仅偶数的平方:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [x * x for x in range(1, 11) if x % 2 == 0]</div><div class="line">[4, 16, 36, 64, 100]</div></pre></td></tr></table></figure>
+</li>
+<li><p>还可以使用两层循环, 可以生成全排列:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [m + n for m in &apos;ABC&apos; for n in &apos;XYZ&apos;]</div><div class="line">[&apos;AX&apos;, &apos;AY&apos;, &apos;AZ&apos;, &apos;BX&apos;, &apos;BY&apos;, &apos;BZ&apos;, &apos;CX&apos;, &apos;CY&apos;, &apos;CZ&apos;]</div></pre></td></tr></table></figure>
+<p>  三层及以上的循环就很少用到了</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>for</code>循环其实可以同时使用两个甚至多个变量, ==<code>dict</code>的<code>item()</code>可以同时迭代key和value==</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; d = [&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos;]</div><div class="line">&gt;&gt;&gt; for k, v in d.items():</div><div class="line">...     print(k, &apos;=&apos;, v)</div><div class="line">...</div><div class="line">y = B</div><div class="line">x = A</div><div class="line">z = C</div></pre></td></tr></table></figure>
+<p>  因此, 列表生成式也可以使用两个变量来生成list:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; d = [&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos;]</div><div class="line">&gt;&gt;&gt; [k + &apos;=&apos; + v for k, v in d.items()]</div><div class="line">[&apos;y=B&apos;, &apos;x=A&apos;, &apos;z=C&apos;]</div></pre></td></tr></table></figure>
+<p>  最后把一个list中所有的字符串变成小写:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    &gt;&gt;&gt; L = [&apos;Hello&apos;, &apos;World&apos;, &apos;IBM&apos;, &apos;Apple&apos;]</div><div class="line">    &gt;&gt;&gt; [slower() for s in L]</div><div class="line">    [&apos;hello&apos;, &apos;world&apos;, &apos;ibm&apos;, &apos;apple&apos;]</div><div class="line">    - 练习</div><div class="line">- 问题: 如果list中既包含字符串，又包含整数，由于非字符串类型没有lower()方法，所以列表生成式会报错：</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>L = [‘Hello’, ‘World’, 18, ‘Apple’, None]<br>[s.lower() for s in L]<br>  Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>  File “<stdin>“, line 1, in <listcomp><br>  AttributeError: ‘int’ object has no attribute ‘lower’</listcomp></stdin></module></stdin></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">使用内建的`isinstance`函数可以判断一个变量是不是字符串:</div></pre></td></tr></table></figure>
+<p>x = ‘abc’<br>y = 123<br>isinstance(x, str)<br>  True<br>isinstance(y, str)<br>  False</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    请修改列表生成式, 通过添加`if`语句保证列表生成式能正确地执行</div><div class="line">- 答案:</div></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>  [x.lower() for x in L if isinstance(x, str) == True]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- 生成器</div><div class="line">    - 产生背景: 通过列表生成式, 我们可以直接创造一个列表. 但是, 受到内存限制, 列表容量肯定是有限的. 而且, 创建一个包含100万个元素的列表, 不仅占用很大得到存储空间, 而且如果我们仅仅需要访问前面几个元素, 那后面绝大多数元素占用的空间都白白浪费了.      </div><div class="line">    所以, 如果列表元素可以按照某种算法推算出来, 那我们是否可以在循环的过程中不断推算出后续元素呢? 这样就不必创建完整的list, 从而节省大量的空间. 在Python中, 这种一边循环一边计算的机制, 称为生成器(generator)</div><div class="line">    - 创建方法</div><div class="line">        1. 把列表生成式的`[]`换成`()`</div></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L = [x*x for x in range(10)]
+&gt;&gt;&gt; L 
+[0,1,4,9,16,25,36,49,64,81]
+&gt;&gt;&gt; g = (x*x for x in range(10))
+&gt;&gt;&gt; g
+&lt;generator object &lt;genexpr&gt; at 0x1022ef630&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    由于generator保存的是算法, 所以可以通过`next()`来获得generator的下一个返回值,但这样太麻烦了, 所以我们创建一个generator后, 基本永远不会调用`next()`, 而是通过`for`循环来迭代它.</div><div class="line">2. 如果一个函数定义中包括`yield`关键字, 那么这个函数就不再是一个普通函数, 而是一个generator:</div></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; f = fib(6)
+&gt;&gt;&gt; f
+&lt;generator object fib at 0x104feaaa0&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">        此方法不像方法1那样自动中断, 而是`next`到`yield`关键字才中断, 再次执行`next`则从上次返回时的`yield`语句处继续执行.</div><div class="line">- 用处: generator非常强大, 如果推算的算法比较复杂, 用类似列表生成式的`for`循环无法实现的时候, 还可以用函数来实现.</div><div class="line">- 练习</div><div class="line">    - 题目: 杨辉三角定义如下:</div></pre></td></tr></table></figure>
+
+          1
+        1   1
+    1   2   1
+    1   3   3   1
+1   4   6   4   1
+1   5   10  10  5   1
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    把每一行看做一个list, 试写一个generator, 不断输出下一行的list.</div><div class="line">- 答案:</div></pre></td></tr></table></figure>
+
+def triangles(max):
+ary_1 = [1,1]
+print([1])
+print([1, 1])
+n = 3
+while n &lt;= max:
+    i = 0
+    a = 0
+    ary_2 = [1,1]
+    while i &lt; len(ary_1)-1:
+        num = ary_1[i] + ary_1[i+1]
+        ary_2.insert(i+1, num)
+        i += 1
+    ary_1 = ary_2
+    yield ary_1
+    n += 1
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- 迭代器</div><div class="line">    - 背景</div><div class="line">        - 可以直接作用于`for`循环的数据类型有以下几种:</div><div class="line">            1. 集合数据类型, 如`list`, `tuple`, `dict`, `set`, `str`等;</div><div class="line">            2. `generator`, 包括生成器和带`yield`的generator function.</div><div class="line">        - 这些可以直接作用于`for`循环的对象统称为可迭代对象: `Iterable`.</div><div class="line">        - 可以使用`isinstance()`判断一个对象是否是`Iterable`对象:</div></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; from collections import Iterable
+&gt;&gt;&gt; isinstance([], Iterable)
+True
+&gt;&gt;&gt; isinstance({}, Iterable)
+True
+&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable)
+True
+&gt;&gt;&gt; isinstance((x for x in range(10)), Iterable)
+True
+&gt;&gt;&gt; isinstance(100, Iterable)
+False
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    - 而生成器不但可以作用于`for`循环, 还可以被`next()`函数不断调用并返回下一个值, 直到最后抛出`StopIterable`错误表示无法继续返回下一个值了.</div><div class="line">- 定义: 可以被`next()`函数调用并不断返回下一个值的对象称为迭代器: `Iterable`.</div><div class="line">    - 可以使用`isinstance()`判断一个对象是否是`Iterable`对象:</div></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; from cokkections import Iterable
+&gt;&gt;&gt; isinstance((x for x in range(10)), Iterable)
+True
+&gt;&gt;&gt; isinstance([], Iterator)
+False
+&gt;&gt;&gt; isinstance({}, Iterator)
+False                
+&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterator)
+False
+```
+</code></pre></li>
 </ul>
 </li>
 </ul>
