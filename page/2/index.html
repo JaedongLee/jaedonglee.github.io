@@ -147,6 +147,47 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/10/24/server/">
+                host is not allowed to connect to this mysql server
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Mysql/">Mysql</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>原因: 很明显云服务器入站流量和防火墙都没问题, 问题出在云服务器上的mysql数据库上</li>
+<li>解决方法: <ul>
+<li>从要连接的主机登录本地的mysql(即云服务器上的mysql), </li>
+<li>进入名称为”mysql”的数据库中, 找到表”user”, 找到host字段值为”localhost”且User字段值为”root”的那一行, </li>
+<li>将host字段的值改为”%”,</li>
+<li>重新启动mysql server(可使用mysql notifier)</li>
+<li>尝试从远程连接mysql, 成功!</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/10/24/CSAPPP练习题3-16/">
                 深入了解计算机系统CSAPPP练习题3.16
             </a>
@@ -327,6 +368,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/11/27/JEECMS播放视频黑屏问题解决方法/">JEECMS播放视频黑屏问题解决方法</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/11/23/Python问题解析-关于-getattr-的链式调用的应用的一点解析/">Python问题解析-关于__getattr__的</a>
             </li>
             
@@ -336,10 +381,6 @@
             
             <li>
                 <a class="footer-post" href="/2017/11/21/bgcolor-intro-md/">bgcolor_intro.md</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/11/09/Python-Note/">Python_Note</a>
             </li>
             
         </ul>
@@ -353,11 +394,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/introduction/">introduction</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
         <li>

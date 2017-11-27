@@ -1036,71 +1036,279 @@ def __next__(self):
         return L
 </code></pre><p>  f = Fib()<br>  print(f[0:5])</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    如果需要其它功能, 可以继续自定义. 如: 对step参数进行处理/对负数进行处理</div><div class="line">    与之对应的还有`__setitem__()`方法和`__delitem__()`方法</div><div class="line">- __getattr__(): 可以动态返回一个属性</div><div class="line">    - 注意: </div><div class="line">        - 只有找不到属性才会调用`__getattr__()`</div><div class="line">        - 如果调用其它没有的函数, 不会报错, 而会返回None, 因为`__getattr__()`默认返回None. 为了让class只响应特定的几个属性, 对其它属性报错, 我们要按照正常属性缺失错误一样, 抛出`AttributeError`:</div></pre></td></tr></table></figure>
-<pre><code>class Student(object):
+<pre><code>    class Student(object):
 
-    def __getattr__(self, attr):
-        if attr==&apos;age&apos;:
-            return lambda: 25
-        raise AttributeError(&apos;\&apos;Student\&apos; object has no attribute \&apos;%s\&apos;&apos; % attr)
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">        这实际上可以把一个类的所有属性和方法调用全部动态化处理了.</div><div class="line">- &lt;span style=&quot;background-color: red&gt;关于`__getattr__()`的链式调用的应用的一点解析&lt;/span&gt;</div><div class="line">    - 实例: 现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</div><div class="line"></div><div class="line">        http://api.server/user/friends</div><div class="line">        http://api.server/user/timeline/list</div><div class="line">        如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</div><div class="line"></div><div class="line">        利用完全动态的__getattr__，我们可以写出一个链式调用：</div></pre></td></tr></table></figure>
-
-class Chain(object):
-
-    def __init__(self, path=&apos;&apos;):
-        self._path = path
-
-    def __getattr__(self, path):
-        return Chain(&apos;%s/%s&apos; % (self._path, path))
-
-    def __str__(self):
-        return self._path
-
-    __repr__ = __str__
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">尝试:</div></pre></td></tr></table></figure>
-
-&gt;&gt;&gt; Chain().status.user.timeline.list
-&apos;/status/user/timeline/list&apos;    
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 疑问: Chain().status.user.timeline.list在类Chain()内部是如何工作的才导致输出为: </div><div class="line">    &apos;/status/user/timeline/list&apos;?</div><div class="line">- 解析: </div><div class="line">    1. 只分析一层属性和两层属性, 即: `Chain().status`与`Chain().status.user`. 在类Chain()中添加print, 新代码如下:</div></pre></td></tr></table></figure>
+        def __getattr__(self, attr):
+            if attr==&apos;age&apos;:
+                return lambda: 25
+            raise AttributeError(&apos;\&apos;Student\&apos; object has no attribute \&apos;%s\&apos;&apos; % attr)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">        这实际上可以把一个类的所有属性和方法调用全部动态化处理了.</div><div class="line">- &lt;span style=&quot;background-color: red&gt;关于`__getattr__()`的链式调用的应用的一点解析&lt;/span&gt;</div><div class="line">    - 实例: 现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</div><div class="line"></div><div class="line">        http://api.server/user/friends</div><div class="line">        http://api.server/user/timeline/list</div><div class="line">        如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</div><div class="line"></div><div class="line">        利用完全动态的__getattr__，我们可以写出一个链式调用：</div></pre></td></tr></table></figure>
 
     class Chain(object):
 
         def __init__(self, path=&apos;&apos;):
             self._path = path
-            print(&quot;init path is:&quot; + self._path)
 
         def __getattr__(self, path):
-            print(&quot;get path is:&quot; + path)
             return Chain(&apos;%s/%s&apos; % (self._path, path))
 
         def __str__(self):
             return self._path
 
         __repr__ = __str__
-    # print(c)
-    print(&apos;---------------------------&apos;)
-    print(Chain().status)
-    print(&apos;---------------------------&apos;)
-    print(Chain().status.user)
-    print(&apos;---------------------------&apos;)
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2. 结果是:</div></pre></td></tr></table></figure>
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">尝试:</div></pre></td></tr></table></figure>
 
-    ---------------------------
-    init path is:
-    get path is:status
-    init path is:/status
-    /status
-    ---------------------------
-    init path is:
-    get path is:status
-    init path is:/status
-    get path is:user
-    init path is:/status/user
-    /status/user
-    ---------------------------
-    ```
-3. 分析结果: 
-    1. `print(Chain().status)`经历了两次`__init__`, 再结合源代码中的`return Chain(&apos;%s/%s&apos; % (self._path, path))`分析, 可知: `Chain`的新实例的`status`属性触发`__getattr__`方法, 而该方法对`Chain()`新实例进行了递归操作, 带入新实例的值为`/status`. 此时, 新实例二没有属性, 因此不会调用`__getattr__`方法. 而`print(Chain(&apos;/status&apos;))`会调用`__str__`方法显示参数`path`即`/status`
-    2. `print(Chain().status.user)`: `1`中的新实例二会在`2`中拥有属性`user`, 再次调用`__getattr__`, `*.user`之后的属性会再再次调用`__getattr__`, 从而打印出相应路径
+    &gt;&gt;&gt; Chain().status.user.timeline.list
+    &apos;/status/user/timeline/list&apos;    
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 疑问: Chain().status.user.timeline.list在类Chain()内部是如何工作的才导致输出为: </div><div class="line">    &apos;/status/user/timeline/list&apos;?</div><div class="line">- 解析: </div><div class="line">    1. 只分析一层属性和两层属性, 即: `Chain().status`与`Chain().status.user`. 在类Chain()中添加print, 新代码如下:</div></pre></td></tr></table></figure>
+
+        class Chain(object):
+
+            def __init__(self, path=&apos;&apos;):
+                self._path = path
+                print(&quot;init path is:&quot; + self._path)
+
+            def __getattr__(self, path):
+                print(&quot;get path is:&quot; + path)
+                return Chain(&apos;%s/%s&apos; % (self._path, path))
+
+            def __str__(self):
+                return self._path
+
+            __repr__ = __str__
+        # print(c)
+        print(&apos;---------------------------&apos;)
+        print(Chain().status)
+        print(&apos;---------------------------&apos;)
+        print(Chain().status.user)
+        print(&apos;---------------------------&apos;)
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2. 结果是:</div></pre></td></tr></table></figure>
+
+        ---------------------------
+        init path is:
+        get path is:status
+        init path is:/status
+        /status
+        ---------------------------
+        init path is:
+        get path is:status
+        init path is:/status
+        get path is:user
+        init path is:/status/user
+        /status/user
+        ---------------------------
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">            3. 分析结果: </div><div class="line">                1. `print(Chain().status)`经历了两次`__init__`, 再结合源代码中的`return Chain(&apos;%s/%s&apos; % (self._path, path))`分析, 可知: `Chain`的新实例的`status`属性触发`__getattr__`方法, 而该方法对`Chain()`新实例进行了递归操作, 带入新实例的值为`/status`. 此时, 新实例二没有属性, 因此不会调用`__getattr__`方法. 而`print(Chain(&apos;/status&apos;))`会调用`__str__`方法显示参数`path`即`/status`</div><div class="line">                2. `print(Chain().status.user)`: `1`中的新实例二会在`2`中拥有属性`user`, 再次调用`__getattr__`, `*.user`之后的属性会再再次调用`__getattr__`, 从而打印出相应路径</div><div class="line">- __call__</div><div class="line">    - 用处: 不需要使用`instance.method()`来调用方法, 可以直接调用实例本身来调用默认方法. 例:</div></pre></td></tr></table></figure>
+
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print(&apos;My name is %s.&apos; % self.name)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; s = Student(&apos;Michael&apos;)
+&gt;&gt;&gt; s() # self参数不要传入
+My name is Michael.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">            可以在`__call__()`中插入参数</div><div class="line">- 使用枚举类</div><div class="line">    - 当我们需要定义常量时, 一个办法是用大写变量通过整数来定义, 例如月份:</div></pre></td></tr></table></figure>
+</code></pre><p>  JAN = 1<br>  FEB = 2<br>  …<br>  NOV = 11<br>  DEC = 12</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    缺点是类型是`int`且仍是变量</div><div class="line">- 更好的方法是为这样的枚举类型定义一个class, 然后每个常量都是class的一个唯一实例. Python提供`Enum`类来实现这个功能:</div></pre></td></tr></table></figure>
+<p>  from enum import Enum<br>  Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    这样我就获得了`Month`类型的枚举类        </div><div class="line">    Month.value属性是自动赋给成员的`int`常量, 默认从`1`开始计数.</div><div class="line">- 自定义类</div><div class="line">    - 为了更精确地控制枚举类型, 可以从`Enum`派生出自定义类:</div></pre></td></tr></table></figure>
+<pre><code>from enum import Enum, unique
+
+@unique
+class Weekday(Enum):
+    Sun = 0 # Sun的value被设定为0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    `@unique`装饰器可以帮助我们检查保证没有重复值.</div><div class="line">- 练习</div><div class="line">    - 题目: 把`Student`的`gender`属性改造为枚举类型, 可以避免使用字符串</div><div class="line">    - 答案:</div></pre></td></tr></table></figure>
+
+    from enum import Enum, unique
+
+    class Gender(Enum):
+        Male = 0
+        Female = 1
+
+    class Student(object):
+        def __init__(self, name, gender):
+            self.name = name
+            self.gender = gender
+
+    # 测试:
+    bart = Student(&apos;Bart&apos;, Gender.Male)
+    if bart.gender == Gender.Male:
+        print(&apos;测试通过!&apos;)
+    else:
+        print(&apos;测试失败!&apos;)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 使用元类</div><div class="line">    - type(): 使用`type()`可以动态创建class</div><div class="line">        - 当我们用Python解释器载入一个模块时, 会依次执行该模块的所有语句, 执行结果就是动态创建一个class对象</div><div class="line">        - 使用`type()`创建出新的类型:</div></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; def fn(self, name=&apos;world&apos;): # 先定义函数
+...     print(&apos;Hello, %s.&apos; % name)
+...
+&gt;&gt;&gt; Hello = type(&apos;Hello&apos;, (object,), dict(hello=fn)) # 创建Hello class
+&gt;&gt;&gt; h = Hello()
+&gt;&gt;&gt; h.hello()
+Hello, world.
+&gt;&gt;&gt; print(type(Hello))
+&lt;class &apos;type&apos;&gt;
+&gt;&gt;&gt; print(type(h))
+&lt;class &apos;__main__.Hello&apos;&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- metaclass</div><div class="line">    - 解释</div><div class="line">        - 当我们定义了类以后, 就可以根据这个类创建出实例, 所以: 先定义类, 然后创建实例</div><div class="line">        - 如果我们想创建类呢? 那就根据metaclass创建出类, 所以: 先定义metaclass, 然后创建类</div><div class="line">        - 连接起来就是: 先定义metaclass, 再创建类, 最后创建实例</div><div class="line">    - 动态修改的意义: </div><div class="line">        - 动态修改有什么意义? 直接在类的定义中添加方法不是更简单? </div><div class="line">        - 因为总会遇到需要通过metaclass修改类定义的. ORM就是一个典型的例子</div><div class="line">    - ORM:</div><div class="line">        - 解释: ORM全称为: &quot;Object Relational Mapping`, 即对象-关系映射, 就是把关系数据库的一行映射为一个对象, 也就是一个类对应一个表, 这样, 写代码更简单, 不用直接操作SQL语句</div><div class="line">            - 要编写ORM框架, 所有类只能动态定义, 因为只有使用者才能根据表的结构定义处对应的类来</div><div class="line">        - 编写ORM框架</div><div class="line">            1. 把调用接口写出来. 比如: 使用者如果使用这个ORM框架, 想定义一个`User`类来操作对应的数据库表`User`, 我们期待他写出这样的代码:</div></pre></td></tr></table></figure>
+
+        class User(Model):
+            id = IntegerField(&apos;id&apos;)
+            name = StringField(&apos;name&apos;)
+            email = StringField(&apos;email&apos;)
+            password = StringField(&apos;password&apos;)
+
+        u = User(id=12345, name=&apos;Michael&apos;, email=&apos;test@test.com&apos;, password=&apos;12345&apos;)
+        u.save()
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2. `Field`及其子类`IntegerField`和`StringField`</div></pre></td></tr></table></figure>
+
+        class Field(object):
+            def __init__(self, name, column_type):
+                self.name = name
+                self.column_type = column_type
+
+            def __str__(self):
+                return &apos;&lt;%s:%s&gt;&apos; % (self.__class__.__name__, self.name)
+
+        class IntegerField(Field):
+            def __init__(self, name):
+                super(IntegerField, self).__init__(name, &apos;bigint&apos;)
+
+        class StringField(Field):
+            def __init__(self, name):
+                super(StringField, self).__init__(name, &apos;varchar(100)&apos;)
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">3. 编写最复杂的`ModelMetaclass`</div></pre></td></tr></table></figure>
+
+        class ModelMetaclass(type)
+
+            def __new__(cls, name, bases, attrs)
+                if name == &apos;Model&apos;:
+                    return type.__new__(cls, name, bases, attrs)
+                print(&apos;Found model: %s&apos; % name)
+                mappings = dict()
+                for k, v in mappings.keys():
+                    if isinstance(v, Field):
+                        print(&apos;Found mappings: %s&apos; % (k, v))
+                        mappings[k] = v
+                for k in mappings.keys():
+                    attrs.pop(k)
+                attrs[&apos;__mappings__&apos;] = mappings
+                attrs[&apos;__table__&apos;] = name
+                return type.__new__(cls, name, bases, attrs)
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4. 编写基类`Model`</div></pre></td></tr></table></figure>
+
+        class Model(dict, metaclass=ModelMetaclass):
+
+            def __init__(self, **kw):
+                super(Model, self).__init__(**kw)
+
+            def __getattr__(self, key):
+                try:
+                    return self[key]
+                except KeyError:
+                    raise AttributeError(r&quot;&apos;Model&apos; object has no attribute &apos;%s&apos;&quot; $ key)
+
+            def __setattr__(self, key, value):
+                self[key] = value
+
+            def save(self)
+                fields = []
+                params = []
+                args = []
+                for k, v in self.__mappings__.items():
+                    fields.append(v.name)
+                    params.append(getattr(self, k, None))
+                sql = &apos;insert into %s (%s) values (%s)&apos; % (self.__table__, &apos;,&apos;.join(foelds), &apos;,&apos;.join(params))
+                print(&apos;SQL: %s&apos; % sql)
+                print(&apos;ARGS: %s&apos; % str(args))
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 输出如下</div></pre></td></tr></table></figure>
+
+    Found model: User
+    Found mapping: email ==&gt; &lt;StringField:email&gt;
+    Found mapping: password ==&gt; &lt;StringField:password&gt;
+    Found mapping: id ==&gt; &lt;IntegerField:uid&gt;
+    Found mapping: name ==&gt; &lt;StringField:username&gt;
+    SQL: insert into User (password,email,username,id) values (?,?,?,?)
+    ARGS: [&apos;my-pwd&apos;, &apos;test@orm.org&apos;, &apos;Michael&apos;, 12345]
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 错误, 调试和测试</div><div class="line">    - 错误处理</div><div class="line">        - 内置: 高级语言一般都内置了一套`try...except...finally...`的错误处理机制, Python也不例外.</div><div class="line">        - try:</div></pre></td></tr></table></figure>
+</code></pre><p>  try:</p>
+<pre><code>print(&apos;try...&apos;)
+r = 10/0
+print(&apos;result:&apos;, r)
+</code></pre><p>  except ZeroDivisionError as e:</p>
+<pre><code>print(&apos;except:&apos;, e)
+</code></pre><p>  finally:</p>
+<pre><code>print(&apos;finally...&apos;)
+</code></pre><p>  print(‘END’)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">如果执行出错, 则后续代码不会继续执行, 而是直接跳转至错误处理代码, 即`except`语句块. 如果有`finally`语句块, 则执行`finally`语句块, 至此, 执行完毕.       </div><div class="line">上面的代码在计算`10/0`时会产生一个除法运算错误:</div></pre></td></tr></table></figure>
+<p>  try…<br>  except: division by zero<br>  finally…<br>  END</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果把除数`0`改为`2`, 则执行结果如下:</div></pre></td></tr></table></figure>
+<p>  try…<br>  result: 5<br>  finally…<br>  END</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 错误类型: 错误类型有很多种, 可以用多个`except`来捕获:</div></pre></td></tr></table></figure>
+<p>  except ValueError as e<br>  except ZeroDivisionError as e</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- else: 可以在`except`语句后面加一个`else`, 当没有错误发生时, 会自动执行`else`语句:</div></pre></td></tr></table></figure>
+<p>  try:</p>
+<pre><code>pass
+</code></pre><p>  except ZeroDivisionError as e:</p>
+<pre><code>pass
+</code></pre><p>  else:</p>
+<pre><code>print(&apos;no error&apos;)
+</code></pre><p>  finally:</p>
+<pre><code>pass
+</code></pre><p>  print(‘END’)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- 跨多层调用: 不需要在每个可能出错的地方捕获错误, 只要在合适的层次去捕获错误就可以了</div><div class="line">- 调用栈</div><div class="line">    - 如果错误没有被捕获, 它就会向上一层抛, 最后被Python解释器捕获, 打印一个错误信息, 然后程序退出. 例如err.py:</div></pre></td></tr></table></figure>
+<pre><code>def foo(s):
+    return 10 / int(s)
+def bar(s):
+    return foo(s) * 2
+def main():
+    bar(&apos;0&apos;)
+main()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">执行, 结果如下:</div></pre></td></tr></table></figure>
+
+$ python err.py
+Traceback (most recent call last):
+    File &quot;err.py&quot;, line 11, in&lt;module&gt;
+        main()
+    File &quot;err.py&quot;, line 9, in main
+        bar(&apos;0&apos;)
+    File &quot;err.py&quot;, line 6, in bar
+        return foo(s) * 2
+    File &quot;err.py&quot;, line 3, in foo
+        return 10 / int(s)
+    ZeroDivisionError: division by zero
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">解读如下:       </div><div class="line">我们从上往下可以看出整个错误的调用函数链:</div><div class="line">错误信息第一行:</div></pre></td></tr></table></figure>
+
+TrackBack (most recent call last):
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">告诉我们这是错误的跟踪信息</div><div class="line">第2-3行:</div></pre></td></tr></table></figure>
+
+File &quot;err.py&quot;, line 11, in &lt;module&gt;
+    main()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">调用main()出错了, 在代码文件`err.py`的第11行代码, 但原因在第9行:</div></pre></td></tr></table></figure>
+
+File &quot;err.py&quot;, line 9, in main
+    bar(&apos;0&apos;)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">调用`bar(&apos;0&apos;)`出错了, 在文件的第9行, 但原因是第6行:</div></pre></td></tr></table></figure>
+
+File &quot;err.py&quot;, line 6, in bar
+    return foo(s) = 2
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`return foo(s) = 2`这个语句错了, 但这不是最终原因, 继续往下看:</div></pre></td></tr></table></figure>
+
+File &quot;err.py&quot;, line 3, in foo
+    return 10 / int(s)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`return 10 / int(s)`这个语句错了, 这是错误产生的源头, 因为在下面打印出了:</div></pre></td></tr></table></figure>
+
+ZeroaDivisionError: integer division or modulo by zero
+```
+根据错误类型`ZeroaDivisionError`, 我们判断, `int(s)`本身并没有错, 但是`int(s)`返回`0`, 在计算`10 / 0`时出错, 至此, 找到错误源头
 </code></pre></li>
 </ul>
 </li>
@@ -1143,6 +1351,10 @@ class Chain(object):
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/11/27/JEECMS播放视频黑屏问题解决方法/">JEECMS播放视频黑屏问题解决方法</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/11/23/Python问题解析-关于-getattr-的链式调用的应用的一点解析/">Python问题解析-关于__getattr__的</a>
             </li>
             
@@ -1152,10 +1364,6 @@ class Chain(object):
             
             <li>
                 <a class="footer-post" href="/2017/11/21/bgcolor-intro-md/">bgcolor_intro.md</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/11/09/Python-Note/">Python_Note</a>
             </li>
             
         </ul>
@@ -1169,11 +1377,11 @@ class Chain(object):
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/introduction/">introduction</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
         <li>
