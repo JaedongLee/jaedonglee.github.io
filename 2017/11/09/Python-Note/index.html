@@ -1450,12 +1450,340 @@ except ValueError as e:
 </li>
 </ul>
 </li>
+<li><p>读文件</p>
+<ul>
+<li><code>f.read()</code>方法: 可以一次读取文件的全部内容, Python将内容读到内存, 用一个str对象表示</li>
+<li><code>f.close()</code>: 文件对象会占用操作系统的资源, 且同时能打开的文件数量是有限的. 因此文件使用完毕后必须关闭</li>
+<li><p><code>with</code>语句: 由于文件读写时都有可能产生<code>IOError</code>, 而出错后<code>f.closed()</code>就不会被调用, 文件就不会正确关闭. 因此, 为了保证无论是否出错都能正确地关闭文件, 我们可以使用<code>try...finally</code>来实现.<br>  这样写太繁琐, Python引入<code>with</code>语句来自动帮我们调用<code>close()</code>方法:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">with open(&apos;/path/to/file&apos;, &apos;r&apos;) as f:</div><div class="line">    print(f.read())</div></pre></td></tr></table></figure>
+<p>  效果和<code>try...finally</code>一样, 但更简洁, 且不必调用<code>f.closed()</code>方法.</p>
+</li>
+<li><code>f.read(size)</code>: <code>read()</code>会调用文件所有内容, 如果文件过大, 内存就爆了. 为保险起见, 使用<code>read(size)</code>, 每次最多读取size个字节内容. </li>
+<li><code>f.readline()</code>: 一次读取一行内容</li>
+<li><code>f.readlines()</code>: 一次读取所有内容并按行返回<code>list</code>. 因此, 如果是配置文件, 调用<code>readlines()</code>最方便</li>
 </ul>
+</li>
+<li>file-like-Object<ul>
+<li>可能的类: file/内存的字节流/网络流/自定义流等</li>
+<li>原则: 不要求从特定类继承, 只要写个<code>read()</code>方法就行</li>
+<li>例子: <code>StringIO</code>就是在内存中创建的file-like-Object, 常用作临时缓冲.</li>
+</ul>
+</li>
+<li><p>二进制文件</p>
+<ul>
+<li>方法: 使用<code>open()</code>, 参数为<code>rb</code>. 例:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/test.jpg&apos;, &apos;rb&apos;)</div><div class="line">&gt;&gt;&gt; f.read()</div><div class="line">b&apos;\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...&apos; # 十六进制表示的字节</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>字符编码</p>
+<ul>
+<li><p><code>encoding</code>参数: 要读取非UTF-8编码的文本文件, 需要给<code>open()</code>函数传入<code>encoding</code>参数, 例如:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/gbk.txt&apos;, &apos;r&apos;, encoding=&apos;gbk&apos;)</div><div class="line">&gt;&gt;&gt; f.read()</div><div class="line">&apos;测试&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>UnicodeDecodeError</code>: 文本文件中可能夹杂着非法编码的字符. 因此, 还接收一个<code>error</code>参数, 表示如果遇到编码错误后如何处理. 比如直接忽略:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/gbk.txt&apos;, &apos;r&apos;, encoding=&apos;gbk&apos;, errors=&apos;ignore&apos;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>写文件</p>
+<ul>
+<li>传入<code>open()</code>函数的标识符<code>w</code>或者<code>wb</code></li>
+<li><code>close()</code>: 当我们写文件时, 操作系统旺旺不会立刻把数据写进磁盘, 而是放到内存缓存起来, 空闲的时候再慢慢写入. 只有调用<code>close()</code>方法时, 操作系统才保住把没有写入的数据全部写入磁盘.<ul>
+<li>忘记的后果: 只写了一部分到磁盘, 剩下的丢失了. </li>
+</ul>
+</li>
+<li><p><code>with</code>方法: 最保险</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">with open(&apos;/Users/michael/test.txt&apos;, &apos;w&apos;) as f:</div><div class="line">f.write(&apos;Hello, world!&apos;)</div></pre></td></tr></table></figure>
+<p>  要写入特定编码的文本文件, 请给<code>open()</code>函数传入<code>encoding</code>参数, 将字符串自动转换成指定编码</p>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+<li>使用<code>with</code>语句操作文件IO是一个好习惯</li>
+</ul>
+</li>
+<li><p>StringIO和BytesIO</p>
+<ul>
+<li><p>StringIO: </p>
+<ul>
+<li>作用: 从内存中读写str</li>
+<li><p>例子:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from io import StringIO</div><div class="line">&gt;&gt;&gt; f = StringIO()</div><div class="line">&gt;&gt;&gt; f.write(&apos;hello&apos;)</div><div class="line">5</div><div class="line">&gt;&gt;&gt; f.write(&apos; &apos;)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; f.write(&apos;world!&apos;)</div><div class="line">6</div><div class="line">&gt;&gt;&gt; print(f.getvalue())</div><div class="line">hello world!</div></pre></td></tr></table></figure>
+<p>  <code>getvalue()</code>用于获得写入后的str</p>
+</li>
+<li>读取<code>StringIO</code>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from io import StringIO</div><div class="line">&gt;&gt;&gt; f = StringIO(&apos;Hello!\nHi!\nGoodbye!&apos;)</div><div class="line">&gt;&gt;&gt; while True:</div><div class="line">...     s = f.readline()</div><div class="line">...     if s == &apos;&apos;:</div><div class="line">...         break</div><div class="line">...     print(s.strip())</div><div class="line">...</div><div class="line">Hello!</div><div class="line">Hi!</div><div class="line">Goodbye!</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>BytesIO</p>
+<ul>
+<li><p>作用: 操作二进制数据. 例:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from io import BytesIO</div><div class="line">&gt;&gt;&gt; f = BytesIO()</div><div class="line">&gt;&gt;&gt; f.write(&apos;中文&apos;.encode(&apos;utf-8&apos;))</div><div class="line">6</div><div class="line">&gt;&gt;&gt; print(f.getvalue())</div><div class="line">b&apos;\xe4\xb8\xad\xe6\x96\x87&apos;</div></pre></td></tr></table></figure>
+<p>  注意: 写入的不是str, 而是经过UTF-8编码的bytes<br>  英文字符输出的还是英文字符</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>操作文件和目录</p>
+<ul>
+<li><code>os</code>模块: 直接调用操作系统的接口<ul>
+<li><code>os.name</code>: 显示操作系统类型</li>
+<li><code>os.uname()</code>: 显示系统详细信息, 在Windows上不提供</li>
+<li>环境变量<ul>
+<li><code>os.environ</code>: 查看环境变量</li>
+<li><code>os.environ.get(&#39;key)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>操作文件和目录</p>
+<ul>
+<li><p>目录操作</p>
+<ul>
+<li><p>查看目录: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; os.path.abspath(&apos;.&apos;)</div><div class="line">&apos;/Users/michael&apos;</div><div class="line">&gt;&gt;&gt; os.path.join(&apos;/Users/michael&apos;, &apos;testdir&apos;)</div><div class="line">&apos;/Users/michael/testdir&apos;</div><div class="line">&gt;&gt;&gt; os.mkdir(&apos;/Users/michael/testdir&apos;)</div><div class="line"># 删掉一个目录</div><div class="line">&gt;&gt;&gt; os.rmdir(&apos;/Users/michael/testdir&apos;)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>os.path.join()</code>: 将两个路径合成一个</p>
+<ul>
+<li>好处: 可以正确处理不同操作系统的路径分隔符</li>
+</ul>
+</li>
+<li><p><code>os.path.split()</code>: 拆分路径. 后一部分总是最后级别的目录或文件名:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; os.path.split(&apos;.Users/michael/testdir/file.txt&apos;)</div><div class="line">(&apos;/Users/michael/testdir&apos;, &apos;file.txt&apos;)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>os.path.splitext()</code>: 直接得到文件扩展名</p>
+</li>
+<li>这些合并/拆分函数并不要求目录和文件真实存在, 它们只对字符串进行操作</li>
+</ul>
+</li>
+<li><p>文件操作</p>
+<ul>
+<li><code>os.rename()</code>: 重命名文件: `os.rename(‘test.txt’, ‘test.py’)</li>
+<li><code>os.remove()</code>: 删除文件: <code>os.remove(&#39;test.py&#39;)</code></li>
+<li>没有复制模块:<ul>
+<li><code>os</code>未提供</li>
+<li><code>shutil</code>模块提供:<ul>
+<li><code>copyfile()</code></li>
+<li>可以看做是<code>os</code>模块的补充, 还有很多其它实用函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>过滤文件</p>
+<ul>
+<li><p>列出当前目录下的所有目录:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; [x for x in os.listdir(&apos;.&apos;) if os.path.isdir(x)]</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出所有<code>.py</code>文件</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[x for x in os.listdir(‘.’) if os.path.isfile(x) and os.path.splitext(x)[1]==’.py’]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">        - 小结: python的`os`模块封装了操作系统的目录和文件操作, 要注意这些函数有的在`os`模块中, 有的在`os.path`模块中.</div><div class="line">- 序列化</div><div class="line">    - 定义: 变量从内存中变成可储存对象或传输的过程称之为序列化, 在Python中叫pickling, 在其它语言中叫serialization, marshaling,flattening等等, 都是一个意思</div><div class="line">    - 反序列化: 把变量内容从序列化的对象重新读到内存里称之为反序列化, 即unpickling           </div><div class="line">    - 目的: </div><div class="line">        1. 以某种存储形式使自定义对象持久化；</div><div class="line">        2. 将对象从一个地方传递到另一个地方。</div><div class="line">        3. 使程序更具维护性。</div><div class="line">    - 例子: </div><div class="line">        - 将数据转化成xml/json</div><div class="line">        - 将数据转化成文件/流</div><div class="line">    - `pickle`模块</div><div class="line">        - 作用: 实现序列化</div><div class="line">        - `pickle.dumps()`: 把任意对象序列化成一个`bytes`. 例:</div></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import pickle<br>d = dict(name=’Bob’, age=20, score=88)<br>pickle.dumps(d)<br>b’\x80\x03}q\x00(X\x03\x00\x00\x00ageq\x01K\x14X\x05\x00\x00\x00scoreq\x02KXX\x04\x00\x00\x00nameq\x03X\x03\x00\x00\x00Bobq\x04u.’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- `pickle.dump()`(**没有`s`**)可以把一个对象序列化后写入文件</div></pre></td></tr></table></figure>
+<p>f = open(‘dump.txt’, ‘wb’)<br>pickle.dump(d, f)<br>f.close()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">    - `pickle.loads()`: 反序列化对象</div><div class="line">    - `pickle.load()`: 从一个`file-like-Object`中直接反序列化对象</div><div class="line">- `json`模块: Python对象到JSON格式的转换</div><div class="line">    - `json.dumps()`: 将对象变成一个`json`样式的`str`. </div><div class="line">    - `json.dump()`: 将`json`写入一个`file-like-Object`</div><div class="line">    - `json.loads()`: 把`json`的字符串反序列化</div><div class="line">    - `json.load()`: 从`file-like-Object`中读取字符串并反序列化</div><div class="line">- JSON进阶</div><div class="line">    - 将`class`序列化为`json`</div><div class="line">        - 直接转化: 会报错, 因为`class`的实例不是一个可序列化为JSON的对象</div><div class="line">        - 间接转化</div><div class="line">            - `dumps()`提供一大堆可选参数</div><div class="line">                - 可选参数`default`: 把任意一个对象变成一个可序列为JSON的对象, 我们只需要写一个转换函数, 再把函数穿进去即可:</div><div class="line">                    - 将特定`class`实例转化成JSON</div></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>def student2dict(std):
+    return {
+        &apos;name&apos;: std.name,
+        &apos;age&apos;: std.age,
+        &apos;score&apos;: std.score
+    }
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    `class`的实例`Student`首先被`student2dict()`转换成`dict`, 再被顺利序列化为JSON</div><div class="line">- 将任意`class`的实例变成`json`</div></pre></td></tr></table></figure>
 
+print(json.dumps(s, default=lambda obj: obj.__dict__))
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">                    其中`__dict__`属性是一个`dict`, 用来储存实例变量</div><div class="line">- 将`json`反序列化为`class`</div><div class="line">    - 先用`loads()`方法将`json`转换成一个`dict`对象, 然后, 我们传入的`object_hook`函数负责将`dict`转换成`Student`实例:</div></pre></td></tr></table></figure>
+</code></pre><p>  def dict2student(d):</p>
+<pre><code>return Student(d[&apos;name&apos;], d[&apos;age&apos;], d[&apos;score&apos;]) 
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行结果如下:</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>json_str = ‘{“age”: 20, “score”: 88, “name”: “Bob”}’<br>print(json.loads(json_str, object_hook=dict2student))<br>  <__main__.student object="" at="" 0x10cd3c190=""></__main__.student></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">        - 练习</div><div class="line">            - 题目: 对中文进行JSON序列化时, `json.dumps()`提供了一个`ensure_ascii`参数, 观察该参数对结果的影响:</div><div class="line">- 进程和线程</div><div class="line">    - 总览</div><div class="line">        - 通俗理解: 多进程和多线程就是操作系统让各个任务(进程)轮流执行, 让各个任务里面的子任务(线程)轮流执行</div><div class="line">        - 任务之间的联系: 同时执行多个任务通常各个任务之间并不是内有关联的, 而是需要相互通信和协调, 有时, 任务1必须暂停等待任务2完成后才能继续执行, 有时, 任务3和任务4又不能同时执行, 所以, 多进程和多线程的程序的复杂度要远远高于我们前面写的单进程单线程的程序.</div><div class="line">    - 多进程</div><div class="line">        - `fork()`: Unix/Linux专属</div><div class="line">            - 调用一次, 返回两次. 操作系统自动把当前进程(称为父进程)复制一份(称为子进程), 然后, 分别在父进程和子进程中返回</div><div class="line">            - 返回值: 子进程永远返回`0`, 父进程返回子进程的pid. 这样做的理由: 一个父进程可以fork出多个子进程, 所以, 父进程要记下每个子进程的ID, 而子进程只需要调用`getppid()`就可以拿到父进程的ID</div><div class="line">            - Python中的`fork`: Python的</div><div class="line">        - `multiprocessing`模块</div><div class="line">            - `Process`类: 代表一个进程对象. 下面的例子演示了启动一个子进程并等待其结束:</div></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>from multiprocessing import Process<br>import os</p>
+<h1 id="子进程要执行的代码"><a href="#子进程要执行的代码" class="headerlink" title="子进程要执行的代码"></a>子进程要执行的代码</h1><p>def run_proc(name):<br>  print(‘Run child process %s (%s)…’ % (name, os.getpid()))</p>
+<p>if <strong>name</strong>==’<strong>main</strong>‘:<br>  print(‘Parent process %s.’ % os.getpid())<br>  p = Process(target=run_proc, args=(‘test’,))<br>  print(‘Child process will start.’)<br>  p.start()<br>  p.join()<br>  print(‘Child process end.’)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">执行结果如下:</div></pre></td></tr></table></figure>
+<p>Parent process 928.<br>Process will start.<br>Run child process test (929)…<br>Process end.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">        创建子进程时, 只需要传入一个执行函数和函数的参数, 创建一个`Process`实例, 这样创建进程比`fork()`简单       </div><div class="line">        `join()`方法可以等待子进程结束后再继续往下运行, 通常用于进程间的同步.</div><div class="line">- `Pool`模块: 进程池, 启动大量子进程时使用</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>from multiprocessing import Pool<br>import os, time, random</p>
+<p>def long_time_task(name):<br>  print(‘Run task %s (%s)…’ % (name, os.getpid()))<br>  start = time.time()<br>  time.sleep(random.random() * 1)<br>  end = time.time()<br>  print(‘Task %s runs %0.2f seconds’ % (name, (end - start)))</p>
+<p>if <strong>name</strong>==’<strong>main</strong>‘:<br>  print(‘Parent process %s’ % os.getpid())<br>  p = Pool(4)<br>  for i in range(5):</p>
+<pre><code>p.apply_async(long_time_task, args=(i,))
+</code></pre><p>  print(‘Waiting for all subprocesses done…’)<br>  p.close()<br>  p.join()<br>  print(‘All subprocesses done’)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    p = Pool(4)意味着同时进行的子进程为4个, 也就是同时运行4个`long_time_task`函数</div><div class="line">- 子进程: 很多时候, 子进程不是自身, 而是一个外部进程. 我们创建了子进程后, 还要控制子进程的输入和输出.</div><div class="line">    - `subprocess`模块: 可以让我们非常方便的启动一个子进程, 然后控制其输入和输出. 例:</div></pre></td></tr></table></figure>
+<p>  import subprocess</p>
+<p>  print(‘$ nslookup www.python.com’)<br>  r = subprocess.call([‘nslookup’, ‘www.python.com’])<br>  print(‘Exit code:’, r)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行结果</div></pre></td></tr></table></figure>
+<p>  $ nslookup www.python.org<br>  Server:        192.168.19.4<br>  Address:    192.168.19.4#53</p>
+<p>  Non-authoritative answer:<br>  www.python.org    canonical name = python.map.fastly.net.<br>  Name:    python.map.fastly.net<br>  Address: 199.27.79.223</p>
+<p>  Exit code: 0</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果子进程还需要输入, 则可以通过`communicate()`方法输入:</div></pre></td></tr></table></figure>
+<p>  import subprocess</p>
+<p>  print(‘$ nslookup’)<br>  p = subprocess.Popen([‘nslookup’], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)<br>  output, err = p.communicate(b’set q=mx\npython.org\nexit\n’)<br>  print(output.decode(‘utf-8’))<br>  print(‘Exit code:’, p.returncode)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行结果</div></pre></td></tr></table></figure>
+<p>  $ nslookup<br>  Server:        192.168.19.4<br>  Address:    192.168.19.4#53</p>
+<p>  Non-authoritative answer:<br>  python.org    mail exchanger = 50 mail.python.org.</p>
+<p>  Authoritative answers can be found from:<br>  mail.python.org    internet address = 82.94.164.166<br>  mail.python.org    has AAAA address 2001:888:2000:d::a6</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>        Exit code: 0
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- 进程间通信</div><div class="line">    - Python的`multiprocessing`模块封装了操作系统的底层机制来实现`Process`之间的通信, 提供了Queue, Pipes等多种方式来交换数据.</div></pre></td></tr></table></figure>
+
+        from multiprocessing import Process, Queue
+        import os, time, random
+
+        def write(q):
+            for value in [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]:
+                print(&apos;Process to write: %s&apos; % os.getpid()) 
+                print(&apos;Put %s to queue...&apos; % value)
+                q.put(value)
+                time.sleep(random.random())
+
+        # 读数据进程执行的代码
+        def read(q):
+            while True:
+                print(&apos;Process to read: %s&apos; % os.getpid())
+                value = q.get(True)
+                print(&apos;Get %s from queue.&apos; % value)
+
+        if __name__ == &apos;__main__&apos;:
+            q = Queue()
+            pw = Process(target=write, name=None, args=(q,) )
+            pr = Process(target=read, name=None, args=(q,) )
+            pw.start()
+            pr.start()
+            pw.join()
+            pr.terminate()
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行结果</div></pre></td></tr></table></figure>
+
+        Process to write: 50563
+        Put A to queue...
+        Process to read: 50564
+        Get A from queue.
+        Put B to queue...
+        Python3 基础教程【完整版】 http://www.yeayee.com/
+        274/531
+        Get B from queue.
+        Put C to queue...
+        Get C from queue.
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    - 小结</div><div class="line">        - 在Unix/Linux下, 可以使用`fork()`来调用实现多进程.</div><div class="line">        - 要实现跨平台的多进程, 可以使用`multiprocessing`模块.</div><div class="line">        - 进程间通信是通过`Queue`/`Pipes`等实现的.</div><div class="line">- 多线程</div><div class="line">    - 多任务可以由多进程完成, 也可以由一个进程内的多线程完成.</div><div class="line">    - Python的标准库提供了两个模块: `_thread`和`threading`. `threading`是高级模块, 是对`_thread`模块的封装</div><div class="line">    - 启动线程: 启动一个线程就是把一个函数传入并创建Thread实例, 然后调用`start()`开始执行:</div></pre></td></tr></table></figure>
+
+    import time, threading
+
+    def loop():
+        print(&apos;thread %s is running...&apos; % threading.current_thread().name)
+        n = 0
+        while n &lt; 5:
+            n = n + 1
+            print(&apos;thread %s &gt;&gt;&gt; %s&apos; % (threading.current_thread().name, n))
+            time.sleep(1)
+        print(&apos;thread %s ended.&apos; % threading.current_thread().name)
+    print(&apos;thread %s is running...&apos; % threading.current_thread().name)
+    t = threading.Thread(target=loop, name=&apos;LoopThreadT&apos;)
+    t.start()
+    t.join()
+    print(&apos;thread %s ended. &apos; % threading.current_thread().name)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">执行结果:</div></pre></td></tr></table></figure>
+
+    thread MainThread is running...
+    thread LoopThreadT is running...
+    thread LoopThreadT &gt;&gt;&gt; 1
+    thread LoopThreadT &gt;&gt;&gt; 2
+    thread LoopThreadT &gt;&gt;&gt; 3
+    thread LoopThreadT &gt;&gt;&gt; 4
+    thread LoopThreadT &gt;&gt;&gt; 5
+    thread LoopThreadT ended.
+    thread MainThread ended.
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- 任何进程默认会启动一个线程, 我们称之为主线程, 主线程可以启动新的线程. 主线程实例的名字叫`MainThread`. 子线程的名字在创建时指定</div><div class="line">- Lock</div><div class="line">    - 多线程与多进程最大的不同: 多进程中, 同一个变量, 各自有一份拷贝存在于每个进程中, 互不影响. 而多线程中, 所有变量都由所有线程共享, 因此, 任何一个变量都可以被任何一个线程修改, 这样, 线程之间共享数据最大的危险在于多个进程同时改一个变量, 把内容改乱了. 让我们来看一个例子:</div></pre></td></tr></table></figure>
+
+        import time, threading
+
+        # 假定这是你的银行存款:
+        balance = 0
+
+        def change_it(n):
+            # 先存后取，结果应该为0:
+            global balance
+            balance = balance + n
+            balance = balance - n
+
+        def run_thread(n):
+            for i in range(100000):
+                change_it(n)
+
+        t1 = threading.Thread(target=run_thread, args=(5,))
+        t2 = threading.Thread(target=run_thread, args=(8,))
+        t1.start()
+        t2.start()
+        t1.join()
+        t2.join()
+        print(balance)
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">上述代码运行的结果理论上应该是`0`, 但是, 由于线程的调度是操作系统决定的, 当t1, t2交替执行时, 只要循环次数足够多, `balance`的结果就不一定是`0`.         </div><div class="line">原因: 在高级语言中, `balance = balance + n`这条语句在CPU中执行时是分两条的:</div></pre></td></tr></table></figure>
+
+        x = balance + n
+        balance = x
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当t1和t2交替运行时, 如果操作系统以下面的顺序执行t1/t2:</div></pre></td></tr></table></figure>
+
+        初始值 balance = 0
+        t1: x1 = balance + n # x1 = 5
+        t2: x2 = balance + n # x2 = 8
+        t2: balance = x2 # balance = 8
+        t1: balance = x1 # balance = 5
+
+        结果: balance = 5
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    由于修改`balance`需要多条语句, 而执行这几条语句时, 线程可能中断, 从而导致多个线程把同一个对象改乱了.</div><div class="line">- 当我们要确保`change_it(n)`的计算不出错时, 就要给`change_it()`一把锁, 由于锁只有一个, 无论多少线程, 同一时间只有一个线程可以持有该锁, 所以, 不会造成修改的冲突, 但这样会导致运行拥有锁的代码实际上是以单线程模式执行的. 创建一个锁就是通过`threading.Lock()`来实现:</div></pre></td></tr></table></figure>
+
+        balance = 0
+        lock = threading.Lock()
+
+        def run_thread(n):
+            for i in range(100000):
+                # 先要获取锁:
+                lock.acquire()
+                try:
+                    # 放心地改吧:
+                    change_it(n)
+                finally:
+                    # 改完了一定要释放锁:
+                    lock.release()
+        ```
+    - 死锁: 由于可以存在多个锁, 不同的线程持有不同的锁, 并试图获取对方持有的锁时, 可能造成死锁, 导致多个线程挂起, 既不执行, 也无法结束, 只能靠操作系统强制终止.
+- 多核CPU
+    - 默认
+        - 一个死循环占用一个CPU
+        - 两个死循环在多核CPU中, 会占用200%的CPU
+    - Python中, 运行死循环, 在4核CPU上的占用率仅有102%
+        - 原因: 因为Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：Global Interpreter Lock，任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核。
+    - Python虽然不能利用多线程实现多核任务，但可以通过多进程实现多核任务。多个Python进程有各自独立的GIL锁，互不影响。
+- 小结
+    - 多线程编程, 模型复杂, 容易发生冲突, 必须用锁加以隔离, 同时, 又要小心死锁的发生.
+    - Python解释器由于设计时有GIL全局锁, 导致多线程无法利用多核. 
+</code></pre>
     </div>
 
     
@@ -1525,11 +1853,11 @@ except ValueError as e:
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/target/">target</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/target/">target</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
     </ul>
