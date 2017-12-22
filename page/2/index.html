@@ -147,6 +147,156 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/11/05/CSAPPP练习题3-30/">
+                CSAPPP练习题3-30
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-05</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/CSAPP/">CSAPP</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>题目:<br>  下面的C函数忽略了switch语句的主体. 在C代码中, 情况标号是不连续的, 而有些情况有多个标号.      </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void switch2(long x, long *dest) &#123;</div><div class="line">    long val = 0;</div><div class="line">    switch (x) &#123;</div><div class="line">        ... //Body of switch statement omitted</div><div class="line">    &#125;</div><div class="line">    *dest = val;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  在编译该函数时, GCC为程序的初始部分生成了以下代码. 变量x在寄存器%rdi中:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// void switch2(long x, long *dest)</div><div class="line">// x in %rdi</div><div class="line">1   switch2:</div><div class="line">2       addq    $1, %rdi</div><div class="line">3       cmpq    $8, %rdi</div><div class="line">4       ja      .L2</div><div class="line">5       jmp     *.L4(, %rdi, 8)</div></pre></td></tr></table></figure>
+<p>  为跳转表生成以下代码(跳转表声明):</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1   .L4:</div><div class="line">2       .quad   .L9</div><div class="line">3       .quad   .L5</div><div class="line">4       .quad   .L6</div><div class="line">5       .quad   .L7</div><div class="line">6       .quad   .L2</div><div class="line">7       .quad   .L7</div><div class="line">8       .quad   .L8</div><div class="line">9       .quad   .L2</div><div class="line">10      .quad   .L5</div></pre></td></tr></table></figure>
+<p>  根据上述信息回答下列问题:<br>  A. switch语句类情况标号的值分别是多少?<br>  B. C代码中哪些情况有多个标号?       </p>
+</li>
+<li>解析:          <ul>
+<li>switch代码标号编译原则: 对C语言中的编号进行初始化, 使其从0开始     </li>
+<li>跳转表声明表示原则: 从原情况编号初始值开始往下排, 每行 +1, 右侧的字符串表示情况值.</li>
+<li>解析: 从初始部分汇编代码的第2行可以看出: GCC为了使编号初始值为0, 对原初始值 + 1, 因此原初始值为 -1.<br>从初始部分汇编代码第3/4行看出: 当初始值 &gt;8 时, 会跳转到默认情况.L2, 因此情况编号最多到7.<br>根据跳转声明表示原则可排出各情况标号的值, 如下:<ul>
+<li>-1    .L9</li>
+<li>0     .L5</li>
+<li>1     .L6</li>
+<li>2     .L7</li>
+<li>3     .L2</li>
+<li>4     .L7</li>
+<li>5     .L8</li>
+<li>6     .L2</li>
+<li>7     .L5</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>答案:<ol>
+<li>如上列所示</li>
+<li>通过上列可以看出, .L2/.L7/.L5有多个标号</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/10/24/JEECMS获取指定栏目标题图/">
+                JEECMS获取指定栏目标题图
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JEECMS/">JEECMS</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>获取指定栏目标题图的方法:<br>&emsp;&emsp;` [@cms_channel id=’175’]  <pre><code>    &lt;img src=&quot;${tag_bean.titleImg!site.defImg}&quot; alt=&quot;${tag_bean.name}&quot; width=&quot;100%&quot; /&gt;  
+[/@cms_channel]`
+</code></pre><ul>
+<li>注意: alt中不能为title, 因为没有这个字段, 这个字段是属于content的</li>
+</ul>
+</li>
+<li>获取批量栏目标题图的方法:<ul>
+<li>` [@cms_channel_list ]<br>  [#list tag_list as a] <pre><code>&lt;img src=&quot;${a.titleImg!site.defImg}&quot; alt=&quot;${a.name}&quot; width=&quot;100%&quot; /&gt; 
+</code></pre>  [/#list]<br>  [/@cms_channel_list]`</li>
+<li>注意: 如果a.name不行请使用, 请使用a.title尝试</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/10/24/CSAPP程序的机器级表示/">
+                Charpter Three 程序的机器级表示
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/CSAPP/">CSAPP</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>3.2 程序编码<ul>
+<li>3.2.1 机器级表示<ul>
+<li>抽象<ul>
+<li>计算机系统使用了多种不同形式的抽象, 利用更简单的抽象模型来隐藏实现的细节</li>
+<li>最重要的两种抽象:<ol>
+<li>由指令集体系结构(Instruction Set Architecture, ISA)来定义机器级程序的格式和行为.</li>
+<li>机器级程序使用的内存地址是虚拟地址, 提供的内存模型看上去是一个非常大的字节数组</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>处理器状态<ul>
+<li>程序计数器(通常被称为”PC”, 在x86-64中用%rip表示): 给出将要执行的下一条指令在内存中的地址
+        </div>
+        <a href="/2017/10/24/CSAPP程序的机器级表示/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/10/24/CSAPP信息的表示和处理/">
                 Charpter Two 信息的表示和处理
             </a>
@@ -375,19 +525,19 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2017/12/22/English-transcribe-We-choose-to-go-to-the-Moon/">English-transcribe-We-cho</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2017/12/21/Pyhton-Practice-Pic-to-char/">Pyhton-Practice:Pic-to-ch</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/12/21/Python-Comprehend-Daily/">Python_Comprehend_Daily</a>
             </li>
             
             <li>
                 <a class="footer-post" href="/2017/11/29/target-recently/">target_recently</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/11/27/JEECMS播放视频黑屏问题解决方法/">JEECMS播放视频黑屏问题解决方法</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/11/23/Python问题解析-关于-getattr-的链式调用的应用的一点解析/">Python问题解析-关于__getattr__的</a>
             </li>
             
         </ul>
@@ -401,7 +551,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+            <a class="footer-post" href="/categories/English/">English</a>
         </li>
         
         <li>
@@ -409,11 +559,11 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/target/">target</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/target/">target</a>
+            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
         </li>
         
     </ul>
