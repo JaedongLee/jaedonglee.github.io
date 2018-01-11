@@ -147,6 +147,82 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2018/01/06/Unknowed-Word/">
+                Unknowed-Word
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-06</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Question/">Question</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>安全<ul>
+<li>PCI扫描</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/01/04/Programming-Note/">
+                Programming-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-04</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Programming/">Programming</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>Skill<ul>
+<li>跳过循环的下一次<ul>
+<li>可以在循环外设置一个变量保存值, 当需要跳过下一次循环时, 改变该值, 再判断变量的值, 如是指定值,则结束本次循环, 这样就跳过了一次循环</li>
+<li>code:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def merge(row):</div><div class="line">    pair = False</div><div class="line">    new_row = []</div><div class="line">    for i in range(len(row)):</div><div class="line"></div><div class="line">        if i + 1 &lt; len(row) and row[i] == row[i + 1]:</div><div class="line">            pair = True</div><div class="line">            new_row.append(0)</div><div class="line">            new_row.append(2 * row[i])</div><div class="line">            i = i + 1</div><div class="line">        else:</div><div class="line">            new_row.append(row[i])</div><div class="line">    assert len(new_row) == len(row)</div><div class="line">    return new_row</div></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/12/22/English-transcribe-We-choose-to-go-to-the-Moon/">
                 English-transcribe-We-choose-to-go-to-the-Moon
             </a>
@@ -265,6 +341,18 @@
 </li>
 </ul>
 </li>
+<li>curses<ul>
+<li>getch(): window.getch()/stdscr.getch()</li>
+</ul>
+</li>
+<li><p>list/tuple</p>
+<ul>
+<li><p>tuple:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tuple1 = ([1, 2, 3],(4, 5, 6), (7, 8, 9))</div><div class="line">tuple2 = ((1, 2, 3),(4, 5, 6), (7, 8, 9))</div><div class="line">type(tuple1[0]) = list</div><div class="line">type(tuple1[1]) = tuple</div><div class="line">type(list(tuple1[1])) = list</div></pre></td></tr></table></figure>
+<p>  - </p>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -277,8 +365,8 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2017/11/29/target-recently/">
-                target_recently
+            <a href="/2017/11/29/Life-Target/">
+                Life-Target
             </a>
         </h1>
         <div class="post-info">
@@ -288,7 +376,7 @@
             
             
                 <span class="category">
-                    <a href="/categories/target/">target</a>
+                    <a href="/categories/Life/">Life</a>
                 </span>
             
         </div>
@@ -297,7 +385,11 @@
     
         <div class="content">
             <ul>
+<li>Programming<ul>
 <li>编写一个自动将github更新消息发送到qq的小程序    </li>
+<li>编写一个备忘录软件</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -483,92 +575,6 @@
 
 </div>
             
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/09/Python-Note/">
-                Python_Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-09</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Python/">Python</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>Python基础<ul>
-<li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
-<li>使用list和tuple<ul>
-<li>list<ul>
-<li>定义: Python内置的一种数据类型是列表: list. list是一种有序的集合, 可以随时添加和删除其中的元素</li>
-<li>用法<ul>
-<li>list[-1]: 使用-1做索引获取最后一个元素, 依此类瑞, 可以获得倒数第二个/第三个元素</li>
-<li>list.append(‘ele’): 向list末尾追加元素</li>
-<li>list.insert(num, ‘ele’): 将ele插入指定位置num</li>
-<li>list.pop(): 删除末尾元素</li>
-<li>list.pop(num): 删除指定位置的元素</li>
-<li>list元素可以是另一个list, 获取元素的方式是: list[i][j]
-        </div>
-        <a href="/2017/11/09/Python-Note/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/09/Python 廖雪峰教程 Note/">
-                Python_Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-09</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Python/">Python</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>Python基础<ul>
-<li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
-<li>使用list和tuple<ul>
-<li>list<ul>
-<li>定义: Python内置的一种数据类型是列表: list. list是一种有序的集合, 可以随时添加和删除其中的元素</li>
-<li>用法<ul>
-<li>list[-1]: 使用-1做索引获取最后一个元素, 依此类瑞, 可以获得倒数第二个/第三个元素</li>
-<li>list.append(‘ele’): 向list末尾追加元素</li>
-<li>list.insert(num, ‘ele’): 将ele插入指定位置num</li>
-<li>list.pop(): 删除末尾元素</li>
-<li>list.pop(num): 删除指定位置的元素</li>
-<li>list元素可以是另一个list, 获取元素的方式是: list[i][j]
-        </div>
-        <a href="/2017/11/09/Python 廖雪峰教程 Note/" class="read-more">Read More</a>
-    
-
-</div>
-            
         </section>
     </div>
 </div>
@@ -611,19 +617,19 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/01/06/Unknowed-Word/">Unknowed-Word</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/01/04/Programming-Note/">Programming-Note</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2017/12/22/English-transcribe-We-choose-to-go-to-the-Moon/">English-transcribe-We-cho</a>
             </li>
             
             <li>
                 <a class="footer-post" href="/2017/12/21/Pyhton-Practice-Pic-to-char/">Pyhton-Practice:Pic-to-ch</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/12/21/Python-Comprehend-Daily/">Python_Comprehend_Daily</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/11/29/target-recently/">target_recently</a>
             </li>
             
         </ul>
@@ -637,19 +643,19 @@
     <ul>
         
         <li>
+            <a class="footer-post" href="/categories/Life/">Life</a>
+        </li>
+        
+        <li>
             <a class="footer-post" href="/categories/English/">English</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/introduction/">introduction</a>
+            <a class="footer-post" href="/categories/Programming/">Programming</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/target/">target</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Mysql/">Mysql</a>
+            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
         </li>
         
     </ul>
