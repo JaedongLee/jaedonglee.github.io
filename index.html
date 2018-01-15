@@ -347,9 +347,49 @@
 </li>
 <li><p>list/tuple</p>
 <ul>
-<li><p>tuple:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tuple1 = ([1, 2, 3],(4, 5, 6), (7, 8, 9))</div><div class="line">tuple2 = ((1, 2, 3),(4, 5, 6), (7, 8, 9))</div><div class="line">type(tuple1[0]) = list</div><div class="line">type(tuple1[1]) = tuple</div><div class="line">type(list(tuple1[1])) = list</div></pre></td></tr></table></figure>
-<p>  - </p>
+<li>tuple:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tuple1 = ([1, 2, 3],(4, 5, 6), (7, 8, 9))</div><div class="line">tuple2 = ((1, 2, 3),(4, 5, 6), (7, 8, 9))</div><div class="line">type(tuple1[0]) = list</div><div class="line">type(tuple1[1]) = tuple</div><div class="line">type(list(tuple1[1])) = list</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>defaultdict</p>
+<ul>
+<li>source: collections</li>
+<li><p>notes</p>
+<ul>
+<li><p>TypeError: first argument must be callable or None</p>
+<ul>
+<li>For a <code>defaultdict</code>, the default value is usually not really a value, it is a factory: a method that generates a new value.</li>
+<li><p>Example:</p>
+<ul>
+<li><p>Wrong:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lst = list(range(0, 5))</div><div class="line">d = defaultdict(lst)</div></pre></td></tr></table></figure>
+<p>  the terminal will report an error like this:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TypeError: first argument must be callable or None</div></pre></td></tr></table></figure>
+</li>
+<li><p>Right:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d = defaultdict(lambda: list(range(0, 5)))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Extend: the codes below will make all default values(like d[1]/d[2]) reference the same list</p>
+<ul>
+<li><p>Example:</p>
+<ul>
+<li><p>Wrong:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; val = list(range(0, 5))</div><div class="line">&gt;&gt;&gt; d = defaultdict(lambda: val)</div><div class="line">&gt;&gt;&gt; d[1]</div><div class="line">[0, 1, 2, 3, 4]</div><div class="line">&gt;&gt;&gt; d[1].append(14)</div><div class="line">&gt;&gt;&gt; d[2]</div><div class="line">[0, 1, 2, 3, 4, 14]</div></pre></td></tr></table></figure>
+</li>
+<li><p>Right:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; val = lambda: list(range(0, 5))</div><div class="line">&gt;&gt;&gt; d = defaultdict(val)</div><div class="line">&gt;&gt;&gt; d[1]</div><div class="line">[0, 1, 2, 3, 4]</div><div class="line">&gt;&gt;&gt; d[1].append(14)</div><div class="line">&gt;&gt;&gt; d[2]</div><div class="line">[0, 1, 2, 3, 4]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Reason: </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -643,10 +683,6 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/Life/">Life</a>
-        </li>
-        
-        <li>
             <a class="footer-post" href="/categories/English/">English</a>
         </li>
         
@@ -656,6 +692,10 @@
         
         <li>
             <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Life/">Life</a>
         </li>
         
     </ul>
