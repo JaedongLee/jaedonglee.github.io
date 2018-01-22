@@ -10,10 +10,11 @@
 
     <!--Description-->
     
-        <meta name="description" content="Skill
-跳过循环的下一次
-可以在循环外设置一个变量保存值, 当需要跳过下一次循环时, 改变该值, 再判断变量的值, 如是指定值,则结束本次循环, 这样就跳过了一次循环
-code:  1234567891011121314def merge(row):    pair = False    new">
+        <meta name="description" content="Spring Mybatis Mapper 报错
+
+问题: 调用dao类方法,如userApplyMapper.updateByPrimaryKeySelective时, 报空指针错误
+分析: 发现
+  123@Autowiredprivate UserMapper userMapper;priva">
     
 
     <!--Author-->
@@ -23,7 +24,7 @@ code:  1234567891011121314def merge(row):    pair = False    new">
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Programming-Note"/>
+        <meta property="og:title" content="Java-Note"/>
     
 
     <!--Open Graph Description-->
@@ -45,7 +46,7 @@ code:  1234567891011121314def merge(row):    pair = False    new">
 
     <!-- Title -->
     
-    <title>Programming-Note - 邹泰然的个人博客</title>
+    <title>Java-Note - 邹泰然的个人博客</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -149,18 +150,18 @@ code:  1234567891011121314def merge(row):    pair = False    new">
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2018/01/04/Programming-Note/">
-                Programming-Note
+            <a href="/2018/01/22/Java-Note/">
+                Java-Note
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-01-04</span>
+                <span class="date">2018-01-22</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/Programming/">Programming</a>
+                    <a href="/categories/Java/">Java</a>
                 </span>
             
         </div>
@@ -173,12 +174,17 @@ code:  1234567891011121314def merge(row):    pair = False    new">
 
         <!-- Post Content -->
         <ul>
-<li>Skill<ul>
-<li>跳过循环的下一次<ul>
-<li>可以在循环外设置一个变量保存值, 当需要跳过下一次循环时, 改变该值, 再判断变量的值, 如是指定值,则结束本次循环, 这样就跳过了一次循环</li>
-<li>code:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def merge(row):</div><div class="line">    pair = False</div><div class="line">    new_row = []</div><div class="line">    for i in range(len(row)):</div><div class="line"></div><div class="line">        if i + 1 &lt; len(row) and row[i] == row[i + 1]:</div><div class="line">            pair = True</div><div class="line">            new_row.append(0)</div><div class="line">            new_row.append(2 * row[i])</div><div class="line">            i = i + 1</div><div class="line">        else:</div><div class="line">            new_row.append(row[i])</div><div class="line">    assert len(new_row) == len(row)</div><div class="line">    return new_row</div></pre></td></tr></table></figure></li>
-</ul>
+<li><p>Spring Mybatis Mapper 报错</p>
+<ul>
+<li>问题: 调用dao类方法,如<code>userApplyMapper.updateByPrimaryKeySelective</code>时, 报空指针错误</li>
+<li><p>分析: 发现</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private UserMapper userMapper;</div><div class="line">private UserApplyMapper userApplyMapper;</div></pre></td></tr></table></figure>
+<p>  第二个变量<code>userApplyMapper</code>是暗的, 显示<code>Private field &#39;userApplyMapper&#39; is never assigned</code>. 因此推测: 一个<code>@Autowired</code>只能用于一个变量, 将代码改为:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private UserMapper userMapper;</div><div class="line"></div><div class="line">@Autowired</div><div class="line">private UserApplyMapper userApplyMapper;</div></pre></td></tr></table></figure>
+<p>  成功</p>
 </li>
+<li>结论: <code>@Autowired</code>只能装配一个变量</li>
+<li>推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.</li>
 </ul>
 </li>
 </ul>

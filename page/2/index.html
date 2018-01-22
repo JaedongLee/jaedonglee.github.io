@@ -147,6 +147,59 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/11/22/JavaScript-Note/">
+                JavaScript-Note.md
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JavaScript/">JavaScript</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>原型链</p>
+<ul>
+<li><p>构造实例和定义方法的先后问题</p>
+<ul>
+<li><p>代码如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">var person = new Person();</div><div class="line">Person.prototype.say = function() &#123;</div><div class="line">    console.log(&apos;Hello,&apos; + this.name);</div><div class="line">&#125;;</div><div class="line">person.say();//Hello,John</div></pre></td></tr></table></figure>
+<p>  虽然原型方法在构造实例之后声明, 但因为在调用方法之前就已经声明了, 因此之后的每个实例都拥有该方法.<br>  如果我们这样写:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">var person = new Person();</div><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">person.say();//person.say is not a function</div></pre></td></tr></table></figure>
+<p>  person.say方法没找到, 报错.<br>  原因: <code>var person = new Person()</code>创建了一个新实例, 即Person.prototype指向了一个空对象. 对于实例person来说, 其内部有一个原型链指针proto, 该指针指向了Person.prototype指向的对象.而接下来:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>  则将Person.prototype重置了, 使其指向了另一个对象即: <code>Object(say: function)</code><br>  而此时person.proto的指向没有变, 其指向的空对象没有<code>say</code>方法, 因此报错.<br>  想要成功运行, 则需将方法定义放在构造实例之前:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">var person = new Person();</div><div class="line">person.say();</div></pre></td></tr></table></figure>
+<p>  其实, 只需要明白原型对象的结构即可:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Function.prototype = &#123;</div><div class="line">    constructor : Function,</div><div class="line">    __proto__ : parent prototype,</div><div class="line">    some prototype properties: ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数格式: 为了区分普通函数和构造函数, 按照约定, 构造函数首字母应当大写, 而普通函数首字母应当小写</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/11/21/bgcolor-intro-md/">
                 bgcolor_intro.md
             </a>
@@ -537,40 +590,6 @@
 
 </div>
             
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/10/24/CSAPPP练习题3-16/">
-                深入了解计算机系统CSAPPP练习题3.16
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-10-24</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/CSAPP/">CSAPP</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li><p>exercise 3.16<br>  已知下列C代码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">void cond(long a, long *p) &#123;</div><div class="line">    if (p &amp;&amp; a &gt; *p) </div><div class="line">        *p = a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  GCC会产生下面的汇编代码
-        </div>
-        <a href="/2017/10/24/CSAPPP练习题3-16/" class="read-more">Read More</a>
-    
-
-</div>
-            
         </section>
     </div>
 </div>
@@ -613,6 +632,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/01/22/Java-Note/">Java-Note</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/01/17/Mysql-cant-create-table-error-150/">Mysql can&#39;t create table </a>
             </li>
             
@@ -622,10 +645,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/01/04/Programming-Note/">Programming-Note</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2017/12/22/English-transcribe-We-choose-to-go-to-the-Moon/">English-transcribe-We-cho</a>
             </li>
             
         </ul>
@@ -639,19 +658,19 @@
     <ul>
         
         <li>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Java/">Java</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+        </li>
+        
+        <li>
             <a class="footer-post" href="/categories/Life/">Life</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/English/">English</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Programming/">Programming</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Question/">Question</a>
         </li>
         
     </ul>
