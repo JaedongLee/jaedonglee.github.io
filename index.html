@@ -167,6 +167,8 @@
     
         <div class="content">
             <ul>
+<li><p>Spring</p>
+<ul>
 <li><p>Spring Mybatis Mapper 报错</p>
 <ul>
 <li>问题: 调用dao类方法,如<code>userApplyMapper.updateByPrimaryKeySelective</code>时, 报空指针错误</li>
@@ -178,6 +180,13 @@
 </li>
 <li>结论: <code>@Autowired</code>只能装配一个变量</li>
 <li>推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.</li>
+</ul>
+</li>
+<li>Spring项目报错: org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userController’: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.service.UserService com.ylxx.custom.controller.UserController.userService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userServiceImple’: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.dao.UserMapper com.ylxx.custom.service.UserServiceImple.userMapper; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userMapper’ defined in file [E:\Develop\counter\server\counter\out\artifacts\counter\WEB-INF\classes\com\ylxx\custom\dao\UserMapper.class]: Cannot resolve reference to bean ‘sessionFactory’ while setting bean property ‘sqlSessionFactory’; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘sessionFactory’ defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.apache.ibatis.type.TypeException: The alias ‘UserRole’ is already mapped to the value ‘com.ylxx.custom.entity.UserRole’.<ul>
+<li>分析: 看最后一句<code>The alias &#39;UserRole&#39; is already mapped to the value &#39;com.ylxx.custom.entity.UserRole&#39;.</code>, 意思是<code>UserRole</code>这个名称已经映射到<code>com.ylxx.custom.entity.UserRole</code>上了, 联想到项目中刚加过一个<code>enum</code>: <code>UserRole</code>. 将其换掉后, 项目成功运行.</li>
+<li>总结: 在Spring中, 一个项目里, Java文件的名称是唯一的, 如果文件名相同, 里面的对象的种类不同,如<code>Enum</code>和<code>Class</code>类. 即使编译没问题, 运行时也会报错</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
