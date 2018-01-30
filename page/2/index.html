@@ -147,6 +147,94 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2017/11/27/JEECMS播放视频黑屏问题解决方法/">
+                JEECMS播放视频黑屏问题解决方法
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-27</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>问题: 在使用JEECMS V8.1 发布包含视频内容后在线播放视频时, 出现黑屏即只有声音没有图像的情况</li>
+<li>浅析: 出现这种情况主要是视频编码的问题</li>
+<li>解决方法: 使用H264格式进行转码, 随即正常播放</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2017/11/23/Python问题解析-关于-getattr-的链式调用的应用的一点解析/">
+                Python问题解析-关于__getattr__的链式调用的应用的一点解析
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-23</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>&lt;span style=”background-color: red&gt;关于<code>__getattr__()</code>的链式调用的应用的一点解析</p>
+<ul>
+<li><p>实例: 现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</p>
+<p>  <a href="http://api.server/user/friends" target="_blank" rel="external">http://api.server/user/friends</a><br>  <a href="http://api.server/user/timeline/list" target="_blank" rel="external">http://api.server/user/timeline/list</a><br>  如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</p>
+<p>  利用完全动态的<strong>getattr</strong>，我们可以写出一个链式调用：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Chain(object):</div><div class="line"></div><div class="line">    def __init__(self, path=&apos;&apos;):</div><div class="line">        self._path = path</div><div class="line"></div><div class="line">    def __getattr__(self, path):</div><div class="line">        return Chain(&apos;%s/%s&apos; % (self._path, path))</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self._path</div><div class="line"></div><div class="line">    __repr__ = __str__</div></pre></td></tr></table></figure>
+<p>  尝试:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; Chain().status.user.timeline.list</div><div class="line">&apos;/status/user/timeline/list&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>疑问: Chain().status.user.timeline.list在类Chain()内部是如何工作的才导致输出为:<br>  ‘/status/user/timeline/list’?</p>
+</li>
+<li><p>解析: </p>
+<ol>
+<li><p>只分析一层属性和两层属性, 即: <code>Chain().status</code>与<code>Chain().status.user</code>. 在类Chain()中添加print, 新代码如下:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class Chain(object):</div><div class="line">    </div><div class="line">    def __init__(self, path=&apos;&apos;):</div><div class="line">        self._path = path</div><div class="line">        print(&quot;init path is:&quot; + self._path)</div><div class="line">    </div><div class="line">    def __getattr__(self, path):</div><div class="line">        print(&quot;get path is:&quot; + path)</div><div class="line">        return Chain(&apos;%s/%s&apos; % (self._path, path))</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self._path</div><div class="line"></div><div class="line">    __repr__ = __str__</div><div class="line"># print(c)</div><div class="line">print(&apos;---------------------------&apos;)</div><div class="line">print(Chain().status)</div><div class="line">print(&apos;---------------------------&apos;)</div><div class="line">print(Chain().status.user)</div><div class="line">print(&apos;---------------------------&apos;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>结果是:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">---------------------------</div><div class="line">init path is:</div><div class="line">get path is:status</div><div class="line">init path is:/status</div><div class="line">/status</div><div class="line">---------------------------</div><div class="line">init path is:</div><div class="line">get path is:status</div><div class="line">init path is:/status</div><div class="line">get path is:user</div><div class="line">init path is:/status/user</div><div class="line">/status/user</div><div class="line">---------------------------</div></pre></td></tr></table></figure>
+</li>
+<li><p>分析结果: </p>
+<ol>
+<li><code>print(Chain().status)</code>经历了两次<code>__init__</code>, 再结合源代码中的<code>return Chain(&#39;%s/%s&#39; % (self._path, path))</code>分析, 可知: <code>Chain</code>的新实例的<code>status</code>属性触发<code>__getattr__</code>方法, 而该方法对<code>Chain()</code>新实例进行了递归操作, 带入新实例的值为<code>/status</code>. 此时, 新实例二没有属性, 因此不会调用<code>__getattr__</code>方法. 而<code>print(Chain(&#39;/status&#39;))</code>会调用<code>__str__</code>方法显示参数<code>path</code>即<code>/status</code></li>
+<li><code>print(Chain().status.user)</code>: <code>1</code>中的新实例二会在<code>2</code>中拥有属性<code>user</code>, 再次调用<code>__getattr__</code>, <code>*.user</code>之后的属性会再再次调用<code>__getattr__</code>, 从而打印出相应路径</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/11/22/JavaScript-Note/">
                 JavaScript-Note.md
             </a>
@@ -504,92 +592,6 @@
 
 </div>
             
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/10/24/JEECMS栏目自定义属性研究/">
-                JEECMS栏目自定义属性研究
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-10-24</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/JEECMS/">JEECMS</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>可以为栏目添加自定义属性</p>
-<ul>
-<li>实现步骤: <ol>
-<li>在配置中的模型管理中为所需的模型添加所需的字段名<ul>
-<li>此时会在数据库的jc_channel_attr表中的channel_id 和 attr_name分别产生一个记录</li>
-</ul>
-</li>
-<li>在栏目中点击修改, 找到新添加的字段, 输入想要的值<ul>
-<li>此时会在数据库的jc_channel_attr表中的attr_value中产生一个记录</li>
-</ul>
-</li>
-<li>在栏目模板对应的html文件(如: C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.5\webapps\ROOT\WEB-INF\t\cms\www\default\channel\create_cast_agencies.html)中使用channel.attr.custom_value来显示为栏目所设置的属性</li>
-</ol>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/10/24/server/">
-                host is not allowed to connect to this mysql server
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-10-24</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Mysql/">Mysql</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>原因: 很明显云服务器入站流量和防火墙都没问题, 问题出在云服务器上的mysql数据库上</li>
-<li>解决方法: <ul>
-<li>从要连接的主机登录本地的mysql(即云服务器上的mysql), </li>
-<li>进入名称为”mysql”的数据库中, 找到表”user”, 找到host字段值为”localhost”且User字段值为”root”的那一行, </li>
-<li>将host字段的值改为”%”,</li>
-<li>重新启动mysql server(可使用mysql notifier)</li>
-<li>尝试从远程连接mysql, 成功!</li>
-</ul>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
         </section>
     </div>
 </div>
@@ -632,19 +634,19 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/01/25/Mysql-Problem/">Mysql-Problem</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/01/25/Java-Problem/">Java-Problem</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/01/22/Java-Note/">Java-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/17/Mysql-cant-create-table-error-150/">Mysql can&#39;t create table </a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/01/06/Unknowed-Word/">Unknowed-Word</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/01/04/Programming-Note/">Programming-Note</a>
+                <a class="footer-post" href="/2018/01/17/Mysql-Note/">Mysql-Note</a>
             </li>
             
         </ul>
@@ -658,19 +660,19 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/introduction/">introduction</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Java/">Java</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+            <a class="footer-post" href="/categories/Programming/">Programming</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/Life/">Life</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/English/">English</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
         </li>
         
     </ul>

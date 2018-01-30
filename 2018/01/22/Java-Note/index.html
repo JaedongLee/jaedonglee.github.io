@@ -197,7 +197,9 @@ Spring Mybatis Mapper 报错
 <li>推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.     <a id="more"></a></li>
 </ul>
 </li>
-<li>Spring项目报错: org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userController’: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.service.UserService com.ylxx.custom.controller.UserController.userService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userServiceImple’: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.dao.UserMapper com.ylxx.custom.service.UserServiceImple.userMapper; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘userMapper’ defined in file [E:\Develop\counter\server\counter\out\artifacts\counter\WEB-INF\classes\com\ylxx\custom\dao\UserMapper.class]: Cannot resolve reference to bean ‘sessionFactory’ while setting bean property ‘sqlSessionFactory’; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘sessionFactory’ defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.apache.ibatis.type.TypeException: The alias ‘UserRole’ is already mapped to the value ‘com.ylxx.custom.entity.UserRole’.<ul>
+<li><p>Spring项目报错: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userController&apos;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.service.UserService com.ylxx.custom.controller.UserController.userService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userServiceImple&apos;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.dao.UserMapper com.ylxx.custom.service.UserServiceImple.userMapper; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userMapper&apos; defined in file [E:\Develop\counter\server\counter\out\artifacts\counter\WEB-INF\classes\com\ylxx\custom\dao\UserMapper.class]: Cannot resolve reference to bean &apos;sessionFactory&apos; while setting bean property &apos;sqlSessionFactory&apos;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;sessionFactory&apos; defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.apache.ibatis.type.TypeException: The alias &apos;UserRole&apos; is already mapped to the value &apos;com.ylxx.custom.entity.UserRole&apos;.</div></pre></td></tr></table></figure>
+<ul>
 <li>分析: 看最后一句<code>The alias &#39;UserRole&#39; is already mapped to the value &#39;com.ylxx.custom.entity.UserRole&#39;.</code>, 意思是<code>UserRole</code>这个名称已经映射到<code>com.ylxx.custom.entity.UserRole</code>上了, 联想到项目中刚加过一个<code>enum</code>: <code>UserRole</code>. 将其换掉后, 项目成功运行.</li>
 <li>总结: 在Spring中, 一个项目里, Java文件的名称是唯一的, 如果文件名相同, 里面的对象的种类不同,如<code>Enum</code>和<code>Class</code>类. 即使编译没问题, 运行时也会报错</li>
 </ul>
@@ -210,6 +212,25 @@ Spring Mybatis Mapper 报错
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>Mybatis</p>
+<ul>
+<li>浏览器报错: <code>java.lang.IllegalArgumentException: No enum constant org.apache.ibatis.type.JdbcType.STRING</code><ul>
+<li>原因: Mybatis中的<code>jdbcType</code>没有<code>String</code>数据类型, 只有<code>VARCHAR</code>, 将其改为<code>VARCHAR</code>, 运行成功</li>
+<li>推论: 如果改掉一个此错误后, 还有报这种错误, 这意味着还有一个地方有这种错误.</li>
+</ul>
+</li>
+<li>报错: <code>Parameter &#39;XXX&#39; not found. Available parameters are [collection, list]</code><ul>
+<li>原因: 在<code>XXXMapper.java</code>类中, 需要添加<code>@Param(&quot;XXX)</code>, 其中<code>XXX</code>与<code>collection</code>中的<code>value</code>一样, 例:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@XXX.xml</div><div class="line">&lt;foreach collection=&quot;orderIdList&quot; index=&quot;index&quot; item=&quot;item&quot; separator=&quot;,&quot;&gt;</div><div class="line"></div><div class="line">@xxxMapper.java</div><div class="line">List&lt;OrderItemHistory&gt; selectByOrderIdList(@Param(&quot;orderIdList&quot;) List&lt;String&gt; orderIdList);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Java</p>
+<ul>
+<li>public String substring(int startIndex, int endIndex)中的 endIndex 不包含自身, 即 substring(0, 2) 只含有一个字符</li>
 </ul>
 </li>
 </ul>
@@ -249,19 +270,19 @@ Spring Mybatis Mapper 报错
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/01/25/Mysql-Problem/">Mysql-Problem</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/01/25/Java-Problem/">Java-Problem</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/01/22/Java-Note/">Java-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/17/Mysql-cant-create-table-error-150/">Mysql can&#39;t create table </a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/01/06/Unknowed-Word/">Unknowed-Word</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/01/04/Programming-Note/">Programming-Note</a>
+                <a class="footer-post" href="/2018/01/17/Mysql-Note/">Mysql-Note</a>
             </li>
             
         </ul>
@@ -275,19 +296,19 @@ Spring Mybatis Mapper 报错
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/introduction/">introduction</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Java/">Java</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+            <a class="footer-post" href="/categories/Programming/">Programming</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/Life/">Life</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/English/">English</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
         </li>
         
     </ul>
