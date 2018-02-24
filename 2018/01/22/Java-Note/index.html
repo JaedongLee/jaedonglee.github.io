@@ -207,8 +207,27 @@ Spring Mybatis Mapper 报错
 <li><p><code>==</code>与<code>equals()</code>的区别</p>
 <ul>
 <li><p>总结: <code>==</code>比较的是对象的引用, 即两个变量是否引用自同一个对象, 而<code>equals()</code>比较的是两个变量的定义, 如果定义相同, 它们就相同, 即使来自不同的对象, 例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">Foo f1 = new Foo(5);</div><div class="line">Foo f2 = new Foo(5);</div><div class="line">System.out.println(f1 == f2);</div><div class="line">// outputs false, they&apos;re distinct object instance</div><div class="line">System.out.println(f1.equals(f2));</div><div class="line">// outputs trues, they&apos;re &quot;equal&quot; according to their definiition</div></pre></td></tr></table></figure>
+<ul>
+<li>20180201补充: <code>equals()</code>的实现方式就是<code>==</code>, 所以没区别, 但<code>equals()</code>可以被重写, 从而可以用来比较等价性<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">Foo f1 = new Foo(5);</div><div class="line">Foo f2 = new Foo(5);</div><div class="line">System.out.println(f1 == f2);</div><div class="line">// outputs false, they&apos;re distinct object instance</div><div class="line">System.out.println(f1.equals(f2));</div><div class="line">// outputs trues, they&apos;re &quot;equal&quot; according to their definiition</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>简单来说, <code>==</code>比较是否是同一个对象, <code>equals()</code>比较是否是同一类对象</p>
+</li>
+</ul>
+</li>
+<li><p>spring 项目连接数据库时报错:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP Status 500 - Request processing failed; nested exception is org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</div></pre></td></tr></table></figure>
+<ul>
+<li>原因: <code>Mysql</code>由于重启或者超时自动断开了连接, 而另一方不知道, 因此会继续使用错误的连接, 从而导致浏览器一直加载最后报错.</li>
+<li><p>解决方案: </p>
+<ol>
+<li>设置更长的wait_timeout, 这种方式很直接，就是MySQL会等待更长的时间，如果连接上没有数据传输，会关闭这个连接. 这种方式的缺点是如果您的应用可能超过wait_timeout都不使用数据库连接，那么在使用的时候还是有可能会出现相同的错误。</li>
+<li><p>引用<code>c3p0</code>官方文档中的解释, 重点是最后两段:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">When configuring Connection testing, first try to minimize the cost of each test. If you are using a JDBC driver that you are certain supports the new(ish) jdbc4 API — and if you are using c3p0-0.9.5 or higher! — let your driver handle this for you. jdbc4 Connections include a method called isValid() that should be implemented as a fast, reliable Connection test. By default, c3p0 will use that method if it is present.</div><div class="line"></div><div class="line">However, if your driver does not support this new-ish API, c3p0&apos;s default behavior is to test Connections by calling the getTables() method on a Connection&apos;s associated DatabaseMetaData object. This has the advantage of being very robust and working with any database, regardless of the database schema. However, a call to DatabaseMetaData.getTables() is often much slower than a simple database query, and using this test may significantly impair your pool&apos;s performance.</div><div class="line"></div><div class="line">The simplest way to speed up Connection testing under a JDBC 3 driver (or a pre-0.9.5 version of c3p0) is to define a test query with the preferredTestQuery parameter. Be careful, however. Setting preferredTestQuery will lead to errors as Connection tests fail if the query target table does not exist in your database prior to initialization of your DataSource. Depending on your database and JDBC driver, a table-independent query like SELECT 1 may (or may not) be sufficient to verify the Connection. If a table-independent query is not sufficient, instead of preferredTestQuery, you can set the parameter automaticTestTable. Using the name you provide, c3p0 will create an empty table, and make a simple query against it to test the database.</div><div class="line"></div><div class="line">The most reliable time to test Connections is on check-out. But this is also the most costly choice from a client-performance perspective. Most applications should work quite reliably using a combination of idleConnectionTestPeriod and testConnectionOnCheckin. Both the idle test and the check-in test are performed asynchronously, which can lead to better performance, both perceived and actual.</div></pre></td></tr></table></figure>
+<p> 总结下来就是: <code>c3p0</code>版本在0.95以下, 推荐在<code>applicationContext.xml</code>中使用以下配置:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;property name=&quot;preferredTestQuery&quot; value=&quot;select 1&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;false&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;true&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;30&quot;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 </li>
 </ul>
 </li>
@@ -270,19 +289,19 @@ Spring Mybatis Mapper 报错
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/01/25/Mysql-Problem/">Mysql-Problem</a>
+                <a class="footer-post" href="/2018/02/06/Mybatis-Problem/">Mybatis-Problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/25/Java-Problem/">Java-Problem</a>
+                <a class="footer-post" href="/2018/02/06/Mybatis-Note/">Mybatis-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/22/Java-Note/">Java-Note</a>
+                <a class="footer-post" href="/2018/02/02/Network-problem/">Network-problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/17/Mysql-Note/">Mysql-Note</a>
+                <a class="footer-post" href="/2018/02/01/Design-Mode/">Design-Mode</a>
             </li>
             
         </ul>
@@ -296,15 +315,15 @@ Spring Mybatis Mapper 报错
     <ul>
         
         <li>
+            <a class="footer-post" href="/categories/Question/">Question</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
+        </li>
+        
+        <li>
             <a class="footer-post" href="/categories/Programming/">Programming</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Life/">Life</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/English/">English</a>
         </li>
         
         <li>

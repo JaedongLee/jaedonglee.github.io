@@ -196,6 +196,24 @@
 </li>
 </ul>
 </li>
+<li><p>Ajax cross domain session change problem and solution</p>
+<ul>
+<li>解释: 使用<code>ajax</code>跨域请求服务器会出现<code>sessionId</code>变化的问题, 即每次连接都会产生一个新的sessionId</li>
+<li>原因: 根据浏览器的保护规则, 跨域的时候我们创建的sessionId是不会被浏览器保存下来, 即每一次请求, 服务器都会以为是一个新的人(客户端)</li>
+<li><p>解决方式: </p>
+<ul>
+<li><p>前端添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    type: &quot;POST&quot;,</div><div class="line">    url: &quot;http://192.168.0.113:8081/user/login.do&quot;,</div><div class="line">    data: orderData,</div><div class="line">    contentType: &quot;application/json&quot;,</div><div class="line">    cache: false,</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    xhrFields: &#123;</div><div class="line">        withCredentials: true</div><div class="line">    &#125;,</div><div class="line">    crossDomain: true,</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    processData: false,</div><div class="line">    success: function (data) &#123;</div><div class="line">        console.log(data);</div><div class="line">    &#125;,</div><div class="line">    error: function (data) &#123;</div><div class="line">        console.log(data);</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>后台添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</div><div class="line">    HttpServletRequest request = (HttpServletRequest) servletRequest;</div><div class="line">    HttpServletResponse response = (HttpServletResponse) servletResponse;</div><div class="line">    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, request.getHeader(&quot;Origin&quot;));</div><div class="line">    response.setHeader(&quot;Access-Control-Max-Age&quot;, &quot;3600&quot;);</div><div class="line">    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;*&quot;);</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</div><div class="line">    response.setHeader(&quot;XDomainRequestAllowed&quot;,&quot;1&quot;);</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    filterChain.doFilter(servletRequest, servletResponse);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>参考文档: <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -233,19 +251,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/01/25/Mysql-Problem/">Mysql-Problem</a>
+                <a class="footer-post" href="/2018/02/06/Mybatis-Problem/">Mybatis-Problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/25/Java-Problem/">Java-Problem</a>
+                <a class="footer-post" href="/2018/02/06/Mybatis-Note/">Mybatis-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/22/Java-Note/">Java-Note</a>
+                <a class="footer-post" href="/2018/02/02/Network-problem/">Network-problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/01/17/Mysql-Note/">Mysql-Note</a>
+                <a class="footer-post" href="/2018/02/01/Design-Mode/">Design-Mode</a>
             </li>
             
         </ul>
@@ -259,15 +277,15 @@
     <ul>
         
         <li>
+            <a class="footer-post" href="/categories/Question/">Question</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
+        </li>
+        
+        <li>
             <a class="footer-post" href="/categories/Programming/">Programming</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Life/">Life</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/English/">English</a>
         </li>
         
         <li>
