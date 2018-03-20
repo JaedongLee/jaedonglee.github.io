@@ -177,6 +177,22 @@
 <li>原因: <img src="https://dev.mysql.com/doc/refman/5.7/en/create-table-foreign-keys.html" alt="参考">, 必须要保证字段名/字段类型/字段的编码格式(特别注意, 可能一个是latin1, 一个是utf8)一致</li>
 </ul>
 </li>
+<li><p>group by: 用于结合合计函数，根据一个或多个列对结果集进行分组。</p>
+<ul>
+<li><p>例子:</p>
+<ul>
+<li><p>statement: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select  buy_user, count(buy_user)</div><div class="line">from `order` </div><div class="line">where `sale_vessel_id` = 1 </div><div class="line">and order_id like &apos;hg%&apos; </div><div class="line">and `status` = &apos;reject_pay&apos;</div><div class="line">group by buy_user</div></pre></td></tr></table></figure>
+</li>
+<li><p>resultMap:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">| buy_user   | count(buy_user)    |</div><div class="line">| --------:   | -----:   |</div><div class="line">| ran | 1|</div><div class="line">| tai | 1|</div><div class="line">| zou | 6|</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>performance difference between query 1: <code>insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);</code> and query 2:  <code>insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;), (&quot;username&quot;, &quot;phone&quot;), (&quot;username&quot;, &quot;phone&quot;)</code><br>  -explain:  every query in query 1 cost 0.003s, total query 2 cost 0.003s, so query 1 practical cost 0.003*n, so 2 is better than 1 in preformance. but query 1 is more flexible, b</p>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -214,19 +230,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/02/06/Mybatis-Problem/">Mybatis-Problem</a>
+                <a class="footer-post" href="/2018/03/16/Java-Arithmetic-Note/">Java-Arithmetic-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/06/Mybatis-Note/">Mybatis-Note</a>
+                <a class="footer-post" href="/2018/03/15/Java-Interview-Practice/">Java-Interview-Practice</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/02/Network-problem/">Network-problem</a>
+                <a class="footer-post" href="/2018/03/08/Springframework-Problem/">Springframework-Problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/01/Design-Mode/">Design-Mode</a>
+                <a class="footer-post" href="/2018/03/08/Springframework-Note/">Springframework-Note</a>
             </li>
             
         </ul>
@@ -240,15 +256,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+            <a class="footer-post" href="/categories/design-mode/">design_mode</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/springframework/">springframework</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/introduction/">introduction</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/design-mode/">design_mode</a>
         </li>
         
         <li>

@@ -147,6 +147,179 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2018/01/22/Java-Note/">
+                Java-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>Spring</p>
+<ul>
+<li><p>Spring Mybatis Mapper 报错</p>
+<ul>
+<li>问题: 调用dao类方法,如<code>userApplyMapper.updateByPrimaryKeySelective</code>时, 报空指针错误</li>
+<li><p>分析: 发现</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private UserMapper userMapper;</div><div class="line">private UserApplyMapper userApplyMapper;</div></pre></td></tr></table></figure>
+<p>  第二个变量<code>userApplyMapper</code>是暗的, 显示<code>Private field &#39;userApplyMapper&#39; is never assigned</code>. 因此推测: 一个<code>@Autowired</code>只能用于一个变量, 将代码改为:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private UserMapper userMapper;</div><div class="line"></div><div class="line">@Autowired</div><div class="line">private UserApplyMapper userApplyMapper;</div></pre></td></tr></table></figure>
+<p>  成功</p>
+</li>
+<li>结论: <code>@Autowired</code>只能装配一个变量</li>
+<li>推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.
+        </div>
+        <a href="/2018/01/22/Java-Note/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/01/17/Mysql-Note/">
+                Mysql-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-17</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Mysql/">Mysql</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>Mysql can’t create table error 150<ul>
+<li>问题: 保存table时报错: MySQL: Can’t create table ‘’ (errno: 150)</li>
+<li>原因: <img src="https://dev.mysql.com/doc/refman/5.7/en/create-table-foreign-keys.html" alt="参考">, 必须要保证字段名/字段类型/字段的编码格式(特别注意, 可能一个是latin1, 一个是utf8)一致</li>
+</ul>
+</li>
+<li><p>group by: 用于结合合计函数，根据一个或多个列对结果集进行分组。</p>
+<ul>
+<li><p>例子:</p>
+<ul>
+<li><p>statement: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select  buy_user, count(buy_user)</div><div class="line">from `order` </div><div class="line">where `sale_vessel_id` = 1 </div><div class="line">and order_id like &apos;hg%&apos; </div><div class="line">and `status` = &apos;reject_pay&apos;</div><div class="line">group by buy_user</div></pre></td></tr></table></figure>
+</li>
+<li><p>resultMap:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">| buy_user   | count(buy_user)    |</div><div class="line">| --------:   | -----:   |</div><div class="line">| ran | 1|</div><div class="line">| tai | 1|</div><div class="line">| zou | 6|</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>performance difference between query 1: <code>insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;);</code> and query 2:  <code>insert into user (username, phone) values (&quot;username&quot;, &quot;phone&quot;), (&quot;username&quot;, &quot;phone&quot;), (&quot;username&quot;, &quot;phone&quot;)</code><br>  -explain:  every query in query 1 cost 0.003s, total query 2 cost 0.003s, so query 1 practical cost 0.003*n, so 2 is better than 1 in preformance. but query 1 is more flexible, b</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/01/06/Unknowed-Word/">
+                Unknowed-Word
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-06</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Question/">Question</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>安全<ul>
+<li>PCI扫描</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/01/04/Programming-Note/">
+                Programming-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-04</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Programming/">Programming</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>Skill<ul>
+<li>跳过循环的下一次<ul>
+<li>可以在循环外设置一个变量保存值, 当需要跳过下一次循环时, 改变该值, 再判断变量的值, 如是指定值,则结束本次循环, 这样就跳过了一次循环</li>
+<li>code:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def merge(row):</div><div class="line">    pair = False</div><div class="line">    new_row = []</div><div class="line">    for i in range(len(row)):</div><div class="line"></div><div class="line">        if i + 1 &lt; len(row) and row[i] == row[i + 1]:</div><div class="line">            pair = True</div><div class="line">            new_row.append(0)</div><div class="line">            new_row.append(2 * row[i])</div><div class="line">            i = i + 1</div><div class="line">        else:</div><div class="line">            new_row.append(row[i])</div><div class="line">    assert len(new_row) == len(row)</div><div class="line">    return new_row</div></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2017/12/22/English-transcribe-We-choose-to-go-to-the-Moon/">
                 English-transcribe-We-choose-to-go-to-the-Moon
             </a>
@@ -449,200 +622,6 @@
 
 </div>
             
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/22/JavaScript-Note/">
-                JavaScript-Note.md
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-22</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/JavaScript/">JavaScript</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li><p>原型链</p>
-<ul>
-<li><p>构造实例和定义方法的先后问题</p>
-<ul>
-<li><p>代码如下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">var person = new Person();</div><div class="line">Person.prototype.say = function() &#123;</div><div class="line">    console.log(&apos;Hello,&apos; + this.name);</div><div class="line">&#125;;</div><div class="line">person.say();//Hello,John</div></pre></td></tr></table></figure>
-<p>  虽然原型方法在构造实例之后声明, 但因为在调用方法之前就已经声明了, 因此之后的每个实例都拥有该方法.<br>  如果我们这样写:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">var person = new Person();</div><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">person.say();//person.say is not a function</div></pre></td></tr></table></figure>
-<p>  person.say方法没找到, 报错.<br>  原因: <code>var person = new Person()</code>创建了一个新实例, 即Person.prototype指向了一个空对象. 对于实例person来说, 其内部有一个原型链指针proto, 该指针指向了Person.prototype指向的对象.而接下来:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>  则将Person.prototype重置了, 使其指向了另一个对象即: <code>Object(say: function)</code><br>  而此时person.proto的指向没有变, 其指向的空对象没有<code>say</code>方法, 因此报错.<br>  想要成功运行, 则需将方法定义放在构造实例之前:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function Person () &#123;</div><div class="line">    this.name = &apos;John&apos;;</div><div class="line">&#125;</div><div class="line">Person.prototype = &#123;</div><div class="line">    say: function() &#123;</div><div class="line">        console.log(&apos;Hello,&apos; + this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">var person = new Person();</div><div class="line">person.say();</div></pre></td></tr></table></figure>
-<p>  其实, 只需要明白原型对象的结构即可:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Function.prototype = &#123;</div><div class="line">    constructor : Function,</div><div class="line">    __proto__ : parent prototype,</div><div class="line">    some prototype properties: ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-<li><p>构造函数格式: 为了区分普通函数和构造函数, 按照约定, 构造函数首字母应当大写, 而普通函数首字母应当小写</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Ajax cross domain session change problem and solution</p>
-<ul>
-<li>解释: 使用<code>ajax</code>跨域请求服务器会出现<code>sessionId</code>变化的问题, 即每次连接都会产生一个新的sessionId</li>
-<li>原因: 根据浏览器的保护规则, 跨域的时候我们创建的sessionId是不会被浏览器保存下来, 即每一次请求, 服务器都会以为是一个新的人(客户端)</li>
-<li><p>解决方式: </p>
-<ul>
-<li><p>前端添加:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    type: &quot;POST&quot;,</div><div class="line">    url: &quot;http://192.168.0.113:8081/user/login.do&quot;,</div><div class="line">    data: orderData,</div><div class="line">    contentType: &quot;application/json&quot;,</div><div class="line">    cache: false,</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    xhrFields: &#123;</div><div class="line">        withCredentials: true</div><div class="line">    &#125;,</div><div class="line">    crossDomain: true,</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    processData: false,</div><div class="line">    success: function (data) &#123;</div><div class="line">        console.log(data);</div><div class="line">    &#125;,</div><div class="line">    error: function (data) &#123;</div><div class="line">        console.log(data);</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>后台添加:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</div><div class="line">    HttpServletRequest request = (HttpServletRequest) servletRequest;</div><div class="line">    HttpServletResponse response = (HttpServletResponse) servletResponse;</div><div class="line">    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, request.getHeader(&quot;Origin&quot;));</div><div class="line">    response.setHeader(&quot;Access-Control-Max-Age&quot;, &quot;3600&quot;);</div><div class="line">    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;*&quot;);</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</div><div class="line">    response.setHeader(&quot;XDomainRequestAllowed&quot;,&quot;1&quot;);</div><div class="line">    &lt;!-- 额外添加 --&gt;</div><div class="line">    filterChain.doFilter(servletRequest, servletResponse);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>参考文档: <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
-</li>
-</ul>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/21/bgcolor-intro-md/">
-                bgcolor_intro.md
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-21</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/introduction/">introduction</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>background-color meaning<ul>
-<li>yellow: query</li>
-<li>red: important</li>
-</ul>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/09/Python-Note/">
-                Python_Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-09</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Python/">Python</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>Python基础<ul>
-<li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
-<li>使用list和tuple<ul>
-<li>list<ul>
-<li>定义: Python内置的一种数据类型是列表: list. list是一种有序的集合, 可以随时添加和删除其中的元素</li>
-<li>用法<ul>
-<li>list[-1]: 使用-1做索引获取最后一个元素, 依此类瑞, 可以获得倒数第二个/第三个元素</li>
-<li>list.append(‘ele’): 向list末尾追加元素</li>
-<li>list.insert(num, ‘ele’): 将ele插入指定位置num</li>
-<li>list.pop(): 删除末尾元素</li>
-<li>list.pop(num): 删除指定位置的元素</li>
-<li>list元素可以是另一个list, 获取元素的方式是: list[i][j]
-        </div>
-        <a href="/2017/11/09/Python-Note/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2017/11/09/Python 廖雪峰教程 Note/">
-                Python_Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2017-11-09</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Python/">Python</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>Python基础<ul>
-<li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
-<li>使用list和tuple<ul>
-<li>list<ul>
-<li>定义: Python内置的一种数据类型是列表: list. list是一种有序的集合, 可以随时添加和删除其中的元素</li>
-<li>用法<ul>
-<li>list[-1]: 使用-1做索引获取最后一个元素, 依此类瑞, 可以获得倒数第二个/第三个元素</li>
-<li>list.append(‘ele’): 向list末尾追加元素</li>
-<li>list.insert(num, ‘ele’): 将ele插入指定位置num</li>
-<li>list.pop(): 删除末尾元素</li>
-<li>list.pop(num): 删除指定位置的元素</li>
-<li>list元素可以是另一个list, 获取元素的方式是: list[i][j]
-        </div>
-        <a href="/2017/11/09/Python 廖雪峰教程 Note/" class="read-more">Read More</a>
-    
-
-</div>
-            
         </section>
     </div>
 </div>
@@ -685,19 +664,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/02/06/Mybatis-Problem/">Mybatis-Problem</a>
+                <a class="footer-post" href="/2018/03/16/Java-Arithmetic-Note/">Java-Arithmetic-Note</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/06/Mybatis-Note/">Mybatis-Note</a>
+                <a class="footer-post" href="/2018/03/15/Java-Interview-Practice/">Java-Interview-Practice</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/02/Network-problem/">Network-problem</a>
+                <a class="footer-post" href="/2018/03/08/Springframework-Problem/">Springframework-Problem</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/02/01/Design-Mode/">Design-Mode</a>
+                <a class="footer-post" href="/2018/03/08/Springframework-Note/">Springframework-Note</a>
             </li>
             
         </ul>
@@ -711,15 +690,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/JavaScript/">JavaScript</a>
+            <a class="footer-post" href="/categories/design-mode/">design_mode</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/springframework/">springframework</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/introduction/">introduction</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/design-mode/">design_mode</a>
         </li>
         
         <li>

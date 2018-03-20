@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="question: 九种基本数据类型的大小, 以及他们的封装类
+answer:
+byte/1/Byte
+short/2/Short
+char/2/Character
+int/4/Integer
+long/8/Long
+float/4/Float
+double/8/Double
+void/-/Void">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Interview-Practice"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Java-Interview-Practice - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/03/15/Java-Interview-Practice/">
+                Java-Interview-Practice
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-15</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ol>
+<li><ul>
+<li>question: 九种基本数据类型的大小, 以及他们的封装类</li>
+<li>answer:<ol>
+<li>byte/1/Byte</li>
+<li>short/2/Short</li>
+<li>char/2/Character</li>
+<li>int/4/Integer</li>
+<li>long/8/Long</li>
+<li>float/4/Float</li>
+<li>double/8/Double</li>
+<li>void/-/Void</li>
+<li>boolean/-/Boolean</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: equals与==的区别</li>
+<li>answer: <ol>
+<li><code>equals</code>是对象的方法, <code>==</code>是操作符</li>
+<li><code>equals</code>可以被改写, <code>==</code>不行</li>
+<li><code>equals</code> can not compare with  <code>null</code>, <code>==</code> can</li>
+<li><code>equals</code> is more flexible that it can be override, but <code>==</code> don’t has this feature</li>
+<li><code>equals</code> used to judge whether or not the two object is equal, if this method doesn’t be overrided, this method will reference from <code>Object</code> class, so that the return is still the judgment of <code>==</code></li>
+<li><code>==</code> is used to judge whether or not two object’s address are equal, which means that they refer to the same object</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: Object有哪些公用方法</li>
+<li>answer: <ol>
+<li>equals()</li>
+<li>wait()</li>
+<li>toString()</li>
+<li>getClass()</li>
+<li>hasCode()</li>
+<li>notify()</li>
+<li>notifyAll()</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: Java的四种引用, 强弱软虚, 用到的场景.</li>
+<li><p>answer: </p>
+<ol>
+<li>强引用: <code>Object object = new Object</code> / <code>String str = &quot;hello&quot;</code><ul>
+<li>强引用有引用变量访问时永远不会被垃圾回收, JVM宁愿抛出OutOfMemory错误也不会回收这种对象</li>
+</ul>
+</li>
+<li><p>软引用: 内存空间足够时, JVM不会回收它, 但当内存空间不足时, JVM会回收这些对象的内存</p>
+<ul>
+<li>软引用可以用来实现内存敏感的高速缓存, 如图片缓存/网页缓存等. 使用软引用可以防止内存泄漏, 增强程序的健壮性</li>
+<li>SoftReference的特点是它的一个实例保存着对一个Java对象的软引用, 软引用的存在并不妨碍JVM对该对象的回收</li>
+<li>如果一个SoftReference引用了一个Java对象, 那么在这个对象被JVM回收之前, SoftReference都可以通过<code>get()</code>方法来获得Java对象的强引用</li>
+<li><p>例子:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object aRef = new Object();</div><div class="line">SoftReference aSoftRef = new SoftReference(aRef);</div></pre></td></tr></table></figure>
+<p>  然后, 结束这个强引用</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aRef = null</div></pre></td></tr></table></figure>
+<p>  之后, 这个对象成为了软引用. 如果JVM进行内存垃圾回收, 并不会因为有一个SoftReference对该对象的引用而保留该对象</p>
+</li>
+<li>软引用的清理是JVM根据特定算法按照内存需求决定的, JVM会尽可能的优先回收长期闲置不用的软引用对象, 对那些刚刚创建或刚刚使用过的”新”软引用对象会被虚拟机尽可能保留.</li>
+<li>可以通过<code>MyObject anotherRef = (MyObject) aSoftRef.get()</code>可以获得对这个实例的强引用</li>
+</ul>
+</li>
+<li><p>弱引用: 弱引用也是用来描述非必需对象, 当JVM发起GC时, 弱引用一定会被回收, 不管内存是否充足. 在java中, 用<code>java.lang.ref.WeakReference</code>类来表示. 下面是使用示例:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class WeakReferenceDemo &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        WeakReference&lt;People&gt; reference = new WeakReference&lt;People&gt;(new People(&quot;zoutairan&quot;, 25));</div><div class="line">        System.out.println(reference.get());</div><div class="line">        System.gc();</div><div class="line">        System.out.println(reference.get());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class People &#123;</div><div class="line">    public String name;</div><div class="line">    public int age;</div><div class="line"></div><div class="line">    public People(String name, int age) &#123;</div><div class="line">        this.name = name;</div><div class="line">        this.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;[name:&quot; + name + &quot;, age:&quot; + age + &quot;]&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 输出结果:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[name:zoutairan, age:25]</div><div class="line">null</div></pre></td></tr></table></figure>
+<p> 如果对代码进行一点小小的更改:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class WeakReferenceDemo &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        People people = new People();</div><div class="line">        WeakReference&lt;People&gt; reference = new WeakReference&lt;People&gt;(people));</div><div class="line">        System.out.println(reference.get());</div><div class="line">        System.gc();</div><div class="line">        System.out.println(reference.get());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class People &#123;</div><div class="line">    public String name;</div><div class="line">    public int age;</div><div class="line"></div><div class="line">    public People(String name, int age) &#123;</div><div class="line">        this.name = name;</div><div class="line">        this.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;[name:&quot; + name + &quot;, age:&quot; + age + &quot;]&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 输出结果:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[name:zoutairan, age:25]</div><div class="line">[name:zoutairan, age:25]</div></pre></td></tr></table></figure>
+</li>
+<li><p>虚引用: 如果一个对象跟虚引用关联, 则跟没有引用一样, 随时都可能被JVM回收</p>
+<ul>
+<li>注意: 虚引用必须和引用队列相关联, 当JVM回收一个对象时, 如果发现它还有虚引用, 则会把这个虚引用加入与之相关联的引用队列, 那么就可以在所引用的对象的内存被回收之前采取必要的行动</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>当一个<code>SoftReference</code>所引用的对象被设置成<code>null</code>后, 再调用<code>System.gc()</code>并不会立刻销毁这个软引用, 而是要等JVM发起<code>minorGC</code>后再销毁这个引用变量.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: Hashcode的作用</li>
+<li>answer: <ol>
+<li><code>hashCode</code>的存在主要是用于查找的快捷性, 如<code>HashMap</code>, <code>Hashtable</code>等, <code>hashCode</code>是用来在散列结构中确定对象的存储地址.</li>
+<li>如果两个对象相同, 即使用<code>equals</code>进行比较时, 返回<code>true</code>. 它们的<code>hashCode</code>也相同.</li>
+<li>如果对象的<code>equals</code>方法重写, 那么<code>hashCode()</code>方法也要重写, 而且<code>equals</code>中使用的对象要和<code>hashCode()</code>中的相同</li>
+<li>两个对象的<code>hashCode</code>相同, 并不一定表示两个对象相同, 只能够说明这两个对象在散列存储结构中, 如<code>Hashtable</code>, 他们在同一个链表下.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question:  ArrayList、LinkedList、Vector的区别</li>
+<li>answer: <ol>
+<li><code>ArrayList</code>和<code>Vector</code>的区别:<ol>
+<li><code>ArrayList</code>不是线程安全的, <code>Vector</code>是线程安全的</li>
+<li><code>ArrayList</code>在底层数组不够用时在原来的基础上扩展0.5倍, <code>Vector</code>是扩展一倍</li>
+</ol>
+</li>
+<li><code>ArrayList</code>和<code>LinkedList</code>的区别:<ol>
+<li><code>ArrayList</code>是实现了基于动态数组的数据结构, <code>LinkedList</code>是居于链表的数据结构</li>
+<li>对于随机访问(<code>get()</code>/<code>set()</code>), <code>ArrayList</code>直接根据下标索引, 时间复杂度为<code>O(1)</code>, <code>LinkedList</code>需要一个个节点的索引, 时间复杂度为<code>O(n)</code></li>
+<li>对于增删操作, <code>ArrayList</code>需要调用<code>System.arraycopy</code>移动指定下标以后的所有数组, <code>LinkedList</code>主要耗时是先通过循环找到索引所在位置, 再进行插入或删除, 因此无法比较两者谁快谁慢</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: String，StringBuilder，StringBuffer的区别</li>
+<li>answer: <ol>
+<li>对象类型: <code>String</code>-字符串常量/<code>StringBuilder</code>-字符串变量/<code>StringBuffer</code>-字符串变量</li>
+<li>线程是否安全: 不安全/不安全/安全</li>
+<li>大致执行效率: 低/高/中</li>
+<li>使用场景: 操作少, 数据少/单线程, 操作多, 数据多/多线程, 操作多, 数据多</li>
+<li>对<code>String</code>改变值是一个不断创建新的对象并回收旧对象的过程, 而<code>StringBuilder</code>和<code>StringBuffer</code>则是直接在原对象上进行更改, 因此<code>String</code>是最慢的</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: Map/Set/List/Queue/Stack的特点与用法<ul>
+<li>answer:<ul>
+<li>Map: 键值对, 键唯一不能重复, 一个键对一个值<ul>
+<li>HashMap: 无序</li>
+<li>TreeMap: 有序</li>
+<li>LinkedHashMap: 有序</li>
+<li>可以把Key和Value单独抽取出来<ul>
+<li>KeySet()把所以得keys抽取成一个Set.(为什么不抽取成Collection, 因为Set不可重复, Collection容许重复, 而Key不会重复)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set: 不包含重复元素, Set中最多包含一个null元素, 只能用Lterator实现单项遍历</li>
+<li>List: 有序的可重复集合, 可使用iterator实现单向遍历, 也可以使用Listiterator实现双向遍历</li>
+<li>Queue: Queue遵循先进先出的原则, 使用时尽量不要使用add()和remove()而是使用offer()和poll()</li>
+<li>Stack: Stack遵循后进先出原则, 继承自Vector, 它提供了通常的push和pop, 以及peek, empty方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: HashTable和HashMap的区别详解</li>
+<li><p>answer: </p>
+<ul>
+<li><p>HashMap: </p>
+<ol>
+<li>内部维护着一个存储数据的Entry数组, Entry数组本质上是一个单项链表</li>
+<li>HashMap的扩充会将现有的容积*2</li>
+<li><p>HashMap内部key的hash值的算法: </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">static final int hash(Object var0) &#123;</div><div class="line">    int var1;</div><div class="line">    return var0 == null ? 0 : (var1 = var0.hashCode()) ^ var1 &gt;&gt;&gt; 16;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 把<code>hashCode()</code>得出的值和自身值的前16位进行运算, 这样可以让key本身参与运算, 从而使hash值的分布更加均匀</p>
+</li>
+<li>HashMap取模是使用<code>(length - 1) &amp; hash</code>的方式, 这样比直接取模效率更高, 但使用范围更窄, 因为其只适用于<code>length</code>是2的乘方</li>
+<li>HashMap是线程不安全的</li>
+<li>HashMap继承的是AbstractMap, 实现了Map, Cloneable, Serializable接口</li>
+</ol>
+</li>
+<li>HashTable:<ol>
+<li>HashTable是线程安全的</li>
+<li>HashTable的key和value不允许为null</li>
+<li>HashTable继承的是Dictionary, 实现了Map, Cloneable, Serializable接口</li>
+<li>HashTable的hash值直接采用的<code>hashcode()</code>的值</li>
+<li>扩容方式是 <code>old * 2 + 1</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question: HashMap和ConcurrentHashMap的区别</li>
+<li>answer: <ul>
+<li>hashmap是线程不安全的, concurrenthashmap是线程安全的</li>
+<li>concurrenthashmap采用分段技术, 将数组分成多个segment, 每个segment都有自己的锁, 当对concurrenthashmap进行操作时, 只需要对数据所在的那个segment进行操作. concurrenthashmap让锁的粒度更加精细一些, 并发性能更好.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>question:  TreeMap、HashMap、LindedHashMap的区别。</li>
+<li>answer: <ol>
+<li>TreeMap: <ol>
+<li>红黑树: <ol>
+<li>所有节点左边的子节点/孙节点等都比父节点小, 右边的都大</li>
+<li>旋转的是当前节点, 只会影响前后两层节点, 父节点会成为该节点的左/右子节点</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    ZOUTAIRAN THE ONE
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/03/16/Java-Arithmetic-Note/">Java-Arithmetic-Note</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/03/15/Java-Interview-Practice/">Java-Interview-Practice</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/03/08/Springframework-Problem/">Springframework-Problem</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/03/08/Springframework-Note/">Springframework-Note</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/design-mode/">design_mode</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/springframework/">springframework</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/introduction/">introduction</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Question/">Question</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/jaedonglee">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:one@zoutairan.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
