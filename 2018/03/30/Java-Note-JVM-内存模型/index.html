@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="堆(Heap) [线程共享]
+作用: 用来存放各种类的实例对象
+分类目的: 使JVM能够更好的管理堆内存中的对象, 包括内存的分配和回收
+分类:">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Note-JVM-内存模型">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Java-Note-JVM-内存模型 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/03/30/Java-Note-JVM-内存模型/">
+                Java-Note-JVM-内存模型
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-30</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li>堆(<code>Heap</code>) [线程共享]<ul>
+<li>作用: 用来存放各种类的实例对象</li>
+<li>分类目的: 使JVM能够更好的管理堆内存中的对象, 包括内存的分配和回收</li>
+<li>分类: <a id="more"></a><ul>
+<li>新生代(<code>Young</code>)<ul>
+<li>规则:<ul>
+<li><code>JVM</code>每次只会使用Edem和其中一块<code>Survivor</code>区域来为对象服务. 因此无论什么时候, 总有一块<code>Survivor</code>区域是空闲的.</li>
+<li>当对象在<code>Eden</code>和<code>From Surivor</code>区出生后, 如果对象还存活, 并且能够被<code>To Surivor</code>所容纳, 则使用复制算法将这些仍然存活的对象复制到其中, 清理<code>Eden</code>和<code>From Surivor</code>, 并将存活的对象的年龄<code>+1</code>. 当一个对象的年龄达到某个值(默认为<code>15</code>)时, 这些对象将会变成老年代</li>
+<li>对于一些较大的对象(即要分配一块较大的连续内存空间)则是直接进入到老年代</li>
+<li>在<code>JVM</code>进行<code>Minor GC</code>之前, 会检查<code>Old</code>的最大连续可用空间是否<code>Young</code>所有对象的总空间<ul>
+<li>大于: <code>Minor GC</code>可以确保是安全的. </li>
+<li>不大于: <code>JVM</code>会查看<code>HandlePromotionFailure</code>设置值是否允许担保失败.<ul>
+<li>允许: 检查<code>Old</code>最大连续空间是否大于历次晋升老年代的对象的平均大小<ul>
+<li>大于: 尝试进行一次<code>Minor GC</code>, 尽管有风险<ul>
+<li>风险: 当<code>Young</code>中的存活对象特别多时, <code>Minor GC</code>可能失败, 此时还需要进行<code>Full GC</code></li>
+</ul>
+</li>
+<li>小于: 进行<code>Full GC</code></li>
+</ul>
+</li>
+<li>不允许: 进行<code>Full GC</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GC方式:<ul>
+<li>使用垃圾回收方式是: <code>Minor GC</code>, 所采用的算法是复制算法</li>
+</ul>
+</li>
+<li>分类: <ul>
+<li><code>Eden</code></li>
+<li><code>From Surivor</code></li>
+<li><code>To Surivor</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>老年代(<code>Old</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>虚拟区栈(VM Stack) [线程私有]<ul>
+<li>作用: 虚拟机栈的元素是栈帧, 方法执行时创建一个栈帧, 用来存储局部变量/操作数栈/动态链接/方法出口等信息. 每一个方法一个栈帧</li>
+</ul>
+</li>
+<li>本地方法栈(Native Method Stack) [线程私有]<ul>
+<li><code>JVM</code>执行<code>Native</code>方法时使用, 不同的虚拟机有不同的方法, <code>HotSpot</code>虚拟机的本地方法栈和虚拟机栈合二为一.</li>
+</ul>
+</li>
+<li>方法区(Method Area) [线程共享]<ul>
+<li>作用: 存储已经被<code>JVM</code>加载的类的类信息/常量/静态变量/即时编译后代码等数据.</li>
+<li>分类:<ul>
+<li>常量池<ul>
+<li>作用: 又称运行时常量池, 是方法区的一部分. 用于存放编译器生成的各种字面量和符号引用. 此外, 运行期间新的常量也会放入常量池中. 常见运行时常量池是通过<code>String</code>类的<code>intern()</code>方法<ul>
+<li>字面量: 如文本字符串/final的常量值</li>
+<li>符号引用: 编译语言层面的概念, 包含:<ul>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>程序计数器(Program Counter Register) [线程私有]<ul>
+<li>作用: 可看做当前线程所执行字节码行号的指示器. 每个线程都有一个独立的程序计数器, 各个线程之间计数器互不影响, 独立存储. </li>
+<li>疑问: <code>如果执行的是Java方法, 那么记录的是正在执行的虚拟机字节码指令的地址, 如果是native方法, 计数器的值为空(undefined).</code>, 如果native记录的地址的是<code>undefined</code>, 那么如何找到这个<code>Native</code>方法并执行呢?</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

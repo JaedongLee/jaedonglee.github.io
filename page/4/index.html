@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="邹泰然的个人博客">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>page - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">邹泰然的个人博客</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/11/Java-Note-Debug-使用Intellij对应用进行远程调试/">
+                Java-Note-Debug-使用Intellij对应用进行远程调试
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>环境配置<ul>
+<li>远程服务器<ul>
+<li>操作系统: centos 6.5</li>
+<li>tomcat版本: 8.0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ol>
+<li>打开端口8000(如果是云服务器还需打开8000端口的入站流量)</li>
+<li><p>修改远程tomcat服务器配置: 使用catalina.sh代替startup.sh来启动</p>
+<ol>
+<li><p>关闭远程tomcat: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/tomcat/tomcat-8/bin</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改catalina.sh中的代码, 将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$1&quot; = &quot;jpda&quot; ] ; then</span><br><span class="line">    if [ -z &quot;$JPDA_TRANSPORT&quot; ]; then</span><br><span class="line">        JPDA_TRANSPORT=&quot;dt_socket&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_ADDRESS&quot; ]; then</span><br><span class="line">        JPDA_ADDRESS=&quot;localhost:8000&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_SUSPEND&quot; ]; then</span><br><span class="line">        JPDA_SUSPEND=&quot;n&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_OPTS&quot; ]; then</span><br><span class="line">        JPDA_OPTS=&quot;-agentlib:jdwp=transport=$JPDA_TRANSPORT,address=$JPDA_ADDRESS,server=y,suspend=$JPDA_SUSPEND&quot;</span><br><span class="line">    fi</span><br><span class="line">    CATALINA_OPTS=&quot;$CATALINA_OPTS $JPDA_OPTS&quot;</span><br><span class="line">    shift</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>中的<code>JPDA_ADDRESS=&quot;localhost:8000&quot;</code>改为<code>JPDA_ADDRESS=&quot;0.0.0.0:8000&quot;</code>. 因为0.0.0.0表示所有的ip地址都可以访问, <code>JPDA</code>是指<code>Java Platform Debugger Architecture</code>, 是一种专门用于Java调试的架构: <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/" target="_blank" rel="noopener">JPDA</a>.</p>
+</li>
+<li>重启tomcat: <code>./catalina.sh jpda start</code></li>
+</ol>
+</li>
+<li>修改本地Intellij配置<ol>
+<li>在<code>Edit Configuration</code>中增加一个<code>Remote</code>, 将里面的Port改为8000, 保存然后点击debug按钮</li>
+<li>当出现<code>Connected to the target VM, address: &#39;140.143.29.99:8000&#39;, transport: &#39;socket&#39;</code>时表示远程连接调试端口成功, 可以开始调试</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意: 在步骤3的1中, 如果出现<code>Unable to open debugger port (x.x.x.x:8000): java.net.ConnectException &quot;Connection refused: connect&quot;</code>说明调试端口为对客户端开放, 此时可以在远程服务器上使用<code>netstat -ntlp</code>查看开放的端口, 有可能没有开放8000端口或者开放的是<code>127.0.0.1:8000</code>而不是<code>0.0.0.0:8000</code></li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/11/Java-Note-Spring-415-Unsupported-Media-Type/">
+                Java-Note-Spring-415-Unsupported-Media-Type
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>用postman向服务端发送请求时报错, 使用的<code>content-type</code>是<code>application/json</code>: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP Status 415 – Unsupported Media Type</span><br><span class="line">Type Status Report</span><br><span class="line">Description The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因: </p>
+<ol>
+<li>在请求头中未加入<code>Content-Type:application/json</code></li>
+<li>如果排除<code>1</code>依然报错, 则是因为没有相应的处理json的包, 如<code>com.google.code.gson</code>/<code>com.fasterxml.jackson.core</code>. 如果没有这类包, 则依旧会报这个错误, 因为java和spring自己没有解析json的功能, 需要借助第三方包</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/10/Java-Note-JVM-Java堆和Native堆/">
+                Java-Note-JVM-Java堆和Native堆
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>Native堆属于非Java堆<ul>
+<li>引入原因: JVM与外界通讯, 把Java堆中的内容传输到外界, 需要把Java堆复制到非Java堆, 如果使用Native堆并在Java堆中保存其引用, 可以避免内容在Java堆和非Java堆之间的copy</li>
+<li>注意<ul>
+<li>非Java堆得回收不受Java young gc的影响, 需要手工回收. 大量使用丢失Java自动垃圾回收的特点</li>
+<li>一般使用费Java堆进行和外界的通讯, 并且作为缓存使用. 如DirectByteBuffer</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/10/Java-Note-Reference/">
+                Java-Note-Reference
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/10/Java-Note-引用/">
+                Java-Note-引用
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>引用: </p>
+<ul>
+<li>C++中的引用: 与指针相比:<ol>
+<li>没有null 引用</li>
+<li>引用必须有初值</li>
+<li>使用引用要比使用指针效率高, 因为引用不用测试其有效性</li>
+<li>指针可以重新赋值, 而引用总是指向它最初获得的对象</li>
+</ol>
+</li>
+<li>Java中的引用: 与C++中的引用相比, 不过是穿着引用外衣的指针而已</li>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class ValueTransmit &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ValueObject valueObject1 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;old preprocess: &quot; + valueObject1.value);</span><br><span class="line">        changeOldObject(valueObject1);</span><br><span class="line">        System.out.println(&quot;old processed: &quot; + valueObject1.value);</span><br><span class="line">        ValueObject valueObject2 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;new preprocess: &quot; + valueObject2.value);</span><br><span class="line">        changeNewObject(valueObject2);</span><br><span class="line">        System.out.println(&quot;new processed: &quot; + valueObject2.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeOldObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;old processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeNewObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject = new ValueObject();</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;new processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ValueObject &#123;</span><br><span class="line">    public int value;</span><br><span class="line"></span><br><span class="line">    public ValueObject() &#123;</span><br><span class="line">        value = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;/* Output:</span><br><span class="line">old preprocess: 1</span><br><span class="line">old processing: 5</span><br><span class="line">old processed: 5</span><br><span class="line">new preprocess: 1</span><br><span class="line">new processing: 5</span><br><span class="line">new processed: 1</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>疑问: 为何把<code>valueObject</code>引用指向一个new <code>ValueObject</code>后, 处理的结果没有发生变化呢</p>
+</li>
+<li>答案: 因为方法参数是将实际参数复制一份压入栈中, 而<code>valueObject</code>引用如果指向的是new <code>ValueObject</code>的话, <code>value</code>的改变发生在new <code>ValueObject</code>, 而不是old <code>ValueObject</code></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/25/Java-Note-Spring-Autowired/">
+                Java-Note-Spring-Autowired
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-25</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>@Autowired: 可以将指定bean自动注入, 以避免使用<code>&lt;bean&gt;</code>下面的<code>&lt;preporty&gt;</code>来设置</li>
+<li>使用@Autowired需要在xml中配置<code>&lt;context:annotation-config&gt;</code> 标签<ul>
+<li><code>&lt;context:annotation-config&gt;</code> is used to activate annotations in beans already registered in the application context (no matter if they were defined with XML or by package scanning). and <code>&lt;context:component-scan&gt;</code> can also do what <code>&lt;context:annotation-config&gt;</code> does but <code>&lt;context:component-scan&gt;</code> also scans packages to find and register beans within the application context.
+        </div>
+        <a href="/2018/04/25/Java-Note-Spring-Autowired/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/25/XML-Note-相关知识/">
+                XML-Note-相关知识
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-25</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/XML/">XML</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>XSD: XML Schema Defination, is a World Wide Web Consortium(W3C) recommendation that specifies how to formally describe the elements in an Extensible Markup Language(XML) document</li>
+<li><p>beans标签中的属性:</p>
+        </div>
+        <a href="/2018/04/25/XML-Note-相关知识/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/23/Java-Note-通过相对位置读取项目中的文件/">
+                Java-Note-通过相对位置读取文件
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-23</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>项目代码中:<ul>
+<li>想要读取项目下的文件, 又不希望写死路径, 可以把路径写为: “src/…”</li>
+</ul>
+</li>
+<li>浏览器中: 浏览器中读取服务器的文件<ul>
+<li>在tomcat的service.xml进行一下修改(Context标签):<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;</span><br><span class="line">        unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api/static&quot;  docBase=&quot;\custom_api\WEB-INF\static&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api&quot;  docBase=&quot;D:\runtime\jnScience&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">    &lt;!-- SingleSignOn valve, share authentication between web applications</span><br><span class="line">         Documentation at: /docs/config/valve.html --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&gt;</span><br><span class="line">    --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Access log processes all example.</span><br><span class="line">         Documentation at: /docs/config/valve.html</span><br><span class="line">         Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&gt;</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</span><br><span class="line">           prefix=&quot;localhost_access_log&quot; suffix=&quot;.txt&quot;</span><br><span class="line">           pattern=&quot;%h %l %u %t &amp;quot;%r&amp;quot; %s %b&quot; /&gt;</span><br><span class="line">&lt;/Host&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/23/Base64-Note/">
+                Base64-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-23</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Base64/">Base64</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>js加密: 用FileReader中的readAsDataURL(file)即可, 但注意, 得到的字符串中, 第一个(也是唯一一个)<code>,</code>之前保存的是文件类型和加密类型, 之后保存的才是加密后的字符串</p>
+<ul>
+<li>FileReader: <code>The FileReader object lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user&#39;s computer, using File or Blob objects to specify the file or data to read.</code><ul>
+<li>异步方法的处理: 当FileReader触发了一些事件后, 会返回相应的数据:<ul>
+<li>onload: 加载完成时触发, 会返回结果</li>
+<li>onerror: 读取操作发生错误时触发</li>
+<li>等等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>例子: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br><span class="line">reader.readAsDataURL(fileObj);</span><br><span class="line">reader.onload = function () &#123;</span><br><span class="line">    var encodeString = reader.result;</span><br><span class="line">    console.log(encodeString);</span><br><span class="line">    customFormField1.fieldName = &quot;customFormField1Name&quot;;</span><br><span class="line">    customFormField1.fieldValue = &quot;customFormField1Value&quot;;</span><br><span class="line">    customFormField0.fieldName = &quot;customFormField0Name&quot;;</span><br><span class="line">    customFormField0.fieldValue = &quot;customFormField0Value&quot;;</span><br><span class="line">    customFormFileField0.name = &quot;customFormFileField0Name&quot;;</span><br><span class="line">    customFormFileField0.encodedContent = encodeString;</span><br><span class="line">    customFormFileField0.postfix = &quot;docx&quot;;</span><br><span class="line">    customFormFields[0] = customFormField0;</span><br><span class="line">    customFormFields[1] = customFormField1;</span><br><span class="line">    customFiles[0] = customFormFileField0;</span><br><span class="line">    customForm.customFormFields = customFormFields;</span><br><span class="line">    customForm.type = 0;</span><br><span class="line">    customForm.senderId = 19;</span><br><span class="line">    request.customForm = customForm;</span><br><span class="line">    request.customFiles = customFiles;</span><br><span class="line">    request.integer = 7;</span><br><span class="line">    request.string = &quot;秘书长&quot;;</span><br><span class="line">    request = JSON.stringify(request);</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: &quot;POST&quot;,</span><br><span class="line">        url: &quot;http://192.168.0.113:8090/form/addForm.jspx&quot;,</span><br><span class="line">        data: request,</span><br><span class="line">        dataType: &quot;json&quot;,</span><br><span class="line">        contentType: &quot;application/json&quot;,</span><br><span class="line">        cache: false,</span><br><span class="line">        processData: false,</span><br><span class="line">        success: function (data) &#123;</span><br><span class="line">            console.log(&quot;success: &quot; + data);</span><br><span class="line">        &#125;,</span><br><span class="line">        error: function (data) &#123;</span><br><span class="line">            console.log(&quot;fail: &quot; + data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>java</p>
+<ul>
+<li>加密: <ul>
+<li>先使用NIO中的Files.readAllBytes读取文件为byte[]</li>
+<li>再用java.util中的Base64.getEncoder().encodeToString()加密</li>
+</ul>
+</li>
+<li>解密:<ul>
+<li>如果加密的string中包含文件类型和加密类型信息, 先截取掉</li>
+<li>利用Base64.getDecoder().decode将String解密成byte[]</li>
+<li>利用Files.write将byte[]写入指定位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/23/Java-Note-NIO中的Files/">
+                Java-Note-NIO中的Files
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-23</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>介绍: <code>This class consists exclusively of static methods that operate on files, directories, or other types of files.
+In most cases, the methods defined here will delegate to the associated file system provider to perform the file operations.</code></li>
+<li>包含的方法:<ul>
+<li>Files.readAllBytes(): 根据路径读取所有byte, 实现中用到大量Channel</li>
+<li>Files.write(): 向给定路径写入给定byte, StandardOpenOption defines the standard open options</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrap-pagination">
+                <a class="" href="/page/3/">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </a>
+                <a class="" href="/page/5/">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

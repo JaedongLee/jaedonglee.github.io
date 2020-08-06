@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="volatile关键字
+
+要理解volatile为什么能确保可见性, 就要先理解Java中的内存模型. 关于内存模型详见本目录下的Java-Note-JVM-内存模型.md
+Java内存模型规定了所有的变量都存储在主内存中. 每条线程还有自己的工作内存用来保存被该线程所使用的变量(这些变量是从主内存拷贝而来). 
+线程对变量的所有操作(读取/赋值)都在工作内存中进行.">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Note-Concurrency-volatile关键字">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Java-Note-Concurrency-volatile关键字 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/03/31/Java-Note-Concurrency-volatile关键字/">
+                Java-Note-Concurrency-volatile关键字
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-31</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li><p><code>volatile</code>关键字</p>
+<ul>
+<li>要理解<code>volatile</code>为什么能确保可见性, 就要先理解<code>Java</code>中的内存模型. 关于内存模型详见本目录下的<code>Java-Note-JVM-内存模型.md</code></li>
+<li>Java内存模型规定了所有的变量都存储在主内存中. 每条线程还有自己的工作内存用来保存被该线程所使用的变量(这些变量是从主内存拷贝而来). </li>
+<li>线程对变量的所有操作(读取/赋值)都在工作内存中进行.<a id="more"></a></li>
+<li>不同的线程之间无法直接访问对方工作内存中的变量, 线程间变量值的传递需要通过主内存来完成</li>
+<li>这种内存模型产生了多线程编程中的数据”脏读”等问题.<ul>
+<li>例: 两个线程同时对一个共享变量进行<code>+1</code>操作, 就有可能出现这种情况: <ol>
+<li>初始时, 两个线程把值分别读入自己的工作内存</li>
+<li>然后线程<code>1</code>进行<code>+1</code>操作, 把结果写入共享内存</li>
+<li>线程<code>2</code>进行<code>+1</code>操作, 把结果写入共享内存, 此次的结果就覆盖了<code>2</code>中的结果, 导致结果出错</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>解决”脏读”问题:</p>
+<ol>
+<li><p>了解并发编程的三大概念: <code>原子性</code>/<code>可见性</code>/<code>有序性</code>, 如果三个性质中有一个没有保证, 就有可能导致程序运行不正确</p>
+<ol>
+<li><p>原子性:</p>
+<ul>
+<li>定义: 一个操作(如<code>i = 10</code>)或多个操作(如<code>synchronized</code>修饰的代码块)</li>
+<li><p><code>Java</code>中的原子性:</p>
+<ul>
+<li><p>规则: </p>
+<ol>
+<li><p>对基本数据类型的变量的读取和赋值操作是原子性操作. 例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = 10</span><br><span class="line">y = x</span><br><span class="line">x++</span><br><span class="line">x = x + 1</span><br></pre></td></tr></table></figure>
+<p>以上四条语句中只有语句1是原子性操作:</p>
+</li>
+</ol>
+<ul>
+<li>语句1是直接将数值10赋值给x, 也就是线程执行这个语句会直接将10写入工作内存</li>
+<li>语句2先要读取<code>x</code>的值, 再将<code>x</code>的值写入工作内存</li>
+<li><code>3</code>和<code>4</code>包含三个操作: 读取<code>x</code>的值/进行<code>+1</code>操作/赋新值给<code>x</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>总结: <code>Java</code>内存模型只保证基本读取和赋值是原子性操作, 大范围操作的原子性, 需要通过<code>synchronized</code>或<code>Lock</code>来实现</li>
+</ul>
+</li>
+<li><p>可见性:</p>
+<ul>
+<li>定义: 可见性是指当多个线程访问同一个变量时, 一个线程修改了这个变量的值, 其它线程能够立即看得到修改的值.</li>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//线程1执行的代码</span><br><span class="line">int i = 0;</span><br><span class="line">i = 10;</span><br><span class="line"></span><br><span class="line">// 线程2执行的代码</span><br><span class="line">j = i</span><br></pre></td></tr></table></figure>
+<p>当线程1执行<code>i = 10</code>这句时, 会先把<code>i</code>的初始值加载到工作内存中, 然后赋值为<code>10</code>, 此时在线程1的工作内存当中<code>i</code>的值变为<code>10</code>, 但没有立即写入主存当中.<br>此时线程2执行<code>j = i</code>, 则<code>j</code>的值为0, 结果出错<br>这就是可见性问题, 线程1对变量<code>i</code>修改了以后, 线程<code>2</code>没有立即看到线程<code>1</code>的修改</p>
+</li>
+<li>Java中的可见性:<ul>
+<li>规则: <ul>
+<li>Java提供了volatile关键字来保证可见性</li>
+<li>当一个共享变量被volatile修饰时, 它会保证修改的值会立即被更新到主存, 当有其它线程需要读取时, 它会去内存中国读取新值.</li>
+<li>通过synchronized和Lock也能保证可见性, 在释放锁之前会将对变量的修改刷新到主存当中. 因此可以保证可见性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>有序性</p>
+<ul>
+<li>定义: 程序执行的顺序按照代码的先后顺序执行</li>
+<li><p>规则: JVM在真正执行一段代码时会发生<code>指令重排序</code></p>
+<ul>
+<li><p><code>指令重排序</code>: </p>
+<ul>
+<li>定义: 处理器为了提高程序的运行效率, 可能对输入的代码进行优化, 它不保证程序中的各个语句的执行先后顺序一致, 但是<code>会保证程序最终执行结果和代码顺序执行的结果一致</code><ul>
+<li>如何保证: 处理器在进行重排序时会考虑指令间的数据依赖性, 如果instruction2必须用到instruction1的结果, 那么处理器会保证instruction1在instruction2之前执行</li>
+</ul>
+</li>
+<li><p>多线程中的指令重排序</p>
+<ul>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 线程1:</span><br><span class="line">context = loadContext();</span><br><span class="line">inited = true;</span><br><span class="line"></span><br><span class="line">// 线程2:</span><br><span class="line">while(!inited) &#123;</span><br><span class="line">    sleep()</span><br><span class="line">&#125;</span><br><span class="line">doSomethingwithconfig(context);</span><br></pre></td></tr></table></figure>
+<p>上述代码中, 由于语句1和2没有数据依赖性, 可能会重排序, 如果发重排序, 在线程1中先执行语句2, 而此时线程2会认为初始化已完成, 而执行<code>doSomethingwithConfig(context)</code>, 而此时<code>context</code>没有被初始化, 从而导致程序错误</p>
+</li>
+<li>总结: <ul>
+<li>从上面的例子可以看出, 指令重排序不会影响单个线程的执行, 但是会影响线程并发执行的正确性</li>
+<li>如果一个线程依赖于另一个线程中语句的执行次序, 如果不做处理, 则并发时会出错.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java中的有序性: <ul>
+<li>规则: <ul>
+<li>在Java内存模型中, 允许编译器和处理器对指令进行重排序, 但是重排序过程不会影响到单线程程序的执行, 却会影响到多线程并发执行的正确性</li>
+<li>通过volatile关键字可以保证一定的有序性, 另外可以通过synchronized和Lock保证有序性</li>
+<li>Java内存模型先天有序性: <code>happens-before</code>原则, 如果两个操作的执行次序无法从<code>happens-before</code>原则推导出来, 则无法保证其可见性, 虚拟机可以随意对他们进行重排序: <a href="https://www.cnblogs.com/chenssy/p/6393321.html" target="_blank" rel="noopener">参考文档</a><ul>
+<li><code>happens-before</code>: <ol>
+<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作<ul>
+<li>解释: 虽然这条规则中提到“书写在前面的操作先行发生于书写在后面的操作”，这个应该是程序看起来执行的顺序是按照代码顺序执行的，但是虚拟机可能会对程序代码进行指令重排序。虽然进行重排序，但是最终执行的结果是与程序顺序执行的结果一致的，它只会对不存在数据依赖性的指令进行重排序。</li>
+</ul>
+</li>
+<li>锁定规则：一个unLock操作先行发生于后面对同一个锁的lock操作<ul>
+<li>解释: 一个锁如果处在被锁定的状态, 必须先对锁进行释放操作, 再进行lock操作</li>
+</ul>
+</li>
+<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作<ul>
+<li>解释: 如果一个线程先去写一个变量，然后一个线程去进行读取，那么写入操作肯定会先行发生于读操作。</li>
+</ul>
+</li>
+<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作</li>
+<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作</li>
+<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
+<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>深入了解volatile关键字</p>
+<ol>
+<li>volatile保证可见性: 当一个共享变量(类的成员变量/类的静态成员变量)被volatile修饰后, 有两层语义:<ol>
+<li>保证不同线程对这个变量进行操作的可见性<ul>
+<li>注意: JVM只能保证对volatile修饰的变量在加载时得到最新值, 而如果在变量加载后线程被打断而共享变量发生了变化, 则被打断的线程中的工作变量不会被改变</li>
+</ul>
+<ol>
+<li>使用volatile关键字会强制将修改的值立即写入主存</li>
+<li><code>使用volatile关键字, 当线程2进行修改时, 会导致线程1的工作内存中缓存变量的缓存行无效(反映到硬件层的话, 就是cpu的L1或L2缓存中对象的缓存行无效)</code></li>
+<li>由于线程1中的estop工作内存的变量的缓存行无效, 所以线程1会再次到主存读取变量, 从而读取最新的值</li>
+</ol>
+</li>
+<li>禁止进行指令重排序</li>
+</ol>
+</li>
+<li><p>volatile不保证原子性</p>
+<ul>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    public volatile int inc = 0;</span><br><span class="line"></span><br><span class="line">    public void increase() &#123;</span><br><span class="line">        inc++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        final Test test = new Test();</span><br><span class="line">        for(int i=0;i&lt;10;i++)&#123;</span><br><span class="line">            new Thread()&#123;</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    for(int j=0;j&lt;1000;j++)</span><br><span class="line">                        test.increase();</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(Thread.activeCount()&gt;1)  //保证前面的线程都执行完</span><br><span class="line">            Thread.yield();</span><br><span class="line">        System.out.println(test.inc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述代码中, 由于volatile不保证原子性, 如果线程1在将inc的值存入工作区后被线程2打断, 线程2改变inc的值并存入共享变量, <code>由于JVM只能保证对volatile修饰的变量在加载时得到最新值, 而如果在变量加载后线程被打断而共享变量发生了变化, 则被打断的线程中的工作变量不会被改变</code>, 则此时再继续运行线程1, 其依然使用原来的变量, 因此会报错</p>
+</li>
+<li>解决方案: 使用synchronized或Lock, 也可以通过AtomicInteger<ul>
+<li>AtomicInteger: JDK1.5下的java.util.concurrent.atomic包提供了一些原子操作类, 即对基本数据类型的 自增（加1操作），自减（减1操作）、以及加法操作（加一个数），减法操作（减一个数）进行了封装，保证这些操作是原子性操作。atomic是利用CAS来实现原子性操作的（Compare And Swap），CAS实际上是利用处理器提供的CMPXCHG指令实现的，而处理器执行CMPXCHG指令是一个原子性操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>volatile保证有序性</p>
+<ul>
+<li><p>volatile关键字禁止重排序, 从而一定程度上保证有序性</p>
+<ol>
+<li>当程序执行到volatile变量的读或写操作时, 在其前面的操作的更改肯定全部已经进行, 且结果对后面的操作可见; 在其后面的操作肯定还没有进行</li>
+<li><p>在进行指令优化时, 不能讲在对volatile变量的读/写操作放在后面语句的前面, 也不能把后面的语句放在其前面执行</p>
+<ul>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//x、y为非volatile变量</span><br><span class="line">//flag为volatile变量</span><br><span class="line"></span><br><span class="line">x = 2;        //语句1</span><br><span class="line">y = 0;        //语句2</span><br><span class="line">flag = true;  //语句3</span><br><span class="line">x = 4;         //语句4</span><br><span class="line">y = -1;       //语句5</span><br></pre></td></tr></table></figure>
+<p>语句4不能放在1/2前面, 但1,2之间的顺序不做保证. 同时执行3时, 1/2一定已经执行完毕, 且1/2的执行结果对3/4/5都是可见的</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>volatile的实现原理</p>
+<ul>
+<li><p>可见性: 处理器为了提高处理速度，不直接和内存进行通讯，而是将系统内存的数据独到内部缓存后再进行操作，但操作完后不知什么时候会写到内存。</p>
+<p>如果对声明了volatile变量进行写操作时，JVM会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写会到系统内存。 这一步确保了如果有其他线程对声明了volatile变量进行修改，则立即更新主内存中数据。</p>
+<p>但这时候其他处理器的缓存还是旧的，所以在多处理器环境下，为了保证各个处理器缓存一致，每个处理会通过嗅探在总线上传播的数据来检查 自己的缓存是否过期，当处理器发现自己缓存行对应的内存地址被修改了，就会将当前处理器的缓存行设置成无效状态，当处理器要对这个数据进行修改操作时，会强制重新从系统内存把数据读到处理器缓存里。 这一步确保了其他线程获得的声明了volatile变量都是从主内存中获取最新的。</p>
+</li>
+<li>有序性: Lock前缀指令实际上相当于一个内存屏障（也成内存栅栏），它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；即在执行到内存屏障这句指令时，在它前面的操作已经全部完成。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

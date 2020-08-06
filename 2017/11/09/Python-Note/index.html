@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Python基础
+Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数
+使用list和tuple">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Python_Note">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Python_Note - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/11/09/Python-Note/">
+                Python_Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-09</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Python/">Python</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li>Python基础<ul>
+<li>Python命令行: 可以直接在命令行中编写函数, 这样可以在cmd中调用函数</li>
+<li>使用list和tuple<a id="more"></a><ul>
+<li>list<ul>
+<li>定义: Python内置的一种数据类型是列表: list. list是一种有序的集合, 可以随时添加和删除其中的元素</li>
+<li>用法<ul>
+<li>list[-1]: 使用-1做索引获取最后一个元素, 依此类瑞, 可以获得倒数第二个/第三个元素</li>
+<li>list.append(‘ele’): 向list末尾追加元素</li>
+<li>list.insert(num, ‘ele’): 将ele插入指定位置num</li>
+<li>list.pop(): 删除末尾元素</li>
+<li>list.pop(num): 删除指定位置的元素</li>
+<li>list元素可以是另一个list, 获取元素的方式是: list[i][j]<!-- more --></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tuple<ul>
+<li>定义: 与list非常类似, 但是tuple一旦初始化就不能修改</li>
+<li>注意: 在定义只有一个元素的tuple时, 需用<code>t = (, 1)</code>而不是<code>t = (1)</code>, 因为<code>t = (1)</code>定义的不是tuple而是<code>1</code>这个数</li>
+<li>tuple所谓的不变是指: tuple的每个元素, 指向永远不变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>条件判断<ul>
+<li>input()<ul>
+<li>注意: input()返回的是str类型, 不能和整数直接进行比较, 必须先使用int()转换成整数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>循环<ul>
+<li>break<ul>
+<li>提前结束所属的循环</li>
+</ul>
+</li>
+<li>continue<ul>
+<li>跳过当前的这次循环, 直接开始下一次循环</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>函数</p>
+<ul>
+<li><p>函数的参数</p>
+<ul>
+<li><p>默认参数</p>
+<ul>
+<li><p><font color="red">默认参数设为不变变量的问题:</font></p>
+<ul>
+<li><p>例子:<br>  为了保证默认参数不会在多次调用函数时改变内容, 我们可以使用None这个不变变量来实现:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">code 1:</span><br><span class="line"></span><br><span class="line">def add_end(L=None):</span><br><span class="line">    if L is None:</span><br><span class="line">        L = []</span><br><span class="line">    L.append(&apos;END&apos;)</span><br><span class="line">    return L</span><br></pre></td></tr></table></figure>
+<p>  现在, 无论调用多少次, 都不会有问题:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">code 2:</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; add_end()</span><br><span class="line">[&apos;END&apos;]</span><br><span class="line">&gt;&gt;&gt; add_end()</span><br><span class="line">[&apos;END&apos;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>问题: 为何在<code>code 1</code>第三行中将<code>[]</code>赋值给<code>L</code>后下一次调用<code>add_end()</code>时<code>L</code>初始依然为<code>None</code></p>
+</li>
+<li>答案: 每调用一次<code>add_end()</code>, 变量<code>L</code>就会指向一次<code>None</code>所在的地址. as <code>L</code> intialized to be <code>None</code>, 语句<code>L = []</code>会使<code>L</code>指向一个存放<code>[]</code>的新的内存地址,<br>而原来存放<code>None</code>的地址的内容没有改变, 因此在下一次调用<code>add_end()</code>时, L还是等于<code>None</code>所在地址的内容, 即<code>L = None</code></li>
+<li>默认参数的本质: <ul>
+<li>函数在定义时会确定默认参数指向的地址, 当函数在被调用时默认参数会指向该地址, 在函数中可以改变默认地址的指向, 也可以改变默认参数的指向地址的值(当默认地址设置的不为不变变量)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可变参数</p>
+<ul>
+<li><p>方法: 在定义函数参数时在前面加<code>*</code>. 例:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def calc(*number):</span><br><span class="line">    sum = 0</span><br><span class="line">    for n in numbers:</span><br><span class="line">        sum += n*n</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<p>  定义可变参数和定义一个<code>list</code>或<code>tuple</code>参数相比, 仅仅在参数前面加了一个<code>*</code>号. 在函数内部, 参数<code>number</code>接收到的是一个<code>tuple</code>, 因此, 函数代码完全不变. 但是, 调用该函数时, 可以传入任意个参数, 包括零个.</p>
+</li>
+<li>问题: 如果已经有一个<code>list</code>或<code>tuple</code>, 要调用一个可变参数怎么办? </li>
+<li><p>答案: 可以这样做:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; nums = [1,2,3]</span><br><span class="line">&gt;&gt;&gt; calc(*nums)</span><br></pre></td></tr></table></figure>
+<p>  <code>*nums</code>表示把<code>nums</code>这个<code>list</code>的所有元素作为可变参数传进去. 这种写法相当有用, 而且很常见</p>
+</li>
+</ul>
+</li>
+<li><p>关键字参数</p>
+<ul>
+<li><p>作用:<br>  允许传入0个或任意个含参数名的参数, 这些关键字参数在函数内部自动组装为一个<code>dict</code>. 例:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, **kw):</span><br><span class="line">    print(&apos;name:&apos;, name, &apos;age:&apos;, age, &apos;other:&apos;, kw)</span><br></pre></td></tr></table></figure>
+<p>  函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外, 还接受关键字参数<code>kw</code>. 在调用该函数时, 可以传入任意个数的关键字参数:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&apos;Bob&apos;, 35, city=&apos;Beijing&apos;)</span><br><span class="line">name: Bob age: 35 other: &#123;&apos;city&apos;: &apos;Beijing&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&apos;Adam&apos;, 45, gender=&apos;M&apos;, job=&apos;Engineer&apos;)</span><br><span class="line">name: Bob age: 35 other: &#123;&apos;gender&apos;: &apos;M&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>问题: 如果已经有一个<code>dict</code>, 要调用一个可变参数怎么办? </p>
+</li>
+<li>答案: 可以这样做:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; extra = &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; person(&apos;jack&apos;, 24, **extra)</span><br><span class="line">name: jack age: 24 other: &#123;&apos;city&apos;: &apos;Beijing&apos;, &apos;job&apos;: &apos;Engineer&apos;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>命名关键字参数</p>
+<ul>
+<li><p>如果要限制关键字参数的名字, 就可以用命名关键字参数, 例如, 只接收<code>city</code>和<code>job</code>作为关键字参数. 这种方式定义的函数如下:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, *, city, job):</span><br><span class="line">    print(name, age, city, job)</span><br></pre></td></tr></table></figure>
+<p>  和关键字参数*<em>kw不同, 命名关键字参数需要一个特殊分隔符`</em><code>,</code>*`后面的参数被视为命名关键字参数.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; person(&apos;Jack&apos;, 24, city=&apos;Beijing&apos;, job=&apos;Engineer&apos;)</span><br><span class="line">Jack 24 Beijing Engineer</span><br></pre></td></tr></table></figure>
+<p>  如果函数定义中已经有了一个可变参数, 后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def person(name, age, *args, city, job):</span><br><span class="line">    print(name, age, args, city, job)</span><br></pre></td></tr></table></figure>
+<p>  命名关键字参数必须传入参数名, 这和位置参数不同. 如果没有参入参数名, 调用将报错</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>递归函数</p>
+<ul>
+<li><p>尾递归优化</p>
+<ul>
+<li>定义:　<ol>
+<li>一句话定义: 函数在最后一步只<code>return</code>函数本身的方法</li>
+<li>尾递归优化是指在函数返回时, 调用函数本身, 并且, <code>return</code>语句不能包含表达式</li>
+</ol>
+</li>
+<li><p>解释: </p>
+<ol>
+<li>函数调用会在内存中形成一个”调用记录”, 又称”调用祯”, 用来保存调用位置和内部变量等信息. 如果在函数A的内部动用函数B, 那么在A的调用记录上方, 还会形成一个B的调用记录.</li>
+<li><p>由于尾递归是函数的最后一步操作, 因此与目前的环境(context)没有任何关联,调用位置/内部信息等信息都不会再用到了. 所以不需要保留外层函数的调用记录. 只要直接用内层函数的调用记录, 取代外层函数的调用记录就可以了.</p>
+<ul>
+<li><p>以尾调用为例, 尾递归属于尾调用:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function f() &#123;</span><br><span class="line">    let m = 1;</span><br><span class="line">    let n = 2;</span><br><span class="line">    return g(m + n);</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line">//等同于</span><br><span class="line">function f() &#123;</span><br><span class="line">    return g(3);</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line">//等同于</span><br><span class="line">g(3);</span><br></pre></td></tr></table></figure>
+<p>上面代码中, 乳沟函数<code>g</code>不是尾调用, 函数f就需要保存内部变量<code>m</code>和<code>n</code>的值, <code>g</code>的调用位置等信息. 但由于调用<code>g</code>之后, 函数<code>f</code>就结束了, 所以执行到最后一步, 完全可以删除<code>f()</code>的调用记录, 值保留g(3)的调用记录</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>高级特性</p>
+<ul>
+<li><p>切片</p>
+<ul>
+<li>作用: 提取一个list/tuple中的一段数列</li>
+<li><p>例子:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;, &apos;Bob&apos;, &apos;Jack&apos;]</span><br><span class="line">&gt;&gt;&gt; L[0:3]      //从索引`0`开始取, 直到索引`3`为止, 但不包括索引`3`</span><br><span class="line">&gt;&gt;&gt; L[-3:-1]        //从索引`-3`开始, 直到索引`-1`为止, 但不包括索引`-1`. 记住倒数第一个元素的索引是`-1`</span><br><span class="line">&gt;&gt;&gt; L[-3:]      //包括索引`-1`</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [0,1,2,...,99]</span><br><span class="line">&gt;&gt;&gt; L[:10:2]      //前十个数, 每两个取一个</span><br><span class="line">&gt;&gt;&gt; L[::5]      //所有数, 每5个取一个</span><br><span class="line">&gt;&gt;&gt; L[:]        //获取所有数</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意: </p>
+<ol>
+<li><p>tuple也是一种list, 唯一区别是tuple不可变. 因此, tuple也可以用切片操作, 只是操作结果仍是字符串. 例:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; (0, 1, 2, 3, 4, 5)[:3]</span><br><span class="line">(0, 1, 2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串<code>&#39;xxx&#39;</code>也可以看成是一种list, 每个元素就是一个字符. 因此, 字符串也可以用切片操作, 只是操作结果仍是字符串</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;ABCDEFG&apos;[:3]</span><br><span class="line">&apos;ABC&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;ABCDEFG&apos;[::2]</span><br><span class="line">&apos;ACEG&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>练习</p>
+<ul>
+<li>题目: 利用切片操作，实现一个trim()函数，去除字符串首尾的空格，注意不要调用str的strip()方法</li>
+<li>答案:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def trim(s):</span><br><span class="line">l = len(s)</span><br><span class="line">begin = 0</span><br><span class="line">end = l-1</span><br><span class="line">while begin &lt; l:</span><br><span class="line">    if s[begin] == &apos; &apos;:</span><br><span class="line">        begin = begin + 1</span><br><span class="line">    else:</span><br><span class="line">        break</span><br><span class="line">while end &gt; 0:</span><br><span class="line">    if s[end] == &apos; &apos;:</span><br><span class="line">        end = end - 1</span><br><span class="line">    else:</span><br><span class="line">        break</span><br><span class="line">s_slice = s[begin:end+1]</span><br><span class="line">print(s_slice)</span><br><span class="line">print(len(s_slice))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>迭代</p>
+<ul>
+<li>定义: 如果给定一个list或tuple, 我们可以通过<code>for</code>循环来遍历这个<code>list</code>或<code>tuple</code>, 这种遍历我们称为迭代(Iteration)<ul>
+<li>只要作用于一个可迭代对象, <code>for</code>循环就可以正常运行, 而我们不太关心该对象是list还是其它数据类型.</li>
+</ul>
+</li>
+<li><p>用法:</p>
+<ul>
+<li><p>可用于没有下标的数据类型, 比如<code>dict</code>就可以迭代:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3&#125;</span><br><span class="line">&gt;&gt;&gt; for key in d:</span><br><span class="line">...     print(key)</span><br><span class="line">...</span><br><span class="line">a</span><br><span class="line">c</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
+<p>  PS: 由于<code>dict</code>的存储不是按照<code>list</code>的方式顺序排列, 所有, 迭代出的结果顺序很可能不一样</p>
+<ul>
+<li>默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用for k, v in d.items()。</li>
+</ul>
+</li>
+<li>字符串也是可迭代对象, 因此, 也可以作用于<code>for</code>循环</li>
+</ul>
+</li>
+<li><p>问题</p>
+<ul>
+<li><p>如何判断一个对象是可迭代对象?</p>
+<ul>
+<li>解答: 通过collections模块的Iterable类型判断:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterable</span><br><span class="line">&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable)     #_str是否可迭代_</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance([1,2,3], Iterable)     #_list是否可迭代_</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(123, Iterable)     #_整数是否可迭代_</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果要对list实现类似Java那样的下标循环怎么办?</p>
+<ul>
+<li><p>解答: Python内置的<code>enumerate</code>函数可以把一个list变成使用索引-元素对, 这样就可以在<code>for</code>循环中同时迭代索引和元素本身:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i, value in enumerate(&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]):</span><br><span class="line">...     print(i, value)</span><br><span class="line">...</span><br><span class="line">0 A</span><br><span class="line">1 B</span><br><span class="line">2 C</span><br></pre></td></tr></table></figure>
+<p>上面的<code>for</code>循环里, 同时引进了两个变量, 在Python里是很常见的, 比如下面的代码:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:</span><br><span class="line">...     print(x,y)</span><br><span class="line">... </span><br><span class="line">1 1 </span><br><span class="line">2 4</span><br><span class="line">3 9</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>练习</p>
+<ul>
+<li>题目: 请使用迭代查找一个list中最小和最大值, 并返回一个tuple</li>
+<li>答案:   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def findMinAndMax(L):</span><br><span class="line">max = L[0]</span><br><span class="line">min = L[0]</span><br><span class="line">for i, value in enumerate(L):</span><br><span class="line">    if max &lt; L[i]:</span><br><span class="line">        max = L[i]</span><br><span class="line">    if min &gt; L[i]:</span><br><span class="line">        min = L[i]</span><br><span class="line">print(max)</span><br><span class="line">print(min)</span><br><span class="line">return (max, min)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>列表生成式</p>
+<ul>
+<li>定义: 列表生成式即List Comprehensions, 是Python内置的非常简单却强大的可以用来创建list的生成式.</li>
+<li><p>用法</p>
+<ul>
+<li><p>举例: 如果要生成[1<em>1, 2</em>2, 3<em>3,…, 10</em>10]怎么做?</p>
+<ul>
+<li><p>方法一: 循环</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = []</span><br><span class="line">&gt;&gt;&gt; for x in range(1, 11):</span><br><span class="line">...    L.append(x * x)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; L</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二: 循环太繁琐, 而列表生成式则可以用一行语句代替循环生成上面的list:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x * x for x in range(1, 11)]</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>for循环后面还可以加上if判断, 这样我们就可以筛选出仅偶数的平方:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x * x for x in range(1, 11) if x % 2 == 0]</span><br><span class="line">[4, 16, 36, 64, 100]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还可以使用两层循环, 可以生成全排列:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [m + n for m in &apos;ABC&apos; for n in &apos;XYZ&apos;]</span><br><span class="line">[&apos;AX&apos;, &apos;AY&apos;, &apos;AZ&apos;, &apos;BX&apos;, &apos;BY&apos;, &apos;BZ&apos;, &apos;CX&apos;, &apos;CY&apos;, &apos;CZ&apos;]</span><br></pre></td></tr></table></figure>
+<p>  三层及以上的循环就很少用到了</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>for</code>循环其实可以同时使用两个甚至多个变量, ==<code>dict</code>的<code>item()</code>可以同时迭代key和value==</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = [&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos;]</span><br><span class="line">&gt;&gt;&gt; for k, v in d.items():</span><br><span class="line">...     print(k, &apos;=&apos;, v)</span><br><span class="line">...</span><br><span class="line">y = B</span><br><span class="line">x = A</span><br><span class="line">z = C</span><br></pre></td></tr></table></figure>
+<p>  因此, 列表生成式也可以使用两个变量来生成list:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = [&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos;]</span><br><span class="line">&gt;&gt;&gt; [k + &apos;=&apos; + v for k, v in d.items()]</span><br><span class="line">[&apos;y=B&apos;, &apos;x=A&apos;, &apos;z=C&apos;]</span><br></pre></td></tr></table></figure>
+<p>  最后把一个list中所有的字符串变成小写:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    &gt;&gt;&gt; L = [&apos;Hello&apos;, &apos;World&apos;, &apos;IBM&apos;, &apos;Apple&apos;]</span><br><span class="line">    &gt;&gt;&gt; [slower() for s in L]</span><br><span class="line">    [&apos;hello&apos;, &apos;world&apos;, &apos;ibm&apos;, &apos;apple&apos;]</span><br><span class="line">    - 练习</span><br><span class="line">- 问题: 如果list中既包含字符串，又包含整数，由于非字符串类型没有lower()方法，所以列表生成式会报错：</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>L = [‘Hello’, ‘World’, 18, ‘Apple’, None]<br>[s.lower() for s in L]<br>  Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>  File “<stdin>“, line 1, in <listcomp><br>  AttributeError: ‘int’ object has no attribute ‘lower’</listcomp></stdin></module></stdin></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用内建的`isinstance`函数可以判断一个变量是不是字符串:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = ‘abc’<br>y = 123<br>isinstance(x, str)<br>  True<br>isinstance(y, str)<br>  False</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    请修改列表生成式, 通过添加`if`语句保证列表生成式能正确地执行</span><br><span class="line">- 答案:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>  [x.lower() for x in L if isinstance(x, str) == True]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 生成器</span><br><span class="line">    - 产生背景: 通过列表生成式, 我们可以直接创造一个列表. 但是, 受到内存限制, 列表容量肯定是有限的. 而且, 创建一个包含100万个元素的列表, 不仅占用很大得到存储空间, 而且如果我们仅仅需要访问前面几个元素, 那后面绝大多数元素占用的空间都白白浪费了.      </span><br><span class="line">    所以, 如果列表元素可以按照某种算法推算出来, 那我们是否可以在循环的过程中不断推算出后续元素呢? 这样就不必创建完整的list, 从而节省大量的空间. 在Python中, 这种一边循环一边计算的机制, 称为生成器(generator)</span><br><span class="line">    - 创建方法</span><br><span class="line">        1. 把列表生成式的`[]`换成`()`</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; L = [x*x for x in range(10)]
+&gt;&gt;&gt; L 
+[0,1,4,9,16,25,36,49,64,81]
+&gt;&gt;&gt; g = (x*x for x in range(10))
+&gt;&gt;&gt; g
+&lt;generator object &lt;genexpr&gt; at 0x1022ef630&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    由于generator保存的是算法, 所以可以通过`next()`来获得generator的下一个返回值,但这样太麻烦了, 所以我们创建一个generator后, 基本永远不会调用`next()`, 而是通过`for`循环来迭代它.</span><br><span class="line">2. 如果一个函数定义中包括`yield`关键字, 那么这个函数就不再是一个普通函数, 而是一个generator:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; f = fib(6)
+&gt;&gt;&gt; f
+&lt;generator object fib at 0x104feaaa0&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        此方法不像方法1那样自动中断, 而是`next`到`yield`关键字才中断, 再次执行`next`则从上次返回时的`yield`语句处继续执行.</span><br><span class="line">- 用处: generator非常强大, 如果推算的算法比较复杂, 用类似列表生成式的`for`循环无法实现的时候, 还可以用函数来实现.</span><br><span class="line">- 练习</span><br><span class="line">    - 题目: 杨辉三角定义如下:</span><br></pre></td></tr></table></figure>
+
+          1
+        1   1
+    1   2   1
+    1   3   3   1
+1   4   6   4   1
+1   5   10  10  5   1
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    把每一行看做一个list, 试写一个generator, 不断输出下一行的list.</span><br><span class="line">- 答案:</span><br></pre></td></tr></table></figure>
+
+def triangles(max):
+ary_1 = [1,1]
+print([1])
+print([1, 1])
+n = 3
+while n &lt;= max:
+    i = 0
+    a = 0
+    ary_2 = [1,1]
+    while i &lt; len(ary_1)-1:
+        num = ary_1[i] + ary_1[i+1]
+        ary_2.insert(i+1, num)
+        i += 1
+    ary_1 = ary_2
+    yield ary_1
+    n += 1
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- 迭代器</span><br><span class="line">    - 背景</span><br><span class="line">        - 可以直接作用于`for`循环的数据类型有以下几种:</span><br><span class="line">            1. 集合数据类型, 如`list`, `tuple`, `dict`, `set`, `str`等;</span><br><span class="line">            2. `generator`, 包括生成器和带`yield`的generator function.</span><br><span class="line">        - 这些可以直接作用于`for`循环的对象统称为可迭代对象: `Iterable`.</span><br><span class="line">        - 可以使用`isinstance()`判断一个对象是否是`Iterable`对象:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; from collections import Iterable
+&gt;&gt;&gt; isinstance([], Iterable)
+True
+&gt;&gt;&gt; isinstance({}, Iterable)
+True
+&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable)
+True
+&gt;&gt;&gt; isinstance((x for x in range(10)), Iterable)
+True
+&gt;&gt;&gt; isinstance(100, Iterable)
+False
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    - 而生成器不但可以作用于`for`循环, 还可以被`next()`函数不断调用并返回下一个值, 直到最后抛出`StopIterable`错误表示无法继续返回下一个值了.</span><br><span class="line">- 定义: 可以被`next()`函数调用并不断返回下一个值的对象称为迭代器: `Iterable`.</span><br><span class="line">    - 可以使用`isinstance()`判断一个对象是否是`Iterable`对象:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; from cokkections import Iterable
+&gt;&gt;&gt; isinstance((x for x in range(10)), Iterable)
+True
+&gt;&gt;&gt; isinstance([], Iterator)
+False
+&gt;&gt;&gt; isinstance({}, Iterator)
+False                
+&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterator)
+False
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 范围: 生成器都是`Iterable`对象, 但`list`, `dict`, `str`虽然是`Iterable`, 却不是`Iterator`.</span><br><span class="line">- 转换: 把`list`, `dict`, `str`等`Iterable`变成`Iterator`可以使用`iter()`函数:</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>isinstance(iter([]), Iterator)<br>  True<br>isinstance(iter(‘abc’), Iterator)<br>  True</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        - 问题: 为什么`list`, `dict`, `str`等数据类型不是`Iterator`?</span><br><span class="line">            - 回答: 这是因为Python的`Iterator`对象表示的是一个数据流, Iterator对象可以被`next()`函数调用并不断返回下一个数据, 直到没有数据时抛出`StopIteration`错误. 可以把这个数据流看做是一个有序系列, 但我们不能提前知道序列的长度, 只能不断通过`next()`函数实现按需计算下一个数据, 索引`Iterator`的计算是惰性的, 只有在需要返回下一个数据时它才会计算.</span><br><span class="line">                - `Iterator`甚至可以表示一个无限大的数据流, 例如全体自然数. 而使用list是永远不可能存储全体自然数的.</span><br><span class="line">        - 小结</span><br><span class="line">            - 凡是可作用于`for`循环的对象都是`Iterator`类型</span><br><span class="line">            - 凡是可作用于`next()`函数的对象都是`Iterator`类型, 它们表示一个惰性计算的序列</span><br><span class="line">            - &lt;span style=&apos;background-color: blue&apos;&gt;Python的`for`循环本质上就是通过不断调用`next()`函数来实现的&lt;/span&gt;</span><br><span class="line">- 函数式编程</span><br><span class="line">    - 高阶函数(Higher-order function)</span><br><span class="line">        - 定义: 能接收别的的函数作为参数的函数</span><br><span class="line">            - 例</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>def add(x, y, add):
+    return add(x) + add(y)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- map/reduce</span><br><span class="line">    - map</span><br><span class="line">        - 原理: `map()`接收两个参数, 一个是函数, 一个是`Iterable`, `map`将传入的函数依次作用到序列的每一个元素, 并把结果作为新的`Iterator`返回. 例如:</span><br></pre></td></tr></table></figure>
+
+    &gt;&gt;&gt; def f(x):
+    ...     return x * x
+    ...
+    &gt;&gt;&gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    &gt;&gt;&gt; list(r)
+    [1, 4, 9, 16, 25, 36, 49, 64, 81]
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- reduace</span><br><span class="line">    - 原理: `reduce`把一个函数作用在一个序列`[x1, x2, x3, ...]`上, 这个函数必须接收两个参数, `reduce`把结果继续和序列的下一个元素做累积计算, 其效果是:</span><br></pre></td></tr></table></figure>
+
+    reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果还是不明白, 就举个例子:</span><br></pre></td></tr></table></figure>
+
+    &gt;&gt;&gt; from functools import reduce
+    &gt;&gt;&gt; def add(x, y): 
+    ...     return x + y
+    ...     
+    &gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])
+    25
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 优秀样例</span><br></pre></td></tr></table></figure>
+
+    &gt;&gt;&gt; from functools import reduce
+    &gt;&gt;&gt; def fn(x, y):
+    ...     return x * 10 + y
+    ...
+    &gt;&gt;&gt; def char2num(s):
+    ...     return {&apos;0&apos;: 0, &apos;1&apos;: 1, &apos;2&apos;: 2, &apos;3&apos;: 3, &apos;4&apos;: 4, &apos;5&apos;: 5, &apos;6&apos;: 6, &apos;7&apos;: 7, &apos;8&apos;: 8, &apos;9&apos;, 9}[s]
+    ...
+    &gt;&gt;&gt; reduce(fn, map(char2num, &apos;13579&apos;))
+    13579
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 练习</span><br><span class="line">    - 题目: 利用map()函数，把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。输入：[&apos;adam&apos;, &apos;LISA&apos;, &apos;barT&apos;]，输出：[&apos;Adam&apos;, &apos;Lisa&apos;, &apos;Bart&apos;]</span><br><span class="line">    - 答案:</span><br></pre></td></tr></table></figure>
+
+        from functools import reduce
+
+        def normalize(name):
+            def lower2capital(s):
+                dict = {&apos;a&apos;: &apos;A&apos;, &apos;b&apos;: &apos;B&apos;, &apos;c&apos;: &apos;C&apos;, &apos;d&apos;: &apos;D&apos;, &apos;e&apos;: &apos;E&apos;, 
+                        &apos;f&apos;: &apos;F&apos;, &apos;g&apos;: &apos;G&apos;, &apos;h&apos;: &apos;H&apos;, &apos;i&apos;: &apos;I&apos;, &apos;j&apos;: &apos;J&apos;,
+                        &apos;k&apos;: &apos;K&apos;, &apos;l&apos;: &apos;L&apos;, &apos;m&apos;: &apos;M&apos;, &apos;n&apos;: &apos;N&apos;, &apos;o&apos;: &apos;O&apos;,
+                        &apos;p&apos;: &apos;P&apos;, &apos;q&apos;: &apos;Q&apos;, &apos;r&apos;: &apos;R&apos;, &apos;s&apos;: &apos;S&apos;, &apos;t&apos;: &apos;T&apos;, 
+                        &apos;u&apos;: &apos;U&apos;, &apos;v&apos;: &apos;V&apos;, &apos;w&apos;: &apos;W&apos;, &apos;x&apos;: &apos;X&apos;, &apos;y&apos;: &apos;Y&apos;, 
+                        &apos;z&apos;: &apos;Z&apos;}
+                if s in dict:
+                    return dict[s]
+                else:
+                    return s
+            def capital2lower(s):
+                dict = {&apos;A&apos;: &apos;a&apos;, &apos;B&apos;: &apos;b&apos;, &apos;C&apos;: &apos;c&apos;, &apos;D&apos;: &apos;d&apos;, &apos;E&apos;: &apos;e&apos;,
+                        &apos;F&apos;: &apos;f&apos;, &apos;G&apos;: &apos;g&apos;, &apos;H&apos;: &apos;h&apos;, &apos;I&apos;: &apos;i&apos;, &apos;J&apos;: &apos;j&apos;,
+                        &apos;K&apos;: &apos;k&apos;, &apos;L&apos;: &apos;l&apos;, &apos;M&apos;: &apos;m&apos;, &apos;N&apos;: &apos;n&apos;, &apos;O&apos;: &apos;o&apos;,
+                        &apos;P&apos;: &apos;p&apos;, &apos;Q&apos;: &apos;q&apos;, &apos;R&apos;: &apos;r&apos;, &apos;S&apos;: &apos;s&apos;, &apos;T&apos;: &apos;t&apos;,
+                        &apos;U&apos;: &apos;u&apos;, &apos;V&apos;: &apos;v&apos;, &apos;W&apos;: &apos;w&apos;, &apos;X&apos;: &apos;x&apos;, &apos;Y&apos;: &apos;y&apos;,
+                        &apos;Z&apos;: &apos;z&apos;}
+                if s in dict:
+                    return dict[s]
+                else:
+                    return s
+            def str_add(a, b):
+                return a + b
+            def main_fun(str_test):
+                return lower2capital(str_test[0]) + reduce(str_add, map(capital2lower, str_test[1:]))
+            return map(main_fun, name)
+
+        L = [&apos;adam&apos;, &apos;LIdA&apos;, &apos;barT&apos;]
+        print(list(normalize(L)))
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- filter</span><br><span class="line">    - 定义: `filter()`函数用于过滤序列. 和`map()`类似, `filter()`也接收一个函数和一个序列. 和`map()`不同的是, `filter()`把传入的函数依次作用于每个元素, 然后根据返回值是`True`还是`False`决定保留还是丢弃该元素.         </span><br><span class="line">    例如, 在一个list中, 删掉偶数, 只保留奇数, 可以这么写:</span><br></pre></td></tr></table></figure>
+</code></pre><p>  def is_odd(n):</p>
+<pre><code>return n % 2 == 1
+</code></pre><p>  list(filter(is_odd, [1 ,2, 4, 5, 6, 9, 10, 15]))</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    使用`filter()`这个函数, 关键在于正确实现一个&quot;筛选&quot;函数.</span><br><span class="line">    - 注意: `filter()`返回的是一个`Iterator`, 即一个惰性序列, 所以要使用`list()`函数来强迫`filter()`完成计算结果</span><br><span class="line">- 切片补充</span><br><span class="line">    - L[10:20:2]: 前10-20个数中, 每两个娶一个</span><br><span class="line">    - L[:50:5]: 前50的数中, 每五个取yige</span><br><span class="line">    - L[::-1]: 反转列表</span><br><span class="line">        - 小结: 从L[::-1]可以看出, 每n个数取一个的本质是从给定下标开始每次前进n个下标,取一个数. 而L[::-1]则每次需要前进-1个下标, 即从起点下标0开始, 第一次前进-1个下标, 到下标-1, 而python中规定, 下标-1表示为倒数第一个数, 以此类推, 则L[::-1]可取到反转的列表</span><br><span class="line">- sorted</span><br><span class="line">        - `sorted()`函数可以接收一个`key`来实现自定义的排序</span><br><span class="line">        使用`sorted()`函数排序的关键在于实现一个映射函数.</span><br><span class="line">        - 练习</span><br><span class="line">            - 问题: 假设我们用一组tuple表示学生名字和成绩：</span><br><span class="line">            L = [(&apos;Bob&apos;, 75), (&apos;Adam&apos;, 92), (&apos;Bart&apos;, 66), (&apos;Lisa&apos;, 88)]</span><br><span class="line">            请用sorted()对上述列表分别按名字和成绩高低排序</span><br><span class="line">            - 答案:</span><br></pre></td></tr></table></figure>
+<pre><code># 名字排序
+L = [(&apos;Bob&apos;, 75), (&apos;Adam&apos;, 92), (&apos;Bart&apos;, 66), (&apos;Lisa&apos;, 88)]
+def by_name(t):
+    return t[0]
+L2 =sorted(L, key=by_name, reverse=True)
+print(L2)
+
+#成绩高低排序
+L = [(&apos;Bob&apos;, 75), (&apos;Adam&apos;, 92), (&apos;Bart&apos;, 66), (&apos;Lisa&apos;, 88)]
+def by_name(t):
+    return t[1]
+L2 =sorted(L, key=by_name, reverse=True)
+print(L2)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 返回函数</span><br><span class="line">    - 解释: 高阶函数除了可以接受函数作为参数外, 还可以把函数作为结果值返回.</span><br><span class="line">    - 例子</span><br></pre></td></tr></table></figure>
+</code></pre><p>  def lazy_sum(*args):</p>
+<pre><code>def sum():
+    ax = 0
+    for n in args:
+        ax = ax + n
+    return ax
+return sum
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当我们调用`lazy_sum()`时, 返回的并不是求和结果, 而是求和函数:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f = lazy_sum(1,3,5,7,9)<br>f<br>  &lt;function lazy_sum.<locals>.sum at 0x101c6ed90&gt;</locals></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">调用函数`f`时, 才真正计算求和的结果:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f()<br>  25</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    在这个例子中, 我们在函数`lazy_sum`中定义了函数`sum`, 并且, 内部函数`sum`可以引用外部函数`lazy_sum`的参数和局部变量, 当`lazy_sum`返回函数`sum`时, 相关参数和变量都保存在返回的函数中, 这种称为&quot;闭包(Closure)&quot;的程序结构具有极大的威力.</span><br><span class="line">    - 注意, 当我们调用`lazy_sum()`时, 每次调用都会返回一个新的函数, 即使传入相同的参数</span><br><span class="line">- 注意: &lt;span style=&quot;background-color:blue&quot;&gt;返回的函数并没有立即执行, 而是直到调用了`f()`才执行. 例:&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>  def count():</p>
+<pre><code>fs = []
+for i in range(1, 4):
+    def f():
+        return i*i
+    fs.append(f)
+return fs
+</code></pre><p>  f1, f2, f3 = count()</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在上面的例子中, 每次循环, 都创建了一个新的函数, 然后, 把创建的3个函数都返回了.</span><br><span class="line">你可能认为调用`f1()`, `f2()`, `f3()`结果应该是`1`, `4`, `9`, 但实际结果全部是`9`, 正好呼应了本段开头所说的</span><br><span class="line">因此牢记一点:</span><br><span class="line">- &lt;span style=&quot;background-color:blue&quot;&gt;返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。&lt;/span&gt;</span><br><span class="line">- 如果一定要引用循环变量怎么办? 方法是再创建一个函数, 用该函数的参数绑定循环变量当前的值, 无论该循环变量如何更改, 已绑定到函数参数的值不变:</span><br></pre></td></tr></table></figure>
+<pre><code>def count():
+    def f(j):
+        def g():
+            return j*j
+        return g
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i)) #
+    return fs
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        缺点是代码较长, 可利用lambda函数缩短代码.</span><br><span class="line">- 练习: 利用闭包返回一个计数器函数, 每次调用它返回递增整数</span><br><span class="line">    - 答案:</span><br></pre></td></tr></table></figure>
+
+def createCounter():
+    n = 0
+    def counter():
+        nonlocal n
+        return n += 1
+    return counter
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        - 小结: 由于闭包的作用, 在createCounter执行完成后, 闭包使得Python的垃圾回收机制不会收回createCounter所占createCounter的内部函数counter的执行需要依赖createCounter中的变量, 因此在函数createCounter返回后, n的值始终存在, 这样每次执行counterA=createCounter(), n都会+1</span><br><span class="line">- 匿名函数</span><br><span class="line">    - 表示形式: 关键词`lambda`表示匿名函数, 冒号前的`x`表示函数参数, 例如:</span><br></pre></td></tr></table></figure>
+</code></pre><p>  lambda x: x * x</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">相当于</span><br></pre></td></tr></table></figure>
+<p>  def f(x)</p>
+<pre><code>return x * x
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    - 限制: 只能有一个表达式, 不用写`return`, 返回值就是该表达式的结果.</span><br><span class="line">- 装饰器</span><br><span class="line">    - 解释</span><br><span class="line">        - 设置一个函数</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;&gt; def now():
+...     print(&apos;2015-3-25&apos;)
+...
+&gt;&gt;&gt; f = now
+&gt;&gt;&gt; f()
+2015-3-25
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">现在, 假设我们要增强`now()`函数的功能, 比如, 在函数调用前后自动打印日志, 但又不希望修改函数的定义, 这种在代码运行期间动态增加功能的方式, 称之为&quot;装饰器&quot;(Decorator).      </span><br><span class="line">本质上, decorator就是一个返回函数的高阶函数. 所以我们可以这样定义能打印日志的decorator:</span><br></pre></td></tr></table></figure>
+
+def log(func):
+    def wrapper(*args, **kw):
+        print(&apos;call %s():&apos; % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`log`是一个decorator, 可以接受一个函数作为参数, 并返回一个函数        </span><br><span class="line">利用Python的@语法, 把decorator置于函数的定义处:</span><br></pre></td></tr></table></figure>
+
+@log
+def now():
+    print(&apos;2015-3-25&apos;)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">调用now()的结果是:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; now()
+call now():
+2015-3-25
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把`@long`放到`now()`函数的定义处, 相当于执行了语句:</span><br></pre></td></tr></table></figure>
+
+now = log(now)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        从结果可以看出, func在`wrapper`函数中的__name__属性还是now, 但在`log`这个decorator执行完之后, now的__name__属性已经变成了wrapper.</span><br><span class="line">- 进阶</span><br><span class="line">    - decorator本身传入参数</span><br><span class="line">        - 需要编写一个返回decorator的高阶函数, 写出来会更复杂. 比如, 要自定义log的文本:</span><br></pre></td></tr></table></figure>
+
+    def log(text):
+        def decorator(func):
+            def wrapper(*args, **kw):
+                print(&apos;%s %s():&apos; % (text, func.__name__))
+                return func(*args, **kw)
+            return wrapper
+        return decorator
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用法如下:</span><br></pre></td></tr></table></figure>
+
+    @log(&apos;execute&apos;)
+    def now():
+        print(&apos;2015-3-25&apos;)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行结果如下:</span><br></pre></td></tr></table></figure>
+
+    &gt;&gt;&gt; now()
+    execute now():
+    2015-3-25
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">效果是:</span><br></pre></td></tr></table></figure>
+
+    &gt;&gt;&gt; now = log(&apos;execute&apos;)(now)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">            上面的语句首先执行log(&apos;execute&apos;)，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。</span><br><span class="line">- 原始函数的`__name__`等属性</span><br><span class="line">    - 由于`__name__`属性发生变化, 所以需要把原始函数的`__name__`等属性复制到`wrapper()`函数中, 否则, 有些依赖函数签名的代码执行就会出错.</span><br><span class="line">        - `functools.wraps`: 用来解决上述问题</span><br><span class="line">        - 完整的decorator的写法:</span><br></pre></td></tr></table></figure>
+
+    import functools
+
+    def log(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print(&apos;call %s():&apos; % func.__name__)
+            return func(*args, **kw)
+        return wrapper
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">或者针对带参数的decorator:</span><br></pre></td></tr></table></figure>
+
+    import functools
+
+    def log(text):
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kw):
+                print(&apos;%s %s():&apos; % (text, func.__name__))
+                return func(*args, **kw)
+            return wrapper
+        return decorator
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 练习</span><br><span class="line">    - 题目一: 设计一个decorator, 它可作用于任何函数, 并打印该函数的执行时间:</span><br><span class="line">        - 答案:</span><br></pre></td></tr></table></figure>
+
+    import functools
+    import time
+    import datetime
+
+    def log(text):
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kw):
+                begin = datetime.datetime.now()
+                result = func(*args, **kw)
+                end = datetime.datetime.now()
+                print(&apos;%s %s %s&apos; % (func.__name__, text, end - begin))
+                return result
+            return wrapper
+        return decorator
+
+    @log(&apos;的运行时间为:&apos;)
+    def fast(x, y):
+        time.sleep(0.012)
+        print(&apos;fast() run&apos;)
+        return x + y
+
+    print(fast(1, 2))
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 题目一小结: `fast`的实际运行情况是</span><br></pre></td></tr></table></figure>
+
+    fast = log(&apos;的运行时间为:&apos;)(fast)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">                即把`fast`作为参数带入`log`中运行</span><br><span class="line">        - 题目二: 写出一个`@log`的decorator, 是它既支持`@log`又支持`@log(&apos;text&apos;)`</span><br><span class="line">            - 答案: 将`def log(text)`变为`def log(*text)`即可</span><br><span class="line">- 偏函数</span><br><span class="line">    - 作用: `functools.partial`就是帮助我们创建一个偏函数的, 不需要我们自己定义`int2()`, 可以直接使用下面的代码创建一个新的函数`int2`:</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>import functools<br>int2 = functools.partial(int, base=2)<br>int2 = (‘100000’)<br>  64<br>int2 = (‘101010’)<br>  85</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">            所以, 简单总结`functools.partial`的作用就是, 把一个函数的某些参数给固定住, 返回新函数, 调用这个新函数会更简单.</span><br><span class="line">        - 小结: 当函数的参数个数太多, 需要简化时, 使用`functools.partial`可以创建一个新的函数, 这个新函数可以固定住原函数的部分参数, 从而在调用时更简单.</span><br><span class="line">- 模块</span><br><span class="line">    - 产生原因: 随着程序代码越写越多, 在一个文件里代码就会越来越长, 越来越不容易维护. 为了编写可维护的代码, 我们把很多函数分组, 分别放到不同的文件里, 这样, 每个文件包含的代码就相对较少, 很多编程语言都采用这种组织代码的方式. 在Python中, 一个py文件就称之为一个模块(Module).</span><br><span class="line">    - 每个包`package`下面都会有一个`__init__.py`的文件, 这个文件必须存在, 否则Python就把这个目录当成普通目录, 而不是一个包.</span><br><span class="line">    - 总结: </span><br><span class="line">        - 创建自己的模块时, 要注意:</span><br><span class="line">            - 模块名要遵循Python变量命名规范, 不要使用中文/特殊字符;</span><br><span class="line">            - 模块名不要和系统模块名冲突, 最好先查看系统是否已存在该模块, 检查方法是在Python交互环境执行`import abc`, 若成功则说明系统存在此模块.</span><br><span class="line">    - 使用模块</span><br><span class="line">        - 一个`hello`模块, 调用`sys`模块</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p> #!/usr/bin/env python3</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>  ‘ a test module ‘</p>
+<p>  <strong>author</strong> = ‘Michael Liao’</p>
+<p>  import sys</p>
+<p>  def test():</p>
+<pre><code>args = sys.argv
+if len(args)==1:
+    print(&apos;Hello, world!&apos;)
+elif len(args)==2:
+    print(&apos;Hello, %s!&apos; % args[1])
+else:
+    print(&apos;Too many arguments!&apos;)
+</code></pre><p>  if <strong>name</strong>==’<strong>main</strong>‘:</p>
+<pre><code>test() 
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`sys`模块有一个`argv`变量, 用list存储了命令行的所有参数.       </span><br><span class="line">注意最后两行代码:</span><br></pre></td></tr></table></figure>
+<p>  if <strong>name</strong>==’<strong>main</strong>‘:</p>
+<pre><code>test()
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">            当且仅当我们在命令行`hello`模块文件时, Python解释器把特殊变量`__name__`置为`__main__`, 而如果在其它地方导入该`hello`模块时, `if`判断将失效, 因此, 这种`if``测试可以让一个模块通过命令行运行时执行一些额外的代码, 最常见的</span><br><span class="line">    - 作用域</span><br><span class="line">        - 公开变量</span><br><span class="line">            - 正常函数和变量名</span><br><span class="line">            - 类似`__xxx__`的特殊变量</span><br><span class="line">        - 非公开变量</span><br><span class="line">            - 类似`_xxx`和`__xxx`的函数或变量: 不应该被直接引用, 而不是不能被直接引用. 因为Python并没有一种方法可以完全限制访问private函数或变量</span><br><span class="line">        - 编程规范: 外部不需要引用的函数全部定义成private, 只有外部需要引用的函数才定义为public.</span><br><span class="line">- 面对对象编程</span><br><span class="line">    - 类和实例</span><br><span class="line">        - 可以自由地给一个实例变量绑定属性, 比如, 给实例`bart`绑定一个`name`属性:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class Student(object):<br>   pass<br>bart = Student()<br>bart<br>  &lt;<strong>main</strong>.Student object at 0x10a67a590&gt;<br>Student<br>  <class '__main__.student'><br>bart.name = ‘Bart Simpson’<br>bart.name<br>  ‘Bart Simpson’</class></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 绑定属性</span><br><span class="line">    - 由于类可以起到模板的作用, 因此, 可以在创建实例的时候, 把一些我们认为必须绑定的属性强制填写进去, 通过定义一个特殊的`__init__`方法, 在创建实例的时候, 就把`name`, `score`等属性绑上去:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>class Student(object):
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        注意, `__init__`方法的第一个参数永远是`self`, 表示创建的实例本身, 因此, 在`__init__`方法内部, 就可以把各种属性绑定到`self`, 因为`self`就指向创建的实例本身.</span><br><span class="line">- 传送参数</span><br><span class="line">    - 有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去：</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; bart = Student(&apos;Bart Simpson&apos;, 59)
+&gt;&gt;&gt; bart.name
+&apos;Bart Simpson&apos;
+&gt;&gt;&gt; bart.score
+59
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">            和普通的函数相比, 在类中定义的函数只有一点不同, 就是第一个参数永远是实例变量`self`, 而且调用时不用传递该参数.</span><br><span class="line">    - 数据封装</span><br><span class="line">        - 封装数据的函数被称为类的方法</span><br><span class="line">        - 我们从外部看`Student`类, 只需要知道, 创建实例需要给出`name`和`score`, 调用很容易, 但却不用知道内部实现的细节.</span><br><span class="line">    - 小结</span><br><span class="line">        - 类是创建实例的模板，而实例则是一个一个具体的对象，各个实例拥有的数据都互相独立，互不影响</span><br><span class="line">        - 方法就是与实例绑定的函数, 和普通函数不同, 方法可以直接访问实例的数据</span><br><span class="line">        - &lt;span style=&quot;background-color:yellow&quot;&gt;和静态语言不同，Python允许对实例变量绑定任何数据，也就是说，对于两个实例变量，虽然它们都是同一个类的不同实例，但拥有的变量名称都可能不同：&lt;/span&gt;</span><br><span class="line">- 访问限制</span><br><span class="line">    - 限制修改属性</span><br><span class="line">        - 例: 从前面Student类的定义来看, 外部代码可以自由修改一个实例的`name`/`score`属性:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; bark = Student(&apos;Bart Simpson&apos;, 59)
+&gt;&gt;&gt; bart.score
+59
+&gt;&gt;&gt; bart.score = 99
+&gt;&gt;&gt; bart.score
+99
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        如果要让内部属性不被外部访问, 可以把属性的名称前加两个下划线`__`, 在Python中, 实例的变量名如果以`__`开头, 就变成了一个私有变量(private), 只有内部可以访问.</span><br><span class="line">- 允许获取属性</span><br><span class="line">    - 如果外部代码要获取name和score怎么办? 可以给Student类增加`get_name`和`get_score`的方法</span><br><span class="line">- 允许修改属性</span><br><span class="line">    - 可以再给Student类增加`set_score`方法</span><br><span class="line">    改后的Student类如下:</span><br></pre></td></tr></table></figure>
+</code></pre><p>  class Student(object):</p>
+<pre><code>def __init__(self, name, score):
+    self.__name = name
+    self.__score = score
+
+def print_score(self):
+    print(&apos;%s: %s&apos; % (self._name, self._score))
+
+def get_name(self):
+    return self.__name
+
+def get_score(self):
+    return self.__score
+
+def set_score(self):
+    self._score = score
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- 继承和多态</span><br><span class="line">    - 继承</span><br><span class="line">        - 解释: 在OOP程序设计中, 当我们定义一个class的时候, 可以从某个现有的class继承, 新的class称为子类(Subclass), 而被继承的class称为基类/父类或超类(Base class/Super class).</span><br><span class="line">    - 多态</span><br><span class="line">        - 解释: 当子类和父类都存在相同的`method()`方法时, 我们说, 子类的`method()`覆盖了父类的`method()`, 在代码运行的时候, 总是会调用子类的`method()`. 这样, 我们就获得了继承的另一个好处: 多态.</span><br><span class="line">        - 作用: 调用方只管调用, 不管细节, 而当我们新增一种`Animal`的子类时, 只要确保`run()`方法编写正确, 不用管原来的代码是如何调用的. 这就是著名的&quot;开闭&quot;原则: </span><br><span class="line">            - 对扩展开放: 允许新的`Animal`子类</span><br><span class="line">            - 对修改封闭: 不需要修改依赖`Animal`类型的`run_twice()`等函数</span><br><span class="line">        - 示例代码:</span><br></pre></td></tr></table></figure>
+<pre><code>class Animal(object):
+    def run(self):
+        print(&apos;Animal is running...&apos;)
+
+class Dog(Animal):
+    def run(self):
+        print(&apos;Dog is running...&apos;)
+    def eat(self):
+        print(&apos;Eating meat...&apos;)
+class Cat(Animal):
+    def run(self):
+        print(&apos;Cat is running...&apos;)
+class Fish(Animal):
+    pass
+
+def run_twice(animal):
+    animal.run()
+    animal.run()
+run_twice(Fish())
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    - 静态语言 vs 动态语言</span><br><span class="line">        - &lt;span style=&apos;background-color: yellow&apos;&gt;动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。&lt;/span&gt;</span><br><span class="line">- 获取对象信息</span><br><span class="line">    - 使用type(): 判断基本类型</span><br><span class="line">        - 如果一个变量指向函数或者类, 也可以用`type()`判断</span><br><span class="line">        - 判断对象是否是函数: 可以使用`types`模块中定义的常量:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; import types
+&gt;&gt;&gt; def fn():
+...     pass
+...
+&gt;&gt;&gt; type(fn)==types.FunctionType
+True
+&gt;&gt;&gt; type(abs)==types.BuiltinFunctionType
+True
+&gt;&gt;&gt; type(lambda x: x)==types.LambdaType
+True
+&gt;&gt;&gt; type((x for x in range(10)))==types.GeneratorType
+True
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- getattr()/setattr()/hasattr(): 通过上述方法, 我们可以直接操作一个对象的状态:</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>class MyObject(object):<br>  …     def <strong>init</strong>(self):<br>  …         self.x = 9<br>  …     def power(self):<br>  …         return self.x * self.x<br>  …<br>obj = MyObject()<br>hasattr(obj, ‘x’) # 有属性’x’吗？<br>  True<br>obj.x<br>  9<br>hasattr(obj, ‘y’) # 有属性’y’吗？<br>  False<br>setattr(obj, ‘y’, 19) # 设置一个属性’y’<br>hasattr(obj, ‘y’) # 有属性’y’吗？<br>  True<br>getattr(obj, ‘y’) # 获取属性’y’<br>  19<br>obj.y # 获取属性’y’<br>  19</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- 实例属性和类属性</span><br><span class="line">    - 类属性: 类本身的属性, 可以直接在class中定义,</span><br><span class="line">        - 当我们定义了一个类属性后, 这个属性虽然归类所有, 但类的所有实例都可以访问到.</span><br><span class="line">    - 注意: 千万不要对实例属性和类属性使用相同的名字, 因为相同名字的实例属性将屏蔽掉类属性</span><br><span class="line">    - 练习</span><br><span class="line">        - 题目: 为了统计学生人数，可以给Student类增加一个类属性，每创建一个实例，该属性自动增加</span><br><span class="line">        - 答案:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>class Student(object):
+count = 0
+def __init__(self, name):
+    self.name = name
+    Student.count += 1
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 关于`Class.attr`和`self.attr`的一点思考:      </span><br><span class="line">    在上述类中, 如果将第五行`Student.count`改为`self.count`, 则结果为</span><br></pre></td></tr></table></figure>
+
+bart = Student(&apos;Bart&apos;)
+print(Student.count)
+alex = Student(&apos;Alex&apos;)
+print(Student.count)
+grey = Student(&apos;Grey&apos;)
+print(Student.count)
+0
+0
+0
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因: `self`指向的是调用类的实例(如:`bart`/`alex`/`grey`)而不是`Student`类, 实例的count属性继承至类的count属性, 而实例的count属性改变不会引起类的count属性的改变, 但类的count属性的改变会引起实例的count属性的改变, 看下面的例子:</span><br></pre></td></tr></table></figure>
+
+class Student(object):
+    count = 0
+    def __init__(self, name):
+        self.name = name
+        Student.count += 1
+        self.count += 1
+bart = Student(&apos;Bart&apos;)
+print(Student.count)
+print(bart.count)
+alex = Student(&apos;Alex&apos;)
+print(Student.count)
+print(alex.count)
+grey = Student(&apos;Grey&apos;)
+print(Student.count)
+print(grey.count)
+1
+2
+2
+3
+3
+4
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">                为何会有这样的结果呢? 因为每新建一个实例, self的count属性都会复制类的count属性, 并且类的count属性和self的count属性都+1, 所以当调用`self.count`在`Class.count`之后是, 每次打印会比`Class.count`多1</span><br><span class="line">                - 小结: </span><br><span class="line">                    1. `self`对象指向的是调用它的实例</span><br><span class="line">                    2. 实例的属性继承自类的属性, 并且实例的属性是继承自定义实例属性的那一刻的类的属性</span><br><span class="line">- 面向对象高级编程</span><br><span class="line">    - 解释: 数据封装/继承/多态只是OOP设计中最基本的3个概念. 在Python中, OOP还有很多高级特性, 允许我们写出非常强大的功能, 如: 多重继承/定制类/元类等概念</span><br><span class="line">    - 动态语言 vs 静态语言</span><br><span class="line">        - 动态语言(Dynamically Typed Language)</span><br><span class="line">            - 特性: 程序在运行时可以改变其结构：新的函数可以被引进，已有的函数可以被删除等在结构上的变化，类型的检查是在运行时做的</span><br><span class="line">        - 静态语言(Statically Typed Language)</span><br><span class="line">            - 特性: 在运行前编译时检查类型。在写代码时，没声明一个变量必须指定类型. 无法在运行时改变其结构</span><br><span class="line">        - 优缺点: 静态类型语言的主要优点在于其结构非常规范，便于调试，方便类型安全；缺点是为此需要写更多的类型相关代码，导致不便于阅读、不清晰明了。动态类型语言的优点在于方便阅读，不需要写非常多的类型相关的代码；缺点自然就是不方便调试，命名不规范时会造成读不懂，不利于理解等。顺便说一下，现在有这样一种趋势，那就是合并动态类型与静态类型在一种语言中，这样可以在必要的时候取长补短，Boo就是一个很好的试验性例子.</span><br><span class="line">    - 使用`__slots__`       </span><br><span class="line">        - 为类动态绑定方法: 例:</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>def set_score(self, score):<br>  …     self.score = score<br>  …</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    给class绑定方法后, 所有实例都可调用</span><br><span class="line">    &gt;&gt;&gt; Student.set_score = set_score  </span><br><span class="line">为了限制实例的属性, Python允许在定义class的时候, 定义一个特殊的`__slots__`变量, 来限制该class实例能添加的属性. 例:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>class Student(object):<br>  <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    使用`__slots__`要注意, 其定义的属性仅对当前类的实例起作用, 对继承的子类不起作用</span><br><span class="line">- 使用@property</span><br><span class="line">    - 解释: 通过`set_score()`和`get_score()`方式的调用方法略显复杂, 没有直接用属性这么直接简单.</span><br><span class="line">    `@property`可以实现既能检查参数, 又可以用类似属性这么简单的方式来访问类的变量.</span><br><span class="line">    只需要加上`@property`就可以了, 此时, `@property`本身又创建了另一个装饰器`@score.setter`, 负责把一个setter方法编程属性赋值, 于是, 我们就拥有一个可控的属性操作:</span><br></pre></td></tr></table></figure>
+<p>class Student(object):</p>
+<p>  @property<br>  def score(self):</p>
+<pre><code>return self._score
+</code></pre><p>  @score.setter<br>  def score(self, value):</p>
+<pre><code>if not isinstance(value, int):
+    raise ValueError(&apos;score must be an integer!&apos;)
+if value &lt; 0 or value &gt; 100:
+    raise ValueError(&apos;score must between 0 ~ 100!&apos;)
+self._score = value
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student()<br>s.score = 60 # OK，实际转化为s.set_score(60)<br>s.score # OK，实际转化为s.get_score()<br>60<br>s.score = 9999<br>Traceback (most recent call last):<br>…<br>ValueError: score must between 0 ~ 100!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">还可以定义只读属性, 即: 只定义getter()方法, 不定义setter方法就是一个只读属性:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>class Student(object):</p>
+<p>  @property<br>  def birth(self):</p>
+<pre><code>return self._birth
+</code></pre><p>  @birth.setter<br>  def birth(self, value):</p>
+<pre><code>self._birth = value
+</code></pre><p>  @property<br>  def age(self):</p>
+<pre><code>return 2015 - self._birth
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">上面的`birth`是可读写属性, 而`age`就是`只读`属性, 因为`age`可以根据`birth`和当前时间计算出来</span><br><span class="line">- 练习</span><br><span class="line">    - 题目: 请利用@property给一个Screen对象加上width和height属性，以及一个只读属性resolution</span><br><span class="line">    - 答案:</span><br></pre></td></tr></table></figure>
+<pre><code>class Screen(object):
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        self._width = value
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, value):
+        self._height = value
+
+    @property
+    def resolution(self):
+        return self._width * self._height
+
+s = Screen()
+s.width = 1024
+s.height = 768
+print(s.resolution)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- 多重继承</span><br><span class="line">    - 作用: 通过多重继承, 一个子类可以同时获得多个父类的所有功能           </span><br><span class="line">    - MixIn: 在设计类的继承关系时, 通常, 主线都是单一继承下来的, 例如, `Ostrich`继承自`Bird`. 但是, 如果需要&quot;混入&quot;额外的功能, 通过多重继承就可以实现. 这种设计通常称之为MixIn.</span><br><span class="line">        - 一个子类可以拥有多个MixIn</span><br><span class="line">        - 只允许单一继承的语言(如Java)不能使用MixIn的设计</span><br><span class="line">- 定制类</span><br><span class="line">    - 注意: 看到类似`__slots__`这种变量或者函数名就要注意, 这些在Python中都有特殊用途.</span><br><span class="line">    - __str__()</span><br><span class="line">        - 作用: 自定义返回实例时的打印信息</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; class Student(object):
+...     def __init__(self, name):
+...         self.name = name
+...     def __str__(self):
+...         return &apos;Student object (name: %s)&apos; % self.name
+...
+&gt;&gt;&gt; print(Student(&apos;Michael&apos;))
+Student object (name: Michael)
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果不是使用`print`, 而是在命令行中直接敲变量, 打印出来的实例还是不好看:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; s = Student(&apos;Michael&apos;)
+&gt;&gt;&gt; s
+&lt;__main__.Student object at 0x00000213EE9C27B8&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原因: 直接显示变量调用的不是`__str__()`而是`__repr__()`, 两者的区别是前者返回用户看到的字符串, 后者返回程序开发者看到的字符串.</span><br><span class="line">- 解决方法: 添加一行:</span><br></pre></td></tr></table></figure>
+
+    __repr__ = __str__
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- __iter__(): 如果一个类想被用于for ... in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。     </span><br><span class="line">以斐波那契(Fibonacci)为例, 写一个Fib类, 可以作用于for循环:</span><br></pre></td></tr></table></figure>
+</code></pre><p>  class Fib(object):</p>
+<pre><code>def __init__(self):
+    self.a, self.b = 0, 1
+def __iter__(self):
+    return self
+def __next__(self):
+    self.a, self.b = self.b, self.a + self.b
+    if self.a &gt; 100000:
+        raise StopIteration()
+    return self.a
+</code></pre><p>  for n in Fib():</p>
+<pre><code>print(n)
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- __getitem__(): Fib实例虽然可以作用于for循环, 看起来和list有点像, 但是, 不行, 比如, 取第5个元素:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Fib()[5]<br>  Trackback (most recent call last):</p>
+<pre><code>File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+</code></pre><p>  TypeError: ‘Fib’ object does not support indexing</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">要想按下标取元素, 需要实现`__getitem()__`方法:</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>  class Fib(object):</p>
+<pre><code>def __getitem__(self, n):
+    a, b = 1, 1
+    for x in range(n):
+        a, b = b, a + b
+    return a
+</code></pre><p>  f = Fib()<br>  print(f[0])<br>  print(f[1])<br>  print(f[2])<br>  print(f[3])</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">结果为:</span><br></pre></td></tr></table></figure>
+<p>  1<br>  1<br>  2<br>  3</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">但list有一个神奇的切片方法</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>list(range(100))[5:10]<br>  [5,6,7,8,9]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于Fib却报错. 原因是`__getitem__()`传入的参数需要我们做判断并且写出判断后的处理方法</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>  class Fib(object):</p>
+<pre><code>def __getitem__(self, n):
+    if isinstance(n, int):
+        a, b = 1, 1
+        for x in range(n):
+            a, b = b, a + b
+        return a
+    if isinstance(n, slice):
+        start = n.start
+        stop = n.stop
+        if start is None:
+            start = 0
+        a, b = 1, 1
+        L = []
+        for x in range(stop):
+            if x &gt;= start:
+                L.append(a)
+            a, b = b, a + b
+        return L
+</code></pre><p>  f = Fib()<br>  print(f[0:5])</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    如果需要其它功能, 可以继续自定义. 如: 对step参数进行处理/对负数进行处理</span><br><span class="line">    与之对应的还有`__setitem__()`方法和`__delitem__()`方法</span><br><span class="line">- __getattr__(): 可以动态返回一个属性</span><br><span class="line">    - 注意: </span><br><span class="line">        - 只有找不到属性才会调用`__getattr__()`</span><br><span class="line">        - 如果调用其它没有的函数, 不会报错, 而会返回None, 因为`__getattr__()`默认返回None. 为了让class只响应特定的几个属性, 对其它属性报错, 我们要按照正常属性缺失错误一样, 抛出`AttributeError`:</span><br></pre></td></tr></table></figure>
+<pre><code>class Student(object):
+
+    def __getattr__(self, attr):
+        if attr==&apos;age&apos;:
+            return lambda: 25
+        raise AttributeError(&apos;\&apos;Student\&apos; object has no attribute \&apos;%s\&apos;&apos; % attr)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        这实际上可以把一个类的所有属性和方法调用全部动态化处理了.</span><br><span class="line">- &lt;span style=&quot;background-color: red&gt;关于`__getattr__()`的链式调用的应用的一点解析&lt;/span&gt;</span><br><span class="line">    - 实例: 现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</span><br><span class="line"></span><br><span class="line">        http://api.server/user/friends</span><br><span class="line">        http://api.server/user/timeline/list</span><br><span class="line">        如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</span><br><span class="line"></span><br><span class="line">        利用完全动态的__getattr__，我们可以写出一个链式调用：</span><br></pre></td></tr></table></figure>
+
+class Chain(object):
+
+    def __init__(self, path=&apos;&apos;):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain(&apos;%s/%s&apos; % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">尝试:</span><br></pre></td></tr></table></figure>
+
+&gt;&gt;&gt; Chain().status.user.timeline.list
+&apos;/status/user/timeline/list&apos;    
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 疑问: Chain().status.user.timeline.list在类Chain()内部是如何工作的才导致输出为: </span><br><span class="line">    &apos;/status/user/timeline/list&apos;?</span><br><span class="line">- 解析: </span><br><span class="line">    1. 只分析一层属性和两层属性, 即: `Chain().status`与`Chain().status.user`. 在类Chain()中添加print, 新代码如下:</span><br></pre></td></tr></table></figure>
+
+    class Chain(object):
+
+        def __init__(self, path=&apos;&apos;):
+            self._path = path
+            print(&quot;init path is:&quot; + self._path)
+
+        def __getattr__(self, path):
+            print(&quot;get path is:&quot; + path)
+            return Chain(&apos;%s/%s&apos; % (self._path, path))
+
+        def __str__(self):
+            return self._path
+
+        __repr__ = __str__
+    # print(c)
+    print(&apos;---------------------------&apos;)
+    print(Chain().status)
+    print(&apos;---------------------------&apos;)
+    print(Chain().status.user)
+    print(&apos;---------------------------&apos;)
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 结果是:</span><br></pre></td></tr></table></figure>
+
+    ---------------------------
+    init path is:
+    get path is:status
+    init path is:/status
+    /status
+    ---------------------------
+    init path is:
+    get path is:status
+    init path is:/status
+    get path is:user
+    init path is:/status/user
+    /status/user
+    ---------------------------
+    ```
+3. 分析结果: 
+    1. `print(Chain().status)`经历了两次`__init__`, 再结合源代码中的`return Chain(&apos;%s/%s&apos; % (self._path, path))`分析, 可知: `Chain`的新实例的`status`属性触发`__getattr__`方法, 而该方法对`Chain()`新实例进行了递归操作, 带入新实例的值为`/status`. 此时, 新实例二没有属性, 因此不会调用`__getattr__`方法. 而`print(Chain(&apos;/status&apos;))`会调用`__str__`方法显示参数`path`即`/status`
+    2. `print(Chain().status.user)`: `1`中的新实例二会在`2`中拥有属性`user`, 再次调用`__getattr__`, `*.user`之后的属性会再再次调用`__getattr__`, 从而打印出相应路径
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

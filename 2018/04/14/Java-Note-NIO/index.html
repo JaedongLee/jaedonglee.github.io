@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="核心部分
+Channels
+Buffers
+Selectors
+其它部分不过是一些工具类而已
+
+
+Channel
+所有的IO在NIO中都从一个Channel开始, Channel有点像流. 数据可以从Channel读到Buffer中, 也可以从Buffer写到Channel中
+主要的Channel实现">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Note-NIO">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Java-Note-NIO - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/04/14/Java-Note-NIO/">
+                Java-Note-NIO
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-14</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li>核心部分<ul>
+<li>Channels</li>
+<li>Buffers</li>
+<li>Selectors</li>
+<li>其它部分不过是一些工具类而已</li>
+</ul>
+</li>
+<li>Channel<ul>
+<li>所有的IO在NIO中都从一个Channel开始, Channel有点像流. 数据可以从Channel读到Buffer中, 也可以从Buffer写到Channel中</li>
+<li>主要的Channel实现<a id="more"></a><ul>
+<li>FileChannel: 从文件中读取数据</li>
+<li>DatagramChannel: 通过UDP读写网络中的数据</li>
+<li>SocketChannel: 通过TCP读写网络中的数据</li>
+<li>ServerSocketChannel: 监听新进来的TCP连接, 对每个新进来的连接都会创建一个SocketChannel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Buffer: 用于和Channel进行交互. 数据是从通道读入缓冲区, 从缓冲区写入通道.</p>
+<ul>
+<li>本质: 缓冲区本质上是一块可以写入数据, 然后可以从中读取数据的内存. 这块内存被包装成NIO Buffer对象, 并提供一组方法, 用来方便的访问该块内存</li>
+<li>主要的Buffer实现<ul>
+<li>ByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffer</li>
+</ul>
+</li>
+<li>当向buffer写入数据时, buffer会记录写下了多少数据. 一旦要读取数据, 需要通过flip()方法将Buffer从写模式切换到读模式. 在读模式下, 可以赌气之前写入到buffer的所有数据</li>
+<li>一旦读完了所有数据, 就需要清空缓冲区, 让它可以再次被写入. 有两种方式能请清空缓冲区: 调用clear()/compact()方法. clear()方法会清空整个缓冲区, compact()方法只会清除已经读过的数据, 任何未读的数据都被移到缓冲区的起始处, 新写入的数据将放到缓冲区未读数据的后面</li>
+<li>Buffer的三个属性<ul>
+<li>capacity: 作为一个内存块, Buffer有一个固定的大小值, <code>你只能往里写capacity个byte, long, char等类型</code>. 一旦Buffer满了, 需要将其清空(通过读数据或清除数据)才能继续往里写数据</li>
+<li>position: <ul>
+<li>写数据: position表示当前的位置. 最大可为capacity-1</li>
+<li>读数据: 当Buffer从写模式切换到读模式, position会被重置为0. 当从Buffer的position处读取数据时, position向前移动到下一个可读的位置</li>
+</ul>
+</li>
+<li>limit:<ul>
+<li>写模式: limit == capacity</li>
+<li>读模式: limit == 写数据时的position值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Buffer的分配: 想获得一个Buffer对象首先要进行分配. 每一个Buffer类都有一个allocate方法. <ul>
+<li>例子<ol>
+<li>分配48个字节capacity的ByteBuffer的例子: <code>ByteBuffer buf = ByteBuffer.allocate(48)</code></li>
+<li>分配1024个字符的CharBuffer的例子: <code>CharBuffer buf = CharBuffer.allocate(1024)</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>向Buffer中写数据<ul>
+<li>方式<ol>
+<li>从Channel写到Buffer</li>
+<li>通过Buffer的put()方法写到Buffer里(可以自由操纵每一个单位)</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>flip()方法: flip方法将Buffer从写模式切换到读模式. 调用flip()方法会将position设为0, 并将limit设置成之前position的值</li>
+<li>从Buffer中读取数据<ul>
+<li>方式<ol>
+<li>从Buffer读取数据到Channel<ul>
+<li>例子: <code>int bytesWritten = inChannel.write(buf)</code></li>
+</ul>
+</li>
+<li>使用get()方法从Buffer中读取数据<ul>
+<li>例子: <code>byte aByte = buf.get()</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>rewind()方法: Buffer.rewind()将position设为0, 使用户可以重读Buffer中的所有数据. limit保持不变, 仍然表示能从Buffer中读取多少个元素</li>
+<li>clear()与compact()方法: 一旦读完Buffer中的数据, 需要让Buffer准备好再次被写入. 可以通过clear()或compact()方法来完成<ul>
+<li>clear(): position将被设为0, limit被设置为capacity的值. 换句话说, Buffer被清空了. Buffer中的数据并未清除, 只是这些标记告诉我们可以从哪里开始往Buffer里写数据. 如果Buffer中有未读的数据, 调用clear()方法, 数据将被遗忘, 意味着不再有任何标记会告诉你哪些数据被读过, 哪些还没有. 如果Buffer中仍有未读的数据, 且后续还需要这些数据, 但是此时想要先写些数据, 那么使用compact()方法</li>
+<li>compact(): 将所有未读的数据拷贝到Buffer起始处. 然后将position设到最后一个未读元素正后面. limit属性依然像clear()方法一样, 设置成capacity. 现在Buffer准备好写数据了, 但是不会覆盖未读的数据.</li>
+</ul>
+</li>
+<li><p>mark()与reset()方法: 通过调用Buffer.mark()方法, 可以标记Buffer中的一个特定position. 之后可以通过调用Buffer.reset()方法恢复到这个position. </p>
+<pre><code>- 例子: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buffer.mark();</span><br><span class="line">// call buffer.get() a couple of times, e.g. during parsing</span><br><span class="line">buffer.reset();</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>equals()与compareTo()方法</p>
+<ul>
+<li>equals(): 当满足下列条件时, 表示两个Buffer相等:<ol>
+<li>有相同的类型(byte/char/int等)</li>
+<li>Buffer中剩余的byte/char等的个数相等</li>
+<li>Buffer中所有剩余的byte/char相同</li>
+</ol>
+<ul>
+<li>注: 剩余元素是从position到limit之间的元素</li>
+<li>如上所言, equals只是比较Buffer的一部分, 不是每一个在它里面的元素都比较. 实际上, 它只比较Buffer中的剩余元素</li>
+</ul>
+</li>
+<li>compareTo()方法: 比较两个Buffer的剩余元素(byte/char等), 如果满足下列条件, 则认为一个Buffer”小于”另一个Buffer<ol>
+<li>第一个不相等的元素小于另一个Buffer中对应的元素</li>
+<li>所有元素都相等, 但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Selector</p>
+<ul>
+<li>Selector允许单线程处理多个Channel. 如果应用打开了多个连接(通道), 但每个连接的流量都很低, 使用Selector就会很方便. 例如, 在一个聊天服务器中</li>
+<li>为什么使用Selector: 仅用单个线程来处理多个Channels的好处是，只需要更少的线程来处理通道。事实上，可以只用一个线程处理所有的通道。对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）。因此，使用的线程越少越好。</li>
+<li><p>使用Selector: </p>
+<ol>
+<li><p>创建一个Selector:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Selector selector = Selector.open();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向Selector注册Channel</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">channel.configureBlocking(false);</span><br><span class="line">SelectionKey key = channel.register(selector, SelectionKey.OP_READ);</span><br></pre></td></tr></table></figure>
+<p>与Selector一起使用时, Channel必须处于非阻塞模式. 这意味着不能将FileChannel与Selector一起使用, 因为FileChannel不能切换到非阻塞模式. 而套接字通道可以</p>
+</li>
+</ol>
+<ul>
+<li><p>注意register()方法的第二个参数. 这是一个”interest集合”, 意思是在通过Selector监听Channel时对什么事件感兴趣. 可以监听四种不同类型的事件:</p>
+<ol>
+<li>Connect</li>
+<li>Accept</li>
+<li>Read</li>
+<li>Write</li>
+</ol>
+<ul>
+<li>这四种事件用SelectionKey的四个常量来表示:<ol>
+<li>SelectionKey.OP_CONNECT</li>
+<li>SelectionKey.OP_ACCEPT</li>
+<li>SelectionKey.OP_READ</li>
+<li>SelectionKey.OP_WRITE</li>
+</ol>
+<ul>
+<li>如果对不止一种事件感兴趣, 那么可以用”位或”操作符将常量连接起来, 如下: <code>int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE</code></li>
+</ul>
+</li>
+<li><p>SelectionKey: </p>
+<ul>
+<li><p>当向Selector注册Channel时, register()方法会返回一个SelectionKey对象. 这个对象包含了一些你感兴趣的属性:</p>
+<ul>
+<li><p>interest集合: 所选择的感兴趣的事件集合. 可以通过SelectionKey读写interest集合, 像这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int interestSet = selectionKey.interestOps();</span><br><span class="line">boolean isInterstedInAccept = (interestSet &amp; SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT;</span><br><span class="line">boolean isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT;</span><br><span class="line">boolean isInterestedInRead = interestSet &amp; SelectionKey.OP_READ;</span><br><span class="line">boolean isInterestedInWrite = interestSet &amp; SelectionKey.OP_WRITE;</span><br></pre></td></tr></table></figure>
+<p>可以看出, 用”位与”操作interest集合和给定的SelectionKey常量, 可以确定某个确定的事件是否在interest集合中</p>
+</li>
+<li><p>ready集合: 已准备就绪的通道的集合(interest集合中的), 可以这样访问ready集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int readySet = selectionKey.readyOps();</span><br></pre></td></tr></table></figure>
+<p>检测interest集合可以使用检测interest集合一样的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">selectionKey.isAcceptable();</span><br><span class="line">selectionKey.isConnectable();</span><br><span class="line">selectionKey.isReadable();</span><br><span class="line">selectionKey.isWritable();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Channel</p>
+</li>
+<li>Selector</li>
+<li>附加的对象(可选)</li>
+</ul>
+</li>
+<li><code>当把一个channel注册到指定的Selector上时, 实际上就是将(channel, selector)封装成一个SelectionKey对象, 并将此对象保存在Selector对象中</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>调用它的select()方法, 这个方法会一直阻塞到某个注册的通道有事件就绪. 一旦这个方法返回, 线程就可以处理这些事件, 事件的例子有如新连接进来/数据接收<ul>
+<li>调用select()方法, 会返回所感兴趣的事件(如连接/接受/读或写)已经准备就绪的那些通道.</li>
+<li>重载的select()方法<ul>
+<li>int select(): 保持阻塞知道至少有一个通道在注册的事件上就绪, 返回的int表示注册数</li>
+<li>int select(long timeout): 和select()一样, 除了最长会阻塞timeout毫秒</li>
+<li>int selectNow(): 不会阻塞, 不管什么通道立即返回, 如果没有就绪, 则返回0</li>
+</ul>
+</li>
+<li>selectedKeys()<ul>
+<li>如果调用select()方法后返回的值大于1, 就可以通过调用selector的selectedKeys()方法, 访问”已选择键集(selected key set)”中的就绪通道. 例如: <code>Set selectedKeys = selector.selectedKeys()</code>, 可以遍历这个已选择的键的集合来访问就绪的通道</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/NIO/">#NIO</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

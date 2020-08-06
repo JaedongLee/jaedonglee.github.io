@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="2.1 信息存储  
+2.1.4 表示字符串
+独立性(文本数据/二进制数据)
+文本数据比二进制数据具有更强的平台独立性
+原因: 在使用ASCII码作为字符码的任何系统上都将得到相同的结果">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Charpter Two 信息的表示和处理">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Charpter Two 信息的表示和处理 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/10/24/CSAPP信息的表示和处理/">
+                Charpter Two 信息的表示和处理
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-10-24</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/CSAPP/">CSAPP</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li>2.1 信息存储  <ul>
+<li>2.1.4 表示字符串<ul>
+<li>独立性(文本数据/二进制数据)<ul>
+<li>文本数据比二进制数据具有更强的平台独立性<ul>
+<li>原因: 在使用ASCII码作为字符码的任何系统上都将得到相同的结果         <a id="more"></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.1.6 布尔代数简介<ul>
+<li>位向量<ul>
+<li>定义: 位向量是固定长度为w, 由0和1组成的串</li>
+<li>应用: <ul>
+<li>表示有限集合<ul>
+<li>例:<ul>
+<li>a = [01101001] 表示 A = {0, 3, 5, 6}</li>
+<li>a = [01010101] 表示 A = {0, 2, 4, 6}</li>
+</ul>
+</li>
+<li>布尔运算|和&amp;分别对应于集合A的交与并, 而~对应于集合的补</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分配律:<ul>
+<li>&amp;对|: a&amp;(b|c) = a&amp;b|a&amp;c</li>
+<li>|对&amp;: a|(b&amp;c) = a|b&amp;a|c</li>
+</ul>
+</li>
+<li>加法逆元: <ul>
+<li>a^a = 0</li>
+<li>(a^b)^a = b</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.1.7 C语言中的位级运算<ul>
+<li>掩码:<ul>
+<li>定义: 掩码是一个位模式, 表示从一个字中选出的位的集合</li>
+<li>例: 假设 x = 0xEDFCA3423, x&amp;0xFFLE可以提取出x的最低八位字节, 即提取后的值为: 0X00000023</li>
+</ul>
+</li>
+<li>按位取补: 即按位取反, 运算符为: “~”</li>
+</ul>
+</li>
+<li>2.1.8 C语言中的逻辑运算<ul>
+<li>注意: <ul>
+<li>逻辑运算很容易与位级运算相混淆, 但它们的功能是完全不同的</li>
+<li>逻辑运算认为所有==非零==(包括1)的参数都表示TRUE, 参数0表示FALSE. 它们返回0或者1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.1.9 C语言中的移位运算<ul>
+<li>补充知识: <ul>
+<li>操作数: 操作数是运算符作用于的实体，是表达式中的一个组成部分，它规定了指令中进行数字运算的量</li>
+</ul>
+</li>
+<li>移位运算的结合性<ul>
+<li>移位运算是从左至右可结合的, 所以x&lt;&lt;j&lt;&lt;k == (x&lt;&lt;j)&lt;&lt;k</li>
+<li>右移运算有两种<ul>
+<li>逻辑右移: 左端补上n个0</li>
+<li>算术右移: 左端补上n个最高位</li>
+</ul>
+</li>
+<li>注意: <ul>
+<li>C语言没有明确定义使用哪种类型的右移, 而Java明确规定算术右移使用x&lt;&lt;j, 逻辑右移使用x&lt;&lt;&lt;j</li>
+<li>几乎所有的编译器使用算术右移</li>
+</ul>
+</li>
+<li>移动k位, k大于位数w:<ul>
+<li>C语言未规定, Java明确规定位移数量应该按照我们前面所讲的求模(mod)方法来计算<ul>
+<li>求模方法(mod): 求余数, 特别: 3mod5 = 3</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2 整数表示<ul>
+<li>2.2.1 整数类型数据<ul>
+<li>固定大小数据类型:<ul>
+<li>int32_t/int64_t: 为了平台的可移植性而设计的固定位长的数据类型, 分别为32位/64位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2.2 无符号数的编码<ul>
+<li>定理: 无符号数编码具有唯一性, 即其二进制表示和十进制表示是一一对应的</li>
+<li>中英文对比:<ul>
+<li>补码: two’s-complement</li>
+<li>负权: negative weight<ul>
+<li>解释: 有符号数中字的最高有效位</li>
+</ul>
+</li>
+<li>反码: ones’complement<ul>
+<li>注意: 补码(two’ complement)和反码(ones’complement)中撇号(“‘“)的位置是不同的<ul>
+<li>原因: 见原书P48</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2.4 有符号数和无符号数之间的转换<ul>
+<li>规则(一般): 数值可能会改变, 但是位模式不变<ul>
+<li>当将一个有符号数映射为它相应的无符号数时, 负数会被转换成大的正数, 而非负数会保持不变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2.5 C语言中的有符号数和无符号数<ul>
+<li>默认: 声明整数时, 一般默认是有符号数. 例: 12345<ul>
+<li>无符号常量: 在后面添加”U”或”u”, 例: 12345U</li>
+</ul>
+</li>
+<li>奇特的行为: <pre><code>- 当执行一个运算时, 如果它的一个运算数是==有符号的==而另一个是==无符号的==, 那么C语言会隐式地将有符号参数强制类型转换为无符号数, 并假设这两个数都是非负的
+</code></pre></li>
+</ul>
+</li>
+<li>2.2.6 扩展一个数字的位表示<ul>
+<li>分类<ol>
+<li>无符号数:<ul>
+<li>扩展类型: 零扩展(zero extension)<ul>
+<li>定义: 简单地在数值的开头添加0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>补码数:<ul>
+<li>扩展类型: 符号扩展<ul>
+<li>定义: 在数值的开头添加最高位的值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>类型和大小的同时转换<ul>
+<li>原则(C语言规定): 先进行大小转换再进行类型转换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2.7 截断数字<ul>
+<li>分类: <ol>
+<li>无符号数:<ul>
+<li>原理: 直接截断</li>
+</ul>
+</li>
+<li>补码数: <ul>
+<li>原理: 截断后把最高位转换为符号位</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>2.2.8 关于有符号数和无符号数的建议<ul>
+<li>绝不使用无符号数<ul>
+<li>原因: 有符号数到无符号数的隐式转换会导致错误或漏洞</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.3 整数运算<ul>
+<li>2.3.1 无符号加法<ul>
+<li>原理: 当无符号数之和溢出时, 会丢弃溢出的位</li>
+<li>检测溢出 <ul>
+<li>方法: 对在范围 0&lt;=x, y&lt;=UMax 中,令 s = x + y. 则当且仅当s&lt;x(或等价的s&lt;y)时, 发生溢出<ul>
+<li>推导: 很简单, 利用结果超过UMAx会溢出的特性可轻松求得</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无符号数求反<ul>
+<li>-x = 2^w - x</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.3.2 补码加法<ul>
+<li>原则: 范围必须在 -2^w ~ 2^w 之间</li>
+</ul>
+</li>
+<li>2.3.3 补码的非<ul>
+<li>bug: 由于求反的数是关于0对称的, 而补码的范围则是非对称的(-a &lt;= x &lt; a), 因此在x = -a即x = TMin时, -x不等于 -TMin, 而是由于溢出等于 Tmin</li>
+<li>小贴士: <ul>
+<li>使用一个十六进制数字 a 表示长度w = 4的位模式时, a 里面已经包含了正负号的信息, 所以这个数字一定是非负数 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.3.7 除以2的幂<ul>
+<li>负数除法的偏置<ul>
+<li>在通过移位计算除法时, 需要偏置这个值, 偏置的大小为2^k - 1</li>
+<li>偏移技术的使用范围:<ul>
+<li>偏移技术只适用于负数, 如果用于正数, 则除不尽的结果会比正确值大1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>除以2的幂可以通过逻辑或算术右移来实现, 但这种方法不能推广到除以任何常数</li>
+</ul>
+</li>
+<li>2.3.8 关于整数运算的最后思考<ul>
+<li>计算机执行的”整数”运算实际上是一种模运算形式<ul>
+<li>模运算表示了数字的有限字长限制了可能的值的取值范围, 结果运算可能溢出. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.4.2 IEEE浮点表示<ul>
+<li>表示形式:<ul>
+<li>V = (-1)<sup>s</sup> <em> M </em> 2<sup>E</sup><ul>
+<li>符号(sign): s决定这个数是正还是负, 对数值0做特殊处理</li>
+<li>尾数(significand): M是一个二进制小数, 范围为: 1~2-&epsilon;, 或者0~1-&epsilon;</li>
+<li>阶码(exponent): E的作用是对浮点数加权</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表示形式的编码:<ul>
+<li>一个单独的符号位s直接编码符号s</li>
+<li>k位的阶码字段exp=e<sub>k-1</sub>…e<sub>1</sub>e<sub>0</sub>编码阶码E</li>
+<li>n位小数字段frac=f<sub>n-1</sub>…f<sub>1</sub>f<sub>0</sub>编码尾数M, 但编码的值也依赖于阶码字段的值是否等于0</li>
+</ul>
+</li>
+<li>根据exp的值不同分为的三种情况:<ul>
+<li>情况1: 规格化的值<ul>
+<li>exp不全为0, E = e - Bias, Bias = 2<sup>k-1</sup> - 1, M = 1+ f (0&lt;=f<1>&gt;)</1></li>
+</ul>
+</li>
+<li>情况2: 非规范化的值:<ul>
+<li>exp全为0, E = 1 - Bias, M = f</li>
+</ul>
+</li>
+<li>情况3: 特殊值<ul>
+<li>exp全为1<ul>
+<li>小数域全为0, 表示无穷大</li>
+<li>小数域不为0, 表示”NaN”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>向偶舍入:<ul>
+<li>C语言默认使用向偶舍入</li>
+<li>原则: 舍入到最接近的值, 如进行舍入的值处于两个可能结果的正中间,则按使结果的最低有效数字是偶数的方向舍入</li>
+<li>注意:<ul>
+<li>1.555/2.555在C语言中的舍入结果是不一样的, 前者结果为1.55, 后者结果为2.56<ul>
+<li>原因: 1.555在浮点数中的最精确表示为:1.55499994754791259765625E0, 2.555则为: 2.5550000667572021484375E0. 根据向偶舍入的原则,1.555舍入为1.55, 2.555舍入为2.56</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>必须小心的使用浮点运算, 因为浮点运算只有有限的范围和精度, 而且并不遵守普遍的算术属性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Spring
+
+Spring Mybatis Mapper 报错
+
+问题: 调用dao类方法,如userApplyMapper.updateByPrimaryKeySelective时, 报空指针错误
+分析: 发现
+  123@Autowiredprivate UserMapper userMapper;private UserApplyMapper userApplyMapper;
+  第二个变量userApplyMapper是暗的, 显示Private field &amp;#39;userApplyMapper&amp;#39; is never assigned. 因此推测: 一个@Autowired只能用于一个变量, 将代码改为:
+  12345@Autowiredprivate UserMapper userMapper;@Autowiredprivate UserApplyMapper userApplyMapper;
+  成功
+
+结论: @Autowired只能装配一个变量
+推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Note">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Java-Note - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/01/22/Java-Note/">
+                Java-Note
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-01-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li><p>Spring</p>
+<ul>
+<li><p>Spring Mybatis Mapper 报错</p>
+<ul>
+<li>问题: 调用dao类方法,如<code>userApplyMapper.updateByPrimaryKeySelective</code>时, 报空指针错误</li>
+<li><p>分析: 发现</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private UserMapper userMapper;</span><br><span class="line">private UserApplyMapper userApplyMapper;</span><br></pre></td></tr></table></figure>
+<p>  第二个变量<code>userApplyMapper</code>是暗的, 显示<code>Private field &#39;userApplyMapper&#39; is never assigned</code>. 因此推测: 一个<code>@Autowired</code>只能用于一个变量, 将代码改为:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private UserApplyMapper userApplyMapper;</span><br></pre></td></tr></table></figure>
+<p>  成功</p>
+</li>
+<li>结论: <code>@Autowired</code>只能装配一个变量</li>
+<li>推论: 其它注释也只能装饰一个类或者方法, 这也是必然的.     <a id="more"></a></li>
+</ul>
+</li>
+<li><p>Spring项目报错: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userController&apos;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.service.UserService com.ylxx.custom.controller.UserController.userService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userServiceImple&apos;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.ylxx.custom.dao.UserMapper com.ylxx.custom.service.UserServiceImple.userMapper; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;userMapper&apos; defined in file [E:\Develop\counter\server\counter\out\artifacts\counter\WEB-INF\classes\com\ylxx\custom\dao\UserMapper.class]: Cannot resolve reference to bean &apos;sessionFactory&apos; while setting bean property &apos;sqlSessionFactory&apos;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;sessionFactory&apos; defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.apache.ibatis.type.TypeException: The alias &apos;UserRole&apos; is already mapped to the value &apos;com.ylxx.custom.entity.UserRole&apos;.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分析: 看最后一句<code>The alias &#39;UserRole&#39; is already mapped to the value &#39;com.ylxx.custom.entity.UserRole&#39;.</code>, 意思是<code>UserRole</code>这个名称已经映射到<code>com.ylxx.custom.entity.UserRole</code>上了, 联想到项目中刚加过一个<code>enum</code>: <code>UserRole</code>. 将其换掉后, 项目成功运行.</li>
+<li>总结: 在Spring中, 一个项目里, Java文件的名称是唯一的, 如果文件名相同, 里面的对象的种类不同,如<code>Enum</code>和<code>Class</code>类. 即使编译没问题, 运行时也会报错</li>
+</ul>
+</li>
+<li><p><code>==</code>与<code>equals()</code>的区别</p>
+<ul>
+<li><p>总结: <code>==</code>比较的是对象的引用, 即两个变量是否引用自同一个对象, 而<code>equals()</code>比较的是两个变量的定义, 如果定义相同, 它们就相同, 即使来自不同的对象, 例:</p>
+<ul>
+<li>20180201补充: <code>equals()</code>的实现方式就是<code>==</code>, 所以没区别, 但<code>equals()</code>可以被重写, 从而可以用来比较等价性<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Foo &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo f1 = new Foo(5);</span><br><span class="line">Foo f2 = new Foo(5);</span><br><span class="line">System.out.println(f1 == f2);</span><br><span class="line">// outputs false, they&apos;re distinct object instance</span><br><span class="line">System.out.println(f1.equals(f2));</span><br><span class="line">// outputs trues, they&apos;re &quot;equal&quot; according to their definiition</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>简单来说, <code>==</code>比较是否是同一个对象, <code>equals()</code>比较是否是同一类对象</p>
+</li>
+</ul>
+</li>
+<li><p>spring 项目连接数据库时报错:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP Status 500 - Request processing failed; nested exception is org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</span><br></pre></td></tr></table></figure>
+<ul>
+<li>原因: <code>Mysql</code>由于重启或者超时自动断开了连接, 而另一方不知道, 因此会继续使用错误的连接, 从而导致浏览器一直加载最后报错.</li>
+<li><p>解决方案: </p>
+<ol>
+<li>设置更长的wait_timeout, 这种方式很直接，就是MySQL会等待更长的时间，如果连接上没有数据传输，会关闭这个连接. 这种方式的缺点是如果您的应用可能超过wait_timeout都不使用数据库连接，那么在使用的时候还是有可能会出现相同的错误。</li>
+<li><p>引用<code>c3p0</code>官方文档中的解释, 重点是最后两段:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">When configuring Connection testing, first try to minimize the cost of each test. If you are using a JDBC driver that you are certain supports the new(ish) jdbc4 API — and if you are using c3p0-0.9.5 or higher! — let your driver handle this for you. jdbc4 Connections include a method called isValid() that should be implemented as a fast, reliable Connection test. By default, c3p0 will use that method if it is present.</span><br><span class="line"></span><br><span class="line">However, if your driver does not support this new-ish API, c3p0&apos;s default behavior is to test Connections by calling the getTables() method on a Connection&apos;s associated DatabaseMetaData object. This has the advantage of being very robust and working with any database, regardless of the database schema. However, a call to DatabaseMetaData.getTables() is often much slower than a simple database query, and using this test may significantly impair your pool&apos;s performance.</span><br><span class="line"></span><br><span class="line">The simplest way to speed up Connection testing under a JDBC 3 driver (or a pre-0.9.5 version of c3p0) is to define a test query with the preferredTestQuery parameter. Be careful, however. Setting preferredTestQuery will lead to errors as Connection tests fail if the query target table does not exist in your database prior to initialization of your DataSource. Depending on your database and JDBC driver, a table-independent query like SELECT 1 may (or may not) be sufficient to verify the Connection. If a table-independent query is not sufficient, instead of preferredTestQuery, you can set the parameter automaticTestTable. Using the name you provide, c3p0 will create an empty table, and make a simple query against it to test the database.</span><br><span class="line"></span><br><span class="line">The most reliable time to test Connections is on check-out. But this is also the most costly choice from a client-performance perspective. Most applications should work quite reliably using a combination of idleConnectionTestPeriod and testConnectionOnCheckin. Both the idle test and the check-in test are performed asynchronously, which can lead to better performance, both perceived and actual.</span><br></pre></td></tr></table></figure>
+<p> 总结下来就是: <code>c3p0</code>版本在0.95以下, 推荐在<code>applicationContext.xml</code>中使用以下配置:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;preferredTestQuery&quot; value=&quot;select 1&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;false&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;true&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;30&quot;&gt;&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Mybatis</p>
+<ul>
+<li>浏览器报错: <code>java.lang.IllegalArgumentException: No enum constant org.apache.ibatis.type.JdbcType.STRING</code><ul>
+<li>原因: Mybatis中的<code>jdbcType</code>没有<code>String</code>数据类型, 只有<code>VARCHAR</code>, 将其改为<code>VARCHAR</code>, 运行成功</li>
+<li>推论: 如果改掉一个此错误后, 还有报这种错误, 这意味着还有一个地方有这种错误.</li>
+</ul>
+</li>
+<li>报错: <code>Parameter &#39;XXX&#39; not found. Available parameters are [collection, list]</code><ul>
+<li>原因: 在<code>XXXMapper.java</code>类中, 需要添加<code>@Param(&quot;XXX)</code>, 其中<code>XXX</code>与<code>collection</code>中的<code>value</code>一样, 例:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@XXX.xml</span><br><span class="line">&lt;foreach collection=&quot;orderIdList&quot; index=&quot;index&quot; item=&quot;item&quot; separator=&quot;,&quot;&gt;</span><br><span class="line"></span><br><span class="line">@xxxMapper.java</span><br><span class="line">List&lt;OrderItemHistory&gt; selectByOrderIdList(@Param(&quot;orderIdList&quot;) List&lt;String&gt; orderIdList);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Java</p>
+<ul>
+<li>public String substring(int startIndex, int endIndex)中的 endIndex 不包含自身, 即 substring(0, 2) 只含有一个字符</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

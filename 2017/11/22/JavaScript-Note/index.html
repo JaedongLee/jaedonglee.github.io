@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="原型链
+
+构造实例和定义方法的先后问题
+
+代码如下
+  12345678function Person () &amp;#123;    this.name = &amp;apos;John&amp;apos;;&amp;#125;var person = new Person();Person.prototype.say = function() &amp;#123;    console.log(&amp;apos;Hello,&amp;apos; + this.name);&amp;#125;;person.say();//Hello,John
+  虽然原型方法在构造实例之后声明, 但因为在调用方法之前就已经声明了, 因此之后的每个实例都拥有该方法.  如果我们这样写:
+  12345678910function Person () &amp;#123;    this.name = &amp;apos;John&amp;apos;;&amp;#125;var person = new Person();Person.prototype = &amp;#123;    say: function() &amp;#123;        console.log(&amp;apos;Hello,&amp;apos; + this.name);    &amp;#125;&amp;#125;;person.say();//person.say is not a function
+  person.say方法没找到, 报错.  原因: var person = new Person()创建了一个新实例, 即Person.prototype指向了一个空对象. 对于实例person来说, 其内部有一个原型链指针proto, 该指针指向了Person.prototype指向的对象.而接下来:
+  12345Person.prototype = &amp;#123;    say: function() &amp;#123;        console.log(&amp;apos;Hello,&amp;apos; + this.name);    &amp;#125;&amp;#125;;
+  则将Person.prototype重置了, 使其指向了另一个对象即: Object(say: function)  而此时person.proto的指向没有变, 其指向的空对象没有say方法, 因此报错.  想要成功运行, 则需将方法定义放在构造实例之前:
+  12345678910function Person () &amp;#123;    this.name = &amp;apos;John&amp;apos;;&amp;#125;Person.prototype = &amp;#123;    say: function() &amp;#123;        console.log(&amp;apos;Hello,&amp;apos; + this.name);    &amp;#125;&amp;#125;;var person = new Person();person.say();
+  其实, 只需要明白原型对象的结构即可:
+  12345Function.prototype = &amp;#123;    constructor : Function,    __proto__ : parent prototype,    some prototype properties: ...&amp;#125;;
+
+构造函数格式: 为了区分普通函数和构造函数, 按照约定, 构造函数首字母应当大写, 而普通函数首字母应当小写
+
+
+
+
+
+Ajax cross domain session change problem and solution
+
+解释: 使用ajax跨域请求服务器会出现sessionId变化的问题, 即每次连接都会产生一个新的sessionId">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="JavaScript-Note.md">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>JavaScript-Note.md - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/11/22/JavaScript-Note/">
+                JavaScript-Note.md
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-11-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/JavaScript/">JavaScript</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ul>
+<li><p>原型链</p>
+<ul>
+<li><p>构造实例和定义方法的先后问题</p>
+<ul>
+<li><p>代码如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person () &#123;</span><br><span class="line">    this.name = &apos;John&apos;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Person();</span><br><span class="line">Person.prototype.say = function() &#123;</span><br><span class="line">    console.log(&apos;Hello,&apos; + this.name);</span><br><span class="line">&#125;;</span><br><span class="line">person.say();//Hello,John</span><br></pre></td></tr></table></figure>
+<p>  虽然原型方法在构造实例之后声明, 但因为在调用方法之前就已经声明了, 因此之后的每个实例都拥有该方法.<br>  如果我们这样写:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Person () &#123;</span><br><span class="line">    this.name = &apos;John&apos;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Person();</span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    say: function() &#123;</span><br><span class="line">        console.log(&apos;Hello,&apos; + this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">person.say();//person.say is not a function</span><br></pre></td></tr></table></figure>
+<p>  person.say方法没找到, 报错.<br>  原因: <code>var person = new Person()</code>创建了一个新实例, 即Person.prototype指向了一个空对象. 对于实例person来说, 其内部有一个原型链指针proto, 该指针指向了Person.prototype指向的对象.而接下来:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype = &#123;</span><br><span class="line">    say: function() &#123;</span><br><span class="line">        console.log(&apos;Hello,&apos; + this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>  则将Person.prototype重置了, 使其指向了另一个对象即: <code>Object(say: function)</code><br>  而此时person.proto的指向没有变, 其指向的空对象没有<code>say</code>方法, 因此报错.<br>  想要成功运行, 则需将方法定义放在构造实例之前:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Person () &#123;</span><br><span class="line">    this.name = &apos;John&apos;;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    say: function() &#123;</span><br><span class="line">        console.log(&apos;Hello,&apos; + this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var person = new Person();</span><br><span class="line">person.say();</span><br></pre></td></tr></table></figure>
+<p>  其实, 只需要明白原型对象的结构即可:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype = &#123;</span><br><span class="line">    constructor : Function,</span><br><span class="line">    __proto__ : parent prototype,</span><br><span class="line">    some prototype properties: ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数格式: 为了区分普通函数和构造函数, 按照约定, 构造函数首字母应当大写, 而普通函数首字母应当小写</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Ajax cross domain session change problem and solution</p>
+<ul>
+<li>解释: 使用<code>ajax</code>跨域请求服务器会出现<code>sessionId</code>变化的问题, 即每次连接都会产生一个新的sessionId<a id="more"></a></li>
+<li>原因: 根据浏览器的保护规则, 跨域的时候我们创建的sessionId是不会被浏览器保存下来, 即每一次请求, 服务器都会以为是一个新的人(客户端)</li>
+<li><p>解决方式: </p>
+<ul>
+<li><p>前端添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    type: &quot;POST&quot;,</span><br><span class="line">    url: &quot;http://192.168.0.113:8081/user/login.do&quot;,</span><br><span class="line">    data: orderData,</span><br><span class="line">    contentType: &quot;application/json&quot;,</span><br><span class="line">    cache: false,</span><br><span class="line">    &lt;!-- 额外添加 --&gt;</span><br><span class="line">    xhrFields: &#123;</span><br><span class="line">        withCredentials: true</span><br><span class="line">    &#125;,</span><br><span class="line">    crossDomain: true,</span><br><span class="line">    &lt;!-- 额外添加 --&gt;</span><br><span class="line">    processData: false,</span><br><span class="line">    success: function (data) &#123;</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;,</span><br><span class="line">    error: function (data) &#123;</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后台添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line">    HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">    HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, request.getHeader(&quot;Origin&quot;));</span><br><span class="line">    response.setHeader(&quot;Access-Control-Max-Age&quot;, &quot;3600&quot;);</span><br><span class="line">    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;*&quot;);</span><br><span class="line">    &lt;!-- 额外添加 --&gt;</span><br><span class="line">    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span><br><span class="line">    response.setHeader(&quot;XDomainRequestAllowed&quot;,&quot;1&quot;);</span><br><span class="line">    &lt;!-- 额外添加 --&gt;</span><br><span class="line">    filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>参考文档: <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

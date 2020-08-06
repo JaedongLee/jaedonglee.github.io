@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="通过Class类的getDeclaredMethod可以获取指定方法名和参数的方法对象Method
+ 123456789public Method getDeclaredMethod(String name, Class&amp;lt;?&amp;gt;... parameterTypes)    throws NoSuchMethodException, SecurityException &amp;#123;    checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);    Method method = searchMethods(privateGetDeclaredMethods(false), name, parameterTypes);    if (method == null) &amp;#123;        throw new NoSuchMethodException(getName() + &amp;quot;.&amp;quot; + name + argumentTypesToString(parameterTypes));    &amp;#125;    return method;&amp;#125;
+
+其中privateGetDeclaredMethods方法从缓存或JVM中获取该Class中声明的方法列表,">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java-Note-反射原理">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Java-Note-反射原理 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/04/17/Java-Note-反射原理/">
+                Java-Note-反射原理
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-17</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ol>
+<li><p>通过Class类的getDeclaredMethod可以获取指定方法名和参数的方法对象Method</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br><span class="line">    throws NoSuchMethodException, SecurityException &#123;</span><br><span class="line">    checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);</span><br><span class="line">    Method method = searchMethods(privateGetDeclaredMethods(false), name, parameterTypes);</span><br><span class="line">    if (method == null) &#123;</span><br><span class="line">        throw new NoSuchMethodException(getName() + &quot;.&quot; + name + argumentTypesToString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    return method;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>其中privateGetDeclaredMethods方法从缓存或JVM中获取该Class中声明的方法列表,<a id="more"></a></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private Method[] privateGetDeclaredMethods(boolean publicOnly) &#123;</span><br><span class="line">    checkInitted();</span><br><span class="line">    Method[] res;</span><br><span class="line">    ReflectionData&lt;T&gt; rd = reflectionData();</span><br><span class="line">    if (rd != null) &#123;</span><br><span class="line">        res = publicOnly ? rd.declaredPublicMethods : rd.declaredMethods;</span><br><span class="line">        if (res != null) return res;</span><br><span class="line">    &#125;</span><br><span class="line">    // No cached value available; request value from VM</span><br><span class="line">    res = Reflection.filterMethods(this, getDeclaredMethods0(publicOnly));</span><br><span class="line">    if (rd != null) &#123;</span><br><span class="line">        if (publicOnly) &#123;</span><br><span class="line">            rd.declaredPublicMethods = res;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            rd.declaredMethods = res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>其中reflectionData()方法的实现如下:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private ReflectionData&lt;T&gt; reflectionData() &#123;</span><br><span class="line">    SoftReference&lt;ReflectionData&lt;T&gt;&gt; reflectionData = this.reflectionData;</span><br><span class="line">    int classRedefinedCount = this.classRedefinedCount;</span><br><span class="line">    ReflectionData&lt;T&gt; rd;</span><br><span class="line">    if (useCaches &amp;&amp;</span><br><span class="line">        reflectionData != null &amp;&amp;</span><br><span class="line">        (rd = reflectionData.get()) != null &amp;&amp;</span><br><span class="line">        rd.redefinedCount == classRedefinedCount) &#123;</span><br><span class="line">        return rd;</span><br><span class="line">    &#125;</span><br><span class="line">    // else no SoftReference or cleared SoftReference or stale ReflectionData</span><br><span class="line">    // -&gt; create and replace new instance</span><br><span class="line">    return newReflectionData(reflectionData, classRedefinedCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 有一个比较重要的数据结构ReflectionData, 用来缓存从JVM中读取的属性数据:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private static class ReflectionData&lt;T&gt; &#123;</span><br><span class="line">    volatile Field[] declaredFields;</span><br><span class="line">    volatile Field[] publicFields;</span><br><span class="line">    volatile Method[] declaredMethods;</span><br><span class="line">    volatile Method[] publicMethods;</span><br><span class="line">    volatile Constructor&lt;T&gt;[] declaredConstructors;</span><br><span class="line">    volatile Constructor&lt;T&gt;[] publicConstructors;</span><br><span class="line">    // Intermediate results for getFields and getMethods</span><br><span class="line">    volatile Field[] declaredPublicFields;</span><br><span class="line">    volatile Method[] declaredPublicMethods;</span><br><span class="line">    volatile Class&lt;?&gt;[] interfaces;</span><br><span class="line"></span><br><span class="line">    // Value of classRedefinedCount when we created this ReflectionData instance</span><br><span class="line">    final int redefinedCount;</span><br><span class="line"></span><br><span class="line">    ReflectionData(int redefinedCount) &#123;</span><br><span class="line">        this.redefinedCount = redefinedCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 从reflectionData()的代码可以看出, reflectionData对象是SoftReference类型的, 说明在内存紧张时会被回收, 如果在被回收后又执行反射方法, 则会用newReflectionData方法产生一个新的对象</p>
+<pre><code>1. newReflectionData()方法: 
+    1. 如果`userCache`为空, 返回null
+    2. 否则循环尝试通过unsafe.compareAndSwapObject()方法重新设置reflectionData
+</code></pre></li>
+<li>在privateGetDeclaredMethods方法中, 如果通过reflectionData()获得的ReflectionData对象不为空, 则尝试从ReflectionData对象中获取declaredMethods属性, 如果为空, 比如第一次或被GC回收之后(疑问), 会从JVM中重新获取一次, 并赋值给ReflectionData, 下次调用时可用缓存数据</li>
+</ol>
+</li>
+<li>其中searchMethods从获取的方法列表中找到匹配名称和参数的方法对象</li>
+</ol>
+</li>
+<li><p>Method调用</p>
+<ol>
+<li><p>获取到指定的方法对象Method之后, 就可以调用invoke()方法, 实现如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">public Object invoke(Object obj, Object... args)</span><br><span class="line">    throws IllegalAccessException, IllegalArgumentException,</span><br><span class="line">       InvocationTargetException</span><br><span class="line">&#123;</span><br><span class="line">    if (!override) &#123;</span><br><span class="line">        if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) &#123;</span><br><span class="line">            Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">            checkAccess(caller, clazz, obj, modifiers);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    MethodAccessor ma = methodAccessor;             // read volatile</span><br><span class="line">    if (ma == null) &#123;</span><br><span class="line">        ma = acquireMethodAccessor();</span><br><span class="line">    &#125;</span><br><span class="line">    return ma.invoke(obj, args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要注意: 这里的MethodAccessor对象是invoke方法实现的关键, 一开始ma为空, 此时调用acquireMethodAccessor()获得新的MethodAccessor对象</p>
+</li>
+<li>acquireMethodAccessor()方法中, 会通过ReflectionFactory类的newMethodAccessor创建一个实现了MethodAccessor接口的对象</li>
+<li>在ReflectionFactory类中有两个重要的静态变量: <ol start="3">
+<li>noInflation(默认false): 允许切换至Java代码实现的MethodAccessorImpl对象</li>
+<li>inflationThreshold: 触发调用Java代码实现的MethodAccessorImpl对象的次数</li>
+</ol>
+</li>
+<li><p>newMethodAccessor会返回DelegatingMethodAccessorImpl对象, 而DelegatingMethodAccessorImpl只是一个代理类, 被代理的对像delegate开始是指向的NativeMethodAccessorImpl对象, 所以最终Method的invoke()方法调用的是NativeMethodAccessorImpl对象的invoke方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class NativeMethodAccessorImpl extends MethodAccessorImpl &#123;</span><br><span class="line">    private final Method method;</span><br><span class="line">    private DelegatingMethodAccessorImpl parent;</span><br><span class="line">    private int numInvocations;</span><br><span class="line"></span><br><span class="line">    NativeMethodAccessorImpl(Method var1) &#123;</span><br><span class="line">        this.method = var1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object invoke(Object var1, Object[] var2) throws IllegalArgumentException, InvocationTargetException &#123;</span><br><span class="line">            if (++this.numInvocations &gt; ReflectionFactory.inflationThreshold() &amp;&amp; !ReflectUtil.isVMAnonymousClass(this.method.getDeclaringClass())) &#123;</span><br><span class="line">                MethodAccessorImpl var3 = (MethodAccessorImpl)(new MethodAccessorGenerator()).generateMethod(this.method.getDeclaringClass(), this.method.getName(), this.method.getParameterTypes(), this.method.getReturnType(), this.method.getExceptionTypes(), this.method.getModifiers());</span><br><span class="line">                this.parent.setDelegate(var3);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return invoke0(this.method, var1, var2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void setParent(DelegatingMethodAccessorImpl var1) &#123;</span><br><span class="line">            this.parent = var1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private static native Object invoke0(Method var0, Object var1, Object[] var2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里用到了inflationThreshold,  当调用了15次方法后, 会将delegate对象设置为专门生成的的MethodAccessor实现类, 生成其中的invoke()方法的字节码</p>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/Reflection/">#Reflection</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
