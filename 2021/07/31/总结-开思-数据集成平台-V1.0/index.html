@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="架构设计阶段应注重异常流程的设计, 否则写出来的没有经过设计的异常处理代码会非常臃肿.流处理程序中, 应保证元数据的一致性即一个元数据应该只对应一个特定的数据体. 即使元数据里面的内容是相同的, 也不能随意的更换它
+当系统较复杂时, 类型键的命名应该具体, 以避免歧义.
+正例: 数据业务类型: 商品">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="总结-开思-数据集成平台-V1.0">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>总结-开思-数据集成平台-V1.0 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2021/07/31/总结-开思-数据集成平台-V1.0/">
+                总结-开思-数据集成平台-V1.0
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2021-07-31</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/总结/">总结</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><h3 id="设计阶段应注重异常流程的设计-否则写出来的没有经过设计的异常处理代码会非常臃肿"><a href="#设计阶段应注重异常流程的设计-否则写出来的没有经过设计的异常处理代码会非常臃肿" class="headerlink" title="设计阶段应注重异常流程的设计, 否则写出来的没有经过设计的异常处理代码会非常臃肿."></a>设计阶段应注重异常流程的设计, 否则写出来的没有经过设计的异常处理代码会非常臃肿.</h3><h3 id="流处理程序中-应保证元数据的一致性"><a href="#流处理程序中-应保证元数据的一致性" class="headerlink" title="流处理程序中, 应保证元数据的一致性"></a>流处理程序中, 应保证元数据的一致性</h3><p>即一个元数据应该只对应一个特定的数据体. 即使元数据里面的内容是相同的, 也不能随意的更换它</p>
+<h3 id="当系统较复杂时-类型键的命名应该具体-以避免歧义"><a href="#当系统较复杂时-类型键的命名应该具体-以避免歧义" class="headerlink" title="当系统较复杂时, 类型键的命名应该具体, 以避免歧义."></a>当系统较复杂时, 类型键的命名应该具体, 以避免歧义.</h3><ul>
+<li>正例: 数据业务类型: 商品 / 订单</li>
+<li>反例: 数据类型: 商品 / 订单</li>
+</ul>
+<h1 id="代码评审"><a href="#代码评审" class="headerlink" title="代码评审"></a>代码评审</h1><h3 id="审核代码时不应只注意代码的规范-还应注意新旧代码的一致性"><a href="#审核代码时不应只注意代码的规范-还应注意新旧代码的一致性" class="headerlink" title="审核代码时不应只注意代码的规范, 还应注意新旧代码的一致性"></a>审核代码时不应只注意代码的规范, 还应注意新旧代码的一致性</h3><ul>
+<li>比如命名和方法名的语义性</li>
+</ul>
+<h1 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h1><h3 id="ES-限制最大的查询结果为-10000-条-超过后即使分页查询第-10001-条也会报错"><a href="#ES-限制最大的查询结果为-10000-条-超过后即使分页查询第-10001-条也会报错" class="headerlink" title="ES 限制最大的查询结果为 10000 条. 超过后即使分页查询第 10001 条也会报错"></a>ES 限制最大的查询结果为 10000 条. 超过后即使分页查询第 10001 条也会报错</h3><p>解决方案: 将限制由 10000 改为 1000000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUT _all/_settings?preserve_existing=true</span><br><span class="line">&#123;</span><br><span class="line">  &quot;index.max_result_window&quot; : &quot;10000000&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="避免-Index-中的字段动态-因为可能会导致整个-ES-服务超时"><a href="#避免-Index-中的字段动态-因为可能会导致整个-ES-服务超时" class="headerlink" title="避免 Index 中的字段动态, 因为可能会导致整个 ES 服务超时"></a>避免 Index 中的字段动态, 因为可能会导致整个 ES 服务超时</h3><p>由于 ES 会为 Index 的每个新增的字段创建一个 mapping, 当 Index 中字段过多时, mappings 会非常多.<br>创建或删除 document 时由于会改变字段的 mapping, 会占用非常多的 CPU 时间. 从而导致整个 ES 服务超时.</p>
+<p>每个 Index 尽量保证字段不变或很少变</p>
+<h1 id="消息组件"><a href="#消息组件" class="headerlink" title="消息组件"></a>消息组件</h1><h3 id="消息组件不是用来发送单条大-size-的数据的-而是用来发送多条小-size-的数据的"><a href="#消息组件不是用来发送单条大-size-的数据的-而是用来发送多条小-size-的数据的" class="headerlink" title="消息组件不是用来发送单条大 size 的数据的, 而是用来发送多条小 size 的数据的"></a>消息组件不是用来发送单条大 size 的数据的, 而是用来发送多条小 size 的数据的</h3><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><h3 id="Kafka-中存在-transction-的概念-Producer-会收集一批数据后一次性发送"><a href="#Kafka-中存在-transction-的概念-Producer-会收集一批数据后一次性发送" class="headerlink" title="Kafka 中存在 transction 的概念. Producer 会收集一批数据后一次性发送"></a>Kafka 中存在 transction 的概念. Producer 会收集一批数据后一次性发送</h3><h1 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h1><h3 id="Flink-与-Kafka-的通讯中-不会按-Kafka-的配置自动提交-offset-而是在检查点中提交-offset-如果检查点时间间隔设置过长-会导致-offset-提交延迟-从而造成消息积压"><a href="#Flink-与-Kafka-的通讯中-不会按-Kafka-的配置自动提交-offset-而是在检查点中提交-offset-如果检查点时间间隔设置过长-会导致-offset-提交延迟-从而造成消息积压" class="headerlink" title="Flink 与 Kafka 的通讯中, 不会按 Kafka 的配置自动提交 offset, 而是在检查点中提交 offset. 如果检查点时间间隔设置过长, 会导致 offset 提交延迟, 从而造成消息积压"></a>Flink 与 Kafka 的通讯中, 不会按 Kafka 的配置自动提交 offset, 而是在检查点中提交 offset. 如果检查点时间间隔设置过长, 会导致 offset 提交延迟, 从而造成消息积压</h3>
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

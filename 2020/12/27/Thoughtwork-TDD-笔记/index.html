@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="思想极限编程是指将最佳实践做到极限
+防御性测试代价太大, 应该只测试 80%的正确业务场景
+git 规范git commit 提现业务价值
+命名测试方法名称使用下划线方式命名
+命名使用一般含义而非具体实现来命名
+写完方法名后让队友读一下以检测可读性
+TDDWhy TDD简化设计活文档测试用例维护好后">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Thoughtwork-TDD-笔记">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Thoughtwork-TDD-笔记 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2020/12/27/Thoughtwork-TDD-笔记/">
+                Thoughtwork-TDD-笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-12-27</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>极限编程是指将最佳实践做到极限</p>
+<p>防御性测试代价太大, 应该只测试 80%的正确业务场景</p>
+<h2 id="git-规范"><a href="#git-规范" class="headerlink" title="git 规范"></a>git 规范</h2><p>git commit 提现业务价值</p>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>测试方法名称使用下划线方式命名</p>
+<p>命名使用一般含义而非具体实现来命名</p>
+<p>写完方法名后让队友读一下以检测可读性</p>
+<h1 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h1><h2 id="Why-TDD"><a href="#Why-TDD" class="headerlink" title="Why TDD"></a>Why TDD</h2><h3 id="简化设计"><a href="#简化设计" class="headerlink" title="简化设计"></a>简化设计</h3><h3 id="活文档"><a href="#活文档" class="headerlink" title="活文档"></a>活文档</h3><p>测试用例维护好后方法签名本身就是活文档</p>
+<h3 id="快速反馈"><a href="#快速反馈" class="headerlink" title="快速反馈"></a>快速反馈</h3><h3 id="安全保障"><a href="#安全保障" class="headerlink" title="安全保障"></a>安全保障</h3><h2 id="测试替身"><a href="#测试替身" class="headerlink" title="测试替身"></a>测试替身</h2><h2 id="正交分解法"><a href="#正交分解法" class="headerlink" title="正交分解法"></a>正交分解法</h2><h1 id="Code-Review-原则"><a href="#Code-Review-原则" class="headerlink" title="Code Review 原则"></a>Code Review 原则</h1><h2 id="关注-git-commits"><a href="#关注-git-commits" class="headerlink" title="关注 git commits"></a>关注 git commits</h2><p>每个测试通过都要提交一次代码. 至少 30 秒一次提交</p>
+<p>commit 粒度:</p>
+<ol>
+<li>经验丰富的开发人员: 15m</li>
+<li>经验不足的开发人员: 2h</li>
+</ol>
+<h2 id="Story-拆分"><a href="#Story-拆分" class="headerlink" title="Story 拆分"></a>Story 拆分</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><ol>
+<li>对请求和响应的处理放在 controller 层</li>
+</ol>
+<p>PS: 1 个架构师带 8 个新人</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
+<li><p>识别 MVP(最重要部分)</p>
+<ol>
+<li>点到点走通</li>
+<li>阻断性功能</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="半白盒测试"><a href="#半白盒测试" class="headerlink" title="半白盒测试"></a>半白盒测试</h3><p>某些单元测试是半白盒的</p>
+<p>某些测试依赖于功能的关键实现点. 比如随机数生成</p>
+<p>重构过程中发现 bug 暂不进行更改. 重构后再进行</p>
+<p>模块中某个单词只能代表一个含义</p>
+<hr>
+<h1 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h1><p>性能优化非重构</p>
+<p>书籍:</p>
+<ol>
+<li>程序员修炼之道</li>
+<li>架构整洁之道</li>
+</ol>
+<h2 id="不重构的情况"><a href="#不重构的情况" class="headerlink" title="不重构的情况"></a>不重构的情况</h2><ol>
+<li>不动不看</li>
+<li>不知目标: 不知道什么才是好的</li>
+<li>不如重写</li>
+</ol>
+<h2 id="如何重构"><a href="#如何重构" class="headerlink" title="如何重构"></a>如何重构</h2><ol>
+<li>旧的不变</li>
+<li>新的创建</li>
+<li>一步切换: 注释旧代码, 切换到新代码</li>
+<li>旧的再见: 删除旧代码</li>
+</ol>
+<h2 id="继承体系不能过长"><a href="#继承体系不能过长" class="headerlink" title="继承体系不能过长"></a>继承体系不能过长</h2><p>最好不超过三层</p>
+<h1 id="遗留系统重构"><a href="#遗留系统重构" class="headerlink" title="遗留系统重构"></a>遗留系统重构</h1><p>获取测试人员的测试清单. 想办法转为单元测试</p>
+<p>一部分一部分的重构</p>
+<p>优先重构依赖少价值高的代码</p>
+<h2 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h2><p>尽量不要写有副作用的函数</p>
+<p>副作用: 对输入没有更改</p>
+<p>纯函数: 没有状态</p>
+<p>只能修改自己类的东西</p>
+<h2 id="如何下手"><a href="#如何下手" class="headerlink" title="如何下手"></a>如何下手</h2><ol>
+<li>掌握系统业务</li>
+<li>明确系统边界</li>
+<li>小步改造系统</li>
+</ol>
+<h3 id="系统架构可视化工具-C4-模型"><a href="#系统架构可视化工具-C4-模型" class="headerlink" title="系统架构可视化工具: C4 模型"></a>系统架构可视化工具: C4 模型</h3><ol>
+<li>系统上下文图</li>
+<li>容器图</li>
+<li>组件图</li>
+<li>代码图</li>
+</ol>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

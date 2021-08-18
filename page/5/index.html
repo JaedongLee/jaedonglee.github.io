@@ -150,13 +150,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/04/20/Java-Note-泛型的尖括号中没有类的问题/">
-                Java-Note-泛型的尖括号中没有类的问题
+            <a href="/2018/05/15/Java-Note-JVN-Could-not-reserve-enough-space-for-heap/">
+                Java-Note-JVN-Could-not-reserve-enough-space-for-heap
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-04-20</span>
+                <span class="date">2018-05-15</span>
             
             
             
@@ -170,306 +170,188 @@
     
         <div class="content">
             <ul>
-<li>这其实是一个语法糖, 可以简化代码</li>
-<li><p>详见:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MORE LIKE THIS</span><br><span class="line">6-7-8 hopscotch</span><br><span class="line">Java 101: The essential Java language features tour, Part 5</span><br><span class="line">A stack of coins</span><br><span class="line">Java 9&apos;s other new enhancements, Part 2: Milling Project Coin</span><br><span class="line">Detecting Class Innards in Groovy</span><br><span class="line">RELATED ARTICLES</span><br><span class="line">cloud ladder climb sky</span><br><span class="line">AWS Lambda tutorial: Get started with serverless computing</span><br><span class="line">NASA Apollo 8 - December 24, 1968 - Earthrise</span><br><span class="line">Cosmos DB review: Database for a small planet</span><br><span class="line">open source license primary.jpg</span><br><span class="line">GitHub tutorial: Get started with GitHub</span><br><span class="line">See all Insider</span><br><span class="line">Project Coin provides numerous &quot;small language enhancements&quot; as a subset of the new JDK 7 features. I recently blogged on Project Coin&apos;s switching on Strings and in this post I write about the new Diamond Operator (&lt;&gt;).</span><br><span class="line"></span><br><span class="line">The Diamond Operator reduces some of Java&apos;s verbosity surrounding generics by having the compiler infer parameter types for constructors of generic classes. The original proposal for adding the Diamond Operator to the Java language was made in February 2009 and includes this simple example:</span><br><span class="line"></span><br><span class="line">For example, consider the following assignment statement:</span><br><span class="line"></span><br><span class="line">Map&lt;String, List&lt;String&gt;&gt; anagrams = new HashMap&lt;String, List&lt;String&gt;&gt;();</span><br><span class="line"></span><br><span class="line">This is rather lengthy, so it can be replaced with this:</span><br><span class="line"></span><br><span class="line">Map&lt;String, List&lt;String&gt;&gt; anagrams = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">The above example provided in Jeremy Manson&apos;s proposal (which was one of the first in response to a call for Project Coin ideas) is simple, but adequately demonstrates how the Diamond Operator is applied in JDK 7. Manson&apos;s proposal also provides significant into why this addition was desirable:</span><br><span class="line"></span><br><span class="line">The requirement that type parameters be duplicated unnecessarily like</span><br><span class="line"></span><br><span class="line">this encourages an unfortunate</span><br><span class="line"></span><br><span class="line">overabundance of static factory methods, simply because type inference</span><br><span class="line"></span><br><span class="line">works on method invocations.</span><br><span class="line"></span><br><span class="line">In other words, the JDK 7 Project Coin addition of a Diamond Operator brings type inference to constructors that has been available with methods. With methods type inference is implicitly done when one leaves off the explicit parameter type specification. With instantiation, on the other hand, the diamond operator must be specified explicitly to &quot;tell&quot; the compiler to infer the type.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>参考文档: <a href="https://www.javaworld.com/article/2074080/core-java/jdk-7--the-diamond-operator.html" target="_blank" rel="noopener">https://www.javaworld.com/article/2074080/core-java/jdk-7--the-diamond-operator.html</a></p>
+<li>问题: Could not reserve enough space for object heap</li>
+<li>答案: 系统默认分配的堆内存不够, 可在catalina.sh开头添加: JAVA_OPTS=”-Xmx1024m”. 其中1024可以更改
+        </div>
+        <a href="/2018/05/15/Java-Note-JVN-Could-not-reserve-enough-space-for-heap/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/15/Java-Note-JVM-Cannot-find-setclasspath-sh/">
+                Java-Note-JVM-Cannot-find-seclasspath-sh
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-15</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>问题: Cannot find /users/ems/tomcat/bin/setclasspath.sh</li>
+<li>原因: 跟环境变量有关, 在catalina.sh中的配置和/etc/profile中的配置不匹配
+        </div>
+        <a href="/2018/05/15/Java-Note-JVM-Cannot-find-setclasspath-sh/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/11/Java-Note-Debug-使用Intellij对应用进行远程调试/">
+                Java-Note-Debug-使用Intellij对应用进行远程调试
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>环境配置<ul>
+<li>远程服务器<ul>
+<li>操作系统: centos 6.5</li>
+<li>tomcat版本: 8.0</li>
+</ul>
 </li>
 </ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/20/Java-Note-Mybatis-resultSet中的数据映射到collection中有相同字段的resultMap中出现的问题/">
-                Java-Note-Mybatis-resultSet中的数据映射到collection中有相同字段的resultMap中出现的问题
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-20</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>原因: 当resultMap中包含collection时, 如果collection中的字段的名称与resultMap中的相同且未对字段名用as重命名时, resultSet映射到resultMap上时, 会同时映射到resultMap和collection中相同的字段</li>
-<li>解决方法: 改column的名称</li>
-<li><p>例:
-        </div>
-        <a href="/2018/04/20/Java-Note-Mybatis-resultSet中的数据映射到collection中有相同字段的resultMap中出现的问题/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/20/Java-Note-Mybatis-无法使用insert一次插入一对多的数据/">
-                Java-Note-Mybatis-无法使用insert一次插入一对多的数据
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-20</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>原因: 一次性插入一对多的数据</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/19/Java-Note-Mybatis-resultSet中一对多关系的转换/">
-                Java-Note-Mybatis-resultSet中一对多关系的转换
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-19</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>使用collection来将一对多的result set转换为实体类最后转化为json</li>
-<li><p>例子:</p>
-<ul>
-<li><p>result set:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Columns: id, gmt_create, gmt_modify, is_active, sender_id, receiver_id, type, is_agreed, process_url, process_reason, id, gmt_create, gmt_modify, is_active, form_id, field_name, field_value</span><br><span class="line">Row: 1, 2018-04-18 18:58:06.0, 2018-04-18 18:58:06.0, 1, 19, 18, 0, null, null, null, 1, 2018-04-18 19:01:52.0, 2018-04-18 19:05:15.0, 1, 1, name, 德玛西亚</span><br><span class="line">Row: 1, 2018-04-18 18:58:06.0, 2018-04-18 18:58:06.0, 1, 19, 18, 0, null, null, null, 2, 2018-04-18 19:02:04.0, 2018-04-18 19:05:02.0, 1, 1, gender, 男</span><br><span class="line">Row: 1, 2018-04-18 18:58:06.0, 2018-04-18 18:58:06.0, 1, 19, 18, 0, null, null, null, 3, 2018-04-18 19:02:10.0, 2018-04-18 19:04:58.0, 1, 1, nation, 中国</span><br><span class="line">Row: 1, 2018-04-18 18:58:06.0, 2018-04-18 18:58:06.0, 1, 19, 18, 0, null, null, null, 4, 2018-04-18 19:02:16.0, 2018-04-18 19:04:54.0, 1, 1, birth, 19910526</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>转换后的json:
-        </div>
-        <a href="/2018/04/19/Java-Note-Mybatis-resultSet中一对多关系的转换/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/17/Java-Note-反射原理/">
-                Java-Note-反射原理
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-17</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ol>
-<li><p>通过Class类的getDeclaredMethod可以获取指定方法名和参数的方法对象Method</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br><span class="line">    throws NoSuchMethodException, SecurityException &#123;</span><br><span class="line">    checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);</span><br><span class="line">    Method method = searchMethods(privateGetDeclaredMethods(false), name, parameterTypes);</span><br><span class="line">    if (method == null) &#123;</span><br><span class="line">        throw new NoSuchMethodException(getName() + &quot;.&quot; + name + argumentTypesToString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    return method;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>其中privateGetDeclaredMethods方法从缓存或JVM中获取该Class中声明的方法列表,
-        </div>
-        <a href="/2018/04/17/Java-Note-反射原理/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/16/Java-Note-Mybatis-SqlSessionFactory和SqlSession/">
-                Java-Note-Mybatis-SqlSessionFactory和SqlSession
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-16</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>SqlSessionFactory: 是Mybatis的关键对象, 它是单个数据库映射关系经过编译后的内存镜像. SqlSessionFactory对象的实例可以通过SqlSessionFactoryBuilder对象类获得, 而SqlSessionFactoryBuilder则可以从XML配置文件或一个预先定制的Configuration的实例构建出SqlSessionFactory的实例, 每一个Mybatis的应用程序都以一个SqlSessionFactory对象的实例为核心, 同时SqlSessionFactory也是线程安全的, SqlSessionFactory是创建SqlSession的工厂</li>
-<li>SqlSession: 是MyBatis的关键对象, 是执行持久化操作的独享, SqlSession对象完全包含以数据库为背景的所有执行SQL操作的方法, 其底层封装了JDBC连接, 可以用SqlSession实例来直接执行被映射的SQL语句.
-        </div>
-        <a href="/2018/04/16/Java-Note-Mybatis-SqlSessionFactory和SqlSession/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/14/Java-Note-事务管理/">
-                Java-Note-事务管理
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-14</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>一个数据库事务通常包含了一个序列的对数据库的读/写操作. 它的存在包含有以下两个目的:<ol>
-<li>为数据库操作序列提供了一个从失败中恢复到正常状态的方法, 同时提供了数据库即使在异常状态下仍能保持一致性的方法</li>
-<li>当多个应用程序在并发访问数据库时, 可以在这些应用程序之间提供一个隔离方法, 以防止彼此的操作互相干扰</li>
+<li><p>步骤</p>
+<ol>
+<li>打开端口8000(如果是云服务器还需打开8000端口的入站流量)</li>
+<li><p>修改远程tomcat服务器配置: 使用catalina.sh代替startup.sh来启动</p>
+<ol>
+<li><p>关闭远程tomcat: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/tomcat/tomcat-8/bin</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改catalina.sh中的代码, 将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$1&quot; = &quot;jpda&quot; ] ; then</span><br><span class="line">    if [ -z &quot;$JPDA_TRANSPORT&quot; ]; then</span><br><span class="line">        JPDA_TRANSPORT=&quot;dt_socket&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_ADDRESS&quot; ]; then</span><br><span class="line">        JPDA_ADDRESS=&quot;localhost:8000&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_SUSPEND&quot; ]; then</span><br><span class="line">        JPDA_SUSPEND=&quot;n&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_OPTS&quot; ]; then</span><br><span class="line">        JPDA_OPTS=&quot;-agentlib:jdwp=transport=$JPDA_TRANSPORT,address=$JPDA_ADDRESS,server=y,suspend=$JPDA_SUSPEND&quot;</span><br><span class="line">    fi</span><br><span class="line">    CATALINA_OPTS=&quot;$CATALINA_OPTS $JPDA_OPTS&quot;</span><br><span class="line">    shift</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>中的<code>JPDA_ADDRESS=&quot;localhost:8000&quot;</code>改为<code>JPDA_ADDRESS=&quot;0.0.0.0:8000&quot;</code>. 因为0.0.0.0表示所有的ip地址都可以访问, <code>JPDA</code>是指<code>Java Platform Debugger Architecture</code>, 是一种专门用于Java调试的架构: <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/" target="_blank" rel="noopener">JPDA</a>.</p>
+</li>
+<li>重启tomcat: <code>./catalina.sh jpda start</code></li>
 </ol>
 </li>
-<li>ACID性质<ul>
-<li>原子性(Atomicity): 事务作为一个整体被执行, 包含在其中的对数据库的操作要么全部被执行, 要么都不执行</li>
-<li>一致性(Consistency): 事务应确保数据库的状态从一个一致状态转变为另一个一致状态. 一致状态的含义是数据库中的数据应满足完整性约束</li>
-<li>隔离性(Isolation): 多个事务并发执行时, 一个事务的执行不应该影响其他事务的执行</li>
-<li>持久性(Durability): 已被提交的事务对数据库的修改应该永久保存在数据库中</li>
+<li>修改本地Intellij配置<ol>
+<li>在<code>Edit Configuration</code>中增加一个<code>Remote</code>, 将里面的Port改为8000, 保存然后点击debug按钮</li>
+<li>当出现<code>Connected to the target VM, address: &#39;140.143.29.99:8000&#39;, transport: &#39;socket&#39;</code>时表示远程连接调试端口成功, 可以开始调试</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意: 在步骤3的1中, 如果出现<code>Unable to open debugger port (x.x.x.x:8000): java.net.ConnectException &quot;Connection refused: connect&quot;</code>说明调试端口为对客户端开放, 此时可以在远程服务器上使用<code>netstat -ntlp</code>查看开放的端口, 有可能没有开放8000端口或者开放的是<code>127.0.0.1:8000</code>而不是<code>0.0.0.0:8000</code></li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/11/Java-Note-Spring-415-Unsupported-Media-Type/">
+                Java-Note-Spring-415-Unsupported-Media-Type
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>用postman向服务端发送请求时报错, 使用的<code>content-type</code>是<code>application/json</code>: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP Status 415 – Unsupported Media Type</span><br><span class="line">Type Status Report</span><br><span class="line">Description The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因: </p>
+<ol>
+<li>在请求头中未加入<code>Content-Type:application/json</code></li>
+<li>如果排除<code>1</code>依然报错, 则是因为没有相应的处理json的包, 如<code>com.google.code.gson</code>/<code>com.fasterxml.jackson.core</code>. 如果没有这类包, 则依旧会报这个错误, 因为java和spring自己没有解析json的功能, 需要借助第三方包</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/10/Java-Note-JVM-Java堆和Native堆/">
+                Java-Note-JVM-Java堆和Native堆
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>Native堆属于非Java堆<ul>
+<li>引入原因: JVM与外界通讯, 把Java堆中的内容传输到外界, 需要把Java堆复制到非Java堆, 如果使用Native堆并在Java堆中保存其引用, 可以避免内容在Java堆和非Java堆之间的copy</li>
+<li>注意<ul>
+<li>非Java堆得回收不受Java young gc的影响, 需要手工回收. 大量使用丢失Java自动垃圾回收的特点</li>
+<li>一般使用费Java堆进行和外界的通讯, 并且作为缓存使用. 如DirectByteBuffer</li>
 </ul>
 </li>
-<li>事务并发
-        </div>
-        <a href="/2018/04/14/Java-Note-事务管理/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/14/Java-Note-类加载/">
-                Java-Note-类加载
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-14</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>类加载过程: 每个编写的”.java”拓展名类文件都存储着需要执行的程序逻辑，这些”.java”文件经过Java编译器编译成拓展名为”.class”的文件，”.class”文件中保存着Java代码经转换后的虚拟机指令，当需要使用某个类时，虚拟机将会加载它的”.class”文件，并创建对应的class对象，将class文件加载到虚拟机的内存，这个过程称为类加载</li>
-<li>类加载过程分解:
-        </div>
-        <a href="/2018/04/14/Java-Note-类加载/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/14/Java-Note-NIO/">
-                Java-Note-NIO
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-14</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>核心部分<ul>
-<li>Channels</li>
-<li>Buffers</li>
-<li>Selectors</li>
-<li>其它部分不过是一些工具类而已</li>
 </ul>
 </li>
-<li>Channel<ul>
-<li>所有的IO在NIO中都从一个Channel开始, Channel有点像流. 数据可以从Channel读到Buffer中, 也可以从Buffer写到Channel中</li>
-<li>主要的Channel实现
+</ul>
+
         </div>
-        <a href="/2018/04/14/Java-Note-NIO/" class="read-more">Read More</a>
     
 
 </div>
@@ -479,13 +361,43 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/04/01/Java-Note-Hashmap/">
-                Java-Note-Hashmap
+            <a href="/2018/05/10/Java-Note-Reference/">
+                Java-Note-Reference
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-04-01</span>
+                <span class="date">2018-05-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/10/Java-Note-引用/">
+                Java-Note-引用
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-10</span>
             
             
             
@@ -499,12 +411,135 @@
     
         <div class="content">
             <ul>
-<li>摘要: hashmap是Java程序员使用频率最高的用于映射的数据类型</li>
-<li><p>内部实现</p>
+<li><p>引用: </p>
 <ul>
-<li>存储结构-字段
+<li>C++中的引用: 与指针相比:<ol>
+<li>没有null 引用</li>
+<li>引用必须有初值</li>
+<li>使用引用要比使用指针效率高, 因为引用不用测试其有效性</li>
+<li>指针可以重新赋值, 而引用总是指向它最初获得的对象</li>
+</ol>
+</li>
+<li>Java中的引用: 与C++中的引用相比, 不过是穿着引用外衣的指针而已</li>
+<li><p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class ValueTransmit &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ValueObject valueObject1 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;old preprocess: &quot; + valueObject1.value);</span><br><span class="line">        changeOldObject(valueObject1);</span><br><span class="line">        System.out.println(&quot;old processed: &quot; + valueObject1.value);</span><br><span class="line">        ValueObject valueObject2 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;new preprocess: &quot; + valueObject2.value);</span><br><span class="line">        changeNewObject(valueObject2);</span><br><span class="line">        System.out.println(&quot;new processed: &quot; + valueObject2.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeOldObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;old processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeNewObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject = new ValueObject();</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;new processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ValueObject &#123;</span><br><span class="line">    public int value;</span><br><span class="line"></span><br><span class="line">    public ValueObject() &#123;</span><br><span class="line">        value = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;/* Output:</span><br><span class="line">old preprocess: 1</span><br><span class="line">old processing: 5</span><br><span class="line">old processed: 5</span><br><span class="line">new preprocess: 1</span><br><span class="line">new processing: 5</span><br><span class="line">new processed: 1</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>疑问: 为何把<code>valueObject</code>引用指向一个new <code>ValueObject</code>后, 处理的结果没有发生变化呢</p>
+</li>
+<li>答案: 因为方法参数是将实际参数复制一份压入栈中, 而<code>valueObject</code>引用如果指向的是new <code>ValueObject</code>的话, <code>value</code>的改变发生在new <code>ValueObject</code>, 而不是old <code>ValueObject</code></li>
+</ul>
+</li>
+</ul>
+
         </div>
-        <a href="/2018/04/01/Java-Note-Hashmap/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/25/Java-Note-Spring-Autowired/">
+                Java-Note-Spring-Autowired
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-25</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>@Autowired: 可以将指定bean自动注入, 以避免使用<code>&lt;bean&gt;</code>下面的<code>&lt;preporty&gt;</code>来设置</li>
+<li>使用@Autowired需要在xml中配置<code>&lt;context:annotation-config&gt;</code> 标签<ul>
+<li><code>&lt;context:annotation-config&gt;</code> is used to activate annotations in beans already registered in the application context (no matter if they were defined with XML or by package scanning). and <code>&lt;context:component-scan&gt;</code> can also do what <code>&lt;context:annotation-config&gt;</code> does but <code>&lt;context:component-scan&gt;</code> also scans packages to find and register beans within the application context.
+        </div>
+        <a href="/2018/04/25/Java-Note-Spring-Autowired/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/25/XML-Note-相关知识/">
+                XML-Note-相关知识
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-25</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/XML/">XML</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>XSD: XML Schema Defination, is a World Wide Web Consortium(W3C) recommendation that specifies how to formally describe the elements in an Extensible Markup Language(XML) document</li>
+<li><p>beans标签中的属性:</p>
+        </div>
+        <a href="/2018/04/25/XML-Note-相关知识/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/04/23/Java-Note-通过相对位置读取项目中的文件/">
+                Java-Note-通过相对位置读取文件
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-23</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>项目代码中:<ul>
+<li>想要读取项目下的文件, 又不希望写死路径, 可以把路径写为: “src/…”</li>
+</ul>
+</li>
+<li>浏览器中: 浏览器中读取服务器的文件<ul>
+<li>在tomcat的service.xml进行一下修改(Context标签):<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;</span><br><span class="line">        unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api/static&quot;  docBase=&quot;\custom_api\WEB-INF\static&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api&quot;  docBase=&quot;D:\runtime\jnScience&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">    &lt;!-- SingleSignOn valve, share authentication between web applications</span><br><span class="line">         Documentation at: /docs/config/valve.html --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&gt;</span><br><span class="line">    --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Access log processes all example.</span><br><span class="line">         Documentation at: /docs/config/valve.html</span><br><span class="line">         Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&gt;</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</span><br><span class="line">           prefix=&quot;localhost_access_log&quot; suffix=&quot;.txt&quot;</span><br><span class="line">           pattern=&quot;%h %l %u %t &amp;quot;%r&amp;quot; %s %b&quot; /&gt;</span><br><span class="line">&lt;/Host&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
     
 
 </div>
@@ -551,19 +586,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
             </li>
             
         </ul>

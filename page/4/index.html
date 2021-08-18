@@ -150,13 +150,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/05/11/Java-Note-Debug-使用Intellij对应用进行远程调试/">
-                Java-Note-Debug-使用Intellij对应用进行远程调试
+            <a href="/2018/08/17/Java-Note-派生类构造器无法捕获它的基类构造器所抛出的异常/">
+                Java-Note-派生类构造器无法捕获它的基类构造器所抛出的异常
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-05-11</span>
+                <span class="date">2018-08-17</span>
             
             
             
@@ -170,37 +170,59 @@
     
         <div class="content">
             <ul>
-<li>环境配置<ul>
-<li>远程服务器<ul>
-<li>操作系统: centos 6.5</li>
-<li>tomcat版本: 8.0</li>
+<li>原因: <code>When you throw an exception, the compiler creates no object. This is why a derived-class constructor cannot catch a base-class constructor exception: it can&#39;t &quot;recover&quot; from the exception failure, since there&#39;s no base-class sub-object.</code></li>
 </ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/07/17/Oracle-Note-ORA01653-无法扩展表空间/">
+                Oracle-Note-ORA01653-无法扩展表空间
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-07-17</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Oracle/">Oracle</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>产生原因: <ol>
+<li>表空间确实不够用, 已经达到自动扩展上限</li>
+<li>表空间的自动扩展功能没有打开</li>
+</ol>
 </li>
-</ul>
+<li><p>查看方法: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT T.TABLESPACE_NAME,D.FILE_NAME,D.AUTOEXTENSIBLE,D.BYTES,D.MAXBYTES,D.STATUS</span><br><span class="line">FROM DBA_TABLESPACES T,DBA_DATA_FILES D</span><br><span class="line">WHERE T.TABLESPACE_NAME =D.TABLESPACE_NAME</span><br><span class="line">ORDER BY TABLESPACE_NAME,FILE_NAME;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>步骤</p>
+<li><p>解决方法:</p>
 <ol>
-<li>打开端口8000(如果是云服务器还需打开8000端口的入站流量)</li>
-<li><p>修改远程tomcat服务器配置: 使用catalina.sh代替startup.sh来启动</p>
-<ol>
-<li><p>关闭远程tomcat: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/tomcat/tomcat-8/bin</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure>
+<li><p>增加数据文件<br><code>ALTER TABLESPACE &#39;表空间名&#39; DATAFILE &#39;D:\ORACLE\PRODUCT\10.2.0\ORADATA\DBFILE\TRD_2.DBF&#39; SIZE 1024M;</code></p>
 </li>
-<li><p>修改catalina.sh中的代码, 将</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$1&quot; = &quot;jpda&quot; ] ; then</span><br><span class="line">    if [ -z &quot;$JPDA_TRANSPORT&quot; ]; then</span><br><span class="line">        JPDA_TRANSPORT=&quot;dt_socket&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_ADDRESS&quot; ]; then</span><br><span class="line">        JPDA_ADDRESS=&quot;localhost:8000&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_SUSPEND&quot; ]; then</span><br><span class="line">        JPDA_SUSPEND=&quot;n&quot;</span><br><span class="line">    fi</span><br><span class="line">    if [ -z &quot;$JPDA_OPTS&quot; ]; then</span><br><span class="line">        JPDA_OPTS=&quot;-agentlib:jdwp=transport=$JPDA_TRANSPORT,address=$JPDA_ADDRESS,server=y,suspend=$JPDA_SUSPEND&quot;</span><br><span class="line">    fi</span><br><span class="line">    CATALINA_OPTS=&quot;$CATALINA_OPTS $JPDA_OPTS&quot;</span><br><span class="line">    shift</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>中的<code>JPDA_ADDRESS=&quot;localhost:8000&quot;</code>改为<code>JPDA_ADDRESS=&quot;0.0.0.0:8000&quot;</code>. 因为0.0.0.0表示所有的ip地址都可以访问, <code>JPDA</code>是指<code>Java Platform Debugger Architecture</code>, 是一种专门用于Java调试的架构: <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/" target="_blank" rel="noopener">JPDA</a>.</p>
+<li><p>增加数据文件并允许自动增长<br><code>ALTER TABLESPACE &#39;表空间名&#39; ADD DATAFILE &#39;D:\ORACLE\PRODUCT\10.2.0\ORADATA\DBFILE\TRD_2.DBF&#39; SIZE 1024M AUTOEXTEND ON NEXT 8M MAXSIZE 10240M;</code></p>
 </li>
-<li>重启tomcat: <code>./catalina.sh jpda start</code></li>
-</ol>
+<li><p>允许已存在的数据文件自动增长<br><code>ALTER DATABASE DATAFILE &#39;D:\ORACLE\PRODUCT\10.2.0\ORADATA\DBFILE\TRD.DBF&#39; AUTOEXTEND ON NEXT 8M MAXSIZE 10240M;</code></p>
 </li>
-<li>修改本地Intellij配置<ol>
-<li>在<code>Edit Configuration</code>中增加一个<code>Remote</code>, 将里面的Port改为8000, 保存然后点击debug按钮</li>
-<li>当出现<code>Connected to the target VM, address: &#39;140.143.29.99:8000&#39;, transport: &#39;socket&#39;</code>时表示远程连接调试端口成功, 可以开始调试</li>
-</ol>
+<li><p>手工改变已存在数据文件的大小<br><code>ALTER DATABASE DATAFILE &#39;D:\ORACLE\PRODUCT\10.2.0\ORADATA\DBFILE\TRD.DBF&#39; RESIZE 10240M;</code></p>
 </li>
 </ol>
 </li>
-<li>注意: 在步骤3的1中, 如果出现<code>Unable to open debugger port (x.x.x.x:8000): java.net.ConnectException &quot;Connection refused: connect&quot;</code>说明调试端口为对客户端开放, 此时可以在远程服务器上使用<code>netstat -ntlp</code>查看开放的端口, 有可能没有开放8000端口或者开放的是<code>127.0.0.1:8000</code>而不是<code>0.0.0.0:8000</code></li>
 </ul>
 
         </div>
@@ -213,13 +235,47 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/05/11/Java-Note-Spring-415-Unsupported-Media-Type/">
-                Java-Note-Spring-415-Unsupported-Media-Type
+            <a href="/2018/07/11/Oracle-Note-beigin和end/">
+                Oracle-Note-beigin和end
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-05-11</span>
+                <span class="date">2018-07-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Oracle/">Oracle</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>在Java中使用多条oracle语句时, 需要在前后分别加上begin/end, 如果不加, 会报错</li>
+<li>在数据库管理软件的控制台中执行多条语句时, 无需添加begin/end</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/07/09/Java-Note-excel文件格式错误/">
+                Java-Note-excel文件格式错误
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-07-09</span>
             
             
             
@@ -233,16 +289,39 @@
     
         <div class="content">
             <ul>
-<li><p>用postman向服务端发送请求时报错, 使用的<code>content-type</code>是<code>application/json</code>: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP Status 415 – Unsupported Media Type</span><br><span class="line">Type Status Report</span><br><span class="line">Description The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原因: </p>
-<ol>
-<li>在请求头中未加入<code>Content-Type:application/json</code></li>
-<li>如果排除<code>1</code>依然报错, 则是因为没有相应的处理json的包, 如<code>com.google.code.gson</code>/<code>com.fasterxml.jackson.core</code>. 如果没有这类包, 则依旧会报这个错误, 因为java和spring自己没有解析json的功能, 需要借助第三方包</li>
-</ol>
-</li>
-</ul>
+<li>问题: 使用<code>workbook.write(outputStream)</code>下载的xsl文件报错: 文件格式无效</li>
+<li>原因: 在设置response的header时, 把<code>Content-Length</code>设置为了初始文件的大小, 实际上在对初始文件进行操作后, 其大小发生了改变, 而且使用<code>workbook.write(outputStream)</code>进行下载不需要设置<code>Content-Length</code>
+        </div>
+        <a href="/2018/07/09/Java-Note-excel文件格式错误/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/06/28/Interview-阿里面试准备/">
+                Interview-阿里面试准备
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-06-28</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Interview/">Interview</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>- </p>
 
         </div>
     
@@ -254,13 +333,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/05/10/Java-Note-JVM-Java堆和Native堆/">
-                Java-Note-JVM-Java堆和Native堆
+            <a href="/2018/06/27/Java-Note-按值传递和按引用传递/">
+                Java-Note-按值传递和按引用传递
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-05-10</span>
+                <span class="date">2018-06-27</span>
             
             
             
@@ -274,18 +353,14 @@
     
         <div class="content">
             <ul>
-<li>Native堆属于非Java堆<ul>
-<li>引入原因: JVM与外界通讯, 把Java堆中的内容传输到外界, 需要把Java堆复制到非Java堆, 如果使用Native堆并在Java堆中保存其引用, 可以避免内容在Java堆和非Java堆之间的copy</li>
-<li>注意<ul>
-<li>非Java堆得回收不受Java young gc的影响, 需要手工回收. 大量使用丢失Java自动垃圾回收的特点</li>
-<li>一般使用费Java堆进行和外界的通讯, 并且作为缓存使用. 如DirectByteBuffer</li>
+<li>程序设计语言中有关参数传递给方法的两种方式<ul>
+<li>按值传递(call by value)</li>
+<li>按引用传递(call by reference): 传递的是指针, 其指向的内存地址可以被改变</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-
+<li>宗旨: Java的参数传递只有按值传递, 没有按引用传递
         </div>
+        <a href="/2018/06/27/Java-Note-按值传递和按引用传递/" class="read-more">Read More</a>
     
 
 </div>
@@ -295,18 +370,18 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/05/10/Java-Note-Reference/">
-                Java-Note-Reference
+            <a href="/2018/06/13/Algorithms-Note-空间换取时间/">
+                Algorithms-Note-空间换取时间
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-05-10</span>
+                <span class="date">2018-06-13</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/Java/">Java</a>
+                    <a href="/categories/Algorithms/">Algorithms</a>
                 </span>
             
         </div>
@@ -314,7 +389,10 @@
 
     
         <div class="content">
-            
+            <ul>
+<li>当计算机进行重复性运算的时候, </li>
+</ul>
+
         </div>
     
 
@@ -325,13 +403,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/05/10/Java-Note-引用/">
-                Java-Note-引用
+            <a href="/2018/05/30/Java-Note-操作符的左优先和右优先/">
+                Java-Note-操作符的左优先和右优先
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-05-10</span>
+                <span class="date">2018-05-30</span>
             
             
             
@@ -345,233 +423,93 @@
     
         <div class="content">
             <ul>
-<li><p>引用: </p>
+<li>different operator has different associativity in java, some operators are not associative. </li>
+<li>reference: <a href="https://introcs.cs.princeton.edu/java/11precedence/" target="_blank" rel="noopener">https://introcs.cs.princeton.edu/java/11precedence/</a></li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/18/Java-Note-getWriter和getOutputStream/">
+                Java-Note-getWriter和getOutputStream
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-18</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>getWriter()返回一个可以发送文本类型信息到客户端的<code>PrintWriter</code>对象</li>
+<li>getOutputStream()返回一个发送字节类型信息到客户端的<code>OutputStream</code>对象
+        </div>
+        <a href="/2018/05/18/Java-Note-getWriter和getOutputStream/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/17/Java-Note-Protected修饰符深入了解/">
+                Java-Note-Protected修饰符深入了解
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-17</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>在<code>Thinking in Java</code>中, protected的定义是: protected必须有继承关系才能访问. 但这句话到底是什么意思呢? </li>
+<li><p>首先弄清楚继承protected和访问protected的范围的区别</p>
 <ul>
-<li>C++中的引用: 与指针相比:<ol>
-<li>没有null 引用</li>
-<li>引用必须有初值</li>
-<li>使用引用要比使用指针效率高, 因为引用不用测试其有效性</li>
-<li>指针可以重新赋值, 而引用总是指向它最初获得的对象</li>
-</ol>
+<li>继承protected: 可以在任意位置(包内或包外)继承基类的protected方法</li>
+<li><p>访问protected: 可以在:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package baseClassInvokeTest;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* @PackageName: baseClassInvokeTest</span><br><span class="line">* @Auther: zoutairan</span><br><span class="line">* @Description:</span><br><span class="line">* @Date: Created in 11:19 2018/5/17</span><br><span class="line">* @Modified By:</span><br><span class="line">*/</span><br><span class="line">public class Base &#123;</span><br><span class="line">    protected void baseTest() &#123;</span><br><span class="line">        System.out.println(&quot;base&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>Java中的引用: 与C++中的引用相比, 不过是穿着引用外衣的指针而已</li>
-<li><p>例子:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class ValueTransmit &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ValueObject valueObject1 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;old preprocess: &quot; + valueObject1.value);</span><br><span class="line">        changeOldObject(valueObject1);</span><br><span class="line">        System.out.println(&quot;old processed: &quot; + valueObject1.value);</span><br><span class="line">        ValueObject valueObject2 = new ValueObject();</span><br><span class="line">        System.out.println(&quot;new preprocess: &quot; + valueObject2.value);</span><br><span class="line">        changeNewObject(valueObject2);</span><br><span class="line">        System.out.println(&quot;new processed: &quot; + valueObject2.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeOldObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;old processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void changeNewObject(ValueObject valueObject) &#123;</span><br><span class="line">        valueObject = new ValueObject();</span><br><span class="line">        valueObject.value = 5;</span><br><span class="line">        System.out.println(&quot;new processing: &quot; + valueObject.value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ValueObject &#123;</span><br><span class="line">    public int value;</span><br><span class="line"></span><br><span class="line">    public ValueObject() &#123;</span><br><span class="line">        value = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;/* Output:</span><br><span class="line">old preprocess: 1</span><br><span class="line">old processing: 5</span><br><span class="line">old processed: 5</span><br><span class="line">new preprocess: 1</span><br><span class="line">new processing: 5</span><br><span class="line">new processed: 1</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+<li><p>同一个包内任何类访问基类的protected方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package baseClassInvokeTest;</span><br><span class="line"></span><br><span class="line">import baseClassInvokeTest.Base;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* @PackageName: baseClassInvokeTest</span><br><span class="line">* @Auther: zoutairan</span><br><span class="line">* @Description:</span><br><span class="line">* @Date: Created in 11:20 2018/5/17</span><br><span class="line">* @Modified By:</span><br><span class="line">*/</span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Base base = new Base();</span><br><span class="line">        base.baseTest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>疑问: 为何把<code>valueObject</code>引用指向一个new <code>ValueObject</code>后, 处理的结果没有发生变化呢</p>
+<li><p>不同包中子类可通过子类对象访问基类的protected方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import baseClassInvokeTest.Base;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* @PackageName: baseClassInvokeTest</span><br><span class="line">* @Auther: zoutairan</span><br><span class="line">* @Description:</span><br><span class="line">* @Date: Created in 11:19 2018/5/17</span><br><span class="line">* @Modified By:</span><br><span class="line">*/</span><br><span class="line">public class Sub extends Base &#123;</span><br><span class="line"></span><br><span class="line">    public void test() &#123;</span><br><span class="line">        Sub sub = new Sub();</span><br><span class="line">        sub.baseTest();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>答案: 因为方法参数是将实际参数复制一份压入栈中, 而<code>valueObject</code>引用如果指向的是new <code>ValueObject</code>的话, <code>value</code>的改变发生在new <code>ValueObject</code>, 而不是old <code>ValueObject</code></li>
+<li><p>不同包中子类<code>不可以</code>创建基类对象访问基类的protected方法</p>
+</li>
+<li>不同包中子类<code>不可以</code>创建另一个子类对象访问基类的protected方法</li>
+<li>protected类的构造器默认也是protected的</li>
 </ul>
 </li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/25/Java-Note-Spring-Autowired/">
-                Java-Note-Spring-Autowired
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-25</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>@Autowired: 可以将指定bean自动注入, 以避免使用<code>&lt;bean&gt;</code>下面的<code>&lt;preporty&gt;</code>来设置</li>
-<li>使用@Autowired需要在xml中配置<code>&lt;context:annotation-config&gt;</code> 标签<ul>
-<li><code>&lt;context:annotation-config&gt;</code> is used to activate annotations in beans already registered in the application context (no matter if they were defined with XML or by package scanning). and <code>&lt;context:component-scan&gt;</code> can also do what <code>&lt;context:annotation-config&gt;</code> does but <code>&lt;context:component-scan&gt;</code> also scans packages to find and register beans within the application context.
-        </div>
-        <a href="/2018/04/25/Java-Note-Spring-Autowired/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/25/XML-Note-相关知识/">
-                XML-Note-相关知识
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-25</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/XML/">XML</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>XSD: XML Schema Defination, is a World Wide Web Consortium(W3C) recommendation that specifies how to formally describe the elements in an Extensible Markup Language(XML) document</li>
-<li><p>beans标签中的属性:</p>
-        </div>
-        <a href="/2018/04/25/XML-Note-相关知识/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/23/Java-Note-通过相对位置读取项目中的文件/">
-                Java-Note-通过相对位置读取文件
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-23</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>项目代码中:<ul>
-<li>想要读取项目下的文件, 又不希望写死路径, 可以把路径写为: “src/…”</li>
-</ul>
-</li>
-<li>浏览器中: 浏览器中读取服务器的文件<ul>
-<li>在tomcat的service.xml进行一下修改(Context标签):<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;</span><br><span class="line">        unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api/static&quot;  docBase=&quot;\custom_api\WEB-INF\static&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">     &lt;Context path=&quot;/custom_api&quot;  docBase=&quot;D:\runtime\jnScience&quot; </span><br><span class="line">                   reloadable=&quot;true&quot; debug=&quot;0&quot;/&gt;</span><br><span class="line">    &lt;!-- SingleSignOn valve, share authentication between web applications</span><br><span class="line">         Documentation at: /docs/config/valve.html --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&gt;</span><br><span class="line">    --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Access log processes all example.</span><br><span class="line">         Documentation at: /docs/config/valve.html</span><br><span class="line">         Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&gt;</span><br><span class="line">    &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</span><br><span class="line">           prefix=&quot;localhost_access_log&quot; suffix=&quot;.txt&quot;</span><br><span class="line">           pattern=&quot;%h %l %u %t &amp;quot;%r&amp;quot; %s %b&quot; /&gt;</span><br><span class="line">&lt;/Host&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/23/Base64-Note/">
-                Base64-Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-23</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Base64/">Base64</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li><p>js加密: 用FileReader中的readAsDataURL(file)即可, 但注意, 得到的字符串中, 第一个(也是唯一一个)<code>,</code>之前保存的是文件类型和加密类型, 之后保存的才是加密后的字符串</p>
-<ul>
-<li>FileReader: <code>The FileReader object lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user&#39;s computer, using File or Blob objects to specify the file or data to read.</code><ul>
-<li>异步方法的处理: 当FileReader触发了一些事件后, 会返回相应的数据:<ul>
-<li>onload: 加载完成时触发, 会返回结果</li>
-<li>onerror: 读取操作发生错误时触发</li>
-<li>等等</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>例子: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br><span class="line">reader.readAsDataURL(fileObj);</span><br><span class="line">reader.onload = function () &#123;</span><br><span class="line">    var encodeString = reader.result;</span><br><span class="line">    console.log(encodeString);</span><br><span class="line">    customFormField1.fieldName = &quot;customFormField1Name&quot;;</span><br><span class="line">    customFormField1.fieldValue = &quot;customFormField1Value&quot;;</span><br><span class="line">    customFormField0.fieldName = &quot;customFormField0Name&quot;;</span><br><span class="line">    customFormField0.fieldValue = &quot;customFormField0Value&quot;;</span><br><span class="line">    customFormFileField0.name = &quot;customFormFileField0Name&quot;;</span><br><span class="line">    customFormFileField0.encodedContent = encodeString;</span><br><span class="line">    customFormFileField0.postfix = &quot;docx&quot;;</span><br><span class="line">    customFormFields[0] = customFormField0;</span><br><span class="line">    customFormFields[1] = customFormField1;</span><br><span class="line">    customFiles[0] = customFormFileField0;</span><br><span class="line">    customForm.customFormFields = customFormFields;</span><br><span class="line">    customForm.type = 0;</span><br><span class="line">    customForm.senderId = 19;</span><br><span class="line">    request.customForm = customForm;</span><br><span class="line">    request.customFiles = customFiles;</span><br><span class="line">    request.integer = 7;</span><br><span class="line">    request.string = &quot;秘书长&quot;;</span><br><span class="line">    request = JSON.stringify(request);</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: &quot;POST&quot;,</span><br><span class="line">        url: &quot;http://192.168.0.113:8090/form/addForm.jspx&quot;,</span><br><span class="line">        data: request,</span><br><span class="line">        dataType: &quot;json&quot;,</span><br><span class="line">        contentType: &quot;application/json&quot;,</span><br><span class="line">        cache: false,</span><br><span class="line">        processData: false,</span><br><span class="line">        success: function (data) &#123;</span><br><span class="line">            console.log(&quot;success: &quot; + data);</span><br><span class="line">        &#125;,</span><br><span class="line">        error: function (data) &#123;</span><br><span class="line">            console.log(&quot;fail: &quot; + data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>java</p>
-<ul>
-<li>加密: <ul>
-<li>先使用NIO中的Files.readAllBytes读取文件为byte[]</li>
-<li>再用java.util中的Base64.getEncoder().encodeToString()加密</li>
-</ul>
-</li>
-<li>解密:<ul>
-<li>如果加密的string中包含文件类型和加密类型信息, 先截取掉</li>
-<li>利用Base64.getDecoder().decode将String解密成byte[]</li>
-<li>利用Files.write将byte[]写入指定位置</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/23/Java-Note-NIO中的Files/">
-                Java-Note-NIO中的Files
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-23</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>介绍: <code>This class consists exclusively of static methods that operate on files, directories, or other types of files.
-In most cases, the methods defined here will delegate to the associated file system provider to perform the file operations.</code></li>
-<li>包含的方法:<ul>
-<li>Files.readAllBytes(): 根据路径读取所有byte, 实现中用到大量Channel</li>
-<li>Files.write(): 向给定路径写入给定byte, StandardOpenOption defines the standard open options</li>
-</ul>
-</li>
+<li>总结: 只能在包内或者该导出类访问基类的protected方法</li>
 </ul>
 
         </div>
@@ -621,19 +559,19 @@ In most cases, the methods defined here will delegate to the associated file sys
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
             </li>
             
         </ul>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="重要的配置Task Manager内存taskmanager.memory.process.size整个 Task Manager 的内存大小
+taskmanager.memory.flink.sizeTask Manager 的堆大小
+如果不配这个, 会默认按百分比配置, 导致堆分到的内存变小, ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Flink 配置文档">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Flink 配置文档 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2021/08/18/Flink-配置文档/">
+                Flink 配置文档
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2021-08-18</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="重要的配置"><a href="#重要的配置" class="headerlink" title="重要的配置"></a>重要的配置</h1><h2 id="Task-Manager"><a href="#Task-Manager" class="headerlink" title="Task Manager"></a>Task Manager</h2><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><h4 id="taskmanager-memory-process-size"><a href="#taskmanager-memory-process-size" class="headerlink" title="taskmanager.memory.process.size"></a><code>taskmanager.memory.process.size</code></h4><p>整个 Task Manager 的内存大小</p>
+<h4 id="taskmanager-memory-flink-size"><a href="#taskmanager-memory-flink-size" class="headerlink" title="taskmanager.memory.flink.size"></a><code>taskmanager.memory.flink.size</code></h4><p>Task Manager 的堆大小</p>
+<p>如果不配这个, 会默认按百分比配置, 导致堆分到的内存变小, 造成内存浪费.</p>
+<p>配置了这个后不要再配置 <code>taskmanager.memory.process.size</code></p>
+<h4 id="taskmanager-memory-managed-size"><a href="#taskmanager-memory-managed-size" class="headerlink" title="taskmanager.memory.managed.size"></a><code>taskmanager.memory.managed.size</code></h4><p>Task Manager 的管理内存大小</p>
+<p>这个内存要指定大小, 否则会按默认百分比配置, 造成内存浪费.</p>
+<h3 id="Task-Slot"><a href="#Task-Slot" class="headerlink" title="Task Slot"></a>Task Slot</h3><h4 id="taskmanager-numberOfTaskSlots"><a href="#taskmanager-numberOfTaskSlots" class="headerlink" title="taskmanager.numberOfTaskSlots"></a><code>taskmanager.numberOfTaskSlots</code></h4><p>每个 Task Manager 的 Task Slot 的数量</p>
+<p><em>参考文档: <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/config/" target="_blank" rel="noopener">https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/config/</a></em></p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

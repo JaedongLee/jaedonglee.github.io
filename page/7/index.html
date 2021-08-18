@@ -150,13 +150,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/03/24/Java-Note-警惕自增陷阱/">
-                Java-Note-警惕自增陷阱
+            <a href="/2018/04/14/Java-Note-NIO/">
+                Java-Note-NIO
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-03-24</span>
+                <span class="date">2018-04-14</span>
             
             
             
@@ -170,12 +170,18 @@
     
         <div class="content">
             <ul>
-<li><p>警惕自增的陷阱</p>
-<ul>
-<li>background: 自增有两种形式: <code>i++</code>和<code>++i</code>, <code>i++</code>表示先赋值后加1, <code>++i</code>表示先加1后赋值</li>
-<li><p>question: 预测下面代码的结果是什么:
+<li>核心部分<ul>
+<li>Channels</li>
+<li>Buffers</li>
+<li>Selectors</li>
+<li>其它部分不过是一些工具类而已</li>
+</ul>
+</li>
+<li>Channel<ul>
+<li>所有的IO在NIO中都从一个Channel开始, Channel有点像流. 数据可以从Channel读到Buffer中, 也可以从Buffer写到Channel中</li>
+<li>主要的Channel实现
         </div>
-        <a href="/2018/03/24/Java-Note-警惕自增陷阱/" class="read-more">Read More</a>
+        <a href="/2018/04/14/Java-Note-NIO/" class="read-more">Read More</a>
     
 
 </div>
@@ -185,13 +191,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/03/21/Java-Note-foreach无法改变原数组的元素/">
-                Java-Note-foreach无法改变原数组的元素
+            <a href="/2018/04/01/Java-Note-Hashmap/">
+                Java-Note-Hashmap
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-03-21</span>
+                <span class="date">2018-04-01</span>
             
             
             
@@ -205,10 +211,12 @@
     
         <div class="content">
             <ul>
-<li><code>foreach</code>无法改变源数组的元素<ul>
-<li>reason: 赋值赋予的是在 foreach语句中创建的中间变量, 而不是源数组的元素, 如下面的代码所示:
+<li>摘要: hashmap是Java程序员使用频率最高的用于映射的数据类型</li>
+<li><p>内部实现</p>
+<ul>
+<li>存储结构-字段
         </div>
-        <a href="/2018/03/21/Java-Note-foreach无法改变原数组的元素/" class="read-more">Read More</a>
+        <a href="/2018/04/01/Java-Note-Hashmap/" class="read-more">Read More</a>
     
 
 </div>
@@ -218,18 +226,18 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/03/16/Java-Arithmetic-Note/">
-                Java-Arithmetic-Note
+            <a href="/2018/04/01/Arithmetic-红黑树/">
+                Arithmetic-红黑树
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-03-16</span>
+                <span class="date">2018-04-01</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/Java/">Java</a>
+                    <a href="/categories/Arithmetic/">Arithmetic</a>
                 </span>
             
         </div>
@@ -237,50 +245,14 @@
 
     
         <div class="content">
-            <ol>
-<li><ul>
-<li><p>question: <code>Jewels And Stones</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    You&apos;re given strings J representing the types of stones that are jewels, and S representing the stones you have.  Each character in S is a type of stone you have.  You want to know how many of the stones you have are also jewels.</span><br><span class="line"></span><br><span class="line">    The letters in J are guaranteed distinct, and all characters in J and S are letters. Letters are case sensitive, so &quot;a&quot; is considered a different type of stone from &quot;A&quot;.</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">    Example 1:</span><br><span class="line"></span><br><span class="line">    Input: J = &quot;aA&quot;, S = &quot;aAAbbbb&quot;</span><br><span class="line">    Output: 3</span><br><span class="line">    Example 2:</span><br><span class="line"></span><br><span class="line">    Input: J = &quot;z&quot;, S = &quot;ZZ&quot;</span><br><span class="line">    Output: 0</span><br><span class="line">    Note:</span><br><span class="line"></span><br><span class="line">    S and J will consist of letters and have length at most 50.</span><br><span class="line">    The characters in J are distinct.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>answer: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">package jewelsAndStones;</span><br><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* @Auther: 1nfinity</span><br><span class="line">* @Description: 先把 stone 中的字符及其个数统计出来并放入 Map 中, 然后在其中寻找对应的 jewel 的数量. 这样应该比直接在 stones 中检索要快</span><br><span class="line">* @Date: Created in 02:53 PM 3/16/2018</span><br><span class="line">* @Modified By:</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public static int numJewelsInStones(String J, String S) &#123;</span><br><span class="line">        // 获取 Stones 字符串的字符列表</span><br><span class="line">        // 仅适用 string.toCharArray 获取到的只是数组, 无法对其进行 remove 操作, 因此需要循环成 List</span><br><span class="line">        List&lt;Character&gt; chars = new ArrayList();</span><br><span class="line">        for (char c : S.toCharArray()) &#123;</span><br><span class="line">            chars.add(c);</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;Character, Integer&gt; charsAndNumMap = new HashMap();</span><br><span class="line">        // 将 List 的第一个字符和其它字符相比较, 如果相同, 数量+1并删除该字符</span><br><span class="line">        // 将上述过程循环进行, 直到 List 的 size 为零, 得到包含 stone 类型和数量的 Map</span><br><span class="line">        // 由于 chars.size() 一直在变动, 因此不适合以其为边界使用 for().</span><br><span class="line">        // for() 并非必须使用, 尽量在有固定边界条件时使用</span><br><span class="line">        while (chars.size() &gt; 0) &#123;</span><br><span class="line">            int count = 1;</span><br><span class="line">            for (int i = 1; i &lt; chars.size();) &#123;</span><br><span class="line">                if (chars.get(0) == chars.get(i)) &#123;</span><br><span class="line">                    chars.remove(i);</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    // 只有在第一个字符未匹配到相同字符时才进行 i++, 因为 i++ 不是必须的, 只是为了推动循环向前进行, 当匹配时, 已经对匹配到的字符进行了移除, 减小了 size, 相当于已经进行了 i++, 已经推进了循环.</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            charsAndNumMap.put(chars.get(0), count);</span><br><span class="line">            chars.remove(0);</span><br><span class="line">        &#125;</span><br><span class="line">        // 遍历 jewel, 尝试在 Map 中获取其数量, 将所有类型的 jewel 的数量相加</span><br><span class="line">        char[] jewels = J.toCharArray();</span><br><span class="line">        int jewelNum = 0;</span><br><span class="line">        for (char jewel : jewels) &#123;</span><br><span class="line">            if (charsAndNumMap.containsKey(jewel)) &#123;</span><br><span class="line">                jewelNum += charsAndNumMap.get(jewel);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;stone type: &quot; + charsAndNumMap.keySet());</span><br><span class="line">        System.out.println(&quot;stone num: &quot; + charsAndNumMap.values());</span><br><span class="line">        System.out.println(&quot;jewels total num: &quot; + jewelNum);</span><br><span class="line">        return jewelNum;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        numJewelsInStones(&quot;ngm&quot;, &quot;kxga&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><p>question: <code>Judge Route Circle</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Initially, there is a Robot at position (0, 0). Given a sequence of its moves, judge if this robot makes a circle, which means it moves back to the original place.</span><br><span class="line"></span><br><span class="line">The move sequ`ence is represented by a string. And each move is represent by a character. The valid robot moves are R (Right), L (Left), U (Up) and D (down). The output should be true or false representing whether the robot makes a circle.</span><br><span class="line"></span><br><span class="line">Example 1:</span><br><span class="line">Input: &quot;UD&quot;</span><br><span class="line">Output: true</span><br><span class="line">Example 2:</span><br><span class="line">Input: &quot;LL&quot;</span><br><span class="line">Output: false`</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>answer:</p>
-<ul>
-<li><p>myAnswer: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public boolean judgeCircle(String moves) &#123;</span><br><span class="line">        int x = 0;</span><br><span class="line">        int y = 0;</span><br><span class="line">        for (char c : moves.toCharArray()) &#123;</span><br><span class="line">            switch (c) &#123;</span><br><span class="line">                case &apos;L&apos;:</span><br><span class="line">                    x--;</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;R&apos;:</span><br><span class="line">                    x++;</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;U&apos;:</span><br><span class="line">                    y++;</span><br><span class="line">                    break;</span><br><span class="line">                case &apos;D&apos;:</span><br><span class="line">                    y--;</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return x + y == 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bestAnswer:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean judgeCircle(String moves) &#123;</span><br><span class="line">        // use an int array to save letter count, its index is the ascii num of the letter</span><br><span class="line">        int temp[] = new int[128];</span><br><span class="line">        for (char c : moves.toCharArray()) &#123;</span><br><span class="line">            temp[c]++;</span><br><span class="line">        &#125;</span><br><span class="line">        return temp[&apos;U&apos;] == temp[&apos;D&apos;] &amp;&amp; temp[&apos;L&apos;] == temp[&apos;R&apos;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><p>question: <code>Self Dividing Numbers</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">A self-dividing number is a number that is divisible by every digit it contains.</span><br><span class="line"></span><br><span class="line">For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.</span><br><span class="line"></span><br><span class="line">Also, a self-dividing number is not allowed to contain the digit zero.</span><br><span class="line"></span><br><span class="line">Given a lower and upper number bound, output a list of every possible self dividing number, including the bounds if possible.</span><br><span class="line"></span><br><span class="line">Example 1:</span><br><span class="line">Input: </span><br><span class="line">left = 1, right = 22</span><br><span class="line">Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]</span><br><span class="line">Note:</span><br><span class="line"></span><br><span class="line">The boundaries of each input argument are 1 &lt;= left &lt;= right &lt;= 10000.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>answer:</p>
-<ul>
-<li><p>myAnswer:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package selfDividingNumbers;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* @Auther: 1nfinity</span><br><span class="line">* @Description:</span><br><span class="line">* @Date: Created in 09:46 AM 3/20/2018</span><br><span class="line">* @Modified By:</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; selfDividingNumbers(int left, int right) &#123;</span><br><span class="line">        List&lt;Integer&gt; integers = new ArrayList&lt;&gt;();</span><br><span class="line">        while (left &lt;= right) &#123;</span><br><span class="line">            if (judgeRange(left, left, 10000)) &#123;</span><br><span class="line">                integers.add(left);</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        return integers;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 整体逻辑: 从最大的位数开始进行模运算</span><br><span class="line">    // source: 需要判断的数字; reminder: 用来记录删去最高位后的数字; divide: 除数, 开始为10000;</span><br><span class="line">    private boolean judgeRange(int source, int reminder, int divide) &#123;</span><br><span class="line">        // 必要, 不然 reminder / divide 会报错</span><br><span class="line">        if (divide &lt; 1) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        // 如果为真, 则表明无法通过 source / divide 来获取source的最高位, 因此需要减少 divide</span><br><span class="line">        if (source &lt; divide) &#123;</span><br><span class="line">            return judgeRange(source, reminder,divide / 10);</span><br><span class="line">        &#125;</span><br><span class="line">        // 表明 reminder 的最高位为 0, 需要排除</span><br><span class="line">        if (reminder / divide == 0) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note! 当 source 模 最高位 为 0 时, 进行递归, 直到模所有位都为 0 返回 true, 或者有不为 0, 返回 false</span><br><span class="line">        if (source % (reminder / divide) == 0) &#123;</span><br><span class="line">            return judgeRange(source, reminder % divide, divide / 10);</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution solution = new Solution();</span><br><span class="line">        System.out.println(solution.selfDividingNumbers(1, 213));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bestAnswer:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class BetterSolution &#123;</span><br><span class="line">    public List&lt;Integer&gt; selfDividingNumbers(int left, int right) &#123;</span><br><span class="line">        List&lt;Integer&gt; ans = new ArrayList();</span><br><span class="line">        for (int n = left; n &lt;= right; ++n) &#123;</span><br><span class="line">            if (selfDividing(n)) ans.add(n);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">//    Alternate implementation of selfDividing:</span><br><span class="line">//    // 通过将源正整数转换为字符串来获取其各个位数</span><br><span class="line">//    public boolean selfDividing(int n) &#123;</span><br><span class="line">//        for (char c: String.valueOf(n).toCharArray()) &#123;</span><br><span class="line">//            if (c == &apos;0&apos; || (n % (c - &apos;0&apos;) &gt; 0))</span><br><span class="line">//                return false;</span><br><span class="line">//        &#125;</span><br><span class="line">//        return true;</span><br><span class="line">//    &#125;</span><br><span class="line">    // 整体逻辑: 从最低位开始进行模运算, 使用的定理: 任何正整数与 10 模, 获得这个正整数的最低位; 任何正整数与 10 除, 获得其除去最低位的数字. 模和除本质上会互补关系</span><br><span class="line">    public boolean selfDividing(int n) &#123;</span><br><span class="line">        int x = n;</span><br><span class="line">        while (x &gt; 0) &#123;</span><br><span class="line">            int d = x % 10;</span><br><span class="line">            // 减少 x 的值, 用来依次获取最低位</span><br><span class="line">            x /= 10;</span><br><span class="line">            // 如果最低位为 0, 或者源正整数模最低位 不为 0, 排除该数</span><br><span class="line">            if (d == 0 || (n % d) &gt; 0) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
+            <ul>
+<li>红黑树结构剖析<ul>
+<li>参考文档: <a href="http://www.cnblogs.com/fanzhidongyzby/p/3187912.html" target="_blank" rel="noopener"><code>红黑树数据结构剖析</code></a>; <code>算法导论</code></li>
+<li>基本概念<ul>
+<li>规则<ol>
+<li>节点非红即黑
         </div>
+        <a href="/2018/04/01/Arithmetic-红黑树/" class="read-more">Read More</a>
     
 
 </div>
@@ -290,13 +262,13 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/03/15/Java-Interview-Practice/">
-                Java-Interview-Practice
+            <a href="/2018/03/31/Java-Note-Concurrency-多线程/">
+                Java-Note-Concurrency-多线程
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-03-15</span>
+                <span class="date">2018-03-31</span>
             
             
             
@@ -310,20 +282,12 @@
     
         <div class="content">
             <ol>
-<li><ul>
-<li>question: 九种基本数据类型的大小, 以及他们的封装类</li>
-<li>answer:<ol>
-<li>byte/1/Byte</li>
-<li>short/2/Short</li>
-<li>char/2/Character</li>
-<li>int/4/Integer</li>
-<li>long/8/Long</li>
-<li>float/4/Float</li>
-<li>double/8/Double</li>
-<li>void/-/Void</li>
-<li>boolean/-/Boolean
+<li>多线程基本概念<ul>
+<li><code>进程</code>: 进程是程序（任务）的执行过程，它持有资源（共享内存，共享文件）和线程。</li>
+<li><code>线程</code>: 线程是系统中最小的执行单元；同一进程中可以有多个线程；线程共享进程的资源。<ul>
+<li>线程的生命周期:<br>  ![生命周期图片]
         </div>
-        <a href="/2018/03/15/Java-Interview-Practice/" class="read-more">Read More</a>
+        <a href="/2018/03/31/Java-Note-Concurrency-多线程/" class="read-more">Read More</a>
     
 
 </div>
@@ -333,44 +297,18 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/03/08/Springframework-Problem/">
-                Springframework-Problem
+            <a href="/2018/03/31/Java-Note-Concurrency-volatile关键字/">
+                Java-Note-Concurrency-volatile关键字
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-03-08</span>
-            
-            
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/03/08/Springframework-Note/">
-                Springframework-Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-03-08</span>
+                <span class="date">2018-03-31</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/springframework/">springframework</a>
+                    <a href="/categories/Java/">Java</a>
                 </span>
             
         </div>
@@ -379,15 +317,13 @@
     
         <div class="content">
             <ul>
-<li><p>springframework事物回滚注意事项</p>
+<li><p><code>volatile</code>关键字</p>
 <ul>
-<li><p>throw </p>
-<ul>
-<li>must to throw something out of method, that springfamework can know that it need to rollback.</li>
-<li>spring will rollback all transactions in the method even though only one transaction is error</li>
-<li><p>example:
+<li>要理解<code>volatile</code>为什么能确保可见性, 就要先理解<code>Java</code>中的内存模型. 关于内存模型详见本目录下的<code>Java-Note-JVM-内存模型.md</code></li>
+<li>Java内存模型规定了所有的变量都存储在主内存中. 每条线程还有自己的工作内存用来保存被该线程所使用的变量(这些变量是从主内存拷贝而来). </li>
+<li>线程对变量的所有操作(读取/赋值)都在工作内存中进行.
         </div>
-        <a href="/2018/03/08/Springframework-Note/" class="read-more">Read More</a>
+        <a href="/2018/03/31/Java-Note-Concurrency-volatile关键字/" class="read-more">Read More</a>
     
 
 </div>
@@ -397,48 +333,18 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/02/06/Mybatis-Problem/">
-                Mybatis-Problem
+            <a href="/2018/03/30/Java-Note-JVM-内存模型/">
+                Java-Note-JVM-内存模型
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2018-02-06</span>
+                <span class="date">2018-03-30</span>
             
             
             
                 <span class="category">
-                    <a href="/categories/Mybatis/">Mybatis</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/02/06/Mybatis-Note/">
-                Mybatis-Note
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-02-06</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Mybatis/">Mybatis</a>
+                    <a href="/categories/Java/">Java</a>
                 </span>
             
         </div>
@@ -447,75 +353,146 @@
     
         <div class="content">
             <ul>
-<li><p>mybatis 中批量可选择性的 <code>update</code> 不同 <code>table</code> 中的 <code>data</code></p>
-<ul>
-<li><p>方法:</p>
+<li>堆(<code>Heap</code>) [线程共享]<ul>
+<li>作用: 用来存放各种类的实例对象</li>
+<li>分类目的: 使JVM能够更好的管理堆内存中的对象, 包括内存的分配和回收</li>
+<li>分类:
+        </div>
+        <a href="/2018/03/30/Java-Note-JVM-内存模型/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/30/Memo/">
+                Memo
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-30</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Memo/">Memo</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li>180330<ul>
+<li>简历: <ul>
+<li>添加python经历</li>
+<li>修改个人网站</li>
+<li>检查承创公众号</li>
+<li>更改项目时间, 四月份开始
+        </div>
+        <a href="/2018/03/30/Memo/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/29/Http-Note-ajax跨域请求导致session错误/">
+                Http-Note-ajax跨域请求导致sesion错误
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-29</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Http/">Http</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p>出于安全原因，浏览器限制从脚本内发起的跨源HTTP请求或返回结果被浏览器拦截, 因此, 在Ajax跨域请求时, 建立的sessionId不会被浏览器保存下来, 这样每次请求都会被当做一个新的客户端. 此时需要使用<code>CORS(跨域请求机制)</code>, 跨域资源共享（ CORS ）机制允许 Web 应用服务器进行跨域访问控制，从而使跨域数据传输得以安全进行.
+        </div>
+        <a href="/2018/03/29/Http-Note-ajax跨域请求导致session错误/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/28/Java-Note-线程的生命周期/">
+                Java-Note-线程的生命周期
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-28</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p><img src="https://note.youdao.com/yws/public/resource/340ba176925ee287a13ec8321f3181f3/xmlnote/A706FAFE512D4B66859DD2F2AC29970B/17112" alt="线程生命周期">
+        </div>
+        <a href="/2018/03/28/Java-Note-线程的生命周期/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/28/Java-Note-sleep和wait的区别/">
+                Java-Note-sleep和wait的区别
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-28</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Java/">Java</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <ul>
+<li><p><code>Java</code>中<code>sleep()</code>和<code>wait()</code>的区别总结:        </p>
 <ol>
-<li><p>前端传入表名 和 <code>List&lt;LinkedHashMap&gt;</code> 类型的 <code>valueList</code>
+<li><p>对于sleep()方法，我们首先要知道该方法是属于Thread类中的。而wait()方法，则是属于Object类中的。
         </div>
-        <a href="/2018/02/06/Mybatis-Note/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/02/02/Network-problem/">
-                Network-problem
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-02-02</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Network/">Network</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ul>
-<li>问题: 一个局域网下面有一个子路由器, 子路由器管理的ip地址为<code>192.168.1.XXX</code>, 局域网本身管理的ip地址范围为<code>192.168.XXX.XXX</code>, 在这个网络中, 当tomcat中的应用在<code>192.168.0.XXX</code>ip中时, 其它电脑可以访问tomcat, 当其中的应用在<code>192.168.1.XXX</code>ip中时, 其它电脑无法访问到, 即使是同样<code>192.168.1.XXX</code>的电脑
-        </div>
-        <a href="/2018/02/02/Network-problem/" class="read-more">Read More</a>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/02/02/Program-Note-函数式编程/">
-                Program-Note-函数式编程
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-02-02</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Program/">Program</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            
-        </div>
+        <a href="/2018/03/28/Java-Note-sleep和wait的区别/" class="read-more">Read More</a>
     
 
 </div>
@@ -562,19 +539,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
             </li>
             
         </ul>

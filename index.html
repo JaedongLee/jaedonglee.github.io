@@ -150,71 +150,29 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">
-                Java-Note-spring-jdbc学习笔记
+            <a href="/2021/08/18/Flink-配置文档/">
+                Flink 配置文档
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-07-31</span>
+                <span class="date">2021-08-18</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <h1 id="spring-jdbc-学习笔记"><a href="#spring-jdbc-学习笔记" class="headerlink" title="spring-jdbc 学习笔记"></a>spring-jdbc 学习笔记</h1>
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2020/07/23/Java-Note-品牌库技术总结/">
-                Java-Note-品牌库技术总结
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2020-07-23</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a><strong>收获</strong></h2><h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a><strong>技术</strong></h3><h4 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h4><ol>
-<li>业务字段和系统字段区分开, 不要混在一起用. 如申请人和创建人. 因为以后业务变化, 创建人可能不再是申请人, 而是其他角色</li>
-<li>设计单据相关表时注意表的拆分, 单据的通用数据(单据状态, 类型等)和对应业务的数据(品牌相关数据)应分开保存. 这样结构更清晰, 代码编写起来更简单</li>
-<li>两个不同概念的东西不要用同一个名称, 比如品牌名称和候选品牌名称不能同时使用品牌名称这个称呼. 以避免对功能的定义产生误会, 从而导致代码返工或者线上事故</li>
-<li>对于执行耗时较长的功能应在story拆分阶段识别出来, 以避免上线后造成的超时异常</li>
-<li>分析可能存在的性能瓶颈, 以避免开发中再识别出来影响迭代时间节点或者线上发布后产生问题</li>
-<li>抽出项目共性</li>
-<li>查询时统一用主键id而不是业务id。因为数据集关联用的主键id</li>
-</ol>
-<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol>
-<li>mybatis <choose><when>之后一定要加<otherwise>, 否则很可能在和其它标签组合时产生语法错误</otherwise></when></choose></li>
-</ol>
-<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a><strong>不足</strong></h2><ol>
-<li>对高性能系统设计的经验不足</li>
-<li>在受到情绪刺激时应该冷静的应对</li>
-</ol>
+            <h1 id="重要的配置"><a href="#重要的配置" class="headerlink" title="重要的配置"></a>重要的配置</h1><h2 id="Task-Manager"><a href="#Task-Manager" class="headerlink" title="Task Manager"></a>Task Manager</h2><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><h4 id="taskmanager-memory-process-size"><a href="#taskmanager-memory-process-size" class="headerlink" title="taskmanager.memory.process.size"></a><code>taskmanager.memory.process.size</code></h4><p>整个 Task Manager 的内存大小</p>
+<h4 id="taskmanager-memory-flink-size"><a href="#taskmanager-memory-flink-size" class="headerlink" title="taskmanager.memory.flink.size"></a><code>taskmanager.memory.flink.size</code></h4><p>Task Manager 的堆大小</p>
+<p>如果不配这个, 会默认按百分比配置, 导致堆分到的内存变小, 造成内存浪费.</p>
+<p>配置了这个后不要再配置 <code>taskmanager.memory.process.size</code></p>
+<h4 id="taskmanager-memory-managed-size"><a href="#taskmanager-memory-managed-size" class="headerlink" title="taskmanager.memory.managed.size"></a><code>taskmanager.memory.managed.size</code></h4><p>Task Manager 的管理内存大小</p>
+<p>这个内存要指定大小, 否则会按默认百分比配置, 造成内存浪费.</p>
+<h3 id="Task-Slot"><a href="#Task-Slot" class="headerlink" title="Task Slot"></a>Task Slot</h3><h4 id="taskmanager-numberOfTaskSlots"><a href="#taskmanager-numberOfTaskSlots" class="headerlink" title="taskmanager.numberOfTaskSlots"></a><code>taskmanager.numberOfTaskSlots</code></h4><p>每个 Task Manager 的 Task Slot 的数量</p>
+<p><em>参考文档: <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/config/" target="_blank" rel="noopener">https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/config/</a></em></p>
 
         </div>
     
@@ -226,36 +184,36 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">
-                Java-Note-记一次log4j配置文件无法加载问题的解决过程
+            <a href="/2021/08/18/Flink-Standalone-部署文档/">
+                Flink Standalone 部署文档
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-04-27</span>
+                <span class="date">2021-08-18</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在一次由于其他原因更改了<code>POM</code>文件配置的操作后发现: <code>spring boot</code>项目中配置的<code>log4j2.yml</code>文件无法正常加载, 显示错误如下:</p>
-<blockquote>
-<p>ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only errors to the console.</p>
-</blockquote>
-<h2 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h2><p>发现在更改<code>POM</code>文件过程中删除了几个依赖. 其中有一个是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.fasterxml.jackson.dataformat&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jackson-dataformat-yaml&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>进入<code>com.fasterxml.jackson.dataformat.yaml</code>包中, 发现与解析<code>yml</code>文件相关的类<code>YAMLParser</code>, <code>debug</code>该类的构造器, 发现<code>org.apache.logging.log4j.core</code>包中的<code>JsonConfigurationFactory</code>对象初始化时会加载<code>com.fasterxml.jackson.dataformat.yaml</code>包中的类. 具体代码如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonConfigurationFactory</span> <span class="keyword">extends</span> <span class="title">ConfigurationFactory</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] dependencies = <span class="keyword">new</span> String[] &#123;</span><br><span class="line">            <span class="string">"com.fasterxml.jackson.databind.ObjectMapper"</span>,</span><br><span class="line">            <span class="string">"com.fasterxml.jackson.databind.JsonNode"</span>,</span><br><span class="line">            <span class="string">"com.fasterxml.jackson.core.JsonParser"</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> isActive;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 尝试加载com.fasterxml.jackson.dataformat.yaml包中的dependencies类, 如果失败, 将isActive置false</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JsonConfigurationFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">final</span> String dependency : dependencies) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!Loader.isClassAvailable(dependency)) &#123;</span><br><span class="line">                LOGGER.debug(<span class="string">"Missing dependencies for Json support"</span>);</span><br><span class="line">                isActive = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        isActive = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 如果isActive置false, 则返回null, 使用default configuration</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Configuration <span class="title">getConfiguration</span><span class="params">(<span class="keyword">final</span> ConfigurationSource source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!isActive) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JsonConfiguration(source);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigurationFactory</span> <span class="keyword">extends</span> <span class="title">ConfigurationBuilderFactory</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> <span class="keyword">extends</span> <span class="title">ConfigurationFactory</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Configuration <span class="title">getConfiguration</span><span class="params">(<span class="keyword">final</span> String name, <span class="keyword">final</span> URI configLocation)</span> </span>&#123;</span><br><span class="line">            ...</span><br><span class="line">            Configuration config = getConfiguration(<span class="keyword">true</span>, name);</span><br><span class="line">            <span class="keyword">if</span> (config == <span class="keyword">null</span>) &#123;</span><br><span class="line">                config = getConfiguration(<span class="keyword">true</span>, <span class="keyword">null</span>);</span><br><span class="line">                <span class="keyword">if</span> (config == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    config = getConfiguration(<span class="keyword">false</span>, name);</span><br><span class="line">                    <span class="keyword">if</span> (config == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 从这里进入上面的getConfiguration方法</span></span><br><span class="line">                        config = getConfiguration(<span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (config != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> config;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 此处为起因中的语句</span></span><br><span class="line">            LOGGER.error(<span class="string">"No log4j2 configuration file found. Using default configuration: logging only errors to the console."</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> DefaultConfiguration();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由上面的代码可知, 当无法加载<code>com.fasterxml.jackson.dataformat.yaml</code>包中的类时, 会弹出起因中的错误</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在<code>POM</code>文件中增加<code>com.fasterxml.jackson.dataformat.yaml</code>依赖</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>遇到这种框架问题, 可以尝试初步定位问题原因, 再通过<code>debug</code>框架源码来精确定位问题所在位置从而找到解决方案</p>
+            <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
+<li>Linux 操作系统</li>
+<li>安装 JDK 8</li>
+<li>下载 <a href="https://flink.apache.org/downloads.html" target="_blank" rel="noopener">Flink 发行版</a></li>
+<li>解压到指定目录</li>
+</ol>
+<h3 id="开始-Standalone-集群"><a href="#开始-Standalone-集群" class="headerlink" title="开始 Standalone 集群"></a>开始 Standalone 集群</h3><ol>
+<li>进入 Flink 目录</li>
+<li>启动集群: <code>./bin/start-cluster.sh</code></li>
+</ol>
+<h3 id="关闭-Standalone-集群"><a href="#关闭-Standalone-集群" class="headerlink" title="关闭 Standalone 集群"></a>关闭 Standalone 集群</h3><ol>
+<li>进入 Flink 目录</li>
+<li>关闭集群: <code>./bin/stop-cluster.sh</code></li>
+</ol>
+<p><em>参考文档: <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/resource-providers/standalone/overview/" target="_blank" rel="noopener">https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/deployment/resource-providers/standalone/overview/</a></em></p>
 
         </div>
     
@@ -267,13 +225,54 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">
-                Untitled
+            <a href="/2021/07/31/总结-开思-数据集成平台-V1.0/">
+                总结-开思-数据集成平台-V1.0
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-04-15</span>
+                <span class="date">2021-07-31</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/总结/">总结</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><h3 id="设计阶段应注重异常流程的设计-否则写出来的没有经过设计的异常处理代码会非常臃肿"><a href="#设计阶段应注重异常流程的设计-否则写出来的没有经过设计的异常处理代码会非常臃肿" class="headerlink" title="设计阶段应注重异常流程的设计, 否则写出来的没有经过设计的异常处理代码会非常臃肿."></a>设计阶段应注重异常流程的设计, 否则写出来的没有经过设计的异常处理代码会非常臃肿.</h3><h3 id="流处理程序中-应保证元数据的一致性"><a href="#流处理程序中-应保证元数据的一致性" class="headerlink" title="流处理程序中, 应保证元数据的一致性"></a>流处理程序中, 应保证元数据的一致性</h3><p>即一个元数据应该只对应一个特定的数据体. 即使元数据里面的内容是相同的, 也不能随意的更换它</p>
+<h3 id="当系统较复杂时-类型键的命名应该具体-以避免歧义"><a href="#当系统较复杂时-类型键的命名应该具体-以避免歧义" class="headerlink" title="当系统较复杂时, 类型键的命名应该具体, 以避免歧义."></a>当系统较复杂时, 类型键的命名应该具体, 以避免歧义.</h3><ul>
+<li>正例: 数据业务类型: 商品 / 订单</li>
+<li>反例: 数据类型: 商品 / 订单</li>
+</ul>
+<h1 id="代码评审"><a href="#代码评审" class="headerlink" title="代码评审"></a>代码评审</h1><h3 id="审核代码时不应只注意代码的规范-还应注意新旧代码的一致性"><a href="#审核代码时不应只注意代码的规范-还应注意新旧代码的一致性" class="headerlink" title="审核代码时不应只注意代码的规范, 还应注意新旧代码的一致性"></a>审核代码时不应只注意代码的规范, 还应注意新旧代码的一致性</h3><ul>
+<li>比如命名和方法名的语义性</li>
+</ul>
+<h1 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h1><h3 id="ES-限制最大的查询结果为-10000-条-超过后即使分页查询第-10001-条也会报错"><a href="#ES-限制最大的查询结果为-10000-条-超过后即使分页查询第-10001-条也会报错" class="headerlink" title="ES 限制最大的查询结果为 10000 条. 超过后即使分页查询第 10001 条也会报错"></a>ES 限制最大的查询结果为 10000 条. 超过后即使分页查询第 10001 条也会报错</h3><p>解决方案: 将限制由 10000 改为 1000000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUT _all/_settings?preserve_existing=true</span><br><span class="line">&#123;</span><br><span class="line">  &quot;index.max_result_window&quot; : &quot;10000000&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="避免-Index-中的字段动态-因为可能会导致整个-ES-服务超时"><a href="#避免-Index-中的字段动态-因为可能会导致整个-ES-服务超时" class="headerlink" title="避免 Index 中的字段动态, 因为可能会导致整个 ES 服务超时"></a>避免 Index 中的字段动态, 因为可能会导致整个 ES 服务超时</h3><p>由于 ES 会为 Index 的每个新增的字段创建一个 mapping, 当 Index 中字段过多时, mappings 会非常多.<br>创建或删除 document 时由于会改变字段的 mapping, 会占用非常多的 CPU 时间. 从而导致整个 ES 服务超时.</p>
+<p>每个 Index 尽量保证字段不变或很少变</p>
+<h1 id="消息组件"><a href="#消息组件" class="headerlink" title="消息组件"></a>消息组件</h1><h3 id="消息组件不是用来发送单条大-size-的数据的-而是用来发送多条小-size-的数据的"><a href="#消息组件不是用来发送单条大-size-的数据的-而是用来发送多条小-size-的数据的" class="headerlink" title="消息组件不是用来发送单条大 size 的数据的, 而是用来发送多条小 size 的数据的"></a>消息组件不是用来发送单条大 size 的数据的, 而是用来发送多条小 size 的数据的</h3><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><h3 id="Kafka-中存在-transction-的概念-Producer-会收集一批数据后一次性发送"><a href="#Kafka-中存在-transction-的概念-Producer-会收集一批数据后一次性发送" class="headerlink" title="Kafka 中存在 transction 的概念. Producer 会收集一批数据后一次性发送"></a>Kafka 中存在 transction 的概念. Producer 会收集一批数据后一次性发送</h3><h1 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h1><h3 id="Flink-与-Kafka-的通讯中-不会按-Kafka-的配置自动提交-offset-而是在检查点中提交-offset-如果检查点时间间隔设置过长-会导致-offset-提交延迟-从而造成消息积压"><a href="#Flink-与-Kafka-的通讯中-不会按-Kafka-的配置自动提交-offset-而是在检查点中提交-offset-如果检查点时间间隔设置过长-会导致-offset-提交延迟-从而造成消息积压" class="headerlink" title="Flink 与 Kafka 的通讯中, 不会按 Kafka 的配置自动提交 offset, 而是在检查点中提交 offset. 如果检查点时间间隔设置过长, 会导致 offset 提交延迟, 从而造成消息积压"></a>Flink 与 Kafka 的通讯中, 不会按 Kafka 的配置自动提交 offset, 而是在检查点中提交 offset. 如果检查点时间间隔设置过长, 会导致 offset 提交延迟, 从而造成消息积压</h3>
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2021/01/30/SonarLint 使用手册/">
+                SonarLint 使用手册
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2021-01-30</span>
             
             
             
@@ -282,21 +281,57 @@
 
     
         <div class="content">
-            <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>今天公司测试人员在测试环境中测试网站新功能时, 突然在浏览器中弹出警告框, 如下图所示: <img src="https://note.youdao.com/yws/public/resource/340ba176925ee287a13ec8321f3181f3/xmlnote/C3BC37974EDD473EB18E176BE989FB71/20900" alt>        </p>
-<h3 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h3><p>问题非常诡异, 因为在这个问题出现前后, 没有人更新过应用. 在应用源码中全文搜索<code>alert</code>和<code>aa</code>字符串, 没有发现能够弹出该警告框的代码块. 在仔细排查了源码没有找到疑点后, 重新对问题的出现过程进行分析, 发现有时弹出一次, 有时弹出两次, 并且全都是在按条件查询后弹出, 于是尝试确定警告框出现次数, 使用筛选功能进行条件查询, 发现弹窗的次数与后台返回的数据数量相关, 于是把怀疑聚焦在后端传入的数据中. 发现后端传入的数据中某个字段的值中包含<code>&lt;script&gt;alert(&#39;aa&#39;)&lt;/script</code>字符串, 于是确定问题起源. <img src="https://note.youdao.com/yws/public/resource/340ba176925ee287a13ec8321f3181f3/xmlnote/A9BE3746D4744F59B3162674317B3326/20899" alt></p>
-<h3 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h3><p>在<code>jquery-1.8.2</code>中的<code>html: function( value ) {...}</code>方法的参数<code>value</code>就是经过处理后的包含微博正文字段等所有表格展示内容的html字符串, 然后在该方法里面对该字符串进行解析, 此时会执行其中的<code>&lt;script&gt;</code>代码片段<br>例如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = "<span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"datagrid-btable"</span> <span class="attr">cellspacing</span>=<span class="string">"0"</span> <span class="attr">cellpadding</span>=<span class="string">"0"</span> <span class="attr">border</span>=<span class="string">"0"</span>&gt;</span><span class="tag">&lt;<span class="name">tbody</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span> <span class="attr">id</span>=<span class="string">"datagrid-row-r1-2-0"</span> <span class="attr">datagrid-row-index</span>=<span class="string">"0"</span> <span class="attr">class</span>=<span class="string">"datagrid-row  "</span> &gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">field</span>=<span class="string">"uid_nick"</span>  &gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center;white-space:normal;height:auto;"</span> <span class="attr">class</span>=<span class="string">"datagrid-cell datagrid-cell-c1-uid_nick"</span>&gt;</span>_笺罗<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center;white-space:normal;height:auto;"</span> <span class="attr">class</span>=<span class="string">"datagrid-cell datagrid-cell-c1-weibo_content"</span>&gt;</span>CMS原发-博文-维系类-带图0710，ADD，sum，000，；‘’“”：？,;''"":?...（@！!#2333#*/^&amp;~+-（2333二三）<span class="tag">&lt;<span class="name">br</span> /&gt;</span> &amp;nbsp; <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">alert('aa');</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>，2-0，1.[偷乐]<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">field</span>=<span class="string">"exposure_rate"</span>  &gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center;white-space:normal;height:auto;"</span> <span class="attr">class</span>=<span class="string">"datagrid-cell datagrid-cell-c1-exposure_rate"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span>&gt;<span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span>"</span><br></pre></td></tr></table></figure></p>
-<p>此时会执行<code>datagrid-cell datagrid-cell-c1-weibo_content</code>类中的<code>&lt;script&gt;</code>字符串</p>
-<h3 id="事后总结"><a href="#事后总结" class="headerlink" title="事后总结"></a>事后总结</h3><ol>
-<li>代码编写方面<ol>
-<li>在后台对需要插入数据库的字符串进行检查或转义. 虽然不是本人写的插入功能, 但也要引以为戒</li>
-<li>在前端对后台传入的字符串进行转义</li>
-</ol>
-</li>
-<li>bug定位方面<ol>
-<li>定位每次出现的具体状况有细微差别的bug时, 应找到bug的出现规律, 有助于发现bug原因</li>
-</ol>
+            <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>指导开发人员安装/使用 SonarLint, 帮助开发人员统一应用公司代码检测配置. 以减少远程 CI 时质量检测不通过的几率, 提高开发效率.</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li>在 Intellij IDEA 的 Plugin Marketplace 中搜索 SonarLint</li>
+<li>点击 INSTALL</li>
+<li><p>重启 IDE</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_16-57-45.png" alt></p>
 </li>
 </ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li><p>包扫描</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-49-24.png?version=1&amp;modificationDate=1612000164156&amp;api=v2" alt></p>
+</li>
+<li><p>文件扫描</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-4-39.png?version=1&amp;modificationDate=1611997479518&amp;api=v2" alt></p>
+</li>
+</ol>
+<h3 id="使用远程-SonarQube-Server-代码检测配置"><a href="#使用远程-SonarQube-Server-代码检测配置" class="headerlink" title="使用远程 SonarQube Server 代码检测配置"></a>使用远程 SonarQube Server 代码检测配置</h3><ol>
+<li><p>配置 SonarQube 远程服务器</p>
+<ol>
+<li><p>配置名称及 URL</p>
+<p>URL: <a href="http://10.118.71.198:9000/" target="_blank" rel="noopener">http://10.118.71.198:9000/</a></p>
+<p><img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-14-16.png?version=1&amp;modificationDate=1611998056272&amp;api=v2" alt></p>
+</li>
+<li><p>配置 Token</p>
+<p>Token: e76568b88f7e8788f60afda7b9f26aa0db9ec64f</p>
+<p><img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-13-55.png?version=1&amp;modificationDate=1611998035055&amp;api=v2" alt></p>
+</li>
+<li><p>更新配置到本地</p>
+<p><img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-16-27.png?version=1&amp;modificationDate=1611998186813&amp;api=v2" alt></p>
+<p>PS: 更新配置时会弹出如下警告窗口, 是远程服务器 PHP 代码检测模块和 Python 代码检测模块版本过低导致. 对 Java 检测没有影响.</p>
+<p><img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-19-40.png?version=1&amp;modificationDate=1611998380785&amp;api=v2" alt></p>
+</li>
+</ol>
+</li>
+<li><p>绑定项目</p>
+<p>   <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-21-44.png?version=1&amp;modificationDate=1611998504554&amp;api=v2" alt></p>
+</li>
+</ol>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><h4 id="1-在实际开发过程中远程配置是否生效"><a href="#1-在实际开发过程中远程配置是否生效" class="headerlink" title="1. 在实际开发过程中远程配置是否生效?"></a>1. 在实际开发过程中远程配置是否生效?</h4><p>A: 生效, 验证如下:</p>
+<ol>
+<li><p>使用本地默认配置检测 unused imports 规则, 结果是可以检测出来</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-32-15.png?version=1&amp;modificationDate=1611999135466&amp;api=v2" alt></p>
+</li>
+<li><p>在远程配置中禁用掉对 unused imports 规则的检测</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-27-15.png?version=1&amp;modificationDate=1611998835701&amp;api=v2" alt></p>
+</li>
+<li><p>使用远程配置检测 unused imports 规则, 结果是无法检测出来</p>
+<p> <img src="https://zhishiku.casstime.com/download/attachments/63512082/image2021-1-30_17-31-12.png?version=1&amp;modificationDate=1611999072753&amp;api=v2" alt></p>
+</li>
+</ol>
+<h4 id="2-Intellij-IDEA-中一个Project中多个微服务-如何保证远程配置生效"><a href="#2-Intellij-IDEA-中一个Project中多个微服务-如何保证远程配置生效" class="headerlink" title="2. Intellij IDEA 中一个Project中多个微服务, 如何保证远程配置生效?"></a>2. Intellij IDEA 中一个Project中多个微服务, 如何保证远程配置生效?</h4><p>A: 绑定项目步骤中绑定组内随机一个微服务, 即可使用本组的远程配置</p>
 
         </div>
     
@@ -308,196 +343,87 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2019/10/16/Java-Spring-使用构造器自动装配时的循环依赖问题/">
-                Java-Spring-使用构造器自动装配时的循环依赖问题
+            <a href="/2020/12/27/Thoughtwork-TDD-笔记/">
+                Thoughtwork-TDD-笔记
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2019-10-16</span>
+                <span class="date">2020-12-27</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <p>Spring中不推荐使用字段注入的方式, 而是推荐使用构造器注入的方式. 构造器注入的方式有很多优点, 但有一点要注意, 构造器注入可能会产生循环依赖的问题.</p>
-<p>字段注入会在对象构建之后进行, 因此不会产生构造器构建时的循环依赖问题, 但构造器注入时会有这个问题, 比如两个Serivce互相调用, 此时使用构造器注入会发生循环依赖</p>
-<p>暂时的解决方法是将互相调用的Service使用字段注入, 最终的解决方案是重新设计类的划分, 使Service无法互相调用</p>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2019/03/30/Java-Note-一次操作系统报错OutOfMemory-Error的处理记录/">
-                Java-Note-JVM-一次OutOfMemoryError的处理过程的记录
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2019-03-30</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/JVM/">JVM</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>在启动公司Websophic容器时出现报错, 如下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> There is insufficient memory for the Java Runtime Environment to continue.</span><br><span class="line"><span class="meta">#</span> Native memory allocation (malloc) failed to allocate 160088 bytes for AllocateHeap</span><br><span class="line"><span class="meta">#</span> An error report file with more information is saved as:</span><br><span class="line"><span class="meta">#</span> /users/xxx/hs_err_pidxxxx.log</span><br></pre></td></tr></table></figure></p>
-<p>然后查看<code>/users/xxx/hs_err_pidxxxx.log</code>内容:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> There is insufficient memory for the Java Runtime Environment to continue.</span><br><span class="line"><span class="meta">#</span> Native memory allocation (mmap) failed to map 357564416 bytes for committing reserved memory.</span><br><span class="line"><span class="meta">#</span> Possible reasons:</span><br><span class="line"><span class="meta">#</span>   The system is out of physical RAM or swap space</span><br><span class="line"><span class="meta">#</span>   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap</span><br><span class="line"><span class="meta">#</span> Possible solutions:</span><br><span class="line"><span class="meta">#</span>   Reduce memory load on the system</span><br><span class="line"><span class="meta">#</span>   Increase physical memory or swap space</span><br><span class="line"><span class="meta">#</span>   Check if swap backing store is full</span><br><span class="line"><span class="meta">#</span>   Decrease Java heap size (-Xmx/-Xms)</span><br><span class="line"><span class="meta">#</span>   Decrease number of Java threads</span><br><span class="line"><span class="meta">#</span>   Decrease Java thread stack sizes (-Xss)</span><br><span class="line"><span class="meta">#</span>   Set larger code cache with -XX:ReservedCodeCacheSize=</span><br><span class="line"><span class="meta">#</span>   JVM is running with Unscaled Compressed Oops mode in which the Java heap is</span><br><span class="line"><span class="meta">#</span>     placed in the first 4GB address space. The Java Heap base address is the</span><br><span class="line"><span class="meta">#</span>     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress</span><br><span class="line"><span class="meta">#</span>     to set the Java Heap base and to place the Java Heap above 4GB virtual address.</span><br><span class="line"><span class="meta">#</span> This output file may be truncated or incomplete.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span>  Out of Memory Error (os_linux.cpp:2749), pid=4252, tid=0x00007f3f38bb5700</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> JRE version:  (8.0_201-b09) (build )</span><br><span class="line"><span class="meta">#</span> Java VM: Java HotSpot(TM) 64-Bit Server VM (25.201-b09 mixed mode linux-amd64 compressed oops)</span><br><span class="line"><span class="meta">#</span> Core dump written. Default location: /users/ems/core or core.4252 (max size 521000 kB). To ensure a full core dump, try "ulimit -c unlimited" before starting Java again</span><br><span class="line"><span class="meta">#</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>翻译过来就是本地内存分配失败, 可能的原因有两种    </p>
+            <h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>极限编程是指将最佳实践做到极限</p>
+<p>防御性测试代价太大, 应该只测试 80%的正确业务场景</p>
+<h2 id="git-规范"><a href="#git-规范" class="headerlink" title="git 规范"></a>git 规范</h2><p>git commit 提现业务价值</p>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>测试方法名称使用下划线方式命名</p>
+<p>命名使用一般含义而非具体实现来命名</p>
+<p>写完方法名后让队友读一下以检测可读性</p>
+<h1 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h1><h2 id="Why-TDD"><a href="#Why-TDD" class="headerlink" title="Why TDD"></a>Why TDD</h2><h3 id="简化设计"><a href="#简化设计" class="headerlink" title="简化设计"></a>简化设计</h3><h3 id="活文档"><a href="#活文档" class="headerlink" title="活文档"></a>活文档</h3><p>测试用例维护好后方法签名本身就是活文档</p>
+<h3 id="快速反馈"><a href="#快速反馈" class="headerlink" title="快速反馈"></a>快速反馈</h3><h3 id="安全保障"><a href="#安全保障" class="headerlink" title="安全保障"></a>安全保障</h3><h2 id="测试替身"><a href="#测试替身" class="headerlink" title="测试替身"></a>测试替身</h2><h2 id="正交分解法"><a href="#正交分解法" class="headerlink" title="正交分解法"></a>正交分解法</h2><h1 id="Code-Review-原则"><a href="#Code-Review-原则" class="headerlink" title="Code Review 原则"></a>Code Review 原则</h1><h2 id="关注-git-commits"><a href="#关注-git-commits" class="headerlink" title="关注 git commits"></a>关注 git commits</h2><p>每个测试通过都要提交一次代码. 至少 30 秒一次提交</p>
+<p>commit 粒度:</p>
 <ol>
-<li>系统物理内存或虚拟内存不足</li>
-<li>程序在压缩指针模式下运行, Java堆会阻塞本地堆的增长   </li>
+<li>经验丰富的开发人员: 15m</li>
+<li>经验不足的开发人员: 2h</li>
 </ol>
-<p>然后使用<code>free -m</code>命令查询, 发现内存足够:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          7983       5415       2568          0        170       1460</span><br><span class="line">-/+ buffers/cache:       3784       4199</span><br><span class="line">Swap:        15257         71      15186</span><br></pre></td></tr></table></figure></p>
-<p>那么尝试按第二个问题进行解决, 可能的方案有两种:</p>
+<h2 id="Story-拆分"><a href="#Story-拆分" class="headerlink" title="Story 拆分"></a>Story 拆分</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><ol>
+<li>对请求和响应的处理放在 controller 层</li>
+</ol>
+<p>PS: 1 个架构师带 8 个新人</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
+<li><p>识别 MVP(最重要部分)</p>
 <ol>
-<li>禁止使用压缩指针模式<ol>
-<li>方法: 在catalina.sh中<code>JAVA_OPTS</code>的值后面添加-XX:-UseCompressedOops, 再重启tomcat</li>
-</ol>
-</li>
-<li>将Java堆的起始地址设置成使Java堆大小+起始地址大于4G, <ol>
-<li>原因: 请参考 <a href="https://blogs.oracle.com/poonam/running-on-a-64bit-platform-and-still-running-out-of-memory" target="_blank" rel="noopener">https://blogs.oracle.com/poonam/running-on-a-64bit-platform-and-still-running-out-of-memory</a>, </li>
-<li>方法: 在这里我将起始地址简单直接的设为4G即4294967296</li>
+<li>点到点走通</li>
+<li>阻断性功能</li>
 </ol>
 </li>
 </ol>
-<p>在尝试过这两种方法后发现依然报同样的错误, 这时我在想会不会是堆内存过大, 导致系统无法分配内存, 于是进行尝试: 把堆内存减少一半, 看看效果.</p>
+<hr>
+<h3 id="半白盒测试"><a href="#半白盒测试" class="headerlink" title="半白盒测试"></a>半白盒测试</h3><p>某些单元测试是半白盒的</p>
+<p>某些测试依赖于功能的关键实现点. 比如随机数生成</p>
+<p>重构过程中发现 bug 暂不进行更改. 重构后再进行</p>
+<p>模块中某个单词只能代表一个含义</p>
+<hr>
+<h1 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h1><p>性能优化非重构</p>
+<p>书籍:</p>
 <ol>
-<li>方法: 在在catalina.sh中<code>JAVA_OPTS</code>的值中把原来的<code>-Xms1024m -Xmx2048m</code>改为<code>-Xms512m -Xmx1024m</code>, 再重启tomcat</li>
+<li>程序员修炼之道</li>
+<li>架构整洁之道</li>
 </ol>
-<p>结果JVM启动成功, 问题解决.</p>
-<p>后续思考: 为什么在可用内存充足的情况下系统无法分配给JVM更多内存? 一直没有想到完美的解释, 如果有明白的兄弟可以指教一下.</p>
-<p>尝试对后续思考进行解答: 原因应该还是内存不足, 可能操作系统会预留一些内存, 而我的机器上默认的启动参数是<code>-Xms1024m -Xmx2048m</code>, 可能已经超过了系统允许分配的最高值, 因此无法分配内存. 当我使用<code>java -Xms10m -Xmx20m</code>可以启动成功, <code>java -Xms500m -Xmx2000m</code>会失败, 因此, 应该还是内存不足的问题</p>
-<p>对后续思考的最终解答及该问题的完美解决方案:</p>
-<p>这个问题是由于<code>/proc/meminfo</code>下的<code>vm.overcommit_memory</code>被设置成不允许<code>overcommit</code>造成的</p>
-<p>首先了解一下<code>overcommit</code>的意思: 用户进程申请的是虚拟地址, 而这个虚拟地址是不允许任意申请的, 因为虚拟内存需要物理内存做支撑, 如果分配太多虚拟内存, 会对性能参数影响. <code>overcommit</code>就是对虚拟内存的过量分配</p>
-<p><code>vm.overcommit_memory</code>的用处: 控制过量分配的策略. 这个参数一共有3个可选值:</p>
-<ol>
-<li><code>0</code>: Heuristic overcommit handling. 就是由操作系统自己决定过量分配策略</li>
-<li><code>1</code>: Always overcommit. 一直允许过量分配</li>
-<li><code>2</code>: Don’t overcommit. 不允许过量分配</li>
+<h2 id="不重构的情况"><a href="#不重构的情况" class="headerlink" title="不重构的情况"></a>不重构的情况</h2><ol>
+<li>不动不看</li>
+<li>不知目标: 不知道什么才是好的</li>
+<li>不如重写</li>
 </ol>
-<p>在这个案例里面, 使用<code>sysctl vm.overcommit_memory</code>来查看, 发现<code>vm.overcommit_memory = 2</code>, 即采用的是不允许过量分配的设置. 而在错误日志中也证明了这一点:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CommitLimit:    15951192 kB</span><br><span class="line">Committed_AS:   15837036 kB</span><br></pre></td></tr></table></figure></p>
-<p>解决方案是<code>sudo sysctl vm.overcommit_memory=0</code>, 即<code>vm.overcommit_memory = 0</code>, 允许系统自己决定过量分配策略</p>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2019/03/30/Linux-Commond-UsefullCommond-DESKTOP-Q0GH0V9/">
-                Linux-Commond-UsefullCommond
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2019-03-30</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/Linux/">Linux</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <ol>
-<li><p>top</p>
-<ol>
-<li>显示包含指定command string的线程信息并定时刷新(使用bash)<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__keyword=name_of_process; (while :; do __arg=$(pgrep -d',' -f $__keyword); if [ -z "$__arg" ]; then top -u 65536 -n 1; else top -c -n 1 -p $__arg; fi; uptime; sleep 1; done;)</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="如何重构"><a href="#如何重构" class="headerlink" title="如何重构"></a>如何重构</h2><ol>
+<li>旧的不变</li>
+<li>新的创建</li>
+<li>一步切换: 注释旧代码, 切换到新代码</li>
+<li>旧的再见: 删除旧代码</li>
 </ol>
-</li>
-<li><p>strace</p>
-<ol>
-<li>追踪目标命令并显示时间和地址及将输出结果放入指定文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> strace -tt -i -o outputfile java -version</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="继承体系不能过长"><a href="#继承体系不能过长" class="headerlink" title="继承体系不能过长"></a>继承体系不能过长</h2><p>最好不超过三层</p>
+<h1 id="遗留系统重构"><a href="#遗留系统重构" class="headerlink" title="遗留系统重构"></a>遗留系统重构</h1><p>获取测试人员的测试清单. 想办法转为单元测试</p>
+<p>一部分一部分的重构</p>
+<p>优先重构依赖少价值高的代码</p>
+<h2 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h2><p>尽量不要写有副作用的函数</p>
+<p>副作用: 对输入没有更改</p>
+<p>纯函数: 没有状态</p>
+<p>只能修改自己类的东西</p>
+<h2 id="如何下手"><a href="#如何下手" class="headerlink" title="如何下手"></a>如何下手</h2><ol>
+<li>掌握系统业务</li>
+<li>明确系统边界</li>
+<li>小步改造系统</li>
 </ol>
-</li>
-<li><p>scp: 远程文件传输</p>
-<ol>
-<li>将文件传送给指定的远程机器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> scp websophic.20190313.v1.3.2.zip ems@198.87.104.101:/users/ems/</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>tar</p>
-<ol>
-<li>tar解压tar.gz文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tar -xvzf target.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>tcpdump</p>
-<ol>
-<li>获取指定网卡指定主机的包数据并存入指定文件中<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i ens192 host 192.168.254.200 -w cap190715_2009.pcap</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>grep</p>
-<ol>
-<li>在文件夹中查找字符串<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -rnw '/path/to/somewhere/' -e 'pattern'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>sed</p>
-<ol>
-<li>获取文本中指定行范围<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n 5,8p file</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>dd</p>
-<ol>
-<li>检测磁盘速度<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/tmp/output conv=fdatasync bs=384k count=1k; rm -f /tmp/output</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>java remote debug</p>
-   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/jdk1.8.0_144/bin/java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=12543 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=20250 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.255.205 -Dspring.profiles.active=test cms_web-0.0.1-SNAPSHOT.war</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>tail高亮</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f 日志文件 |grep -E “高亮的关键字1|高亮的关键字2|…|高亮的关键字N” -A10 -B10 --color=auto</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>docker命令</p>
-<ol>
-<li><code>docker exec</code>: 在docker中执行bash命令<ol>
-<li><code>docker exec -it CONTAINER_NAME bash</code>: 在docker中新建一个bash</li>
-<li><code>docker exec -it CONTAINER_NAME jstack PID &gt; threadDump.log</code>: 将thread dump保存到指定文件中</li>
-<li><code>sudo docker cp e4e2ffe62ca0:arthas-boot.jar /tmp/</code>: 获取容器中的文件</li>
-<li><code>sudo docker exec -it  e73efdd8e70a /bin/bash -c &quot;wget https://alibaba.github.io/arthas/arthas-boot.jar &amp;&amp; java -jar arthas-boot.jar&quot;</code>: 运行arthas</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>top命令<ol>
-<li><code>top -Hp pid</code>: 显示一个进程的线程运行信息列表</li>
-</ol>
-</li>
+<h3 id="系统架构可视化工具-C4-模型"><a href="#系统架构可视化工具-C4-模型" class="headerlink" title="系统架构可视化工具: C4 模型"></a>系统架构可视化工具: C4 模型</h3><ol>
+<li>系统上下文图</li>
+<li>容器图</li>
+<li>组件图</li>
+<li>代码图</li>
 </ol>
 
         </div>
@@ -510,81 +436,31 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2019/03/30/Linux-Commond-UsefullCommond/">
-                Linux-Commond-UsefullCommond
+            <a href="/2020/12/23/设计模式-简介/">
+                设计模式-简介
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2019-03-30</span>
+                <span class="date">2020-12-23</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Linux/">Linux</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <ol>
-<li><p>top</p>
-<ol>
-<li>显示包含指定command string的线程信息并定时刷新(使用bash)<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__keyword=name_of_process; (while :; do __arg=$(pgrep -d',' -f $__keyword); if [ -z "$__arg" ]; then top -u 65536 -n 1; else top -c -n 1 -p $__arg; fi; uptime; sleep 1; done;)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>strace</p>
-<ol>
-<li>追踪目标命令并显示时间和地址及将输出结果放入指定文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> strace -tt -i -o outputfile java -version</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>scp: 远程文件传输</p>
-<ol>
-<li>将文件传送给指定的远程机器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> scp websophic.20190313.v1.3.2.zip ems@198.87.104.101:/users/ems/</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>tar</p>
-<ol>
-<li>tar解压tar.gz文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tar -xvzf target.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>tcpdump</p>
-<ol>
-<li>获取指定网卡指定主机的包数据并存入指定文件中<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i ens192 host 192.168.254.200 -w cap190715_2009.pcap</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>grep</p>
-<ol>
-<li>在文件夹中查找字符串<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -rnw '/path/to/somewhere/' -e 'pattern'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>sed</p>
-<ol>
-<li>获取文本中指定行范围<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n 5,8p file</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>dd</p>
-<ol>
-<li>检测磁盘速度<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/tmp/output conv=fdatasync bs=384k count=1k; rm -f /tmp/output</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>java remote debug</p>
-   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/jdk1.8.0_144/bin/java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=12543 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=20250 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.255.205 -Dspring.profiles.active=test cms_web-0.0.1-SNAPSHOT.war</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>tail高亮</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f 日志文件 |grep -E “高亮的关键字1|高亮的关键字2|…|高亮的关键字N” -A10 -B10 --color=auto</span><br></pre></td></tr></table></figure></li>
-</ol>
-
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>设计模式是软件开发人员在软件开发过程中面临的通用问题的解决方案</p>
+<p>这些解决方案是众多软件开发人员经过相当长的时间的试验和错误中总结出来的</p>
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>设计模式是一套被反复使用的, 多数人知晓的, 经过分类编目的, 代码设计经验的总结</p>
+<p>使用设计模式是为了重用代码, 让代码更容易被他人理解, 保证代码可靠性</p>
+<h1 id="面对对象的设计原则"><a href="#面对对象的设计原则" class="headerlink" title="面对对象的设计原则"></a>面对对象的设计原则</h1><ul>
+<li>对接口编程而不是对实现编程</li>
+<li>优先使用组合而不是继承</li>
+</ul>
+<h1 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h1><h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>这些设计模式</p>
+<h2 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h2><h2 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h2><h2 id="J2EE模式"><a href="#J2EE模式" class="headerlink" title="J2EE模式"></a>J2EE模式</h2>
         </div>
     
 
@@ -595,49 +471,89 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2019/01/07/Java-Note-为何泛型容器中的方法参数保留Object/">
-                Java-Note-为何泛型容器中的方法参数保留Object
+            <a href="/2020/12/23/设计模式-抽象工厂/">
+                设计模式-抽象工厂
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2019-01-07</span>
+                <span class="date">2020-12-23</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <p>今天在阅读的时候突然发现一个问题, 官方工具库里面的泛型容器有一部分方法并未使用泛型方法, 而是依旧沿用JDK1.5之前的<code>Object</code>, 例如: </p>
+            
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2020/11/27/设计模式-拦截过滤器/">
+                设计模式-拦截过滤器
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-11-27</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>拦截过滤器模式(Intercepting Filter Pattern)用于对应用程序的请求或响应做一些预处理/后处理. 定义过滤器, 并在把请求传给实际目标应用程序之前应用在请求上. 过滤器可以做认证/授权/记录日志, 或者跟踪请求, 然后把请求传给相应的处理程序. 以下是这种设计模式的实体.</p>
 <ul>
-<li><p><code>Map</code> </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">V <span class="title">get</span><span class="params">(Object key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">V <span class="title">remove</span><span class="params">(Object key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>List</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<li>过滤器(Filter): 过滤器在请求处理程序执行请求之前或之后, 执行某些任务.</li>
+<li>过滤器链(Filter Chain): 过滤器链带有多个过滤器, 并在 Target 上按照定义的顺序执行这些过滤器.</li>
+<li>目标(Target): 目标对象是请求处理程序.</li>
+<li>过滤管理器(Filter Manager): 过滤管理器管理过滤器和过滤器链.</li>
+<li>客户端(Client): Client 是向 Target 对象发送请求的对象.</li>
+</ul>
+<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><p><img src="http://assets.processon.com/chart_image/5fc0badb6376895e9ae3bfbb.png" alt="类图"></p>
+<h2 id="和过滤器模式-Filter-Pattern-的区别"><a href="#和过滤器模式-Filter-Pattern-的区别" class="headerlink" title="和过滤器模式(Filter Pattern)的区别"></a>和过滤器模式(Filter Pattern)的区别</h2><ol>
+<li><p>过滤器模式中没有<code>FilterChain</code>这个概念, 无法阻止对目标的调用. 而拦截过滤器模式由于有这个概念, 在每个<code>Filter</code>执行时选择是否执行<code>FilterChain</code>里的下一个<code>Filter</code>. 如果不执行, 则不会对目标进行调用</p>
 </li>
-<li><p>原因</p>
-<ol>
-<li>这些含<code>Object</code>类型参数的方法都有一个共同特点, 即需要与容器内的Key或者Value进行比较, 而在Java的规范中, 比较是不需要类型完全相同的, 例如<code>Number</code>类型的实例可以和<code>Long</code>类型的实例相比较</li>
-<li>在Java中比较方法需要重写<code>Object</code>中的<code>equals(Object o)</code>, 所以用到<code>equals(Object o)</code>的方法的参数自然用<code>Object</code>而不是泛型</li>
+<li><p>过滤器模式是对已有对象列表过滤. 而拦截过滤器模式是对调用目标的单个请求的过滤</p>
+</li>
 </ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="拦截过滤器模式在-javax-servlet-中的应用"><a href="#拦截过滤器模式在-javax-servlet-中的应用" class="headerlink" title="拦截过滤器模式在 javax.servlet 中的应用"></a>拦截过滤器模式在 javax.servlet 中的应用</h3><h4 id="Filter接口"><a href="#Filter接口" class="headerlink" title="Filter接口"></a><code>Filter</code>接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">            FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException</span>;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h4 id="FilterChain接口"><a href="#FilterChain接口" class="headerlink" title="FilterChain接口"></a><code>FilterChain</code>接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FilterChain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException, ServletException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="FilterChain实现类ApplicationFilterChain"><a href="#FilterChain实现类ApplicationFilterChain" class="headerlink" title="FilterChain实现类ApplicationFilterChain"></a><code>FilterChain</code>实现类<code>ApplicationFilterChain</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationFilterChain</span> <span class="keyword">implements</span> <span class="title">FilterChain</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-Filter初始化过程"><a href="#1-Filter初始化过程" class="headerlink" title="1. Filter初始化过程"></a>1. <code>Filter</code>初始化过程</h4><ol>
+<li><p><code>ContextConfig#webConfig</code>方法中扫描<code>web.xml</code>文件, 构建<code>WebXml</code>对象</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Scan the web.xml files that apply to the web application and merge them</span></span><br><span class="line"><span class="comment"> * using the rules defined in the spec. For the global web.xml files,</span></span><br><span class="line"><span class="comment"> * where there is duplicate configuration, the most specific level wins. ie</span></span><br><span class="line"><span class="comment"> * an application's web.xml takes precedence over the host level or global</span></span><br><span class="line"><span class="comment"> * web.xml file.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">webConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    WebXml webXml = createWebXml();</span><br><span class="line">    ...</span><br><span class="line">    configureContext(webXml);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>你们以为这就完了吗?</li>
-<li>…</li>
-<li>…</li>
-<li>…</li>
-<li>反驳: 使用<code>Object</code>可能造成的错误比原因1中的好处要大得多, 而且涉及到<code>equals</code>完全可以重新创建一个方法例如<code>getByEquals(Object o)</code>与<code>get(K k)</code>一起使用</li>
-<li>个人结论: 可能存在设计缺陷(不要打我…)</li>
-<li>佐证: 在比Java新的C#中, <code>Map</code>(<code>Dictonary</code>)的<code>get</code>方法参数是<code>(K k)</code></li>
-</ul>
+<li><p><code>ContextConfig#configureContext</code>方法将<code>WebXml</code>中解析到的<code>FilterMap</code>列表放入<code>StandardContext</code>中</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">configureContext</span><span class="params">(WebXml webxml)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> (FilterMap filterMap : webxml.getFilterMappings()) &#123;</span><br><span class="line">        context.addFilterMap(filterMap);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+</ol>
+<h4 id="2-Filter执行过程"><a href="#2-Filter执行过程" class="headerlink" title="2. Filter执行过程"></a>2. <code>Filter</code>执行过程</h4><ol>
+<li><p><code>ApplicationDispatcher#doDispatch</code>方法处理请求</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doDispatch</span><span class="params">(ServletRequest request, ServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    invoke(state.outerRequest, state.outerResponse, state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ApplicationDispatcher#invoke</code>调用方法创建<code>FilterChain</code>, 执行<code>FilterChain</code>的<code>doFilter</code>方法</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">    State state)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    ApplicationFilterChain filterChain = ApplicationFilterFactory.      createFilterChain(request, wrapper, servlet);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// for includes/forwards</span></span><br><span class="line">        <span class="keyword">if</span> ((servlet != <span class="keyword">null</span>) &amp;&amp; (filterChain != <span class="keyword">null</span>)) &#123;</span><br><span class="line">           filterChain.doFilter(request, response);</span><br><span class="line">         &#125;</span><br><span class="line">        <span class="comment">// Servlet Service Method is called by the FilterChain</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ApplicationFilterFactory#createFilterChain</code>提取<code>StandardContext</code>中的<code>Filter</code>列表放入新创建的<code>FilterChain</code>中</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ApplicationFilterChain <span class="title">createFilterChain</span><span class="params">(ServletRequest request, Wrapper wrapper, Servlet servlet)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    filterChain = <span class="keyword">new</span> ApplicationFilterChain();</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// Add the relevant path-mapped filters to this filter chain</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; filterMaps.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!matchDispatcher(filterMaps[i] ,dispatcher)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!matchFiltersURL(filterMaps[i], requestPath))</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ApplicationFilterConfig filterConfig = (ApplicationFilterConfig)</span><br><span class="line">            context.findFilterConfig(filterMaps[i].getFilterName());</span><br><span class="line">        <span class="keyword">if</span> (filterConfig == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// FIXME - log configuration problem</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        filterChain.addFilter(filterConfig);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>FilterChain</code>的<code>doFilter</code>方法中获取第一个<code>Filter</code>并执行其<code>doFilter</code>方法</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    internalDoFilter(request,response);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">internalDoFilter</span><span class="params">(ServletRequest request, ServletResponse response)</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    filter.doFilter(request, response, <span class="keyword">this</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="业务代码中应用的可行性探讨"><a href="#业务代码中应用的可行性探讨" class="headerlink" title="业务代码中应用的可行性探讨"></a>业务代码中应用的可行性探讨</h3><h4 id="参数校验上使用的可行性"><a href="#参数校验上使用的可行性" class="headerlink" title="参数校验上使用的可行性"></a>参数校验上使用的可行性</h4><p>通过拦截过滤器模式进行参数校验. 满足过滤器条件的继续执行, 不满足的直接返回.</p>
+<p>使用注解关联调用类和过滤器</p>
 
         </div>
     
@@ -649,46 +565,59 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2019/01/04/Java-Note-在Java中对潜在类型机制的模拟和优化/">
-                Java-Note-Java中潜在类型机制的实现和优化
+            <a href="/2020/11/18/动物园建设说明书/">
+                动物园建设说明书
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2019-01-04</span>
+                <span class="date">2020-11-18</span>
             
             
-            
-                <span class="category">
-                    <a href="/categories/Java/">Java</a>
-                </span>
             
         </div>
     </div>
 
     
         <div class="content">
-            <ul>
-<li>潜在类型机制<ul>
-<li>介绍: 具有潜在类型机制的语言只要求实现某个方法子集, 而不是某个特定的接口, 这样可以使代码更加泛化. 潜在类型机制不关心使用的类型是否来自同一个接口, 只要该些类型具有相同的方法.</li>
-</ul>
-</li>
-<li><p>Java中潜在类型机制的简单模拟</p>
-<ul>
-<li>方法: 首先想到的就是利用<strong>反射</strong>来模拟</li>
-<li>例子:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clazz1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Class1 f()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Class1 g()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clazz2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Class2 f()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Class2 g()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        Class clazz = object.getClass();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Method method = clazz.getMethod(<span class="string">"f"</span>);</span><br><span class="line">            method.invoke(object);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Method method = clazz.getMethod(<span class="string">"g"</span>);</span><br><span class="line">            method.invoke(object);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReflectTest.perform(<span class="keyword">new</span> Clazz1());</span><br><span class="line">        ReflectTest.perform(<span class="keyword">new</span> Clazz2());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>简单模拟的缺陷: 反射提供了一种模拟潜在类型机制的方法, 但是它将所有的类型检查都转移到了运行时, 因此无法进行编译期类型检查. 需要进行优化</p>
-</li>
-<li>对简单模拟的优化<ul>
-<li>潜在类型机制的实质: 其创建了一个包含所需方法的隐式接口</li>
-<li>优化方法: 通过手工编写必须的接口(注意: 这里的接口与前文中的潜在类型机制不需要实现特定接口中的接口是不同的, 这里的接口是不改变已存在的拥有相同方法的类的代码的), 就可以实现潜在类型机制, 而这样不会用到反射, 从而可以进行编译期类型检查</li>
-<li>例子:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">AdapterInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clazz1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Clazz1 f()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Clazz1 g()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clazz2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Clazz2 f()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Clazz2 g()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassAdapter1</span> <span class="keyword">implements</span> <span class="title">AdapterInterface</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Clazz1 class1;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClassAdapter1</span><span class="params">(Clazz1 class1)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.class1 = class1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        class1.f();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        class1.g();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassAdapter2</span> <span class="keyword">implements</span> <span class="title">AdapterInterface</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Clazz2 class2;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClassAdapter2</span><span class="params">(Clazz2 class2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.class2 = class2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        class2.f();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        class2.g();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Performer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">(AdapterInterface adapterInterface)</span> </span>&#123;</span><br><span class="line">        adapterInterface.f();</span><br><span class="line">        adapterInterface.g();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Performer.perform(<span class="keyword">new</span> ClassAdapter1(<span class="keyword">new</span> Clazz1()));</span><br><span class="line">        Performer.perform(<span class="keyword">new</span> ClassAdapter2(<span class="keyword">new</span> Clazz2()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Zoo 是一个工具集网站<br>提供提高生产力的各种工具, 并允许开发者自由发布工具</p>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>目前已有<a href="http://10.118.71.83:23333" target="_blank" rel="noopener">网站</a>. 网站拥有展示功能, 缺少发布和推荐功能.</p>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><h3 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h3><p><img src="http://assets.processon.com/chart_image/5fb5c4c0e0b34d0d22416778.png" alt="用例图"></p>
+<h3 id="ER图"><a href="#ER图" class="headerlink" title="ER图"></a>ER图</h3><p><img src="http://assets.processon.com/chart_image/5fb67d917d9c0857dda57c8e.png" alt="ER图"></p>
+<h3 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h3><p><img src="http://assets.processon.com/chart_image/5fb7822b5653bb29a80404ff.png" alt="表结构"></p>
+<h1 id="功能需求"><a href="#功能需求" class="headerlink" title="功能需求"></a>功能需求</h1><h2 id="上传工具信息"><a href="#上传工具信息" class="headerlink" title="上传工具信息"></a>上传工具信息</h2><p>规划: 1.增加发布功能.提供入口供开发者发布工具信息.包括介绍/网址/开发者等 2.增加一键生成 Jira 任务功能,与现有 Story 工具整合,减少迭代管理中的重复劳动 3.增加 Jenkins 插件工具. 减少开发人员操作 Jenkins 的时间 4.增加现有优秀生产力工具推荐功能.供开发人员快捷使用,提高传播和开发效率</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2020/11/18/设计-开始-动物园建设说明书/">
+                动物园建设说明书
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-11-18</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Zoo 是一个工具集网站<br>提供提高生产力的各种工具, 并允许开发者自由发布工具</p>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>目前已有<a href="http://10.118.71.83:23333" target="_blank" rel="noopener">网站</a>. 网站拥有展示功能, 缺少发布和推荐功能.</p>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><h3 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h3><p><img src="http://assets.processon.com/chart_image/5fb5c4c0e0b34d0d22416778.png" alt="用例图"></p>
+<h3 id="ER图"><a href="#ER图" class="headerlink" title="ER图"></a>ER图</h3><p><img src="http://assets.processon.com/chart_image/5fb67d917d9c0857dda57c8e.png" alt="ER图"></p>
+<h3 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h3><p><img src="http://assets.processon.com/chart_image/5fb7822b5653bb29a80404ff.png" alt="表结构"></p>
+<h1 id="功能需求"><a href="#功能需求" class="headerlink" title="功能需求"></a>功能需求</h1><h2 id="上传工具信息"><a href="#上传工具信息" class="headerlink" title="上传工具信息"></a>上传工具信息</h2><p>规划: 1.增加发布功能.提供入口供开发者发布工具信息.包括介绍/网址/开发者等 2.增加一键生成 Jira 任务功能,与现有 Story 工具整合,减少迭代管理中的重复劳动 3.增加 Jenkins 插件工具. 减少开发人员操作 Jenkins 的时间 4.增加现有优秀生产力工具推荐功能.供开发人员快捷使用,提高传播和开发效率</p>
 
         </div>
     
@@ -737,19 +666,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/07/31/Java-Note-spring-jdbc学习笔记/">Java-Note-spring-jdbc学习笔记</a>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/07/23/Java-Note-品牌库技术总结/">Java-Note-品牌库技术总结</a>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/27/Java-Note-记一次log4j配置文件无法加载问题的解决过程/">Java-Note-记一次log4j配置文件无法加</a>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2020/04/15/FrontEnd-Note-记一次浏览器无端弹出警告框的处理过程/">Untitled</a>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
             </li>
             
         </ul>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="架构业务状态应该持久化保存, 而不是根据持久化数据动态判断如果实在需要动态判断, 则将状态获取封装成共用方法
+接口设计时定义接口应多花时间思考, 定下来后不要轻易改动定义好后改起来很麻烦, 涉及到其他很多人
+编写修改原有接口的 Story 时, 只需要列出新增或修改的字段在列表中标出是该字段新增还是">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="1nfinity">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Cass-总结-溯源码二期">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="邹泰然的个人博客">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary">
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Cass-总结-溯源码二期 - 邹泰然的个人博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2020/11/13/Cass-总结-溯源码二期/">
+                Cass-总结-溯源码二期
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-11-13</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h4 id="业务状态应该持久化保存-而不是根据持久化数据动态判断"><a href="#业务状态应该持久化保存-而不是根据持久化数据动态判断" class="headerlink" title="业务状态应该持久化保存, 而不是根据持久化数据动态判断"></a>业务状态应该持久化保存, 而不是根据持久化数据动态判断</h4><p>如果实在需要动态判断, 则将状态获取封装成共用方法</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="设计时定义接口应多花时间思考-定下来后不要轻易改动"><a href="#设计时定义接口应多花时间思考-定下来后不要轻易改动" class="headerlink" title="设计时定义接口应多花时间思考, 定下来后不要轻易改动"></a>设计时定义接口应多花时间思考, 定下来后不要轻易改动</h4><p>定义好后改起来很麻烦, 涉及到其他很多人</p>
+<h4 id="编写修改原有接口的-Story-时-只需要列出新增或修改的字段"><a href="#编写修改原有接口的-Story-时-只需要列出新增或修改的字段" class="headerlink" title="编写修改原有接口的 Story 时, 只需要列出新增或修改的字段"></a>编写修改原有接口的 Story 时, 只需要列出新增或修改的字段</h4><p>在列表中标出是该字段新增还是修改. 这样可以节省 Story 的设计时间, 并且入参也同样清晰</p>
+<h4 id="对外接口即使很简单也需要写-Story-提供-Url-入参-出参-给其他组"><a href="#对外接口即使很简单也需要写-Story-提供-Url-入参-出参-给其他组" class="headerlink" title="对外接口即使很简单也需要写 Story, 提供 Url/入参/出参 给其他组"></a>对外接口即使很简单也需要写 Story, 提供 Url/入参/出参 给其他组</h4><p>方便其他组第一时间进行开发</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h4 id="生产环境大数据量表结构新增字段的方法"><a href="#生产环境大数据量表结构新增字段的方法" class="headerlink" title="生产环境大数据量表结构新增字段的方法"></a>生产环境大数据量表结构新增字段的方法</h4><ol>
+<li>新建子表关联原表<ul>
+<li>缺点: 数据库结构增熵</li>
+</ul>
+</li>
+<li>使用临时表保存原表数据(分批插入), 清空原表数据, 增加字段后重新导入<ul>
+<li>缺点: 需锁表, 阻塞业务</li>
+</ul>
+</li>
+<li>使用工具增加<ul>
+<li>缺点: 操作麻烦, 需要数据库权限</li>
+</ul>
+</li>
+<li><p>使用云数据库无感知新增</p>
+<p>阿里云可以像普通增加字段一样操作. 不锁表, 不会阻塞业务</p>
+<ul>
+<li>缺点: 需要上云</li>
+</ul>
+</li>
+</ol>
+<p>该问题是业界遇到的通用问题, 云上已有成熟的解决方案</p>
+<h4 id="大数据量的表设计应该把常用的数据冗余成字段保存"><a href="#大数据量的表设计应该把常用的数据冗余成字段保存" class="headerlink" title="大数据量的表设计应该把常用的数据冗余成字段保存"></a>大数据量的表设计应该把常用的数据冗余成字段保存</h4><p>这样可以很方便的根据常用的数据查询或者查询出常用的数据, 而不需要对入参或出参进行额外处理</p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h4 id="单元测试实际修改或插入数据库的操作必须回滚"><a href="#单元测试实际修改或插入数据库的操作必须回滚" class="headerlink" title="单元测试实际修改或插入数据库的操作必须回滚"></a>单元测试实际修改或插入数据库的操作必须回滚</h4><p>这样会导致数据库的数据非正常变更, 从而产生难以定位的 Bug</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-配置文档/">Flink 配置文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/08/18/Flink-Standalone-部署文档/">Flink Standalone 部署文档</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/07/31/总结-开思-数据集成平台-V1.0/">总结-开思-数据集成平台-V1.0</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2021/01/30/SonarLint 使用手册/">SonarLint 使用手册</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/Algorithms/">Algorithms</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Ant/">Ant</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Arithmetic/">Arithmetic</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Base64/">Base64</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
